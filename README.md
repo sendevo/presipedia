@@ -92,7 +92,7 @@ v1.0.x (alpha):
     - [x] Formulario para editar mandato.  
     - [x] Cálculo de CID para inserción de nuevos elementos.  
     - [x] Exportar base de datos a archivo json.  
-  - [ ] Proyecto Vite multitarget: PWA y Android.  
+  - [x] Proyecto Vite multitarget: PWA y Android.  
   - [ ] Front-end React + MUI.  
   - [ ] Branding: Logo, nombre, eslogans.  
   - [ ] Visualización de línea de tiempo con Vis.js.  

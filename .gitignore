@@ -1,1 +1,3 @@
-data/database.json
+node_modules/
+data/database*
+package-lock.json
