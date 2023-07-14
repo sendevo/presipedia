@@ -46,7 +46,7 @@ Personas:
 Mandatos:
 ```jsonc
 {
-    "pid": "", // string
+    "cid": "", // string
     "party": "", // string
     "term_begin": 0, // unix timestamp
     "term_end": 0 // unix timestamp / null 

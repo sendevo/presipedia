@@ -22,7 +22,7 @@
     <div class="section">
         <h3>Formulario de ingreso de persona</h3>
         <div class="form-container">
-            <form id="form">
+            <form id="person-form">
                 <label for="name">Nombre *</label>
                 <input type="text" id="name" name="name" required>
 
@@ -47,17 +47,18 @@
                 <label for="occupation">Ocupación *</label>
                 <input type="text" id="occupation" name="occupation" required>
 
-                <button class="action-button" type="submit" id="add-button">Agregar</button>
+                <button class="action-button" type="submit" id="add-person-button">Agregar</button>
             </form>
         </div>
     </div>
 
-    <div class="section">
+    <div class="section" id="people-section">
         <h3>Listado de personas actuales</h3>
         <div class="table-container">
             <table>
                 <thead>
                     <tr>
+                        <th>#</th>
                         <th>Nombre</th>
                         <th>Foto</th>
                         <th>Lugar y fecha de nacimiento</th>
@@ -66,7 +67,48 @@
                         <th>Acciones</th>
                     </tr>
                 </thead>
-                <tbody id="tbody">
+                <tbody id="people-tbody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="section">
+        <h3>Formulario de ingreso de mandato</h3>
+        <div class="form-container">
+            <form id="term-form">
+                <label for="cid">ID de mandatario *</label>
+                <input type="text" id="cid" name="cid" required>
+
+                <label for="term_begin">Fecha de inicio *</label>
+                <input type="date" id="term_begin" name="term_begin" required>
+
+                <label for="term_end">Fecha de finalización</label>
+                <input type="date" id="term_end" name="term_end">
+
+                <label for="party">Partido *</label>
+                <input type="text" id="party" name="party" required>
+
+                <button class="action-button" type="submit" id="add-term-button">Agregar</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="section" id="terms-section">
+        <h3>Listado de mandatos presidenciales</h3>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nombre</th>
+                        <th>Inicio</th>
+                        <th>Fin</th>
+                        <th>Tendencia</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="terms-tbody">
                 </tbody>
             </table>
         </div>
