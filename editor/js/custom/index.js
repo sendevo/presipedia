@@ -96,3 +96,9 @@ const editPerson = cid => {
     form.elements.occupation.value = person.occupation;
     deletePerson(cid);
 };
+
+const copyCIDToClipboard = cid => {
+    copyToClipboard(cid)
+    .then(() => console.log('CID copiado al portapapeles'))
+    .catch(error => console.error('Error al intentar copiar CID', error));
+};

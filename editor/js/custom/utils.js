@@ -45,6 +45,8 @@ const hash = message => { // CID generator
     });
 };
 
+const copyToClipboard = text => navigator.clipboard.writeText(text);
+
 const updatePeopleTable = people => { // Push database to table
     const tbody = document.getElementById('tbody');
     tbody.innerHTML = "";
@@ -58,8 +60,9 @@ const updatePeopleTable = people => { // Push database to table
             <td>${person.death_date ? moment(person.death_date).format(DATE_FORMAT) : '-'}</td>
             <td>${person.occupation}</td>
             <td>
-                <button onClick="editPerson('${cid}')">Editar</button>
-                <button onClick="deletePerson('${cid}')">Borrar</button>
+                <button onClick="editPerson('${cid}')" title="Editar"><i class="fa fa-edit"></i></button>
+                <button onClick="deletePerson('${cid}')" title="Borrar"><i class="fa fa-trash"></i></button>
+                <button onClick="copyCIDToClipboard('${cid}')" title="Copiar CID"><i class="fa fa-copy"></i></button>
             </td>
         `;
         tbody.appendChild(row);
