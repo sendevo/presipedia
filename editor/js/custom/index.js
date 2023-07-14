@@ -58,8 +58,10 @@ personForm.addEventListener('submit', event => {
         picture: personForm.elements.picture.value,
         birth_date: toUnixTimestamp(personForm.elements.birth_date.value),
         death_date: toUnixTimestamp(personForm.elements.death_date.value),
-        birth_location_name: personForm.elements.birth_location_name.value,
-        birth_location: latLng2GeoJson(personForm.elements.birth_location.value),
+        birth_location: latLng2GeoJson(
+            personForm.elements.birth_location.value, 
+            personForm.elements.birth_location_name.value
+        ),
         occupation: personForm.elements.occupation.value
     };
     console.log("Adding new entry to people db...");
@@ -93,8 +95,10 @@ const editPerson = cid => {
     personForm.elements.picture.value = person.picture;
     personForm.elements.birth_date.value = unixToDate(person.birth_date);
     personForm.elements.death_date.value = unixToDate(person.death_date);
-    personForm.elements.birth_location_name.value = person.birth_location_name;
-    personForm.elements.birth_location.value = geoJson2LatLng(person.birth_location);
+    [
+        personForm.elements.birth_location.value,
+        personForm.elements.birth_location_name.value
+    ] = geoJson2LatLng(person.birth_location);
     personForm.elements.occupation.value = person.occupation;
     personEditingCID = cid;
 };
@@ -112,22 +116,27 @@ const termForm = document.getElementById("term-form");
 let termEditingIndex = -1;
 termForm.addEventListener('submit', event => {
     event.preventDefault();
-    const termData = {
-        cid: termForm.elements.cid.value,
-        term_begin: toUnixTimestamp(termForm.elements.term_begin.value),
-        term_end: toUnixTimestamp(termForm.elements.term_end.value),
-        party: termForm.elements.party.value
-    };
-    console.log("Adding new entry to terms db...");
-    if(termEditingIndex === -1)
-        database.terms.push(termData);
-    else 
-        database.terms[termEditingIndex] = termData;
-    termForm.reset();
-    termEditingIndex = -1;
-    updateTermsTable(database.terms);
-    localStorage.setItem("database", JSON.stringify(database));
-    console.log("Done");
+    const cid = termForm.elements.cid.value;
+    if(database.people.hasOwnProperty(cid)){
+        const termData = {
+            cid: cid,
+            term_begin: toUnixTimestamp(termForm.elements.term_begin.value),
+            term_end: toUnixTimestamp(termForm.elements.term_end.value),
+            party: termForm.elements.party.value
+        };
+        console.log("Adding new entry to terms db...");
+        if(termEditingIndex === -1)
+            database.terms.push(termData);
+        else 
+            database.terms[termEditingIndex] = termData;
+        termForm.reset();
+        termEditingIndex = -1;
+        updateTermsTable(database.terms);
+        localStorage.setItem("database", JSON.stringify(database));
+        console.log("Done");
+    }else{
+        console.error("Error, person with given CID not found in database.");
+    }
 });
 
 const deleteTerm = index => {

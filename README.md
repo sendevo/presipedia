@@ -23,42 +23,61 @@ Desde Bernardino Rivadavia hasta Alberto Ángel Fernández, la más completa gu�
 #### Otras herramientas utilizadas:
 | Funcionalidad | Tecnología |
 |---|---|
-| Edición de JSON | [json crack](https://jsoncrack.com/editor) |
+| Visualización de JSON | [json crack](https://jsoncrack.com/editor) |
 | Ubicación de sitios | [geojson.io](https://geojson.io/) |
 | Cálculos temporales | [current millis](https://currentmillis.com/) |
 
 
+## Cómo contribuir
+
+Para contribuir al proyecto *Presipedia*, puede hacer un fork y enviar un pull request. Este proyecto sigue los términos de licencia de la [GNU General Public License (v3)](LICENSE), por lo que deberá tener en cuenta que estará liberando su trabajo según los términos de esta misma licencia. 
+
+#### Quiero contribuir, pero no soy desarrollador...
+
+Si Ud. no posee conocimientos de desarrollo de software o de sistemas de control de versiones pero quiere sugerir cambios a este proyecto, puede ponerse en contacto a través de alguno de los siguientes correos electrónicos: [holasendevo@gmail.com](mailto:holasendevo@gmail.com) o [matias.micheletto@uns.edu.ar](mailto:matias.micheletto@uns.edu.ar). ¡Todo comentario, sugerencia o colaboración será bienvenida!
+
 
 ## Formato de datos  
-Personas:  
+Se emplea un único archivo JSON como base de datos, ya que la aplicación es puramente *client-side*. En un futuro, y en el hipotético caso de que este proyecto escale, puede considerarse alguna otra opción más eficiente como MySQL o IndexedDB.  
+
+Base de datos
 ```jsonc
 {
-    "name": "", // string
-    "surname": "", // string
-    "picture": "", // string
-    "birth_date": 0, // unix timestamp
-    "death_date": 0, // unix timestamp / null 
-    "birth_location_name": "", // string
-    "birth_location": {}, // geojson 
-    "occupation": "" // string
+  "people":{},
+  "terms":[],
+  "events":[]
 }
 ```
-Mandatos:
+Personas (Entrada ```people```):  
+*Para cada entrada se calcula un identificador de contenido (CID) mediante una función de hash y se emplea como clave del objeto ```people```*
 ```jsonc
 {
-    "cid": "", // string
-    "party": "", // string
-    "term_begin": 0, // unix timestamp
-    "term_end": 0 // unix timestamp / null 
+  "name": "", // string
+  "surname": "", // string
+  "picture": "", // string
+  "birth_date": 0, // unix timestamp
+  "death_date": 0, // unix timestamp / null 
+  "birth_location": {}, // geojson (nombre del lugar en 'properties')
+  "occupation": "" // string
 }
 ```
-Eventos:
+Mandatos (Entrada ```terms```):  
+*Como puede darse el hecho de que un mismo presidente gobierne en mandatos discontinuados, se emplea una entrada aparte y se la referencia con el CID*
 ```jsonc
 {
-    "name": "", // string
-    "description": "", // string
-    "date": 0,  // unix timestamp
-    "location": {} // geojson
+  "cid": "", // string
+  "party": "", // string
+  "term_begin": 0, // unix timestamp
+  "term_end": 0 // unix timestamp / null 
+}
+```
+Eventos (Entrada ```events```):  
+```jsonc
+{
+  "name": "", // string
+  "description": "", // string
+  "date": 0,  // unix timestamp
+  "location": {} // geojson
 }
 ```
 
@@ -67,10 +86,10 @@ Eventos:
 v1.0.x (alpha):  
   - [x] Creación del repositorio GitHub.  
   - [x] Definición del modelo de datos: mandatos y personas.  
-  - [ ] Herramienta interna para edición de datos:  
-    - [ ] Carga y listado de base de datos.  
+  - [x] Herramienta interna para edición de datos:  
+    - [x] Carga y listado de base de datos.  
     - [x] Formulario para editar persona.  
-    - [ ] Formulario para editar mandato.  
+    - [x] Formulario para editar mandato.  
     - [x] Cálculo de CID para inserción de nuevos elementos.  
     - [x] Exportar base de datos a archivo json.  
   - [ ] Proyecto Vite multitarget: PWA y Android.  

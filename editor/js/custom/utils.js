@@ -12,17 +12,19 @@ const unixToDate = timestamp => moment.unix(timestamp/1000).format('YYYY-MM-DD')
 
 ////////// LOCATIONS //////////
 
-const latLng2GeoJson = latLng => {
+const latLng2GeoJson = (latLng, name="") => {
     const [lat,lng] = latLng.split(",");
     return {
         type: "FeatureCollection",
         features: [{
             type: "Feature",
-            properties: {},
+            properties: {
+                name: name ? name : null
+            },
             geometry: {
                 coordinates: [
-                    lat,
-                    lng
+                    parseFloat(lat),
+                    parseFloat(lng)
                 ],
                 type: "Point"
             }
@@ -30,7 +32,10 @@ const latLng2GeoJson = latLng => {
     };
 };
 
-const geoJson2LatLng = geojson => geojson.features[0].geometry.coordinates.join(",");
+const geoJson2LatLng = geojson => ([
+    geojson.features[0].geometry.coordinates.join(","),
+    geojson.features[0].properties.name
+]);
 
 
 ////////// CRYPTO //////////
@@ -74,7 +79,7 @@ const updatePeopleTable = people => {
             <td>${index}</td>
             <td>${person.name + " " + person.surname}</td>
             <td>${person.picture}</td>
-            <td>${person.birth_location_name + ", " + (moment(person.birth_date).format(DATE_FORMAT))}</td>
+            <td>${person.birth_location.features[0].properties.name + ", " + (moment(person.birth_date).format(DATE_FORMAT))}</td>
             <td>${person.death_date ? moment(person.death_date).format(DATE_FORMAT) : '-'}</td>
             <td>${person.occupation}</td>
             <td>
@@ -97,19 +102,23 @@ const updateTermsTable = terms => {
     tbody.innerHTML = "";
     terms.forEach((term, index) => {
         const person = database.people[term.cid];
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td>${index+1}</td>
-            <td>${person.name + " " + person.surname}</td>
-            <td>${moment(term.term_begin).format(DATE_FORMAT)}</td>
-            <td>${term.term_end ? moment(term.term_end).format(DATE_FORMAT) : 'Actualmente en el cargo'}</td>
-            <td>${term.party}</td>
-            <td>
-                <button onClick="editTerm('${index}')" title="Editar"><i class="fa fa-edit"></i></button>
-                <button onClick="deleteTerm('${index}')" title="Borrar"><i class="fa fa-trash"></i></button>
-            </td>
-        `;
-        tbody.appendChild(row);
+        if(person){
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${index+1}</td>
+                <td>${person.name + " " + person.surname}</td>
+                <td>${moment(term.term_begin).format(DATE_FORMAT)}</td>
+                <td>${term.term_end ? moment(term.term_end).format(DATE_FORMAT) : 'Actualmente en el cargo'}</td>
+                <td>${term.party}</td>
+                <td>
+                    <button onClick="editTerm('${index}')" title="Editar"><i class="fa fa-edit"></i></button>
+                    <button onClick="deleteTerm('${index}')" title="Borrar"><i class="fa fa-trash"></i></button>
+                </td>
+            `;
+            tbody.appendChild(row);
+        }else{
+            console.error("Error: person with given CID not found");
+        }
     });
     const section = document.getElementById('terms-section');
     section.style.display = terms.length === 0 ? "none" : "block";
