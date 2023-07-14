@@ -71,8 +71,8 @@ v1.0.x (alpha):
     - [ ] Carga y listado de base de datos.  
     - [x] Formulario para editar persona.  
     - [ ] Formulario para editar mandato.  
-    - [ ] Cálculo de CID para inserción de nuevos elementos.  
-    - [ ] Exportar base de datos a archivo json.  
+    - [x] Cálculo de CID para inserción de nuevos elementos.  
+    - [x] Exportar base de datos a archivo json.  
   - [ ] Proyecto Vite multitarget: PWA y Android.  
   - [ ] Front-end React + MUI.  
   - [ ] Branding: Logo, nombre, eslogans.  

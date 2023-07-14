@@ -11,51 +11,73 @@
 </head>
 
 <body>
-    
-    <h3>Formulario de ingreso de datos</h3>
-    <form id="form">
-        <label for="name">Nombre:</label>
-        <input type="text" id="name" name="name" required>
 
-        <label for="surname">Apellido:</label>
-        <input type="text" id="surname" name="surname" required>
+    <div class="section">
+        <h3>Cargar base de datos (formato JSON)</h3>
+        <input type="file" id="file-input" style="display: none;">
+        <button class="action-button" id="upload-button">Seleccionar archivo...</button>
+    </div>
 
-        <label for="picture">Foto:</label>
-        <input type="text" id="picture" name="picture" required>
+    <div class="section">
+        <h3>Formulario de ingreso de persona</h3>
+        <div class="form-container">
+            <form id="form">
+                <label for="name">Nombre *</label>
+                <input type="text" id="name" name="name" required>
 
-        <label for="birth_date">Fecha de nacimiento:</label>
-        <input type="date" id="birth_date" name="birth_date" required>
+                <label for="surname">Apellido *</label>
+                <input type="text" id="surname" name="surname" required>
 
-        <label for="death_date">Fecha de fallecimiento (optional):</label>
-        <input type="date" id="death_date" name="death_date">
+                <label for="picture">Nombre de archivo de la foto *</label>
+                <input type="text" id="picture" name="picture">
 
-        <label for="birth_location_name">Lugar de nacimiento:</label>
-        <input type="text" id="birth_location_name" name="birth_location_name" required>
+                <label for="birth_date">Fecha de nacimiento *</label>
+                <input type="date" id="birth_date" name="birth_date" required>
 
-        <label for="birth_location">Lugar de nacimiento (Lat, Lon):</label>
-        <input type="text" id="birth_location" name="birth_location" required>
+                <label for="death_date">Fecha de fallecimiento</label>
+                <input type="date" id="death_date" name="death_date">
 
-        <label for="occupation">Ocupación:</label>
-        <input type="text" id="occupation" name="occupation" required>
+                <label for="birth_location_name">Lugar de nacimiento *</label>
+                <input type="text" id="birth_location_name" name="birth_location_name" required>
 
-        <button id="add_button">Agregar</button>
-    </form>
+                <label for="birth_location">Lugar de nacimiento (Lat,Lon) *</label>
+                <input type="text" id="birth_location" name="birth_location" required>
 
-    <h3>Listado de datos actuales</h3>
-    <table>
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Foto</th>
-                <th>Lugar y fecha de nacimiento</th>
-                <th>Fecha de fallecimiento</th>
-                <th>Ocupación</th>
-            </tr>
-        </thead>
-        <tbody id="tbody">
-        </tbody>
-    </table>
+                <label for="occupation">Ocupación *</label>
+                <input type="text" id="occupation" name="occupation" required>
 
+                <button class="action-button" type="submit" id="add-button">Agregar</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="section">
+        <h3>Listado de personas actuales</h3>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Foto</th>
+                        <th>Lugar y fecha de nacimiento</th>
+                        <th>Fecha de fallecimiento</th>
+                        <th>Ocupación</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="section">
+        <h3>Guardar base de datos (formato JSON)</h3>
+        <button class="action-button" id="export-button">Exportar</button>
+    </div>
+
+    <script src="moment-with-locales.js"></script>
+    <script src="utils.js"></script>
     <script src="index.js"></script>
 </body>
 
