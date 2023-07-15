@@ -55,8 +55,10 @@ Personas (Entrada ```people```):
   "name": "", // string
   "surname": "", // string
   "picture": "", // string
+  "bio": "", // string
   "birth_date": 0, // unix timestamp
-  "death_date": 0, // unix timestamp / null 
+  "death_date": 0, // unix timestamp | null
+  "cause_of_death": "", // string | null
   "birth_location": {}, // geojson (nombre del lugar en 'properties')
   "occupation": "" // string
 }
@@ -68,15 +70,17 @@ Mandatos (Entrada ```terms```):
   "cid": "", // string
   "party": "", // string
   "term_begin": 0, // unix timestamp
-  "term_end": 0 // unix timestamp / null 
+  "term_end": 0 // unix timestamp | null
 }
 ```
 Eventos (Entrada ```events```):  
 ```jsonc
 {
-  "name": "", // string
+  "type": "", // string: {PERIOD, DATE}
+  "title": "", // string
   "description": "", // string
-  "date": 0,  // unix timestamp
-  "location": {} // geojson
+  "event_begin": 0,  // unix timestamp
+  "event_end": 0, // unix timestamp | null
+  "location": {} // geojson | null
 }
 ```

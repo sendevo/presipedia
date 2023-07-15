@@ -6,7 +6,8 @@ moment.locale('es');
 let database = {
     people: {}, // Presidents
     terms: [], // Electoral terms
-    events: [] // Miscelaneous events
+    events: [], // Miscelaneous events
+    blog: [] // Articles
 };
 
 const data = localStorage.getItem("database");
@@ -21,7 +22,7 @@ if(data){
 
 const fileInput = document.getElementById('file-input');
 const uploadButton = document.getElementById('upload-button');
-uploadButton.addEventListener('click', ()=>fileInput.click());
+uploadButton.addEventListener('click', fileInput.click);
 fileInput.addEventListener('change', () => {
     const file = fileInput.files[0];
     const reader = new FileReader();
@@ -58,6 +59,7 @@ personForm.addEventListener('submit', event => {
         picture: personForm.elements.picture.value,
         birth_date: toUnixTimestamp(personForm.elements.birth_date.value),
         death_date: toUnixTimestamp(personForm.elements.death_date.value),
+        cause_of_death: personForm.elements.cause_of_death.value,
         birth_location: latLng2GeoJson(
             personForm.elements.birth_location.value, 
             personForm.elements.birth_location_name.value
@@ -68,8 +70,10 @@ personForm.addEventListener('submit', event => {
     hash(JSON.stringify(personData))
     .then(cid => {
         database.people[cid] = personData;
-        if(cid !== personEditingCID && personEditingCID !== "")
+        if(cid !== personEditingCID && personEditingCID !== ""){
             delete database.people[personEditingCID];
+            // TODO: update references in other tables
+        }
         personForm.reset();
         personEditingCID = "";
         updatePeopleTable(database.people);
@@ -95,6 +99,7 @@ const editPerson = cid => {
     personForm.elements.picture.value = person.picture;
     personForm.elements.birth_date.value = unixToDate(person.birth_date);
     personForm.elements.death_date.value = unixToDate(person.death_date);
+    personForm.elements.cause_of_death.value = person.cause_of_death;
     [
         personForm.elements.birth_location.value,
         personForm.elements.birth_location_name.value
@@ -105,8 +110,8 @@ const editPerson = cid => {
 
 const copyCIDToClipboard = cid => {
     copyToClipboard(cid)
-    .then(() => console.log('CID copiado al portapapeles'))
-    .catch(error => console.error('Error al intentar copiar CID', error));
+    .then(() => console.log('CID copyied to clipboard'))
+    .catch(error => console.error('Error when copying CID', error));
 };
 
 

@@ -7,9 +7,14 @@ const App = () => (
     <ThemeProvider theme={theme}>
         <BrowserRouter>
             <Routes>
-                <Route index element={<Views.Home/>} />
                 <Route path='/about' element={<Views.About/>}/>
+                <Route path='/blog' element={<Views.Blog/>}/>
+                <Route index element={<Views.Home/>} />
+                <Route path='/rankings' element={<Views.Rankings/>}/>
+                <Route path='/sources' element={<Views.Sources/>}/>
+                <Route path='/stats' element={<Views.Stats/>}/>
                 <Route path='/terms' element={<Views.Terms/>}/>
+                <Route path='/timeline' element={<Views.Timeline/>}/>
             </Routes>
         </BrowserRouter>
     </ThemeProvider>
