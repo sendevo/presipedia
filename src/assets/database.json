@@ -1,0 +1,284 @@
+{
+    "people": {
+        "pMS3Zrd0boQZ4YlsTUIO76oZped8R/1rJJFdGuE9tCY=": {
+            "name": "Bernardino",
+            "surname": "Rivadavia",
+            "picture": "",
+            "birth_date": -5983704372000,
+            "death_date": -3923496372000,
+            "cause_of_death": "",
+            "birth_location": {
+                "type": "FeatureCollection",
+                "features": [{
+                    "type": "Feature",
+                    "properties": {
+                        "name": "Buenos Aires"
+                    },
+                    "geometry": {
+                        "coordinates": [-58.43887780352276, -34.60623633310082],
+                        "type": "Point"
+                    }
+                }]
+            },
+            "occupation": "Empleado público"
+        },
+        "1clPEpNrXbjNQeka9tLvZSV+5MipSgKsJPckphuVuVg=": {
+            "name": "Alejandro Vicente",
+            "surname": "Lopez y Planes",
+            "picture": "",
+            "birth_date": -5827406772000,
+            "death_date": -3573057972000,
+            "cause_of_death": "",
+            "birth_location": {
+                "type": "FeatureCollection",
+                "features": [{
+                    "type": "Feature",
+                    "properties": {
+                        "name": "Buenos Aires"
+                    },
+                    "geometry": {
+                        "coordinates": [-58.43887780352276, -34.60623633310082],
+                        "type": "Point"
+                    }
+                }]
+            },
+            "occupation": "Abogado"
+        },
+        "w+g3nMLFkc46uCJLlndhtESyWvzLHGVKMDPBxjT8rKw=": {
+            "name": "Justo José",
+            "surname": "de Urquiza",
+            "picture": "",
+            "birth_date": -5308056372000,
+            "death_date": -3147019572000,
+            "cause_of_death": "",
+            "birth_location": {
+                "type": "FeatureCollection",
+                "features": [{
+                    "type": "Feature",
+                    "properties": {
+                        "name": "Estancia Talar del Arroyo Largo"
+                    },
+                    "geometry": {
+                        "coordinates": [-58.208412751056386, -32.36819752473391],
+                        "type": "Point"
+                    }
+                }]
+            },
+            "occupation": "Militar y hacendado"
+        },
+        "vkAAHPTVtjqWj1Ad5ihxWx7Cw3hHsaQTOsPlGfwbIHE=": {
+            "name": "Santiago",
+            "surname": "Derqui",
+            "picture": "",
+            "birth_date": -5066049972000,
+            "death_date": -3229013172000,
+            "cause_of_death": "",
+            "birth_location": {
+                "type": "FeatureCollection",
+                "features": [{
+                    "type": "Feature",
+                    "properties": {
+                        "name": "Córdoba"
+                    },
+                    "geometry": {
+                        "coordinates": [-64.1909455329184, -31.40586687196732],
+                        "type": "Point"
+                    }
+                }]
+            },
+            "occupation": "Abogado"
+        },
+        "xm2+2Xbu7bjLIIjL6S70kAyULdsuY7VdQ7Ftsnt9i3A=": {
+            "name": "Bartolomé",
+            "surname": "Mitre",
+            "picture": "",
+            "birth_date": -4686753972000,
+            "death_date": -2018115792000,
+            "cause_of_death": "",
+            "birth_location": {
+                "type": "FeatureCollection",
+                "features": [{
+                    "type": "Feature",
+                    "properties": {
+                        "name": "Buenos Aires"
+                    },
+                    "geometry": {
+                        "coordinates": [-58.43887780352276, -34.60623633310082],
+                        "type": "Point"
+                    }
+                }]
+            },
+            "occupation": "Militar y periodista"
+        },
+        "FTP5rA+UrGLSKvCIYksXNhOMa/wrCebn9aikofd8Z2Q=": {
+            "name": "Domingo Faustino",
+            "surname": "Sarmiento",
+            "picture": "",
+            "birth_date": -5013691572000,
+            "death_date": -2565720372000,
+            "cause_of_death": "",
+            "birth_location": {
+                "type": "FeatureCollection",
+                "features": [{
+                    "type": "Feature",
+                    "properties": {
+                        "name": "San Juan"
+                    },
+                    "geometry": {
+                        "coordinates": [-68.53318131785664, -31.534009174188725],
+                        "type": "Point"
+                    }
+                }]
+            },
+            "occupation": "Periodista y docente"
+        },
+        "YRUacZ8qd3bf/akjUd6lhjkiNamoqy1sweeKosQAojs=": {
+            "name": "Nicolás",
+            "surname": "Avellaneda",
+            "picture": "",
+            "birth_date": -4202481972000,
+            "death_date": -2653934772000,
+            "cause_of_death": "",
+            "birth_location": {
+                "type": "FeatureCollection",
+                "features": [{
+                    "type": "Feature",
+                    "properties": {
+                        "name": "San Miguel de Tucumán"
+                    },
+                    "geometry": {
+                        "coordinates": [-65.20140311326375, -26.828533956896962],
+                        "type": "Point"
+                    }
+                }]
+            },
+            "occupation": "Abogado"
+        },
+        "z/4+Lbt+YCLK3/s0jYdMssZFqPB9NMwxYfv9gkr97Rs=": {
+            "name": "Julio Argentino",
+            "surname": "Roca",
+            "picture": "",
+            "birth_date": -3990715572000,
+            "death_date": -1742067792000,
+            "cause_of_death": "",
+            "birth_location": {
+                "type": "FeatureCollection",
+                "features": [{
+                    "type": "Feature",
+                    "properties": {
+                        "name": "San Miguel de Tucumán"
+                    },
+                    "geometry": {
+                        "coordinates": [-65.20140311326375, -26.828533956896962],
+                        "type": "Point"
+                    }
+                }]
+            },
+            "occupation": "Militar"
+        },
+        "itUJ3wKdJ9ccKJ2B6fNp14Tvwu9moRp2HpxKxsAIujQ=": {
+            "name": "Miguel Ángel",
+            "surname": "Juárez Celman",
+            "picture": "",
+            "birth_date": -3952699572000,
+            "death_date": -1916941392000,
+            "cause_of_death": "",
+            "birth_location": {
+                "type": "FeatureCollection",
+                "features": [{
+                    "type": "Feature",
+                    "properties": {
+                        "name": "Córdoba"
+                    },
+                    "geometry": {
+                        "coordinates": [-64.1909455329184, -31.40586687196732],
+                        "type": "Point"
+                    }
+                }]
+            },
+            "occupation": "Abogado"
+        },
+        "yeLbmCsUdXUzlnFEq29GqIKc5woMfYQwfvMtTrR//Io=": {
+            "name": "Carlos",
+            "surname": "Pellegrini",
+            "picture": "",
+            "birth_date": -3888590772000,
+            "death_date": -2002650192000,
+            "cause_of_death": "",
+            "birth_location": {
+                "type": "FeatureCollection",
+                "features": [{
+                    "type": "Feature",
+                    "properties": {
+                        "name": "Buenos Aires"
+                    },
+                    "geometry": {
+                        "coordinates": [-58.43887780352276, -34.60623633310082],
+                        "type": "Point"
+                    }
+                }]
+            },
+            "occupation": "Abogado"
+        }
+    },
+    "terms": [{
+        "cid": "pMS3Zrd0boQZ4YlsTUIO76oZped8R/1rJJFdGuE9tCY=",
+        "term_begin": -4540910772000,
+        "term_end": -4496501172000,
+        "party": "Unitario"
+    }, {
+        "cid": "1clPEpNrXbjNQeka9tLvZSV+5MipSgKsJPckphuVuVg=",
+        "term_begin": -4496501172000,
+        "term_end": -4492872372000,
+        "party": "Unitario"
+    }, {
+        "cid": "w+g3nMLFkc46uCJLlndhtESyWvzLHGVKMDPBxjT8rKw=",
+        "term_begin": -3655137972000,
+        "term_end": -3465749172000,
+        "party": "Federal"
+    }, {
+        "cid": "vkAAHPTVtjqWj1Ad5ihxWx7Cw3hHsaQTOsPlGfwbIHE=",
+        "term_begin": -3452529972000,
+        "term_end": -3413045172000,
+        "party": "Federal"
+    }, {
+        "cid": "xm2+2Xbu7bjLIIjL6S70kAyULdsuY7VdQ7Ftsnt9i3A=",
+        "term_begin": -3383582772000,
+        "term_end": -3194193972000,
+        "party": "Liberal"
+    }, {
+        "cid": "FTP5rA+UrGLSKvCIYksXNhOMa/wrCebn9aikofd8Z2Q=",
+        "term_begin": -3194193972000,
+        "term_end": -3004891572000,
+        "party": "Liberal"
+    }, {
+        "cid": "YRUacZ8qd3bf/akjUd6lhjkiNamoqy1sweeKosQAojs=",
+        "term_begin": -3004891572000,
+        "term_end": -2815502772000,
+        "party": "Autonomista"
+    }, {
+        "cid": "z/4+Lbt+YCLK3/s0jYdMssZFqPB9NMwxYfv9gkr97Rs=",
+        "term_begin": -2815502772000,
+        "term_end": -2626200372000,
+        "party": "Autonomista"
+    }, {
+        "cid": "itUJ3wKdJ9ccKJ2B6fNp14Tvwu9moRp2HpxKxsAIujQ=",
+        "term_begin": -2626200372000,
+        "term_end": -2505758772000,
+        "party": "Autonomista"
+    }, {
+        "cid": "yeLbmCsUdXUzlnFEq29GqIKc5woMfYQwfvMtTrR//Io=",
+        "term_begin": -2505672372000,
+        "term_end": -2436811572000,
+        "party": "Autonomista"
+    }],
+    "events": [
+        {
+            "type": "PERIOD",
+            "title": "Gobernadores a cargo del Poder Ejecutivo Nacional",
+            "description": "Entre el 18 de agosto de 1827 y el 5 de marzo de 1854 no hubo presidente. La provincia de Buenos Aires condujo las relaciones exteriores.",
+            "event_begin": -4492872372000,
+            "event_end": -3655137972000
+        }
+    ]
+}

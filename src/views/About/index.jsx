@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import moment from 'moment';
-import MainView from "../../templates/MainView";
+import MainView from "../../components/MainView";
 import TextBlock from "../../components/TextBlock";
 
 

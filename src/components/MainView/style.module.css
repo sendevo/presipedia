@@ -2,6 +2,7 @@
     background-color: transparent;
     background-repeat: no-repeat;
     background-size: cover!important;
+    filter: blur(2px);
     height: 100%;
     width: 100%;
     top: 0px;
@@ -12,7 +13,7 @@
 
 .Container {    
     margin-bottom: 100px; /* Height of bottom navigation */
-    max-width: 650px!important;
+    max-width: 900px!important;
     padding-left: 3%!important;
     padding-right: 3%!important;
 }

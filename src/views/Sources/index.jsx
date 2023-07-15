@@ -1,5 +1,5 @@
 import {Container} from '@mui/material';
-import MainView from "../../templates/MainView";
+import MainView from "../../components/MainView";
 
 const View = () => {
     return(

@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 import TextBlock from '../../components/TextBlock';
-import MainView from '../../templates/MainView';
+import MainView from '../../components/MainView';
 
 const APP_NAME = "Presipedia: Edición Argentina";
 
