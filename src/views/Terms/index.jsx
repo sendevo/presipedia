@@ -1,4 +1,5 @@
 import { Box } from '@mui/material';
+import { Link } from 'react-router-dom';
 import TextBlock from '../../components/TextBlock';
 import MainView from '../../components/MainView';
 
@@ -9,7 +10,7 @@ const View = () => (
         <Box marginTop={"10px"}>                     
             <TextBlock title={"Aceptación de los términos"}>
                 Al acceder a <b>{APP_NAME}</b> a través de cualquiera de sus versiones móvil u online, usted acepta los términos y condiciones del servicio aquí detallados.
-                Todo el material multimedial, el texto y toda información contenida en esta aplicación en cualquiera de sus versiones, es propiedad de <i>Sendevo Software</i>, salvo que se indique lo contrario.
+                El material multimedial, el texto y la información contenida en esta aplicación en cualquiera de sus versiones, es producto del desarrollo realizado por <i>Sendevo Software</i>, salvo que se indique lo contrario (véase <Link to='/sources'>Fuentes de información</Link>).
             </TextBlock>
 
             <TextBlock title={"Cambios en los términos y condiciones"}>
@@ -26,7 +27,7 @@ const View = () => (
                 El usuario de <b>{APP_NAME}</b> se compromete a:
                 <ol>
                     <li>Emplear esta aplicación, en cualquiera de sus versiones, únicamente para consultar información acerca de mandatarios argentinos.</li>
-                    <li>No alterar, copiar o distribuir el código fuente de la aplicación ni intentar modificar su normal funcionamiento con el fin de obtener algún beneficio propio o para terceros.</li>
+                    <li>Respetar los términos de licencia de la <a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank">GNU General Public License (v3)</a>, en lo que respecta a la edición, modificación y distribución del código fuente de <b>{APP_NAME}</b>.</li>
                     <li>No promocionar o publicitar productos o servicios que no sean propios sin una correspondiente autorización.</li>
                     <li>No infringir la ley de cualquier forma, incluyendo actividades como almacenar o compartir información fraudulenta o engañosa.</li>
                 </ol>

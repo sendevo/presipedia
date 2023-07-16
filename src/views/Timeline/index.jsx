@@ -1,9 +1,8 @@
 import moment from 'moment';
 import Timeline  from '../../components/Timeline';
 import MainView from "../../components/MainView";
+import { VIS_DATE_FORMAT } from '../../model/constants';
 import database from '../../assets/database.json';
-
-const VIS_DATE_FORMAT = "YYYY-MM-DD";
 
 const options = {
     locale: 'es',

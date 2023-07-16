@@ -13,12 +13,13 @@ Desde Bernardino Rivadavia hasta Alberto Ángel Fernández, la más completa gu�
 
 | Funcionalidad | Tecnología |
 |---|---|
-| Gestión de proyecto | Vite |
-| Componentes GUI | ReactJS |
-| Hojas de estilos | MUI |
-| Componentes nativos | CapacitorJS |
-| Visualizaciones | [VisJS](https://visjs.github.io/vis-timeline/examples/timeline/) |
-| Formateo de fechas | MomentJS |
+| Gestión de proyecto | [Vite](https://vitejs.dev/) |
+| Componentes GUI | [ReactJS](https://es.react.dev/) |
+| Hojas de estilos | [MUI](https://mui.com/) |
+| Componentes nativos | [CapacitorJS](https://capacitorjs.com/) |
+| Línea de tiempo | [VisJS](https://visjs.github.io/vis-timeline/examples/timeline/) |
+| Formateo de fechas | [MomentJS](https://momentjs.com/) |
+| Visualización de datos | [Charts.js](https://www.chartjs.org/) |
 
 #### Otras herramientas utilizadas:
 | Funcionalidad | Tecnología |

@@ -1,12 +1,10 @@
-import {Container} from '@mui/material';
 import MainView from "../../components/MainView";
+import articles from "../../assets/articles.json";
 
 const View = () => {
     return(
-        <MainView>
-            <Container>
-                
-            </Container>  
+        <MainView title="Símbolos presidenciales">
+            {JSON.stringify(articles)}
         </MainView>
     );
 };

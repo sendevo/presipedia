@@ -1,12 +1,10 @@
-import {Container} from '@mui/material';
 import MainView from "../../components/MainView";
+import database from "../../assets/database.json";
 
 const View = () => {
     return(
-        <MainView>
-            <Container>
-                
-            </Container>  
+        <MainView title="Estadísticas de periodo">
+            {JSON.stringify(database)}
         </MainView>
     );
 };
