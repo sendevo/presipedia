@@ -1,17 +1,18 @@
 import { useEffect, useRef } from 'react';
 import { Chart } from 'chart.js/auto';
 
-const canvasStyle = {
+const containerStyle = {
     marginTop: "10px",
     padding: "10px",
-    backgroundColor: "rgba(250, 250, 250, 0.6)",
     border: "1px solid rgb(180, 180, 180)",
     borderRadius: "5px",
-    boxShadow: "0px 0px 5px 0px rgba(0, 0, 0, 0.2)"
+    boxShadow: "0px 0px 5px 0px rgba(0, 0, 0, 0.2)",
+    backgroundColor: "rgba(250, 250, 250, 0.6)"
 };
 
-const HorizontalBarChart = ({title, labels, datasets}) => {
+const HorizontalBarChart = ({title, labels, datasets, ylabel, xlabel}) => {
     const canvasRef = useRef(null);
+    const containerHeight = datasets[0].data.length*30;
     const config = {
         type: 'bar',
         data: {
@@ -20,6 +21,12 @@ const HorizontalBarChart = ({title, labels, datasets}) => {
         },
         options: {
             indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {title: {display: ylabel, text: ylabel}},
+                x: {title: {display: xlabel, text: xlabel}},
+            },
             plugins: {
                 legend: {
                     display: false
@@ -37,10 +44,12 @@ const HorizontalBarChart = ({title, labels, datasets}) => {
     useEffect(() => {
         const chart = new Chart(canvasRef.current, config);
         return () => chart.destroy();
-    }, []);
+    }, [datasets]);
 
     return (
-        <canvas style={canvasStyle} ref={canvasRef} />
+        <div style={{...containerStyle, height: `${containerHeight}px`}}>
+            <canvas ref={canvasRef} />
+        </div>
     );
 };
 

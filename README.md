@@ -82,6 +82,7 @@ Eventos (Entrada ```events```):
   "description": "", // string
   "event_begin": 0,  // unix timestamp
   "event_end": 0, // unix timestamp | null
-  "location": {} // geojson | null
+  "location": {}, // geojson | null
+  "sources": [] // Array of strings
 }
 ```

@@ -22,7 +22,7 @@ if(data){
 
 const fileInput = document.getElementById('file-input');
 const uploadButton = document.getElementById('upload-button');
-uploadButton.addEventListener('click', fileInput.click);
+uploadButton.addEventListener('click', () => fileInput.click());
 fileInput.addEventListener('change', () => {
     const file = fileInput.files[0];
     const reader = new FileReader();
@@ -60,7 +60,7 @@ personForm.addEventListener('submit', event => {
         birth_date: toUnixTimestamp(personForm.elements.birth_date.value),
         death_date: toUnixTimestamp(personForm.elements.death_date.value),
         cause_of_death: personForm.elements.cause_of_death.value,
-        birth_location: latLng2GeoJson(
+        birth_location: lngLat2GeoJson(
             personForm.elements.birth_location.value, 
             personForm.elements.birth_location_name.value
         ),
@@ -72,7 +72,8 @@ personForm.addEventListener('submit', event => {
         database.people[cid] = personData;
         if(cid !== personEditingCID && personEditingCID !== ""){
             delete database.people[personEditingCID];
-            // TODO: update references in other tables
+            findAllIndexes(database.terms, "cid", personEditingCID)
+            .forEach(termIndex => {database.terms[termIndex].cid = cid;});
         }
         personForm.reset();
         personEditingCID = "";
@@ -103,7 +104,7 @@ const editPerson = cid => {
     [
         personForm.elements.birth_location.value,
         personForm.elements.birth_location_name.value
-    ] = geoJson2LatLng(person.birth_location);
+    ] = geojson2LngLat(person.birth_location);
     personForm.elements.occupation.value = person.occupation;
     personEditingCID = cid;
 };

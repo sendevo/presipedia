@@ -3,6 +3,15 @@
 const DATE_FORMAT = "LL";
 
 
+////////// MISC //////////
+
+const findAllIndexes = (objArr, attr, key) => objArr.reduce((indexes, element, current) => {
+    if(element[attr] === key) indexes.push(current);
+    return indexes;
+}, []);
+
+
+
 ////////// TIME //////////
 
 const toUnixTimestamp = date => moment(date, "YYYY-MM-DD").unix()*1000;
@@ -12,8 +21,8 @@ const unixToDate = timestamp => moment.unix(timestamp/1000).format('YYYY-MM-DD')
 
 ////////// LOCATIONS //////////
 
-const latLng2GeoJson = (latLng, name="") => {
-    const [lat,lng] = latLng.split(",");
+const lngLat2GeoJson = (lngLat, name="") => {
+    const [lng, lat] = lngLat.split(",");
     return {
         type: "FeatureCollection",
         features: [{
@@ -23,8 +32,8 @@ const latLng2GeoJson = (latLng, name="") => {
             },
             geometry: {
                 coordinates: [
-                    parseFloat(lat),
-                    parseFloat(lng)
+                    parseFloat(lng),
+                    parseFloat(lat)
                 ],
                 type: "Point"
             }
@@ -32,11 +41,18 @@ const latLng2GeoJson = (latLng, name="") => {
     };
 };
 
-const geoJson2LatLng = geojson => ([
+const geojson2LngLat = geojson => ([
     geojson.features[0].geometry.coordinates.join(","),
     geojson.features[0].properties.name
 ]);
 
+const location2GoggleMap = (lat,lng) => `http://www.google.com/maps/place/${lat},${lng}`;
+
+const getLocationLink = (geojson, text, linkFormat) => {
+    const [lng, lat] = geojson.features[0].geometry.coordinates;
+    const link = location2GoggleMap(lat, lng);
+    return linkFormat ? `<a href=${link} target="_blank">${text}</a>` : link;
+};
 
 ////////// CRYPTO //////////
 
@@ -75,12 +91,19 @@ const updatePeopleTable = people => {
         const person = people[cid];
         index++;
         const row = document.createElement('tr');
+        const birth_date = (moment(person.birth_date).format(DATE_FORMAT));
+        const death_date = moment(person.death_date).format(DATE_FORMAT);
+        const death_age = person.death_date ? moment(person.death_date).diff(person.birth_date, 'years', false) : "";
+        const current_age = moment().diff(person.birth_date, 'years', false);
+        const location_name = person.birth_location.features[0].properties.name;
         row.innerHTML = `
             <td>${index}</td>
             <td>${person.name + " " + person.surname}</td>
-            <td>${person.picture}</td>
-            <td>${person.birth_location.features[0].properties.name + ", " + (moment(person.birth_date).format(DATE_FORMAT))}</td>
-            <td>${person.death_date ? moment(person.death_date).format(DATE_FORMAT) : '-'}</td>
+            <td style="text-align: center;">
+                <img class="profile-pic" src="img/${person.picture}" alt="${person.surname}"/>
+            </td>
+            <td>${getLocationLink(person.birth_location, location_name, true) + ", " + birth_date}</td>
+            <td>${(person.death_date ? death_date+", a los "+death_age : "Tiene "+current_age)+" años"}</td>
             <td>${person.occupation}</td>
             <td>
                 <button onClick="editPerson('${cid}')" title="Editar"><i class="fa fa-edit"></i></button>
