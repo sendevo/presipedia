@@ -87,7 +87,7 @@ const updatePeopleTable = people => {
     const tbody = document.getElementById('people-tbody');
     tbody.innerHTML = "";
     let index = 0;
-    for(cid in people) {
+    for(let cid in people) {
         const person = people[cid];
         index++;
         const row = document.createElement('tr');

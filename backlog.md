@@ -22,9 +22,9 @@
   - [ ] Visualizaciones de línea de tiempo con Vis.js  
     - [ ] Linea de tiempo de mandatos y eventos.  
     - [ ] Linea de tiempo de nacimientos y fallecimientos.  
-  - [ ] Visualizaciones de rankings o clasificaciones  
+  - [x] Visualizaciones de rankings o clasificaciones  
     - [x] Duración de mandatos.  
-    - [ ] Edad de mandatarios.  
+    - [x] Edad de mandatarios. TODO: reducir y-labels 
   - [ ] Visualización de estadísticas  
     - [ ] Lugares de nacimiento.  
     - [ ] Duración de gobierno por partido / por mandatario.  

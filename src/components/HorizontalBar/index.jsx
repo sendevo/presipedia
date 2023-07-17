@@ -3,14 +3,19 @@ import { Chart } from 'chart.js/auto';
 
 const containerStyle = {
     marginTop: "10px",
-    padding: "10px",
+    padding: "10px 5px 25px 5px",
     border: "1px solid rgb(180, 180, 180)",
     borderRadius: "5px",
     boxShadow: "0px 0px 5px 0px rgba(0, 0, 0, 0.2)",
     backgroundColor: "rgba(250, 250, 250, 0.6)"
 };
 
-const HorizontalBarChart = ({title, labels, datasets, ylabel, xlabel}) => {
+const spanStyle = {
+    fontSize: "small",
+    color: "gray"
+}
+
+const HorizontalBarChart = ({title, clarification, labels, datasets, ylabel, xlabel}) => {
     const canvasRef = useRef(null);
     const containerHeight = datasets[0].data.length*30;
     const config = {
@@ -49,6 +54,7 @@ const HorizontalBarChart = ({title, labels, datasets, ylabel, xlabel}) => {
     return (
         <div style={{...containerStyle, height: `${containerHeight}px`}}>
             <canvas ref={canvasRef} />
+            {clarification && <span style={spanStyle}>{clarification}</span>}
         </div>
     );
 };

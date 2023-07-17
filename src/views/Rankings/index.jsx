@@ -1,35 +1,16 @@
 import { useState } from "react";
-import moment from "moment";
 import MainView from "../../components/MainView";
 import HorizontalBarChart from "../../components/HorizontalBar";
 import { Slider } from "../../components/Inputs";
-import database from "../../assets/database.json";
+import { longerTerms, shorterTerms, oldest, youngest } from "../../model/data";
 
-const getPersonName = cid => {
-    const person = database.people[cid];
-    return person.name + " " + person.surname;
-};
+const toDurationYears = terms => terms.map(t => t.duration);
+const toDurationMonths = terms => terms.map(t => t.duration*12);
+const toAges = people => people.map(p => p.age);
 
-const longerTermsAll = database.terms
-    .map((term, index) => {
-        const duration = moment(term.term_end).diff(term.term_begin, 'years', true);
-        const president = getPersonName(term.cid);
-        return { index, duration, president, cid: term.cid };
-    })
-    .reduce((acc, term) => {
-        const existingTerm = acc.find((item) => item.cid === term.cid);
-        if(existingTerm)
-            existingTerm.duration += term.duration;
-        else
-            acc.push(term);
-        return acc;
-        }, [])
-    .sort((a,b) => b.duration-a.duration);
-const shorterTermsAll = [...longerTermsAll].reverse();
-
-const terms2ChartDS = (terms, background="", border="") => ([
+const terms2ChartDS = (data, mapFc, background = "", border = "") => ([
     {
-        data: terms.map(t => t.duration),
+        data: mapFc(data),
         backgroundColor: background ? background : 'rgba(75, 20, 192, 0.6)',
         borderColor: border ? border : 'rgba(75, 20, 192, 1)',
         borderWidth: 1
@@ -42,8 +23,10 @@ const View = () => {
 
     const handleSliderChange = (_,value) => setSliderValue(value);
 
-    const longerTermsSliced = longerTermsAll.slice(0, sliderValue);
-    const shorterTermsSliced = shorterTermsAll.slice(0, sliderValue);
+    const longerTermsSliced = longerTerms.slice(0, sliderValue);
+    const shorterTermsSliced = shorterTerms.slice(0, sliderValue);
+    const oldestSliced = oldest.slice(0, sliderValue);
+    const youngestSliced = youngest.slice(0, sliderValue);
 
     return(
         <MainView title="Clasificaciones">
@@ -61,14 +44,30 @@ const View = () => {
             <HorizontalBarChart 
                 title="Mandatos más extensos" 
                 labels={longerTermsSliced.map(t => t.president)} 
-                datasets={terms2ChartDS(longerTermsSliced)}
+                datasets={terms2ChartDS(longerTermsSliced, toDurationYears)}
                 xlabel="Años de mandato"
                 ylabel="Presidente"/>
             <HorizontalBarChart 
                 title="Mandatos más breves" 
                 labels={shorterTermsSliced.map(t => t.president)} 
-                datasets={terms2ChartDS(shorterTermsSliced, 'rgba(200, 20, 50, 0.6)', 'rgba(200, 20, 50, 1)')}
+                datasets={terms2ChartDS(shorterTermsSliced, toDurationMonths, 'rgba(200, 20, 50, 0.6)', 'rgba(200, 20, 50, 1)')}
                 xlabel="Meses de mandato"
+                ylabel="Presidente"/>
+
+            <HorizontalBarChart 
+                title="Mandatarios más longevos *" 
+                clarification="* Edad actual en caso de personas vivas o edad de fallecimiento."
+                labels={oldestSliced.map(t => t.president)} 
+                datasets={terms2ChartDS(oldestSliced, toAges, 'rgba(20, 200, 50, 0.6)', 'rgba(20, 200, 50, 1)')}
+                xlabel="Años de edad"
+                ylabel="Presidente"/>
+
+            <HorizontalBarChart 
+                title="Mandatarios más jóvenes **" 
+                clarification="** Edad actual en caso de personas vivas o edad de fallecimiento."
+                labels={youngestSliced.map(t => t.president)} 
+                datasets={terms2ChartDS(youngestSliced, toAges, 'rgba(20, 60, 190, 0.6)', 'rgba(20, 60, 190, 1)')}
+                xlabel="Años de edad"
                 ylabel="Presidente"/>
         </MainView>
     );
