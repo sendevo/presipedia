@@ -9,11 +9,11 @@ const containerStyle = {
     borderRadius: "5px"
 };
 
-const Timeline = ({title, items}) => {
+const Timeline = ({title, clarification, items}) => {
     const containerRef = useRef();
     
     useEffect(()=>{
-        const tl = new VisTimeline(containerRef.current, items, {locale: 'es',height: '400px'});
+        const tl = new VisTimeline(containerRef.current, items, {locale: 'es', maxHeight: '600px'});
         return () => tl.destroy();
     }, []);
 
@@ -21,6 +21,7 @@ const Timeline = ({title, items}) => {
         <div style={containerStyle}>
             <Typography fontSize={"large"}>{title}</Typography>
             <div ref={containerRef}></div>
+            {clarification && <Typography fontSize={"small"}>{clarification}</Typography>}
         </div>
     );
 };

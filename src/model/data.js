@@ -71,16 +71,18 @@ export const terms = database.terms
         end: moment(term.term_end).format(VIS_DATE_FORMAT)
     }));
 
-export const birthDates = Object.keys(database.people)
-    .map(cid => {
+export const periodOfLife = Object.keys(database.people)
+    .map((cid, idx) => {
         const person = database.people[cid];
         return {
-            president: getPersonName(cid),
-            birth: moment(person.birth_date).format(VIS_DATE_FORMAT)
+            id: idx+1,
+            content: getContentBlock(person),
+            start: moment(person.birth_date).format(VIS_DATE_FORMAT),
+            end: moment(person.death_date ? person.death_date : DB_LAST_UPDATE).format(VIS_DATE_FORMAT)
         };
     });
 
-    
+
 ////// Misc Data Analysis //////
 
 export const aliveCountPerDate = (() => {
