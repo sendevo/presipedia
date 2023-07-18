@@ -16,7 +16,6 @@
     - [x] Mandatos  
     - [x] Eventos  
     - [ ] Articulos  
-    - [ ] Trivia  
   - [x] Proyecto Vite+React.    
   - [x] Front-end React + MUI.  
   - [ ] Visualizaciones de línea de tiempo con Vis.js  
@@ -27,7 +26,7 @@
     - [x] Edad de mandatarios. TODO: reducir y-labels 
   - [ ] Visualización de estadísticas  
     - [ ] Lugares de nacimiento.  
-    - [ ] Duración de gobierno por partido / por mandatario.  
+    - [ ] Candidatos por partido.  
   - [ ] Trivia multiplechoice:  
     - [ ] Quién goberno entre ... y entre ...
     - [ ] Durante qué periodo gobernó ...

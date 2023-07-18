@@ -1,0 +1,34 @@
+.vis-timeline {
+    background: white;
+}
+
+.vis-item {
+    border: 1px solid gray;
+    border-radius: 5px!important;
+    background-color: lightblue;
+    box-shadow: 5px 5px 10px rgba(128, 128, 128, 0.6);
+}
+
+.vis-item p {
+    margin: 0px;
+}
+
+.vis-item.vis-dot {
+    border-width: 5px;
+    border-radius: 5px;
+}
+
+.vis-item.vis-selected {
+    border-color: gray;
+    background-color: lightgray;
+    box-shadow: 7px 7px 10px rgba(100, 100, 100, 1);
+}
+
+.vis-time-axis .vis-text {
+    padding-top: 5px;
+}
+
+.vis-time-axis .vis-grid.vis-major {
+    border-width: 2px;
+    border-color: #91ebf9;
+}
