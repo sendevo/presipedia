@@ -26,6 +26,7 @@
     - [x] Edad de mandatarios. TODO: reducir y-labels 
   - [ ] Visualización de estadísticas  
     - [ ] Lugares de nacimiento.  
+    - [ ] Meses/signos con mayores nacimientos.  
     - [ ] Candidatos por partido.  
   - [ ] Trivia multiplechoice:  
     - [ ] Quién goberno entre ... y entre ...
@@ -53,5 +54,6 @@
   
 
 ### v1.1._ (beta) (requisitos pendientes):  
-  - [ ] Optimizar bases de datos.  
+  - [ ] Optimizar base de datos o pre-procesar datos estáticos.  
   - [ ] Optimizar tareas de mantenimiento y actualización.  
+  - [ ] Implementar backend para actualización de la base de datos.  
