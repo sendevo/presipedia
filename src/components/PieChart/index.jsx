@@ -15,24 +15,15 @@ const spanStyle = {
     color: "gray"
 };
 
-const HorizontalBarChart = ({title, clarification, labels, datasets, ylabel, xlabel}) => {
+const PieChart = ({title, clarification, labels, datasets}) => {
     const canvasRef = useRef(null);
-    const containerHeight = datasets[0].data.length*30;
     const config = {
-        type: 'bar',
-        data: {labels,datasets},
+        type: 'doughnut',
+        data: {labels, datasets},
         options: {
-            indexAxis: 'y',
             responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                y: {title: {display: ylabel, text: ylabel}},
-                x: {title: {display: xlabel, text: xlabel}},
-            },
             plugins: {
-                legend: {
-                    display: false
-                },
+                legend: {position: 'bottom'},
                 title: {
                     align: "start",
                     display: true,
@@ -49,11 +40,11 @@ const HorizontalBarChart = ({title, clarification, labels, datasets, ylabel, xla
     }, [datasets]);
 
     return (
-        <div style={{...containerStyle, height: `${containerHeight}px`}}>
+        <div style={containerStyle}>
             <canvas ref={canvasRef} />
             {clarification && <span style={spanStyle}>{clarification}</span>}
         </div>
     );
 };
 
-export default HorizontalBarChart;
+export default PieChart;

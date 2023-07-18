@@ -1,4 +1,5 @@
 import moment from "moment";
+import { colorMapGenerator } from "./utils";
 import {
     VIS_DATE_FORMAT,
     DAY_MS,
@@ -6,7 +7,40 @@ import {
 } from './constants';
 import database from "../assets/database.json";
 
-// This should be performed during build time.
+// This should be executed during build time and exported in json format.
+
+
+////// Timelines //////
+
+const getContentBlock = person => {
+    const name = `<p>${person.name} ${person.surname}</p>`;
+    const profilePic = `<img src="${'/pictures/'+person.picture}" alt="${person.surname}" width="50px" height="50px" />`;
+    const container = `<div style="background-color: #f2f2f2;">
+                            ${name}
+                            ${profilePic}
+                       </div>`;
+    return container;
+};
+
+export const terms = database.terms
+    .map((term, index) => ({
+        id: index + 1,
+        content: getContentBlock(database.people[term.cid]),
+        start: moment(term.term_begin).format(VIS_DATE_FORMAT),
+        end: moment(term.term_end).format(VIS_DATE_FORMAT)
+    }));
+
+export const periodOfLife = Object.keys(database.people)
+    .map((cid, idx) => {
+        const person = database.people[cid];
+        return {
+            id: idx+1,
+            content: getContentBlock(person),
+            start: moment(person.birth_date).format(VIS_DATE_FORMAT),
+            end: moment(person.death_date ? person.death_date : DB_LAST_UPDATE).format(VIS_DATE_FORMAT)
+        };
+    });
+
 
 ////// Ranking bar charts //////
 
@@ -51,39 +85,20 @@ export const oldest = Object.keys(database.people)
 export const youngest = [...oldest].reverse();
 
 
-////// Timelines //////
-
-const getContentBlock = person => {
-    const name = `<p>${person.name} ${person.surname}</p>`;
-    const profilePic = `<img src="${'/pictures/'+person.picture}" alt="${person.surname}" width="50px" height="50px" />`;
-    const container = `<div style="background-color: #f2f2f2;">
-                            ${name}
-                            ${profilePic}
-                       </div>`;
-    return container;
-};
-
-export const terms = database.terms
-    .map((term, index) => ({
-        id: index + 1,
-        content: getContentBlock(database.people[term.cid]),
-        start: moment(term.term_begin).format(VIS_DATE_FORMAT),
-        end: moment(term.term_end).format(VIS_DATE_FORMAT)
-    }));
-
-export const periodOfLife = Object.keys(database.people)
-    .map((cid, idx) => {
-        const person = database.people[cid];
-        return {
-            id: idx+1,
-            content: getContentBlock(person),
-            start: moment(person.birth_date).format(VIS_DATE_FORMAT),
-            end: moment(person.death_date ? person.death_date : DB_LAST_UPDATE).format(VIS_DATE_FORMAT)
-        };
-    });
 
 
-////// Misc Data Analysis //////
+////// Statistics //////
+
+export const birthLocations = { 
+    places: ["Buenos Aires", "Córdoba", "Rosario"], // TODO: hardcoded data
+    data: [
+        {
+            label: 'Presidentes nacidos',
+            data: [10, 5, 2], // TODO: hardcoded data
+            backgroundColor: colorMapGenerator(3) // TODO: hardcoded data
+        }
+    ]
+}
 
 export const aliveCountPerDate = (() => {
     const startDate = Object.keys(database.people)
@@ -119,6 +134,7 @@ export const aliveCountPerDate = (() => {
 
     return aliveCount;
 })();
+
 
 /*
 aliveCountPerDate.forEach(p => {

@@ -8,7 +8,7 @@
     - [x] Formulario para editar persona.  
     - [x] Formulario para editar mandato.  
     - [ ] Formulario para editar eventos.  
-    - [ ] Formulario para editar publicaciones.  
+    - [ ] Formulario para editar blog.  
     - [x] Cálculo de CID para inserción de nuevos elementos.  
     - [x] Exportar base de datos a archivo json. 
   - [ ] Data entry:  
@@ -19,11 +19,13 @@
   - [x] Proyecto Vite+React.    
   - [x] Front-end React + MUI.  
   - [ ] Visualizaciones de línea de tiempo con Vis.js  
-    - [ ] Linea de tiempo de mandatos y eventos.  
-    - [ ] Linea de tiempo de nacimientos y fallecimientos.  
-  - [x] Visualizaciones de rankings o clasificaciones  
+    - [x] Linea de tiempo de mandatos y eventos.  
+    - [x] Linea de tiempo de nacimientos y fallecimientos.  
+    - [ ] Buscar alternativas de visualizacion.  
+  - [ ] Visualizaciones de rankings o clasificaciones  
     - [x] Duración de mandatos.  
-    - [x] Edad de mandatarios. TODO: reducir y-labels 
+    - [x] Edad de mandatarios.  
+    - [ ] Reducir y-labels  
   - [ ] Visualización de estadísticas  
     - [ ] Lugares de nacimiento.  
     - [ ] Meses/signos con mayores nacimientos.  

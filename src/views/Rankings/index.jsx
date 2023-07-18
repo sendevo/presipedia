@@ -47,6 +47,7 @@ const View = () => {
                 datasets={terms2ChartDS(longerTermsSliced, toDurationYears)}
                 xlabel="Años de mandato"
                 ylabel="Presidente"/>
+                
             <HorizontalBarChart 
                 title="Mandatos más breves" 
                 labels={shorterTermsSliced.map(t => t.president)} 
