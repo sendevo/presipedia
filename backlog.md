@@ -18,6 +18,9 @@
     - [ ] Articulos  
   - [x] Proyecto Vite+React.    
   - [x] Front-end React + MUI.  
+  - [ ] Navegación.  
+    - [x] React Router Dom. 
+    - [ ] Barra de navegación inferior.  
   - [ ] Visualizaciones de línea de tiempo con Vis.js  
     - [x] Linea de tiempo de mandatos y eventos.  
     - [x] Linea de tiempo de nacimientos y fallecimientos.  
@@ -29,8 +32,8 @@
   - [ ] Visualización de estadísticas  
     - [x] Lugares de nacimiento.  
     - [x] Mandatos por partido.  
-    - [ ] Meses/signos con mayores nacimientos.  
-    - [ ] Cantidad de expresidentes en vida por día.  
+    - [ ] Meses/signos con mayores nacimientos (barra vertical).  
+    - [ ] Cantidad de expresidentes en vida por día (lineas).  
   - [ ] Trivia multiplechoice:  
     - [ ] Quién goberno entre ... y entre ...
     - [ ] Durante qué periodo gobernó ...
@@ -41,6 +44,7 @@
     - [ ] Cómo era el segundo nombre de ...  
     - [ ] Cuántos años en total gobernó ...  
     - [ ] Cuántos presidentes con vida había entre ... y ...  
+  - [ ] Menú de inicio (previsualizaciones).  
   - [ ] Branding y promoción:    
     - [ ] Logo  
     - [x] Nombre  

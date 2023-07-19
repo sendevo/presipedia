@@ -9,7 +9,7 @@ const View = () => (
             items={terms} />
         <Timeline 
             title="Nacimientos y fallecimientos *" 
-            clarification="* Hasta fecha de actualizción de los datos" 
+            clarification="* Hasta la fecha de actualización de los datos." 
             items={periodOfLife} />
     </MainView>
 );

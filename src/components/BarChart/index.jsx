@@ -15,14 +15,14 @@ const spanStyle = {
     color: "gray"
 };
 
-const HorizontalBarChart = ({title, clarification, labels, datasets, ylabel, xlabel}) => {
+const BarChart = ({title, clarification, labels, datasets, type, suffix, ylabel, xlabel}) => {
     const canvasRef = useRef(null);
-    const containerHeight = datasets[0].data.length*50;
+    const containerHeight = type==="horizontal" ? datasets[0].data.length*50 : 500;
     const config = {
         type: 'bar',
         data: {labels,datasets},
         options: {
-            indexAxis: 'y',
+            indexAxis: type==="horizontal" ? 'y':'x',
             responsive: true,
             maintainAspectRatio: false,
             scales: {
@@ -38,6 +38,16 @@ const HorizontalBarChart = ({title, clarification, labels, datasets, ylabel, xla
                     display: true,
                     font: {size: 18, weight: "normal"},
                     text: title
+                },
+                tooltip: {
+                    enabled: true,
+                    mode: 'point',
+                    callbacks: {
+                        label: tooltipItem => { 
+                            const value = tooltipItem.raw < 1 ? tooltipItem.raw.toFixed(2) : Math.round(tooltipItem.raw);
+                            return tooltipItem.dataset.label+": "+value+suffix;
+                        }
+                    }
                 }
             }
         }
@@ -56,4 +66,4 @@ const HorizontalBarChart = ({title, clarification, labels, datasets, ylabel, xla
     );
 };
 
-export default HorizontalBarChart;
+export default BarChart;

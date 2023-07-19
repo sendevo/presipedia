@@ -4,6 +4,7 @@ import {
     DAY_MS,
     DB_LAST_UPDATE
 } from './constants';
+import { getZodiac } from "./utils";
 import database from "../assets/database.json";
 
 // This file should be executed during build time and exported in json format.
@@ -46,7 +47,7 @@ export const periodOfLife = Object.keys(database.people)
 
 const getPersonName = (cid, suffix="") => {
     const person = database.people[cid];
-    return [person.name," "+person.surname+suffix];
+    return [person.name,person.surname+suffix];
 };
 
 export const longerTerms = database.terms
@@ -97,6 +98,13 @@ export const youngestAssumption = database.terms
         return acc;
     }, [])
     .sort((a, b) => a.age - b.age);
+
+export const birthsPerMonth = Object.values(database.people)
+    .reduce((acc, current) => {
+        acc[moment(current.birth_date).month()]++;
+        return acc;
+    }, Array(12).fill(0));
+
 
 
 ////// Statistics //////

@@ -1,3 +1,6 @@
+import moment from "moment";
+import { ZODIAC_SIGNS } from "../model/constants";
+
 const hsv2rgb = (h,s,v) => {                              
     let f = (n,k = (n+h/60)%6) => v - v*s*Math.max( Math.min(k,4-k,1), 0);     
     return [f(5)*255,f(3)*255,f(1)*255];
@@ -25,3 +28,11 @@ export const randomColorsGenerator = (count, transparency=0.7) => {
     }
     return colors;
 };
+
+export const getZodiac = unixTime => {
+	var bound = [20,19,20,20,20,21,22,22,21,22,21,21];
+	const day = moment(unixTime).date();
+	const month = moment(unixTime).month();
+	const monthIndex = day <= bound[month] ? month : (month+1) % 12;
+	return ZODIAC_SIGNS[monthIndex]; 
+}

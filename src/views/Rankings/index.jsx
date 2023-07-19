@@ -1,6 +1,6 @@
 import { useState } from "react";
 import MainView from "../../components/MainView";
-import HorizontalBarChart from "../../components/HorizontalBar";
+import BarChart from "../../components/BarChart";
 import { Slider } from "../../components/Inputs";
 import { 
     longerTerms, 
@@ -14,12 +14,13 @@ const toDurationYears = terms => terms.map(t => t.duration);
 const toDurationMonths = terms => terms.map(t => t.duration*12);
 const toAges = people => people.map(p => p.age);
 
-const terms2ChartDS = (data, mapFc = v=>v, background = "", border = "") => ([
+const terms2ChartDS = (data, label, mapFc = v=>v, background = "", border = "") => ([
     {
         data: mapFc(data),
+        label: label,
         backgroundColor: background ? background : 'rgba(75, 20, 192, 0.6)',
-        borderColor: border ? border : 'rgba(75, 20, 192, 1)',
-        borderWidth: 1
+        borderColor: border ? border : 'rgba(75, 20, 192, 1)'
+        //borderWidth: 1
     }
 ]);
 
@@ -48,40 +49,50 @@ const View = () => {
                 onChange={handleSliderChange}
                 suffix="primeros"/>
 
-            <HorizontalBarChart 
-                title="Mandatos más extensos" 
+            <BarChart 
+                title="Los mandatos más extensos" 
                 labels={longerTermsSliced.map(t => t.president)} 
-                datasets={terms2ChartDS(longerTermsSliced, toDurationYears)}
+                datasets={terms2ChartDS(longerTermsSliced, "Duración", toDurationYears)}
+                type="horizontal"
+                suffix=" años"
                 xlabel="Años de mandato"
                 ylabel="Presidente"/>
                 
-            <HorizontalBarChart 
-                title="Mandatos más breves" 
+            <BarChart 
+                title="Los mandatos más breves" 
                 labels={shorterTermsSliced.map(t => t.president)} 
-                datasets={terms2ChartDS(shorterTermsSliced, toDurationMonths, 'rgba(200, 20, 50, 0.6)', 'rgba(200, 20, 50, 1)')}
+                datasets={terms2ChartDS(shorterTermsSliced, "Duración", toDurationMonths, 'rgba(200, 20, 50, 0.6)', 'rgba(200, 20, 50, 1)')}
+                type="horizontal"
+                suffix=" meses"
                 xlabel="Meses de mandato"
                 ylabel="Presidente"/>
 
-            <HorizontalBarChart 
-                title="Años vividos de mayor a menor *" 
-                clarification="* Edad actual en caso de personas vivas o edad de fallecimiento."
+            <BarChart 
+                title="Los que más años vivieron *" 
+                clarification="* Hasta la fecha de actualización de los datos."
                 labels={oldestSliced.map(t => t.president)} 
-                datasets={terms2ChartDS(oldestSliced, toAges, 'rgba(20, 200, 50, 0.6)', 'rgba(20, 200, 50, 1)')}
+                datasets={terms2ChartDS(oldestSliced, "Edad", toAges, 'rgba(20, 200, 50, 0.6)', 'rgba(20, 200, 50, 1)')}
+                type="horizontal"
+                suffix=" años"
                 xlabel="Años de edad"
                 ylabel="Presidente"/>
 
-            <HorizontalBarChart 
-                title="Años vividos de menor a mayor **" 
-                clarification="** Edad actual en caso de personas vivas o edad de fallecimiento."
+            <BarChart 
+                title="Los que menos años vivieron **" 
+                clarification="** Hasta la fecha de actualización de los datos."
                 labels={youngestSliced.map(t => t.president)} 
-                datasets={terms2ChartDS(youngestSliced, toAges, 'rgba(20, 60, 190, 0.6)', 'rgba(20, 60, 190, 1)')}
+                datasets={terms2ChartDS(youngestSliced, "Edad", toAges, 'rgba(20, 60, 190, 0.6)', 'rgba(20, 60, 190, 1)')}
+                type="horizontal"
+                suffix=" años"
                 xlabel="Años de edad"
                 ylabel="Presidente"/>
 
-            <HorizontalBarChart 
+            <BarChart 
                 title="Los más jóvenes en asumir" 
                 labels={youngestAssumpSliced.map(t => t.president)} 
-                datasets={terms2ChartDS(youngestAssumpSliced, toAges, 'rgba(200, 60, 19, 0.6)', 'rgba(200, 60, 19, 1)')}
+                datasets={terms2ChartDS(youngestAssumpSliced, "Edad", toAges, 'rgba(200, 60, 19, 0.6)', 'rgba(200, 60, 19, 1)')}
+                type="horizontal"
+                suffix=" años"
                 xlabel="Edad al asumir"
                 ylabel="Presidente"/>
         </MainView>
