@@ -10,16 +10,16 @@
     - [ ] Formulario para editar eventos.  
     - [ ] Formulario para editar blog.  
     - [x] Cálculo de CID para inserción de nuevos elementos.  
-    - [x] Exportar base de datos a archivo json. 
+    - [x] Exportar base de datos a archivo json.  
   - [ ] Data entry:  
     - [x] Personas  
     - [x] Mandatos  
     - [x] Eventos  
     - [ ] Articulos  
-  - [x] Proyecto Vite+React.    
+  - [x] Proyecto Vite+React.  
   - [x] Front-end React + MUI.  
   - [ ] Navegación.  
-    - [x] React Router Dom. 
+    - [x] React Router Dom.  
     - [ ] Barra de navegación inferior.  
   - [ ] Visualizaciones de línea de tiempo con Vis.js  
     - [x] Linea de tiempo de mandatos y eventos.  
@@ -29,14 +29,17 @@
     - [x] Duración de mandatos.  
     - [x] Edad de mandatarios.  
     - [x] Reducir y-labels  
-  - [ ] Visualización de estadísticas  
+  - [x] Visualización de estadísticas  
     - [x] Lugares de nacimiento.  
     - [x] Mandatos por partido.  
-    - [ ] Meses/signos con mayores nacimientos (barra vertical).  
-    - [ ] Cantidad de expresidentes en vida por día (lineas).  
-  - [ ] Trivia multiplechoice:  
-    - [ ] Quién goberno entre ... y entre ...
-    - [ ] Durante qué periodo gobernó ...
+    - [x] Meses/signos con mayores nacimientos (barra vertical).  
+    - [x] Cantidad de presidentes con vida por periodo continuo.  
+  - [ ] Listado de datos crudos:  
+    - [ ] Tabla.  
+    - [ ] Exportar a csv.  
+  - [ ] Trivia: multiplechoice:  
+    - [ ] Quién goberno entre ... y entre ...  
+    - [ ] Durante qué periodo gobernó ...  
     - [ ] Donde nació ...  
     - [ ] Qué edad tiene ...  
     - [ ] Quien de los siguientes nació en ...  
@@ -44,8 +47,12 @@
     - [ ] Cómo era el segundo nombre de ...  
     - [ ] Cuántos años en total gobernó ...  
     - [ ] Cuántos presidentes con vida había entre ... y ...  
+  - [ ] Trivia: probabilidad de ser presidente.  
+    - [ ] Formulario para ingresar género, fecha y lugar de nacimiento y tendencia politica.  
+    - [ ] Calcular probabilidad basado en datos actuales.  
+    - [ ] Presentación del resultado.  
   - [ ] Menú de inicio (previsualizaciones).  
-  - [ ] Branding y promoción:    
+  - [ ] Branding y promoción:  
     - [ ] Logo  
     - [x] Nombre  
     - [x] Eslogans  
@@ -54,7 +61,7 @@
     - [ ] Publicaciones  
   - [ ] Compilación  
     - [ ] Generar bundle y probar en servidor local.  
-    - [ ] Compilar version dev para android.      
+    - [ ] Compilar version dev para android.  
     - [ ] Compilar version build para android.  
     - [ ] Publicación en hosting.  
     - [ ] Publicación en Play Store.  
@@ -64,4 +71,4 @@
 ### v1.1._ (beta) (requisitos pendientes):  
   - [ ] Optimizar base de datos o pre-procesar datos estáticos.  
   - [ ] Optimizar tareas de mantenimiento y actualización.  
-  - [ ] Implementar backend para actualización de la base de datos.  
+  - [ ] Implementar backend para actualización dinámica de la base de datos.  

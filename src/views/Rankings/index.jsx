@@ -1,7 +1,7 @@
 import { useState } from "react";
 import MainView from "../../components/MainView";
-import BarChart from "../../components/BarChart";
 import { Slider } from "../../components/Inputs";
+import BarChart from "../../charts/BarChart";
 import { 
     longerTerms, 
     shorterTerms, 

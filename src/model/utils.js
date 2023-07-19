@@ -33,6 +33,6 @@ export const getZodiac = unixTime => {
 	var bound = [20,19,20,20,20,21,22,22,21,22,21,21];
 	const day = moment(unixTime).date();
 	const month = moment(unixTime).month();
-	const monthIndex = day <= bound[month] ? month : (month+1) % 12;
-	return ZODIAC_SIGNS[monthIndex]; 
-}
+    const zIndex = day <= bound[month] ? month : (month+1) % 12;
+	return {index: zIndex, name: ZODIAC_SIGNS[zIndex]};
+};

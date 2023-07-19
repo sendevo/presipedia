@@ -105,6 +105,11 @@ export const birthsPerMonth = Object.values(database.people)
         return acc;
     }, Array(12).fill(0));
 
+export const birthsPerZodiacSign = Object.values(database.people)
+    .reduce((acc, current) => {
+        acc[getZodiac(current.birth_date).index]++;
+        return acc;
+    }, Array(12).fill(0));
 
 
 ////// Statistics //////
@@ -173,16 +178,11 @@ export const aliveCountPerDate = (() => {
     }, [{period: [startDate, startDate + DAY_MS], count: 1}]);
 
     return aliveCount;
-
-    /* How to use:
-    aliveCountPerDate.forEach(p => {
-        const from = moment(p.period[0]).format("DD/MM/YYYY");
-        const to = moment(p.period[1]).format("DD/MM/YYYY");
-        const duration = moment(p.period[1]).diff(p.period[0], 'years', true);
-        console.log(`From ${from} to ${to} (${duration}): ${p.count}`);
-    });
-    */
 })();
+
+export const aliveExPresidentsPerDate = {
+    // TODO
+};
 
 // Data processing execution time
 console.log("Database processed in",Date.now() - tic, "ms");

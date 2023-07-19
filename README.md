@@ -86,3 +86,6 @@ Eventos (Entrada ```events```):
   "sources": [] // Array of strings
 }
 ```
+
+### N. del A.
+Durante los 12 años que asistí a las escuelas primaria y secundaria, las asignaturas relacionadas con las ciencias sociales fueron las que más detesté estudiar. Y no fue hasta luego de egresar de la universidad, cuando comencé a entender que efectivamente conocer al menos lo básico de la historia y la geografía de nuestro país nos permite anticipar el impacto de las deciciones del presente en el futuro que vamos creando como sociedad. "Todos los problemas son problemas de educación" dijo una vez el expresidente Domingo F. Sarmiento, así que consideren a esta aplicación como mi más humilde contribución para lograr una Nación "menos problemática". 

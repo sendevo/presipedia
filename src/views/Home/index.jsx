@@ -15,6 +15,8 @@ const View = () => {
             <br/>
             <Link to='blog'>Símbolos presidenciales</Link>
             <br/>
+            <Link to='data'>Base de datos</Link>
+            <br/>
             <Link to='about'>Acerca de Presipedia</Link>
         </MainView>
     );
