@@ -22,15 +22,15 @@
     - [x] Linea de tiempo de mandatos y eventos.  
     - [x] Linea de tiempo de nacimientos y fallecimientos.  
     - [ ] Buscar alternativas de visualizacion.  
-  - [ ] Visualizaciones de rankings o clasificaciones  
+  - [x] Visualizaciones de rankings o clasificaciones  
     - [x] Duración de mandatos.  
     - [x] Edad de mandatarios.  
-    - [ ] Reducir y-labels  
+    - [x] Reducir y-labels  
   - [ ] Visualización de estadísticas  
-    - [ ] Lugares de nacimiento.  
+    - [x] Lugares de nacimiento.  
+    - [x] Mandatos por partido.  
     - [ ] Meses/signos con mayores nacimientos.  
-    - [ ] Candidatos por partido.  
-    - [ ] Cantidad de expresidentes en vida.  
+    - [ ] Cantidad de expresidentes en vida por día.  
   - [ ] Trivia multiplechoice:  
     - [ ] Quién goberno entre ... y entre ...
     - [ ] Durante qué periodo gobernó ...

@@ -17,7 +17,7 @@ const spanStyle = {
 
 const HorizontalBarChart = ({title, clarification, labels, datasets, ylabel, xlabel}) => {
     const canvasRef = useRef(null);
-    const containerHeight = datasets[0].data.length*30;
+    const containerHeight = datasets[0].data.length*50;
     const config = {
         type: 'bar',
         data: {labels,datasets},

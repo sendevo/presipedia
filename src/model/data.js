@@ -1,5 +1,4 @@
 import moment from "moment";
-import { colorMapGenerator } from "./utils";
 import {
     VIS_DATE_FORMAT,
     DAY_MS,
@@ -7,8 +6,9 @@ import {
 } from './constants';
 import database from "../assets/database.json";
 
-// This should be executed during build time and exported in json format.
+// This file should be executed during build time and exported in json format.
 
+const tic = Date.now(); // Measure computing time (remove before deploy)
 
 ////// Timelines //////
 
@@ -44,9 +44,9 @@ export const periodOfLife = Object.keys(database.people)
 
 ////// Ranking bar charts //////
 
-const getPersonName = cid => {
+const getPersonName = (cid, suffix="") => {
     const person = database.people[cid];
-    return person.name + " " + person.surname;
+    return [person.name," "+person.surname+suffix];
 };
 
 export const longerTerms = database.terms
@@ -76,29 +76,61 @@ export const oldest = Object.keys(database.people)
     .map(cid => {
         const person = database.people[cid];
         return {
-            president: getPersonName(cid) + (person.death_date ? "" : " (Vive)"),
+            president: getPersonName(cid,(person.death_date ? "" : " (Vive)")),
             age: moment(person.death_date ? person.death_date : Date.now()).diff(person.birth_date, 'years'),
-        }
+        };
     })
     .sort((a, b) => b.age - a.age);
 
 export const youngest = [...oldest].reverse();
 
-
+export const youngestAssumption = database.terms 
+    .map(term => {
+        const person = database.people[term.cid];
+        const president = getPersonName(term.cid);
+        const age = moment(term.term_begin).diff(person.birth_date, 'years');
+        return {president, age};
+    })
+    .reduce((acc, current) => {
+        if(acc.indexOf(current.president) === -1)
+            acc.push(current);
+        return acc;
+    }, [])
+    .sort((a, b) => a.age - b.age);
 
 
 ////// Statistics //////
 
-export const birthLocations = { 
-    places: ["Buenos Aires", "Córdoba", "Rosario"], // TODO: hardcoded data
-    data: [
-        {
-            label: 'Presidentes nacidos',
-            data: [10, 5, 2], // TODO: hardcoded data
-            backgroundColor: colorMapGenerator(3) // TODO: hardcoded data
+export const birthLocations = Object.values(database.people)
+    .reduce((acc, current) => {
+        const province = current.birth_location.features[0].properties.province;
+        const pIndex = acc.provinces.indexOf(province);
+        if(pIndex === -1){
+            acc.provinces.push(province);
+            acc.count.push(1);
+        }else{
+            acc.count[pIndex]++;
         }
-    ]
-}
+        return acc;
+    }, {
+        provinces: [],
+        count: []
+    });
+
+export const parties = database.terms
+    .reduce((acc, current) => {
+        const pIndex = acc.names.indexOf(current.party);
+        if(pIndex === -1){
+            acc.names.push(current.party);
+            acc.count.push(1);
+        }else{
+            acc.count[pIndex]++;
+        }
+        return acc;
+    }, {
+        names: [],
+        count: []
+    });
 
 export const aliveCountPerDate = (() => {
     const startDate = Object.keys(database.people)
@@ -133,14 +165,16 @@ export const aliveCountPerDate = (() => {
     }, [{period: [startDate, startDate + DAY_MS], count: 1}]);
 
     return aliveCount;
+
+    /* How to use:
+    aliveCountPerDate.forEach(p => {
+        const from = moment(p.period[0]).format("DD/MM/YYYY");
+        const to = moment(p.period[1]).format("DD/MM/YYYY");
+        const duration = moment(p.period[1]).diff(p.period[0], 'years', true);
+        console.log(`From ${from} to ${to} (${duration}): ${p.count}`);
+    });
+    */
 })();
 
-
-/*
-aliveCountPerDate.forEach(p => {
-    const from = moment(p.period[0]).format("DD/MM/YYYY");
-    const to = moment(p.period[1]).format("DD/MM/YYYY");
-    const duration = moment(p.period[1]).diff(p.period[0], 'years', true);
-    console.log(`From ${from} to ${to} (${duration}): ${p.count}`);
-});
-*/
+// Data processing execution time
+console.log("Database processed in",Date.now() - tic, "ms");

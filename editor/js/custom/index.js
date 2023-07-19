@@ -62,7 +62,8 @@ personForm.addEventListener('submit', event => {
         cause_of_death: personForm.elements.cause_of_death.value,
         birth_location: lngLat2GeoJson(
             personForm.elements.birth_location.value, 
-            personForm.elements.birth_location_name.value
+            personForm.elements.birth_location_city.value,
+            personForm.elements.birth_location_province.value
         ),
         occupation: personForm.elements.occupation.value
     };
@@ -103,7 +104,9 @@ const editPerson = cid => {
     personForm.elements.cause_of_death.value = person.cause_of_death;
     [
         personForm.elements.birth_location.value,
-        personForm.elements.birth_location_name.value
+        personForm.elements.birth_location_city.value,
+        personForm.elements.birth_location_province.value,
+
     ] = geojson2LngLat(person.birth_location);
     personForm.elements.occupation.value = person.occupation;
     personEditingCID = cid;

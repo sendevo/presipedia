@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import logoCafecito from "../../assets/cafecito.png";
+import logoCafecito from "../../assets/logoCafecito.png";
 import logoMP from "../../assets/logoMP.png";
 
 const PaymentLinks = () => (

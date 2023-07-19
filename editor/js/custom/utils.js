@@ -21,15 +21,13 @@ const unixToDate = timestamp => moment.unix(timestamp/1000).format('YYYY-MM-DD')
 
 ////////// LOCATIONS //////////
 
-const lngLat2GeoJson = (lngLat, name="") => {
+const lngLat2GeoJson = (lngLat, city=null, province=null) => {
     const [lng, lat] = lngLat.split(",");
     return {
         type: "FeatureCollection",
         features: [{
             type: "Feature",
-            properties: {
-                name: name ? name : null
-            },
+            properties: {city, province},
             geometry: {
                 coordinates: [
                     parseFloat(lng),
@@ -43,7 +41,8 @@ const lngLat2GeoJson = (lngLat, name="") => {
 
 const geojson2LngLat = geojson => ([
     geojson.features[0].geometry.coordinates.join(","),
-    geojson.features[0].properties.name
+    geojson.features[0].properties.city,
+    geojson.features[0].properties.province
 ]);
 
 const location2GoggleMap = (lat,lng) => `http://www.google.com/maps/place/${lat},${lng}`;
@@ -95,14 +94,15 @@ const updatePeopleTable = people => {
         const death_date = moment(person.death_date).format(DATE_FORMAT);
         const death_age = person.death_date ? moment(person.death_date).diff(person.birth_date, 'years', false) : "";
         const current_age = moment().diff(person.birth_date, 'years', false);
-        const location_name = person.birth_location.features[0].properties.name;
+        const location_city = person.birth_location.features[0].properties.city;
+        //const location_province = person.birth_location.features[0].properties.province;
         row.innerHTML = `
             <td>${index}</td>
             <td>${person.name + " " + person.surname}</td>
             <td style="text-align: center;">
                 <img class="profile-pic" src="img/${person.picture}" alt="${person.surname}"/>
             </td>
-            <td>${getLocationLink(person.birth_location, location_name, true) + ", " + birth_date}</td>
+            <td>${getLocationLink(person.birth_location, location_city, true) + ", " + birth_date}</td>
             <td>${(person.death_date ? death_date+", a los "+death_age : "Tiene "+current_age)+" años"}</td>
             <td>${person.occupation}</td>
             <td>

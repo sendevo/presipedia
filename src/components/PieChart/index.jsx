@@ -7,7 +7,8 @@ const containerStyle = {
     border: "1px solid rgb(180, 180, 180)",
     borderRadius: "5px",
     boxShadow: "0px 0px 5px 0px rgba(0, 0, 0, 0.2)",
-    backgroundColor: "rgba(250, 250, 250, 0.6)"
+    backgroundColor: "rgba(250, 250, 250, 0.6)",
+    height: "50vh"
 };
 
 const spanStyle = {
@@ -22,8 +23,9 @@ const PieChart = ({title, clarification, labels, datasets}) => {
         data: {labels, datasets},
         options: {
             responsive: true,
+            maintainAspectRatio: false,
             plugins: {
-                legend: {position: 'bottom'},
+                legend: {position: 'right'},
                 title: {
                     align: "start",
                     display: true,
