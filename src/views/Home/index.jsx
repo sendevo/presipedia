@@ -4,14 +4,18 @@ import MainView from "../../components/MainView";
 
 const View = () => {
     return(
-        <MainView title="Presipedia: Edición Argentina">
-            <Typography fontWeight={"bold"}>Menú de inicio</Typography>
+        <MainView>
+            <Typography fontWeight={"bold"}>"Presipedia: Edición Argentina"</Typography>
             <br/>
-            <Link to='timeline'>Línea de tiempo</Link>
+            <Link to='games/quiz'>Preguntas y respuestas</Link>
             <br/>
-            <Link to='stats'>Estadísticas de periodo</Link>
+            <Link to='games/predictor'>¿Quién será el siguiente?</Link>
             <br/>
-            <Link to='rankings'>Clasificaciones</Link>
+            <Link to='vis/timeline'>Línea de tiempo</Link>
+            <br/>
+            <Link to='vis/stats'>Estadísticas de periodo</Link>
+            <br/>
+            <Link to='vis/rankings'>Clasificaciones</Link>
             <br/>
             <Link to='blog'>Símbolos presidenciales</Link>
             <br/>

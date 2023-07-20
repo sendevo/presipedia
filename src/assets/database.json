@@ -3,6 +3,7 @@
         "1xGBMFCD03XsjY99bCqjjriWSg2QtPss9DcVK65D+KA=": {
             "name": "Julio Argentino",
             "surname": "Roca",
+            "gender": "M",
             "picture": "roca.jpg",
             "birth_date": -3990715572000,
             "death_date": -1742067792000,
@@ -26,6 +27,7 @@
         "Cwbs5kZAHFBQ0l361r8xZp81VYxM7dUGY78kfJ3nPko=": {
             "name": "Manuel",
             "surname": "Quintana",
+            "gender": "M",
             "picture": "quintana.jpg",
             "birth_date": -4235054772000,
             "death_date": -2013622992000,
@@ -49,6 +51,7 @@
         "4Qml6K+ahiQW4vdaw4GnM4LtiEFXW/wskkhrlWsNtSc=": {
             "name": "José",
             "surname": "Figueroa Alcorta",
+            "gender": "M",
             "picture": "alcorta.jpg",
             "birth_date": -3443285172000,
             "death_date": -884034000000,
@@ -72,6 +75,7 @@
         "PdbT1IdAyPXxtzMWP80qOpRxwko4VA0+DqAcXgb3VRE=": {
             "name": "Victorino",
             "surname": "de la Plaza",
+            "gender": "M",
             "picture": "delaplaza.jpg",
             "birth_date": -4075992372000,
             "death_date": -1585770192000,
@@ -95,6 +99,7 @@
         "nvXFnbj2+XcNyrPJaIxmeMZL3CXvh/APn/w7/juvDLc=": {
             "name": "Hipólito",
             "surname": "Yrigoyen",
+            "gender": "M",
             "picture": "yrigoyen.jpg",
             "birth_date": -3707928372000,
             "death_date": -1151784000000,
@@ -118,6 +123,7 @@
         "wHqJORCmMI2nZHX6C2DWNoKaniq5oBnkMjgxhMr0pIY=": {
             "name": "José Félix",
             "surname": "Uriburu",
+            "gender": "M",
             "picture": "jfuriburu.jpg",
             "birth_date": -3201451572000,
             "death_date": -1188936000000,
@@ -141,6 +147,7 @@
         "eGW5tXUde0scyVyrNwwZBtLdxoZizB+vudQaAJrBz2k=": {
             "name": "Roberto Marcelino",
             "surname": "Ortiz",
+            "gender": "M",
             "picture": "ortiz.jpg",
             "birth_date": -2646072372000,
             "death_date": -866754000000,
@@ -164,6 +171,7 @@
         "gsc9FkvBM8Lqs9NVW1boOKc1hCtM0th62y3iA06leXM=": {
             "name": "Juan Domingo",
             "surname": "Perón",
+            "gender": "M",
             "picture": "peron.jpg",
             "birth_date": -2342547792000,
             "death_date": 141879600000,
@@ -187,6 +195,7 @@
         "QCl63LJpLStgfWa6vBJd6FHQbwqdcuunzsXpLQfWaDs=": {
             "name": "Eduardo",
             "surname": "Lonardi",
+            "gender": "M",
             "picture": "lonardi.jpg",
             "birth_date": -2312912592000,
             "death_date": -434840400000,
@@ -210,6 +219,7 @@
         "C54h5wfO2adQhfLwCll0hNGBxB4xsgQiYTslwOUGAcU=": {
             "name": "Arturo",
             "surname": "Frondizi",
+            "gender": "M",
             "picture": "frondizi.jpg",
             "birth_date": -1931456592000,
             "death_date": 803444400000,
@@ -233,6 +243,7 @@
         "IGslE/s17BLrZQaNy6/2d6pnNR7opXJNG6roNLFEyLg=": {
             "name": "José María",
             "surname": "Guido",
+            "gender": "M",
             "picture": "guido.jpg",
             "birth_date": -1872704592000,
             "death_date": 171860400000,
@@ -256,6 +267,7 @@
         "D3sAW3K+hCd8oQ8HELkQInHcJJ2kzYpJag3dtquE/QY=": {
             "name": "Juan Carlos",
             "surname": "Onganía",
+            "gender": "M",
             "picture": "ongania.jpg",
             "birth_date": -1760730192000,
             "death_date": 802580400000,
@@ -279,6 +291,7 @@
         "3G+GMWGZeENesf1IYwy4+HLiTBcUx/B+NVVFZr1gjig=": {
             "name": "Roberto Marcelo",
             "surname": "Levingston",
+            "gender": "M",
             "picture": "levingston.jpg",
             "birth_date": -1576438992000,
             "death_date": 1434510000000,
@@ -302,6 +315,7 @@
         "iD6FBk+2aOD05Vy1KKqkHlgYR1beRPhL/gqJiqpnBIs=": {
             "name": "Alejandro Agustín",
             "surname": "Lanusse",
+            "gender": "M",
             "picture": "lanusse.jpg",
             "birth_date": -1617651792000,
             "death_date": 841028400000,
@@ -325,6 +339,7 @@
         "NaLNAAevDbchUqFwPAHy1Seo2OXY4T/bZHnEZt3exFA=": {
             "name": "Héctor José",
             "surname": "Cámpora",
+            "gender": "M",
             "picture": "campora.jpg",
             "birth_date": -1917718992000,
             "death_date": 346042800000,
@@ -348,6 +363,7 @@
         "7AKAlDHJmlitvLrjoFMtKlcVWmbSdfqBQ7MFf1sQDno=": {
             "name": "Raúl Alberto",
             "surname": "Lastiri",
+            "gender": "M",
             "picture": "lastiri.jpg",
             "birth_date": -1713469392000,
             "death_date": 282193200000,
@@ -371,6 +387,7 @@
         "7fgN/9KMtpiCbbUl5rCKWDrC2SY5Lm+1ZNOkx4BGHbM=": {
             "name": "Jorge Rafael",
             "surname": "Videla",
+            "gender": "M",
             "picture": "videla.jpg",
             "birth_date": -1401652800000,
             "death_date": 1368759600000,
@@ -394,6 +411,7 @@
         "Qpd7fSLugt72TD7ZiXT30twpf+QAkVbY5f4BFp0cbUk=": {
             "name": "Roberto Eduardo",
             "surname": "Viola",
+            "gender": "M",
             "picture": "viola.jpg",
             "birth_date": -1426968000000,
             "death_date": 780894000000,
@@ -417,6 +435,7 @@
         "shJ0tsi8nrBtVCfF3OuhMO+YLYX6TjfUlX8SbsjzD8g=": {
             "name": "Leopoldo Fortunato",
             "surname": "Galtieri",
+            "gender": "M",
             "picture": "galtieri.jpg",
             "birth_date": -1371672000000,
             "death_date": 1042340400000,
@@ -440,6 +459,7 @@
         "NzbAYcAVNZg1OU6NWpyTGQrev4RIGbRcDnAFPHSxjec=": {
             "name": "Raúl Ricardo",
             "surname": "Alfonsín",
+            "gender": "M",
             "picture": "alfonsin.jpg",
             "birth_date": -1350936000000,
             "death_date": 1238468400000,
@@ -463,6 +483,7 @@
         "DAJxv3GWXKykGMAv+ECEckRqYXd3a7CgzlkmrsKGPPU=": {
             "name": "Carlos Saúl",
             "surname": "Menem",
+            "gender": "M",
             "picture": "menem.jpg",
             "birth_date": -1246564800000,
             "death_date": 1613271600000,
@@ -486,6 +507,7 @@
         "Q4QkcSFAgZ86UvjTvxIZVQ3emDBOlEjrBZ8cfsOkh30=": {
             "name": "Fernando",
             "surname": "de la Rúa",
+            "gender": "M",
             "picture": "delarua.jpg",
             "birth_date": -1019160000000,
             "death_date": 1562641200000,
@@ -509,6 +531,7 @@
         "3CxuwEfklSh+NmSoE5MBemuNFc7zjJX7QqUyppIMt8w=": {
             "name": "Federico Ramón",
             "surname": "Puerta",
+            "gender": "M",
             "picture": "puerta.jpg",
             "birth_date": -577918800000,
             "death_date": null,
@@ -532,6 +555,7 @@
         "EXUGP0COaUwLy/jSBCta6nKMVcDkIhtRdC4z/7wxr5g=": {
             "name": "Adolfo",
             "surname": "Rodriguez Saá",
+            "gender": "M",
             "picture": "rodriguezsaa.jpg",
             "birth_date": -708123600000,
             "death_date": null,
@@ -555,6 +579,7 @@
         "8mrPBlCHUUhWdnvRD4T7vDIOLEw3kJrmtucWq8En+b8=": {
             "name": "Eduardo Alberto",
             "surname": "Duhalde",
+            "gender": "M",
             "picture": "duhalde.jpg",
             "birth_date": -891201600000,
             "death_date": null,
@@ -578,6 +603,7 @@
         "2pJRp56tkSrNuUrsW8CXxu18wkfThNKZBbzAZyAD3KU=": {
             "name": "Néstor Carlos",
             "surname": "Kirchner",
+            "gender": "M",
             "picture": "kirchner.jpg",
             "birth_date": -626389200000,
             "death_date": 1288148400000,
@@ -601,6 +627,7 @@
         "IlLFInLhvIZ+PGHgqN+MsDjsnfJ/zT64jh7xCTr/cyU=": {
             "name": "Cristina Elizabeth",
             "surname": "Fernández de Kirchner",
+            "gender": "F",
             "picture": "ckirchner.jpg",
             "birth_date": -532213200000,
             "death_date": null,
@@ -624,6 +651,7 @@
         "9XlYDRHx+Yi4gLfDGpIum9N65nevwZH5Ar3NbdVvDM0=": {
             "name": "Alberto Ángel",
             "surname": "Fernández",
+            "gender": "M",
             "picture": "afernandez.jpg",
             "birth_date": -339282000000,
             "death_date": null,
@@ -647,6 +675,7 @@
         "0ISB/Llkie6CVoQJrT+3tEx+j0i+PX+du9mFBNeuaUA=": {
             "name": "Edelmiro Julián",
             "surname": "Farrell",
+            "gender": "M",
             "picture": "farrell.jpg",
             "birth_date": -2599934772000,
             "death_date": 341809200000,
@@ -670,6 +699,7 @@
         "ab8Jj0yc6VXhHvQXYk4prvNoqrB0/g2Lhi7+6Itt5R8=": {
             "name": "Mauricio",
             "surname": "Macri",
+            "gender": "M",
             "picture": "macri.jpg",
             "birth_date": -343861200000,
             "death_date": null,
@@ -693,6 +723,7 @@
         "gVGQxJg3rqWENEHGkVwcT785HRZddwhf1IwUQ+fdyGc=": {
             "name": "José Evaristo",
             "surname": "Uriburu",
+            "gender": "M",
             "picture": "jeuriburu.jpg",
             "birth_date": -4358606772000,
             "death_date": -1741549392000,
@@ -716,6 +747,7 @@
         "WOQFc0acHz+wdIBTAQMbsMnPqqSf+zRIFTqXxlr3NVs=": {
             "name": "Carlos",
             "surname": "Pellegrini",
+            "gender": "M",
             "picture": "pellegrini.jpg",
             "birth_date": -3888590772000,
             "death_date": -2002650192000,
@@ -739,6 +771,7 @@
         "UuTZ9iOpi4nX6HIslIjJwvQqjvgAiU7YZN4cfIJaRzo=": {
             "name": "Miguel Ángel",
             "surname": "Juárez Celman",
+            "gender": "M",
             "picture": "celman.jpg",
             "birth_date": -3952699572000,
             "death_date": -1916941392000,
@@ -762,6 +795,7 @@
         "mySFb0QvN9NWtSZL+akI6ybt3mdnj3VM3DODzx8Twu4=": {
             "name": "Nicolás",
             "surname": "Avellaneda",
+            "gender": "M",
             "picture": "avellaneda.jpg",
             "birth_date": -4202481972000,
             "death_date": -2653934772000,
@@ -785,6 +819,7 @@
         "uHd/glhnkWSYBhvMpNsnbk+Hfjja5uPjfOCpGOh1KOI=": {
             "name": "Bernardino",
             "surname": "Rivadavia",
+            "gender": "M",
             "picture": "rivadavia.jpg",
             "birth_date": -5983704372000,
             "death_date": -3923496372000,
@@ -808,6 +843,7 @@
         "TQUBOb1K+UX7XUlY8AK/JLyrUBctaPzJChUbXgQWpRk=": {
             "name": "Alejandro Vicente",
             "surname": "Lopez y Planes",
+            "gender": "M",
             "picture": "lopezyplanes.jpg",
             "birth_date": -5827406772000,
             "death_date": -3573057972000,
@@ -831,6 +867,7 @@
         "0pNIRChzuRu2U4uRi90XyFPkPXay9+pXrpFnu0Cf1NM=": {
             "name": "Justo José",
             "surname": "de Urquiza",
+            "gender": "M",
             "picture": "urquiza.jpg",
             "birth_date": -5308056372000,
             "death_date": -3147019572000,
@@ -854,6 +891,7 @@
         "fmSa+Z4ewfHmk7xaOenVsNWAuJmnEYMrgS0FR7ISe8w=": {
             "name": "Santiago",
             "surname": "Derqui",
+            "gender": "M",
             "picture": "derqui.jpg",
             "birth_date": -5066049972000,
             "death_date": -3229013172000,
@@ -877,6 +915,7 @@
         "DKf4S/XN2RYYeSdymMxtORLKBqwVB7buMjgIsCAm2SU=": {
             "name": "Bartolomé",
             "surname": "Mitre",
+            "gender": "M",
             "picture": "mitre.jpg",
             "birth_date": -4686753972000,
             "death_date": -2018115792000,
@@ -900,6 +939,7 @@
         "KS3NOECzWHOCiv9zQ+sjqWjlUS/u2GacvRWrgTjSclY=": {
             "name": "Domingo Faustino",
             "surname": "Sarmiento",
+            "gender": "M",
             "picture": "sarmiento.jpg",
             "birth_date": -5013691572000,
             "death_date": -2565720372000,
@@ -923,6 +963,7 @@
         "k9nm2D4J6P9loMD/RRA9FPSGVK+L/UIXIuksrXk0YvQ=": {
             "name": "Ramón Antonio",
             "surname": "Castillo",
+            "gender": "M",
             "picture": "castillo.jpg",
             "birth_date": -3033057972000,
             "death_date": -795906000000,
@@ -946,6 +987,7 @@
         "akrY+Ttj+bxpsMrn2dbl05LwSbAPdKEITCBPoiO/WCg=": {
             "name": "Pedro Pablo",
             "surname": "Ramírez",
+            "gender": "M",
             "picture": "ramirez.jpg",
             "birth_date": -2679768372000,
             "death_date": -222642000000,
@@ -969,6 +1011,7 @@
         "HIoK0FUISOPtTkAcO4zgpN8hU3kFe5rG0KMXniVMW/c=": {
             "name": "Luis",
             "surname": "Sáenz Peña",
+            "gender": "M",
             "picture": "lsaenzpena.jpg",
             "birth_date": -4662561972000,
             "death_date": -1959018192000,
@@ -992,6 +1035,7 @@
         "5r+hW+7AjvnGdekF93lhAuHf6BKiIV/Uq1UXidJTh6E=": {
             "name": "María Estela \"Isabel\"",
             "surname": "Martínez de Perón",
+            "gender": "F",
             "picture": "isabel.jpg",
             "birth_date": -1227819600000,
             "death_date": null,
@@ -1015,6 +1059,7 @@
         "IVHKY7ylwU7fW7RHc3sndtbU525pjIkU9XSGwlWZOw0=": {
             "name": "Marcelo ",
             "surname": "Torcuato de Alvear",
+            "gender": "M",
             "picture": "alvear.jpg",
             "birth_date": -3194885172000,
             "death_date": -852843600000,
@@ -1038,6 +1083,7 @@
         "0tifMVXKCwPqAfZTOaYXlE+dPl872x0ESBb5njMzkYU=": {
             "name": "Agustín Pedro",
             "surname": "Justo",
+            "gender": "M",
             "picture": "pedrojusto.jpg",
             "birth_date": -2961518772000,
             "death_date": -1198357200000,
@@ -1061,6 +1107,7 @@
         "i8WLwMYT//wx1I9vtlYtGqN1ndZ/Lv+WzMw9I33h1Xo=": {
             "name": "Reinaldo Benito Antonio",
             "surname": "Bignone",
+            "gender": "M",
             "picture": "bignone.jpg",
             "birth_date": -1323720000000,
             "death_date": 1520391600000,
@@ -1084,6 +1131,7 @@
         "YjV5qz8EkTiazTvmnAmQK6NQDAt/CGXG+iVWZDYwwSg=": {
             "name": "Eduardo",
             "surname": "Camaño",
+            "gender": "M",
             "picture": "camano.jpg",
             "birth_date": -742939200000,
             "death_date": null,
@@ -1107,6 +1155,7 @@
         "vp+m2IqY5OY8WjR0iXO9/SFznVow5RRHgzPzJX/z9no=": {
             "name": "Roque",
             "surname": "Sáenz Peña",
+            "gender": "M",
             "picture": "rsaenzpena.jpg",
             "birth_date": -3748622772000,
             "death_date": -1748202192000,
@@ -1130,6 +1179,7 @@
         "kdtaOa+45YdRY/Fr0vRq2qmWAc5+rxdvD1sHrraeIqc=": {
             "name": "Arturo Humberto",
             "surname": "Illia",
+            "gender": "M",
             "picture": "illia.jpg",
             "birth_date": -2190397392000,
             "death_date": 411706800000,
@@ -1153,6 +1203,7 @@
         "pYmgFEq/Ruo5xL4K5uylTmkGkvZEgA6dWGJpIIlpEZk=": {
             "name": "Pedro Eugenio",
             "surname": "Aramburu",
+            "gender": "M",
             "picture": "aramburu.jpg",
             "birth_date": -2102269392000,
             "death_date": 13057200000,

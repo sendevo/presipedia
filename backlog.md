@@ -29,14 +29,14 @@
     - [x] Duración de mandatos.  
     - [x] Edad de mandatarios.  
     - [x] Reducir y-labels  
-  - [x] Visualización de estadísticas  
-    - [x] Lugares de nacimiento.  
-    - [x] Mandatos por partido.  
+  - [ ] Visualización de estadísticas  
+    - [ ] Controles de visualización
+    - [x] Lugares/Mandatos de nacimiento.  
     - [x] Meses/signos con mayores nacimientos (barra vertical).  
-    - [x] Cantidad de presidentes con vida por periodo continuo.  
+    - [x] Cantidad de presidentes/expresidentes con vida por periodo continuo.  
   - [ ] Listado de datos crudos:  
     - [ ] Tabla.  
-    - [ ] Exportar a csv.  
+    - [ ] Exportar a csv? ¿Link al repo? Generar en tpo de ejec.?  
   - [ ] Trivia: multiplechoice:  
     - [ ] Quién goberno entre ... y entre ...  
     - [ ] Durante qué periodo gobernó ...  

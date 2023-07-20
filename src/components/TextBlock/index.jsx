@@ -8,9 +8,14 @@ const textBlockStyle = {
     marginTop: "5px"
 };
 
+const titleStyle = {
+    fontWeight: "bold",
+    fontSize: "20px"
+};
+
 const TextBlock = ({children, title}) => (
     <Box sx={textBlockStyle}>
-        <Typography fontWeight={"bold"}>{title}</Typography>
+        <Typography style={titleStyle}>{title}</Typography>
         {children}
     </Box>
 );

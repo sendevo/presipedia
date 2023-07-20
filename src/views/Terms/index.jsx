@@ -10,7 +10,7 @@ const View = () => (
         <Box marginTop={"10px"}>                     
             <TextBlock title={"Aceptación de los términos"}>
                 Al acceder a <b>{APP_NAME}</b> a través de cualquiera de sus versiones móvil u online, usted acepta los términos y condiciones del servicio aquí detallados.
-                El material multimedial, el texto y la información contenida en esta aplicación en cualquiera de sus versiones, es producto del desarrollo realizado por <i>Sendevo Software</i>, salvo que se indique lo contrario (véase <Link to='/sources'>Fuentes de información</Link>).
+                El material multimedial, el texto y la información contenida en esta aplicación en cualquiera de sus versiones, es producto del trabajo realizado por <i>Sendevo Software</i>, salvo que se indique lo contrario (véase <Link to='/about/sources'>Fuentes de información</Link>).
             </TextBlock>
 
             <TextBlock title={"Cambios en los términos y condiciones"}>
@@ -18,15 +18,15 @@ const View = () => (
             </TextBlock>
 
             <TextBlock title={"Responsabilidad"}>
-                <i>Sendevo Software</i> se deslinda de toda responsabilidad ante cualquier daño o perjuicio ocasionado por el uso o la imposibilidad de uso de <b>{APP_NAME}</b> y de la información contenida y puesta a disposición por dicha aplicación.
+                <i>Sendevo Software</i> se deslinda de toda responsabilidad ante cualquier daño o perjuicio ocasionado por el uso o la imposibilidad de uso de <b>{APP_NAME}</b> y de la información contenida y puesta a disposición por dicha aplicación de software.
                 <br/>
-                <i>Sendevo Software</i> no será responsable por la pérdida total o parcial de información registrada en <b>{APP_NAME}</b>. 
+                <i>Sendevo Software</i> no será responsable por la pérdida total o parcial de información que eventualmente haya sido registrada en el contexto de <b>{APP_NAME}</b>. 
             </TextBlock>
 
             <TextBlock title={"Política de uso"}>
                 El usuario de <b>{APP_NAME}</b> se compromete a:
                 <ol>
-                    <li>Emplear esta aplicación, en cualquiera de sus versiones, únicamente para consultar información acerca de mandatarios argentinos.</li>
+                    <li>Emplear esta aplicación, en cualquiera de sus versiones, únicamente para consultar y compartir información de dominio público referida a los mandatarios y exmandatarios presidenciales que tuvo la República Argentina.</li>
                     <li>Respetar los términos de licencia de la <a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank">GNU General Public License (v3)</a>, en lo que respecta a la edición, modificación y distribución del código fuente de <b>{APP_NAME}</b>.</li>
                     <li>No promocionar o publicitar productos o servicios que no sean propios sin una correspondiente autorización.</li>
                     <li>No infringir la ley de cualquier forma, incluyendo actividades como almacenar o compartir información fraudulenta o engañosa.</li>
@@ -38,11 +38,11 @@ const View = () => (
             </TextBlock>
 
             <TextBlock title={"Acceso a la ubicación"}>
-                <b>{APP_NAME}</b> no solicitará la ubicación del usuario.
+                <b>{APP_NAME}</b> no solicitará la ubicación del usuario ni tendrá acceso a los servicios de geolocalización presentes en el dispositivo en que se ejecuta.
             </TextBlock>
 
             <TextBlock title={"Seguridad"}>
-                <i>Sendevo Software</i> se compromete a realizar lo comercialmente posible por protejer los datos de los usuarios de <b>{APP_NAME}</b> de cualquier acceso no autorizado.
+                <i>Sendevo Software</i> se compromete a realizar lo comercialmente posible por protejer los datos generados por los usuarios de <b>{APP_NAME}</b> de cualquier acceso no autorizado.
             </TextBlock>
 
             <TextBlock title={"Servicios de terceros"}>

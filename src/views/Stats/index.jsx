@@ -8,7 +8,8 @@ import {
     parties, 
     birthsPerMonth,
     birthsPerZodiacSign,
-    aliveCountPerDate 
+    aliveCountPerDate,
+    aliveExPresidentsPerDate 
 } from "../../model/data";
 
 const View = () => {
@@ -66,8 +67,36 @@ const View = () => {
                 ylabel="Nacidos"/>
 
             <LineChart 
-                title="Cantidad de presidentes* con vida"
-                clarification="* Involucra futuros presidentes, presidentes actuales y expresidentes."
+                title="Cantidad de expresidentes* con vida"
+                clarification="* Involucra al presidente actual y expresidentes."
+                labels={aliveExPresidentsPerDate.map(p => {
+                    const from = moment(p.period[0]).format("MM/YYYY");
+                    const to = moment(p.period[1]).format("MM/YYYY");
+                    return `${from} al ${to}`;
+                })}
+                datasets={
+                    [{
+                        label: 'Expresidentes con vida',
+                        data: aliveExPresidentsPerDate.map(a => a.count),
+                        backgroundColor: "rgba(120, 120, 250, 0.7)",
+                        borderColor: 'rgba(120, 120, 250, 1)',
+                        tension: 0.3,
+                        suffix: ""
+                    },
+                    {
+                        label: 'Duración del periodo',
+                        data: aliveCountPerDate.map(a => moment(a.period[1]).diff(a.period[0], 'years')),
+                        backgroundColor: "rgba(250, 120, 120, 0.7)",
+                        borderColor: 'rgba(250, 120, 120, 1)',
+                        tension: 0.3,
+                        suffix: " años"
+                    }]}
+                xlabel="Periodo"
+                ylabel="Presidentes vivos"/>
+
+            <LineChart 
+                title="Cantidad de presidentes** con vida"
+                clarification="** Involucra futuros presidentes, presidentes actuales y expresidentes."
                 labels={aliveCountPerDate.map(p => {
                     const from = moment(p.period[0]).format("MM/YYYY");
                     const to = moment(p.period[1]).format("MM/YYYY");
