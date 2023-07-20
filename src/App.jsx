@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles'; 
 import { CssBaseline } from '@mui/material';
 import moment from 'moment';
+import Navigation from './components/Navigation';
 import { MOMENT_LOCALE_CONFIG } from './model/constants';
 import theme from './themes';
 
@@ -13,18 +14,23 @@ const App = () => (
         <CssBaseline />
         <BrowserRouter>
             <Routes>
-                <Route path='/about' element={<Views.About/>}/>
-                <Route path='/blog' element={<Views.Blog/>}/>
-                <Route path='/data' element={<Views.Data/>}/>
-                <Route index element={<Views.Home/>} />
+                <Route path='/vis/timeline' element={<Views.Timeline/>}/>
+                <Route path='/vis/rankings' element={<Views.Rankings/>}/>
+                <Route path='/vis/stats' element={<Views.Stats/>}/>
+                
                 <Route path='/games/predictor' element={<Views.Predictor/>}/>
                 <Route path='/games/quiz' element={<Views.Quiz/>}/>
-                <Route path='/vis/rankings' element={<Views.Rankings/>}/>
-                <Route path='/about/sources' element={<Views.Sources/>}/>
-                <Route path='/vis/stats' element={<Views.Stats/>}/>
+                
+                <Route index element={<Views.Home/>} />
+                
+                <Route path='/data/blog' element={<Views.Blog/>}/>
+                <Route path='/data/raw' element={<Views.Data/>}/>                
+                
+                <Route path='/about' element={<Views.About/>}/>
                 <Route path='/about/terms' element={<Views.Terms/>}/>
-                <Route path='/vis/timeline' element={<Views.Timeline/>}/>
+                <Route path='/about/sources' element={<Views.Sources/>}/>
             </Routes>
+            <Navigation/>
         </BrowserRouter>
     </ThemeProvider>
 );

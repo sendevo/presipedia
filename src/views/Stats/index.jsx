@@ -11,10 +11,11 @@ import {
     aliveCountPerDate,
     aliveExPresidentsPerDate 
 } from "../../model/data";
+import background from "../../assets/backgrounds/background4.jpg";
 
 const View = () => {
     return(
-        <MainView title="Estadísticas">
+        <MainView title="Estadísticas" background={background}>
             <PieChart 
                 title="Nacidos por provincia" 
                 labels={birthLocations.provinces}

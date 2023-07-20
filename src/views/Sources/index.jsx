@@ -3,10 +3,11 @@ import moment from "moment";
 import MainView from "../../components/MainView";
 import TextBlock from "../../components/TextBlock";
 import { APP_NAME, DB_LAST_UPDATE } from "../../model/constants";
+import background from "../../assets/backgrounds/background3.jpg";
 
 const View = () => {
     return(
-        <MainView title="Fuentes de información">
+        <MainView title="Fuentes de información" background={background}>
             <Box>
                 <TextBlock title="Línea de tiempo">
                     <b>{APP_NAME}</b> está inspirada en una nota publicada por el ex-diario <a href="https://www.lanueva.com/nota/2003-5-25-9-0-0-desde-rivadavia-todos-los-que-se-sentaron-en-el-sillon" target="_blank">La Nueva Provincia</a> del 25 de mayo de 2003.

@@ -4,5 +4,3 @@
 [https://www.todo-argentina.net/historia-argentina/generarion_80/roque_saenz_pena/muerte-saenz-pena.php?idpagina=1248](Muerte de Roque Sáenz Peña)
 [https://elpais.com/diario/1994/10/02/internacional/781052408_850215.html](Muerte de viola)
 [http://www.revisionistas.com.ar/?p=10195](Segundo nombre de Ramón Castillo)
-
-

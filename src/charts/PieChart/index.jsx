@@ -1,19 +1,24 @@
 import { useEffect, useRef } from 'react';
 import { Chart } from 'chart.js/auto';
 
-const containerStyle = {
+const cardStyle = {
     marginTop: "10px",
-    padding: "10px 5px 25px 5px",
+    padding: "5px",
     border: "1px solid rgb(180, 180, 180)",
     borderRadius: "5px",
     boxShadow: "0px 0px 5px 0px rgba(0, 0, 0, 0.2)",
-    backgroundColor: "rgba(250, 250, 250, 0.6)",
+    backgroundColor: "rgba(250, 250, 250, 0.6)"
+}
+
+const containerStyle = {
     height: "50vh"
 };
 
 const spanStyle = {
+    display: "inline-block",
     fontSize: "small",
-    color: "gray"
+    color: "gray",
+    lineHeight: "1.2em"
 };
 
 const PieChart = ({title, clarification, labels, datasets}) => {
@@ -42,8 +47,10 @@ const PieChart = ({title, clarification, labels, datasets}) => {
     }, [datasets]);
 
     return (
-        <div style={containerStyle}>
-            <canvas ref={canvasRef} />
+        <div style={cardStyle}>
+            <div style={containerStyle}>
+                <canvas ref={canvasRef} />
+            </div>
             {clarification && <span style={spanStyle}>{clarification}</span>}
         </div>
     );

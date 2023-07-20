@@ -1,10 +1,11 @@
-import {Typography} from '@mui/material';
-import {Link} from 'react-router-dom';
+import { Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
 import MainView from "../../components/MainView";
+import background from "../../assets/backgrounds/background2.jpg";
 
 const View = () => {
     return(
-        <MainView>
+        <MainView background={background}>
             <Typography fontWeight={"bold"}>"Presipedia: Edición Argentina"</Typography>
             <br/>
             <Link to='games/quiz'>Preguntas y respuestas</Link>
@@ -17,9 +18,9 @@ const View = () => {
             <br/>
             <Link to='vis/rankings'>Clasificaciones</Link>
             <br/>
-            <Link to='blog'>Símbolos presidenciales</Link>
+            <Link to='data/blog'>Símbolos presidenciales</Link>
             <br/>
-            <Link to='data'>Base de datos</Link>
+            <Link to='data/raw'>Base de datos</Link>
             <br/>
             <Link to='about'>Acerca de Presipedia</Link>
         </MainView>

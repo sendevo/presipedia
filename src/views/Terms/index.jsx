@@ -2,11 +2,12 @@ import { Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 import TextBlock from '../../components/TextBlock';
 import MainView from '../../components/MainView';
+import background from "../../assets/backgrounds/background3.jpg";
 
 const APP_NAME = "Presipedia: Edición Argentina";
 
 const View = () => (
-    <MainView title="Términos y condiciones">
+    <MainView title="Términos y condiciones" background={background}>
         <Box marginTop={"10px"}>                     
             <TextBlock title={"Aceptación de los términos"}>
                 Al acceder a <b>{APP_NAME}</b> a través de cualquiera de sus versiones móvil u online, usted acepta los términos y condiciones del servicio aquí detallados.

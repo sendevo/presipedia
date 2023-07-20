@@ -12,11 +12,12 @@ import {
     BUILD_DATE,
     DB_LAST_UPDATE 
 } from "../../model/constants";
+import background from "../../assets/backgrounds/background3.jpg";
 
 const ulStyle = {listStyle: "none", marginTop: "0px"};
 
 const View = () => (
-    <MainView title="Acerca de Presipedia">
+    <MainView title="Acerca de Presipedia" background={background}>
         <Box marginTop={"10px"}>                     
             <TextBlock title="Descripción">
                 <b>{APP_NAME}</b> permite consultar información sobre los máximos mandatarios que ha tenido la República Argentina desde el año 1826 en adelante, de una manera didáctica, entretenida e interesante. Para cada mandato, <b>{APP_NAME}</b> te explica sobre quiénes ocuparon el cargo de presidente con fechas y lugares de nacimiento, signos zodiacales, edades, partidos políticos y mucho más. Todo esto es organizado en herramientas de visualización interactivas, aunque también es posible consultar los datos sin procesar, para identificar cualquier error que haya ocurrido durante la confección de las bases de datos.

@@ -9,6 +9,7 @@ import {
     youngest, 
     youngestAssumption 
 } from "../../model/data";
+import background from "../../assets/backgrounds/background4.jpg";
 
 const toDurationYears = terms => terms.map(t => t.duration);
 const toDurationMonths = terms => terms.map(t => t.duration*12);
@@ -37,7 +38,7 @@ const View = () => {
     const youngestAssumpSliced = youngestAssumption.slice(0, sliderValue);
 
     return(
-        <MainView title="Clasificaciones">
+        <MainView title="Clasificaciones" background={background}>
             <Slider 
                 name="Cantidad de mandatarios a mostrar" 
                 withmarks="true" 

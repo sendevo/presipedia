@@ -11,8 +11,10 @@ const containerStyle = {
 };
 
 const spanStyle = {
+    display: "inline-block",
     fontSize: "small",
-    color: "gray"
+    color: "gray",
+    lineHeight: "1.2em"
 };
 
 const BarChart = ({title, clarification, labels, datasets, type, suffix, ylabel, xlabel}) => {
@@ -59,8 +61,10 @@ const BarChart = ({title, clarification, labels, datasets, type, suffix, ylabel,
     }, [datasets]);
 
     return (
-        <div style={{...containerStyle, height: `${containerHeight}px`}}>
-            <canvas ref={canvasRef} />
+        <div style={containerStyle}>
+            <div style={{height: `${containerHeight}px`}}>
+                <canvas ref={canvasRef} />
+            </div>
             {clarification && <span style={spanStyle}>{clarification}</span>}
         </div>
     );
