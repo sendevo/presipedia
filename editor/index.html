@@ -29,6 +29,13 @@
                 <label for="surname">Apellido *</label>
                 <input type="text" id="surname" name="surname" required>
 
+                <label for="gender">Género:</label>
+                <select name="gender" id="gender" form="person-form">
+                    <option selected value="U">Sin especificar</option>
+                    <option value="M">Masculino</option>
+                    <option value="F">Femenino</option>
+                </select>
+
                 <label for="picture">Nombre de archivo de la foto *</label>
                 <input type="text" id="picture" name="picture">
 
@@ -68,7 +75,8 @@
                         <th>Nombre</th>
                         <th>Foto</th>
                         <th>Lugar y fecha de nacimiento</th>
-                        <th>Fecha y causa de fallecimiento</th>
+                        <th>Fecha y edad de fallecimiento</th>
+                        <th>Causa de fallecimiento</th>
                         <th>Ocupación</th>
                         <th>Acciones</th>
                     </tr>

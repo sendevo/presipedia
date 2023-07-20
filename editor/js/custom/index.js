@@ -56,6 +56,7 @@ personForm.addEventListener('submit', event => {
     const personData = {
         name: personForm.elements.name.value,
         surname: personForm.elements.surname.value,
+        gender: personForm.elements.gender.value,
         picture: personForm.elements.picture.value,
         birth_date: toUnixTimestamp(personForm.elements.birth_date.value),
         death_date: toUnixTimestamp(personForm.elements.death_date.value),
@@ -98,6 +99,7 @@ const editPerson = cid => {
     const person = database.people[cid];
     personForm.elements.name.value = person.name;
     personForm.elements.surname.value = person.surname;
+    personForm.elements.gender.value = person.gender;
     personForm.elements.picture.value = person.picture;
     personForm.elements.birth_date.value = unixToDate(person.birth_date);
     personForm.elements.death_date.value = unixToDate(person.death_date);
@@ -169,18 +171,49 @@ const editTerm = index => {
 
 ////////// EXPORT //////////
 
+const updateCIDs = () => {
+    const prevCIDs = [];
+    return new Promise((resolve, reject) => {
+        const job = Object.keys(database.people).map(cid => {
+            prevCIDs.push(cid);
+            return hash(JSON.stringify(database.people[cid]));
+        });
+        Promise.all(job)
+        .then(newCIDs => {
+            let updateCount = 0;
+            newCIDs.forEach((cid, index) => {
+                const previousCID = prevCIDs[index];
+                if(cid !== previousCID){
+                    const person = database.people[previousCID];
+                    database.people[cid] = {...person};
+                    console.log("updated", previousCID, "to", cid);
+                    delete database.people[previousCID];
+                    findAllIndexes(database.terms, "cid", previousCID)
+                    .forEach(termIndex => {database.terms[termIndex].cid = cid;});
+                    updateCount++;
+                }
+            });
+            resolve("Done. Updated "+updateCount+" CIDs");
+        })
+        .catch(reject);
+    });
+};
+
 const exportButton = document.getElementById("export-button");
 exportButton.addEventListener('click', () => {
-    console.log("Generating database.json file");
-
-    /// TODO: sort elements of database before exporting
-
-    const json = JSON.stringify(database);
-    const blob = new Blob([json], { type: 'application/json' });
-    const downloadUrl = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = downloadUrl;
-    link.download = 'database.json';
-    link.click();
-    URL.revokeObjectURL(downloadUrl);
+    console.log("Updating CIDs values...");
+    updateCIDs()
+        .then(result => {
+            console.log(result);
+            console.log("Generating database.json file...");
+            const json = JSON.stringify(database);
+            const blob = new Blob([json], { type: 'application/json' });
+            const downloadUrl = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = downloadUrl;
+            link.download = 'database.json';
+            link.click();
+            URL.revokeObjectURL(downloadUrl);
+        })
+        .catch(console.error);
 });

@@ -70,7 +70,7 @@ const hash = message => {
             const b64 = btoa(String.fromCharCode.apply(null, str));
             resolve(b64);
         })
-        .catch(err => reject(handleError("hash", err, "SUBTLECRYPTO_DIGEST_ERROR")));
+        .catch(console.error);
     });
 };
 
@@ -104,6 +104,7 @@ const updatePeopleTable = people => {
             </td>
             <td>${getLocationLink(person.birth_location, location_city, true) + ", " + birth_date}</td>
             <td>${(person.death_date ? death_date+", a los "+death_age : "Tiene "+current_age)+" años"}</td>
+            <td>${person.cause_of_death}</td>
             <td>${person.occupation}</td>
             <td>
                 <button onClick="editPerson('${cid}')" title="Editar"><i class="fa fa-edit"></i></button>
