@@ -4,14 +4,12 @@ import {
     DAY_MS,
     DB_LAST_UPDATE
 } from './constants';
-import {
-    getZodiac
-} from "./utils";
+import { getZodiac } from "./utils";
 import database from "../assets/database.json";
 
 // This file should be executed during build time and exported in json format.
 
-const tic = Date.now(); // Measure computing time (remove before deploy)
+const tic = Date.now(); // Data processing execution time
 
 ////// Timelines //////
 

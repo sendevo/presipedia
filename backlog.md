@@ -18,9 +18,9 @@
     - [ ] Articulos  
   - [x] Proyecto Vite+React.  
   - [x] Front-end React + MUI.  
-  - [ ] Navegación.  
+  - [x] Navegación.  
     - [x] React Router Dom.  
-    - [ ] Barra de navegación inferior.  
+    - [x] Barra de navegación inferior.  
   - [ ] Visualizaciones de línea de tiempo con Vis.js  
     - [x] Linea de tiempo de mandatos y eventos.  
     - [x] Linea de tiempo de nacimientos y fallecimientos.  
@@ -37,21 +37,27 @@
   - [ ] Listado de datos crudos:  
     - [ ] Tabla.  
     - [ ] Exportar a csv? ¿Link al repo? Generar en tpo de ejec.?  
-  - [ ] Trivia: multiplechoice:  
+  - [ ] Preguntas y respuestas:  
     - [ ] Quién goberno entre ... y entre ...  
     - [ ] Durante qué periodo gobernó ...  
     - [ ] Donde nació ...  
     - [ ] Qué edad tiene ...  
     - [ ] Quien de los siguientes nació en ...  
-    - [ ] Cuántos presidentes nacieron en ...  
+    - [ ] Cuántos presidentes nacieron en el mes de ...  
     - [ ] Cómo era el segundo nombre de ...  
     - [ ] Cuántos años en total gobernó ...  
-    - [ ] Cuántos presidentes con vida había entre ... y ...  
-  - [ ] Trivia: probabilidad de ser presidente.  
+    - [ ] A qué presidente que tuvo la Argentina corresponde el siguiente retrato:  
+    - [ ] Cuál de los siguientes retratos corresponde a ....  
+    - [ ] Cuántos expresidentes con vida había entre ... y ...  
+  - [ ] ¿Quién será el siguiente?  
     - [ ] Formulario para ingresar género, fecha y lugar de nacimiento y tendencia politica.  
     - [ ] Calcular probabilidad basado en datos actuales.  
     - [ ] Presentación del resultado.  
-  - [ ] Menú de inicio (previsualizaciones).  
+  - [ ] Menúes:  
+    - [ ] Menú de inicio.  
+    - [ ] Menú de visualizaciones.  
+    - [ ] Menú de Juegos.  
+    - [ ] Menú de datos.  
   - [ ] Branding y promoción:  
     - [ ] Logo  
     - [x] Nombre  

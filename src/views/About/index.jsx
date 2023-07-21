@@ -54,15 +54,9 @@ const View = () => (
                 </ul>
             </TextBlock>
             <TextBlock title="Siga leyendo">
-                <Box 
-                    display="flex" 
-                    flexDirection="row" 
-                    justifyContent="space-evenly" 
-                    marginTop="15px">
-                    <Link to='sources'>Fuentes de información</Link>
-                    <br/>
-                    <Link to='terms'>Términos y condiciones</Link>
-                </Box>
+                <Link to='sources'>Fuentes de información</Link>
+                <br/>
+                <Link to='terms'>Términos y condiciones</Link>
             </TextBlock>
             <TextBlock title="Contacto">
                 <b>{APP_NAME}</b> es un producto de <i><a href="https://sendevosoftware.com.ar" rel="noopener" target="_blank">Sendevo Software</a></i>. Ante cualquier duda, consulta o sugerencia, no dude en contactarnos a <a href="mailto:holasendevo@gmail.com?Subject=Ref.%20Presipedia">holasendevo@gmail.com</a>
