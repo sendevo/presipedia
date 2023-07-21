@@ -2,25 +2,31 @@
 import About from './About';
 import Blog from './Blog';
 import Data from './Data';
+import Games from './Games';
 import Home from './Home';
 import Predictor from './Predictor';
 import Quiz from './Quiz';
 import Rankings from './Rankings';
+import Raw from './Raw';
 import Sources from './Sources'; 
 import Stats from './Stats'; 
 import Terms from './Terms';
 import Timeline from './Timeline'; 
+import Visualizations from './Visualizations';
 
 export {
     About,
     Blog,
     Data,
+    Games,
     Home,
     Predictor,
     Quiz,
     Rankings,
     Sources,
+    Raw,
     Stats,
     Terms,
-    Timeline
+    Timeline,
+    Visualizations
 };

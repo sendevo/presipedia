@@ -8,17 +8,17 @@ const View = () => {
         <MainView background={background}>
             <Typography fontWeight={"bold"}>"Presipedia: Edición Argentina"</Typography>
             <br/>
-            <Link to='games/quiz'>Preguntas y respuestas</Link>
-            <br/>
             <Link to='games/predictor'>¿Quién será el siguiente?</Link>
+            <br/>
+            <Link to='games/quiz'>Preguntas y respuestas</Link>
             <br/>
             <Link to='vis/timeline'>Línea de tiempo</Link>
             <br/>
-            <Link to='vis/stats'>Estadísticas de periodo</Link>
+            <Link to='vis/stats'>Mandatos</Link>
             <br/>
-            <Link to='vis/rankings'>Clasificaciones</Link>
+            <Link to='vis/rankings'>Mandatarios</Link>
             <br/>
-            <Link to='data/blog'>Símbolos presidenciales</Link>
+            <Link to='data/blog'>Curiosidades</Link>
             <br/>
             <Link to='data/raw'>Base de datos</Link>
             <br/>

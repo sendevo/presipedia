@@ -1,10 +1,10 @@
 import MainView from "../../components/MainView";
-import articles from "../../assets/articles.json";
+import database from "../../assets/database.json";
 
 const View = () => {
     return(
-        <MainView title="Curiosidades">
-            {JSON.stringify(articles)}
+        <MainView title="Base de datos">
+            {JSON.stringify(database)}
         </MainView>
     );
 };

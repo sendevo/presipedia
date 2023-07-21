@@ -32,10 +32,10 @@ const View = () => (
                 <b>{APP_NAME}</b> se encuentra actualmente en su versión <b>alpha</b>, lo que significa que este producto está transitando su fase inicial de desarrollo luego de su publicación. Por ello, el software puede resultar inestable, contener errores o sufrir muchos cambios en plazos cortos.
             </TextBlock>
             <TextBlock title="Contribuciones al proyecto">
-                Cualquier comentario, sugerencia o cambio que desee incluir en el proyecto será bienvenido. Este proyecto sigue los términos de licencia de la <a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank">GNU General Public License (v3)</a>, por lo que deberá tener en cuenta que estará liberando su trabajo según los términos de esta misma licencia.
-                Para contribuir al desarrollo del proyecto <b>{APP_NAME}</b>, debe hacer un <i>fork</i> y enviar un <i>pull request</i> en el sitio del <a href="https://github.com/sendevo/presipedia" target="_blank">repositorio público</a>.  
+                Cualquier comentario, sugerencia o cambio que desee incluir en el proyecto será bienvenido. Este proyecto sigue los términos de licencia de la <a href="https://www.gnu.org/licenses/gpl-3.0.html" rel="noopener" target="_blank">GNU General Public License (v3)</a>, por lo que deberá tener en cuenta que estará liberando su trabajo según los términos de esta misma licencia.
+                Para contribuir al desarrollo del proyecto <b>{APP_NAME}</b>, debe hacer un <i>fork</i> y enviar un <i>pull request</i> en el sitio del <a href="https://github.com/sendevo/presipedia" rel="noopener" target="_blank">repositorio público</a>.  
                 <br/>
-                Consulte la lista de <a href="https://github.com/sendevo/presipedia/graphs/contributors" target="_blank">principales contribuidores <FaExternalLinkAlt style={{marginLeft:"5px", marginBottom:"-2px"}} /></a>
+                Consulte la lista de <a href="https://github.com/sendevo/presipedia/graphs/contributors" rel="noopener" target="_blank">principales contribuidores <FaExternalLinkAlt style={{marginLeft:"5px", marginBottom:"-2px"}} /></a>
             </TextBlock>            
             <TextBlock title="Costos de uso">
                 <b>{APP_NAME}</b> es una aplicación gratuita, libre de publicidades y no solicitará a sus usuarios realizar pagos bajo ningún concepto y tampoco es requisito autenticarse ni brindar datos personales de ningún tipo.
@@ -54,13 +54,18 @@ const View = () => (
                 </ul>
             </TextBlock>
             <TextBlock title="Siga leyendo">
-                <ul style={ulStyle}>
-                    <li><Link to='sources'>Fuentes de información</Link></li>
-                    <li><Link to='terms'>Términos y condiciones</Link></li>
-                </ul>
+                <Box 
+                    display="flex" 
+                    flexDirection="row" 
+                    justifyContent="space-evenly" 
+                    marginTop="15px">
+                    <Link to='sources'>Fuentes de información</Link>
+                    <br/>
+                    <Link to='terms'>Términos y condiciones</Link>
+                </Box>
             </TextBlock>
             <TextBlock title="Contacto">
-                <b>{APP_NAME}</b> es un producto de <i><a href="https://sendevosoftware.com.ar" target="_blank">Sendevo Software</a></i>. Ante cualquier duda, consulta o sugerencia, no dude en contactarnos a <a href="mailto:holasendevo@gmail.com?Subject=Ref.%20Presipedia">holasendevo@gmail.com</a>
+                <b>{APP_NAME}</b> es un producto de <i><a href="https://sendevosoftware.com.ar" rel="noopener" target="_blank">Sendevo Software</a></i>. Ante cualquier duda, consulta o sugerencia, no dude en contactarnos a <a href="mailto:holasendevo@gmail.com?Subject=Ref.%20Presipedia">holasendevo@gmail.com</a>
             </TextBlock>
         </Box>
     </MainView>

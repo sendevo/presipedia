@@ -50,7 +50,7 @@ const location2GoggleMap = (lat,lng) => `http://www.google.com/maps/place/${lat}
 const getLocationLink = (geojson, text, linkFormat) => {
     const [lng, lat] = geojson.features[0].geometry.coordinates;
     const link = location2GoggleMap(lat, lng);
-    return linkFormat ? `<a href=${link} target="_blank">${text}</a>` : link;
+    return linkFormat ? `<a href=${link} rel="noopener" target="_blank">${text}</a>` : link;
 };
 
 ////////// CRYPTO //////////

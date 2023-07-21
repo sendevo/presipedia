@@ -70,7 +70,7 @@ const Navigation = () => {
                     component={Link} 
                     to="/games" 
                     value="games" 
-                    label={<Typography fontSize={12}>Juegos</Typography>} 
+                    label={<Typography fontSize={12}>Entretenim.</Typography>} 
                     icon={<FaGamepad/>}/>
                 <BottomNavigationAction 
                     style={buttonStyle}
@@ -91,7 +91,7 @@ const Navigation = () => {
                     component={Link} 
                     to="/about" 
                     value="about" 
-                    label={<Typography fontSize={12}>Acerca de</Typography>} 
+                    label={<Typography fontSize={12}>Info</Typography>} 
                     icon={<FaInfoCircle/>}/>
             </BottomNavigation>
         </Paper>

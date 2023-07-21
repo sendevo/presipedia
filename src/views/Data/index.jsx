@@ -1,10 +1,9 @@
 import MainView from "../../components/MainView";
-import database from "../../assets/database.json";
 
 const View = () => {
     return(
-        <MainView title="Base de datos">
-            {JSON.stringify(database)}
+        <MainView title="Bases de datos">
+            
         </MainView>
     );
 };
