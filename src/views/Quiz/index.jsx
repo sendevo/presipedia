@@ -1,71 +1,57 @@
-import { useEffect, useReducer, useState } from "react";
-import { Typography, Button } from "@mui/material";
+import { useEffect, useReducer } from "react";
 import MainView from "../../components/MainView";
+import PlayersDialog from "../../components/PlayersDialog";
+import QuestionBlock from "../../components/QuestionBlock";
+import OptionsBlock from "../../components/OptionsBlock";
 import {
     timerPeriod,
     initialState,
     reducer,
-    addPlayer,
     startQuiz,
     onTimerTick,
     onAnswer
 } from "../../model/quiz";
+import FeedbackDialog from "../../components/FeedbackDialog";
+import background from "../../assets/backgrounds/background3.jpg";
+
+
 
 const View = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
 
     useEffect(() => {
-        const intervalID = setInterval(()=>onTimerTick(dispatch), timerPeriod);
+        const intervalID = setInterval(() => onTimerTick(dispatch), timerPeriod);
         return () => clearInterval(intervalID);
     },[]);
 
-    const handleAddPlayer = () => {
-        addPlayer(dispatch, "Jugador "+state.players.length);
-    };
-
-    const handleStartQuiz = () => {
-        if(state.players.length > 0)
-            startQuiz(dispatch);
-        else 
-            console.error("Error: must add at least one player");
+    const handleStartQuiz = playerNames => {
+        startQuiz(dispatch, playerNames);
     };
 
     return(
-        <MainView title="Preguntas y respuestas">
-            {!state.running &&
-                <div>
-                    <Button variant="contained" onClick={handleAddPlayer}>Agregar jugador</Button>
-                    <Button variant="contained" onClick={handleStartQuiz}>Comenzar</Button>
-                </div>
-            }
+        <MainView title="Preguntas y respuestas" background={background}>
+            <PlayersDialog 
+                open={!state.running} 
+                onPlayersReady={handleStartQuiz} />
+
             {state.running &&
-                <div>
-                    <Typography>Pregunta para {state.players[state.currentPlayer].name}</Typography>
-                    <Typography>Tiempo restante: {state.questionTicksLeft}</Typography>
-                    <Typography>Tiempo restante de feedback: {state.feedbackTicksLeft}</Typography>
-                    <Typography>Puntajes:</Typography>
-                    {
-                        state.players.map((pl,index) => (
-                            <Typography key={index}>  {pl.name}: {pl.score}</Typography>
-                        ))
-                    }
-                    <Typography sx={{fontWeight:"bold"}}>{state.questionText}</Typography>
-                    <br/>
-                    {state.options.map((op,index) => (
-                        <div key={index}>
-                            <Typography onClick={()=>onAnswer(dispatch, index)}>{op.text}</Typography>
-                            <br/>
-                        </div>
-                    ))}
-                </div>
+                <QuestionBlock 
+                    players={state.players}
+                    playerIndex={state.currentPlayer}
+                    progress={state.questionTicksLeft}
+                    question={state.questionText} />
             }
-            {state.showFeedback &&
-                <div>
-                    <Typography sx={{fontWeight:"bold"}}>{state.feedbackTitle}</Typography>
-                    <br/>
-                    <Typography>{state.feedbackExplanation}</Typography>
-                </div>
+
+            {state.running &&
+                <OptionsBlock 
+                    options={state.options} 
+                    onAnswer={index => onAnswer(dispatch, index)}/>
             }
+
+            <FeedbackDialog 
+                type={state.feedbackType}
+                title={state.feedbackTitle}
+                text={state.feedbackExplanation} />
         </MainView>
     );
 };

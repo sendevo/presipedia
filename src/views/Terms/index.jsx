@@ -30,7 +30,7 @@ const View = () => (
                     <li>Emplear esta aplicación, en cualquiera de sus versiones, únicamente para consultar y compartir información de dominio público referida a los mandatarios y exmandatarios presidenciales que tuvo la República Argentina.</li>
                     <li>Respetar los términos de licencia de la <a href="https://www.gnu.org/licenses/gpl-3.0.html" rel="noopener" target="_blank">GNU General Public License (v3)</a>, en lo que respecta a la edición, modificación y distribución del código fuente de <b>{APP_NAME}</b>.</li>
                     <li>No promocionar o publicitar productos o servicios que no sean propios sin una correspondiente autorización.</li>
-                    <li>No infringir la ley de cualquier forma, incluyendo actividades como almacenar o compartir información fraudulenta o engañosa.</li>
+                    <li>No infringir la ley de cualquier forma, incluyendo actividades como almacenar o compartir información falsa, fraudulenta o engañosa.</li>
                 </ol>
             </TextBlock>
 

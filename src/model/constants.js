@@ -38,5 +38,5 @@ export const MOMENT_LOCALE_CONFIG = {
 //// TRIVIA QUIZ ////
 export const MAX_QUIZ_PLAYERS = 4;
 export const FEEDBACK_TIMEOUT = 3000;
-export const QUESTION_TIMEOUT = 10000;
+export const QUESTION_TIMEOUT = 20000;
 export const TIMER_UPDATE_PERIOD = 1000;
