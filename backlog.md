@@ -30,7 +30,7 @@
     - [x] Edad de mandatarios.  
     - [x] Reducir y-labels  
   - [ ] Visualización de estadísticas  
-    - [ ] Controles de visualización
+    - [ ] Controles de visualización.  
     - [x] Lugares/Mandatos de nacimiento.  
     - [x] Meses/signos con mayores nacimientos (barra vertical).  
     - [x] Cantidad de presidentes/expresidentes con vida por periodo continuo.  
@@ -41,8 +41,8 @@
     - [ ] Generador de preguntas y respuestas.  
     - [x] Reducer para controlar juego.  
     - [x] Diálogo para configurar jugadores.  
-    - [ ] Presentación de pregunta y opciones de respuesta.  
-    - [ ] Bloque de puntajes de jugadores.  
+    - [x] Presentación de pregunta y opciones de respuesta.  
+    - [x] Bloque de puntajes de jugadores.  
     - [x] Diálogo para mostrar resultado de respuesta.  
   - [ ] ¿Quién será el siguiente?  
     - [ ] Formulario para ingresar género, fecha y lugar de nacimiento y tendencia politica.  
@@ -75,6 +75,5 @@
   
 
 ### v1.1._ (beta) (requisitos pendientes):  
-  - [ ] Optimizar base de datos o pre-procesar datos estáticos.  
   - [ ] Optimizar tareas de mantenimiento y actualización.  
   - [ ] Implementar backend para actualización dinámica de la base de datos.  

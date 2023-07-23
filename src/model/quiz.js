@@ -24,6 +24,7 @@ export const initialState = {
     players: [], // [{name: "Jugador 1", score: 0}]
     currentPlayer: 0,
     running: false,
+    questionCounter: 0,
     ...newQuestionToState()
 };
 
@@ -49,10 +50,12 @@ export const reducer = (prevState, action) => {
                         const prevPlayer = prevState.currentPlayer;
                         const totalPlayers = prevState.players.length;
                         const currentPlayer = (prevPlayer+1) % totalPlayers;
+                        const questionCounter = prevState.questionCounter+1;
                         return {
                             ...prevState,
                             ...newQuestionToState(),
                             feedbackType: "HIDDEN",
+                            questionCounter,
                             currentPlayer
                         };
                     }else{ // If not timeout yet, just update ticks left

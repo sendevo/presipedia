@@ -1,7 +1,8 @@
 ////////// CONSTANTS //////////
 
 const DATE_FORMAT = "LL";
-
+const ZODIAC_SIGNS = ["Capricornio", "Acuario", "Piscis", "Aries", "Tauro", "Géminis", "Cáncer", "Leo", "Virgo", "Libra", "Escorpio", "Sagitario"];
+const DAY_MS = 86400000;
 
 ////////// MISC //////////
 
@@ -18,6 +19,13 @@ const toUnixTimestamp = date => moment(date, "YYYY-MM-DD").unix()*1000;
 
 const unixToDate = timestamp => moment.unix(timestamp/1000).format('YYYY-MM-DD');
 
+const getZodiac = unixTime => {
+	var bound = [20,19,20,20,20,21,22,22,21,22,21,21];
+	const day = moment(unixTime).date();
+	const month = moment(unixTime).month();
+    const zIndex = day <= bound[month] ? month : (month+1) % 12;
+	return {index: zIndex, name: ZODIAC_SIGNS[zIndex]};
+};
 
 ////////// LOCATIONS //////////
 

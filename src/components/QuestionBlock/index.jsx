@@ -14,11 +14,16 @@ const progressStyle = {
     borderRadius: "5px"
 };
 
-const QuestionBlock = ({players, playerIndex, progress, question, score}) => {
+const QuestionBlock = ({number, players, playerIndex, progress, question, score}) => {
     return (
         <Box>
             <Box sx={questionStyle}>
-                <Typography>Pregunta para: <b>{players[playerIndex].name}</b>, por {score} puntos:</Typography>
+                <Typography fontSize={"larger"}>Pregunta {number+1}</Typography> 
+                {players.length > 1 ? 
+                    <Typography>Responde <b>{players[playerIndex].name}</b> por {score} puntos:</Typography>
+                    :
+                    <Typography>Por {score} puntos:</Typography>
+                }
                 <Typography sx={{fontWeight:"bold",marginBottom:"10px"}}>{question}</Typography>
             </Box>
             <LinearProgress sx={progressStyle} variant="determinate" value={progress} />

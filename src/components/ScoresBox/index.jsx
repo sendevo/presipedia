@@ -11,9 +11,13 @@ const scoresStyle = {
 
 const ScoresBlock = ({players}) => (
     <Box sx={scoresStyle}>
-        {players.sort((a,b) => b.score-a.score).map((pl,index) => (
-            <Typography key={index}>  {pl.name}: {pl.score} puntos</Typography>
-        ))}
+        {players.length > 1 ? 
+            players.sort((a,b) => b.score-a.score).map((pl,index) => (
+                <Typography key={index}>  {pl.name}: {pl.score} puntos</Typography>
+            ))
+            :
+            <Typography>Puntaje acumulado: {players[0].score} puntos</Typography>
+        }
     </Box>
 );
 

@@ -38,6 +38,7 @@ const View = () => {
 
             {state.running &&
                 <QuestionBlock 
+                    number={state.questionCounter}
                     players={state.players}
                     playerIndex={state.currentPlayer}
                     progress={getQuestionProgress(state.questionTicksLeft)}

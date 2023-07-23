@@ -2,14 +2,8 @@ import { useState } from "react";
 import MainView from "../../components/MainView";
 import { Slider } from "../../components/Inputs";
 import BarChart from "../../charts/BarChart";
-import { 
-    longerTerms, 
-    shorterTerms, 
-    oldest, 
-    youngest, 
-    youngestAssumption 
-} from "../../model/data";
 import background from "../../assets/backgrounds/background4.jpg";
+import processed from "../../assets/processed.json";
 
 const toDurationYears = terms => terms.map(t => t.duration);
 const toDurationMonths = terms => terms.map(t => t.duration*12);
@@ -31,11 +25,11 @@ const View = () => {
 
     const handleSliderChange = (_,value) => setSliderValue(value);
 
-    const longerTermsSliced = longerTerms.slice(0, sliderValue);
-    const shorterTermsSliced = shorterTerms.slice(0, sliderValue);
-    const oldestSliced = oldest.slice(0, sliderValue);
-    const youngestSliced = youngest.slice(0, sliderValue);
-    const youngestAssumpSliced = youngestAssumption.slice(0, sliderValue);
+    const longerTermsSliced = processed.longerTerms.slice(0, sliderValue);
+    const shorterTermsSliced = processed.shorterTerms.slice(0, sliderValue);
+    const oldestSliced = processed.oldest.slice(0, sliderValue);
+    const youngestSliced = processed.youngest.slice(0, sliderValue);
+    const youngestAssumpSliced = processed.youngestAssumption.slice(0, sliderValue);
 
     return(
         <MainView title="Clasificaciones" background={background}>

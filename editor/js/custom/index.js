@@ -206,6 +206,8 @@ exportButton.addEventListener('click', () => {
         .then(result => {
             console.log(result);
             console.log("Generating database.json file...");
+            database.updated = Date.now();
+            console.log(database);
             const json = JSON.stringify(database);
             const blob = new Blob([json], { type: 'application/json' });
             const downloadUrl = URL.createObjectURL(blob);
@@ -216,4 +218,18 @@ exportButton.addEventListener('click', () => {
             URL.revokeObjectURL(downloadUrl);
         })
         .catch(console.error);
+});
+
+const analyzeButton = document.getElementById("analyze-button");
+analyzeButton.addEventListener('click', () => {
+    console.log("Analyzing data...");
+    const data = analyzeDatabase(database);
+    console.log("Generating processed.json file...");
+    const blob = new Blob([data], { type: 'application/json' });
+    const downloadUrl = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = downloadUrl;
+    link.download = 'processed.json';
+    link.click();
+    URL.revokeObjectURL(downloadUrl);
 });

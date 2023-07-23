@@ -9,10 +9,10 @@ import {
     APP_NAME, 
     VERSION_CODE, 
     VERSION_VALUE, 
-    BUILD_DATE,
-    DB_LAST_UPDATE 
+    BUILD_DATE
 } from "../../model/constants";
 import background from "../../assets/backgrounds/background3.jpg";
+import database from "../../assets/database.json";
 
 const ulStyle = {listStyle: "none", marginTop: "0px"};
 
@@ -50,7 +50,7 @@ const View = () => (
                     <li><b>Nombre de versión:</b> {VERSION_VALUE}</li>
                     <li><b>Código de versión:</b> {VERSION_CODE}</li>
                     <li><b>Actualización del software: </b> {moment(parseInt(BUILD_DATE)).format('DD/MM/YYYY')}</li>
-                    <li><b>Actualización de la base de datos: </b> {moment(parseInt(DB_LAST_UPDATE)).format('DD/MM/YYYY')}</li>
+                    <li><b>Actualización de la base de datos: </b> {moment(parseInt(database.updated)).format('DD/MM/YYYY')}</li>
                 </ul>
             </TextBlock>
             <TextBlock title="Siga leyendo">

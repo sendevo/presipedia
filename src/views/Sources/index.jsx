@@ -2,8 +2,9 @@ import { Box } from "@mui/material";
 import moment from "moment";
 import MainView from "../../components/MainView";
 import TextBlock from "../../components/TextBlock";
-import { APP_NAME, DB_LAST_UPDATE } from "../../model/constants";
+import { APP_NAME } from "../../model/constants";
 import background from "../../assets/backgrounds/background3.jpg";
+import database from "../../assets/database.json";
 
 const View = () => {
     return(
@@ -15,7 +16,7 @@ const View = () => {
                     Para completar el resto de la información que produjo la historia argentina durante los 20 años siguientes, así como también para revisar la validez de los datos presentados, se utilizó principalmente al sitio web <a href="https://es.wikipedia.org" rel="noopener" target="_blank">Wikipedia</a> como fuente de información.
                 </TextBlock>
                 <TextBlock title="Fecha de corte">
-                    Debido a que <b>{APP_NAME}</b> funciona sin conexión a internet, puede ocurrir que la información que aquí se presenta se encuentre desactualizada. La base de datos fue actualizada por última vez {moment(DB_LAST_UPDATE).fromNow()} (el día {moment(DB_LAST_UPDATE).format('L')}).
+                    Debido a que <b>{APP_NAME}</b> funciona sin conexión a internet, puede ocurrir que la información que aquí se presenta se encuentre desactualizada. La base de datos fue actualizada por última vez {moment(database.updated).fromNow()} (el día {moment(database.updated).format('L')}).
                 </TextBlock>
                 <TextBlock title="Blog">
                     Para la redacción de los artículos del blog se emplearon diversas fuentes que se listan a continuación:

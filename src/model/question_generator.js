@@ -14,8 +14,10 @@ import {
     isAlive,
     isMale 
 } from "./queries";
-import { lastCID } from "./data";
 import database from "../assets/database.json";
+
+const ITERABLE_LEN = 50;
+const lastCID = database.terms.sort((a,b) => b.term_end < a.term_end).at(-1).cid;
 
 const generateOptions = (iterable, rightIndex, rightValue) => {
     const optionsArray = new Array(MAX_QUESTION_OPTIONS);
@@ -75,9 +77,10 @@ class QType1 extends QuestionBase {
 class QT1Subtype1 extends QType1 {
     constructor() {
         super();
-        this._text = `¿Dónde nació ${this._genderKW} expresidente ${this._name}?`;
+        this._text = `¿En qué ciudad nació ${this._genderKW} expresidente ${this._name}?`;
         this._details = `${capitalize(this._genderKW)} expresidente ${this._name} nació en ${this._location}`;
-        const iterable = Object.values(database.people).map(p => getCity(p));
+        const iterable = Object.values(database.people)
+            .map(p => getCity(p));
         this._options = generateOptions(iterable, this._rightOptionIndex, this._location);
     }
 };
@@ -87,7 +90,9 @@ class QT1Subtype2 extends QType1 {
         super();
         this._text = `¿Cuál de los siguientes expresidentes nació en ${this._location}?`;
         this._details = `${capitalize(this._genderKW)} expresidente ${this._name} nació en ${this._location}`;
-        const iterable = Object.values(database.people).map(p => getFullName(p));
+        const iterable = Object.values(database.people)
+            .filter(p => getCity(p) !== this._location)
+            .map(p => getFullName(p));
         this._options = generateOptions(iterable, this._rightOptionIndex, this._name);
     }   
 };
@@ -99,7 +104,7 @@ class QT1Subtype3 extends QType1 {
         const formattedBirth = formatDate(this._birth);
         this._text = `¿Cuándo nació ${this._genderKW} expresidente ${this._name}?`;
         this._details = `${capitalize(this._genderKW)} expresidente ${this._name} nació el día ${formattedBirth}`;
-        const iterable = Array.from({length: 50}, () => formatDate(this._birth+Math.floor((2*Math.random()-1)*45*DAY_MS)));
+        const iterable = Array.from({length: ITERABLE_LEN}, () => formatDate(this._birth+Math.floor((2*Math.random()-1)*45*DAY_MS)));
         this._options = generateOptions(iterable, this._rightOptionIndex, formattedBirth);
     }
 };
@@ -111,7 +116,8 @@ class QT1Subtype4 extends QType1 {
         const formattedBirth = formatDate(this._birth);
         this._text = `¿Qué expresidente nació el día ${formattedBirth}?`;
         this._details = `${capitalize(this._genderKW)} expresidente ${this._name} nació el día ${formattedBirth}`;
-        const iterable = Object.values(database.people).map(p => getFullName(p));
+        const iterable = Object.values(database.people)
+            .map(p => getFullName(p));
         this._options = generateOptions(iterable, this._rightOptionIndex, this._name);
     }
 };
@@ -122,7 +128,7 @@ class QT1Subtype5 extends QType1 {
         this._score = 30;
         this._text = `¿Hace cuántos años nació ${this._genderKW} expresidente ${this._name}?`;
         this._details = `${capitalize(this._genderKW)} expresidente ${this._name} nació hace ${this._age}`;
-        const iterable = Array.from({length: 50}, () => moment(this._birth + (2*Math.random()-1)*20*YEAR_MS).fromNow(true));
+        const iterable = Array.from({length: ITERABLE_LEN}, () => moment(this._birth + (2*Math.random()-1)*20*YEAR_MS).fromNow(true));
         this._options = generateOptions(iterable, this._rightOptionIndex, this._age);
     }
 };
@@ -182,10 +188,10 @@ class QT3Subtype1 extends QType3 {
         const genderKW = this._male ? "el":"la";
         this._text = `¿A qué edad falleció ${genderKW} expresidente ${this._name}?`;
         this._details = `El expresidente ${this._name} falleció a los ${this._age} años de edad`;
-        const iterable = Array.from({length: 50}, () => `A los ${this._age + Math.floor((2*Math.random()-1)*20)} años`);
+        const iterable = Array.from({length: ITERABLE_LEN}, () => `A los ${this._age + Math.floor((2*Math.random()-1)*20)} años`);
         this._options = generateOptions(iterable, this._rightOptionIndex, `A los ${this._age} años`);
     }
-}
+};
 
 const classes = [
     QT1Subtype1,

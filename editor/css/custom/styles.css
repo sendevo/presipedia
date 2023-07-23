@@ -49,6 +49,10 @@ input {
   display: block;
 }
 
+.red-button {
+  background-color: red;
+}
+
 .table-container {
   display: flex;
   justify-content: center;

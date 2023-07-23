@@ -3,37 +3,30 @@ import MainView from "../../components/MainView";
 import { BarChart, PieChart, LineChart } from "../../charts";
 import { colorMapGenerator, randomColorsGenerator } from "../../model/utils";
 import { ZODIAC_SIGNS } from "../../model/constants";
-import { 
-    birthLocations, 
-    parties, 
-    birthsPerMonth,
-    birthsPerZodiacSign,
-    aliveCountPerDate,
-    aliveExPresidentsPerDate 
-} from "../../model/data";
 import background from "../../assets/backgrounds/background4.jpg";
+import processed from "../../assets/processed.json";
 
 const View = () => {
     return(
         <MainView title="Estadísticas" background={background}>
             <PieChart 
                 title="Nacidos por provincia" 
-                labels={birthLocations.provinces}
+                labels={processed.birthLocations.provinces}
                 datasets={[
                     {
                         label: 'Presidentes nacidos',
-                        data: birthLocations.count, 
-                        backgroundColor: colorMapGenerator(birthLocations.provinces.length, 220)
+                        data: processed.birthLocations.count, 
+                        backgroundColor: colorMapGenerator(processed.birthLocations.provinces.length, 220)
                     }
                 ]} />
             <PieChart 
                 title="Tendencia política de mandatos" 
-                labels={parties.names}
+                labels={processed.parties.names}
                 datasets={[
                     {
                         label: 'Mandatos',
-                        data: parties.count,
-                        backgroundColor: randomColorsGenerator(parties.names.length, 0.8)
+                        data: processed.parties.count,
+                        backgroundColor: randomColorsGenerator(processed.parties.names.length, 0.8)
                     }
                 ]} />
 
@@ -41,7 +34,7 @@ const View = () => {
                 title="Nacidos por mes"
                 labels={moment.monthsShort()}
                 datasets={[{
-                    data: birthsPerMonth,
+                    data: processed.birthsPerMonth,
                     label: "Nacidos",
                     backgroundColor: colorMapGenerator(12, 230),
                     borderColor: 'rgba(20, 20, 250, 0.5)',
@@ -56,7 +49,7 @@ const View = () => {
                 title="Nacidos por signo zodiacal"
                 labels={ZODIAC_SIGNS}
                 datasets={[{
-                    data: birthsPerZodiacSign,
+                    data: processed.birthsPerZodiacSign,
                     label: "Nacidos",
                     backgroundColor: colorMapGenerator(12, 20),
                     borderColor: 'rgba(250, 20, 20, 0.5)',
@@ -70,7 +63,7 @@ const View = () => {
             <LineChart 
                 title="Cantidad de expresidentes* con vida"
                 clarification="* Involucra al presidente actual y expresidentes."
-                labels={aliveExPresidentsPerDate.map(p => {
+                labels={processed.aliveExPresidentsPerDate.map(p => {
                     const from = moment(p.period[0]).format("MM/YYYY");
                     const to = moment(p.period[1]).format("MM/YYYY");
                     return `${from} al ${to}`;
@@ -78,7 +71,7 @@ const View = () => {
                 datasets={
                     [{
                         label: 'Expresidentes con vida',
-                        data: aliveExPresidentsPerDate.map(a => a.count),
+                        data: processed.aliveExPresidentsPerDate.map(a => a.count),
                         backgroundColor: "rgba(120, 120, 250, 0.7)",
                         borderColor: 'rgba(120, 120, 250, 1)',
                         tension: 0.3,
@@ -86,7 +79,7 @@ const View = () => {
                     },
                     {
                         label: 'Duración del periodo',
-                        data: aliveCountPerDate.map(a => moment(a.period[1]).diff(a.period[0], 'years')),
+                        data: processed.aliveCountPerDate.map(a => moment(a.period[1]).diff(a.period[0], 'years')),
                         backgroundColor: "rgba(250, 120, 120, 0.7)",
                         borderColor: 'rgba(250, 120, 120, 1)',
                         tension: 0.3,
@@ -98,7 +91,7 @@ const View = () => {
             <LineChart 
                 title="Cantidad de presidentes** con vida"
                 clarification="** Involucra futuros presidentes, presidentes actuales y expresidentes."
-                labels={aliveCountPerDate.map(p => {
+                labels={processed.aliveCountPerDate.map(p => {
                     const from = moment(p.period[0]).format("MM/YYYY");
                     const to = moment(p.period[1]).format("MM/YYYY");
                     return `${from} al ${to}`;
@@ -106,7 +99,7 @@ const View = () => {
                 datasets={
                     [{
                         label: 'Presidentes con vida',
-                        data: aliveCountPerDate.map(a => a.count),
+                        data: processed.aliveCountPerDate.map(a => a.count),
                         backgroundColor: "rgba(120, 120, 250, 0.7)",
                         borderColor: 'rgba(120, 120, 250, 1)',
                         tension: 0.3,
@@ -114,7 +107,7 @@ const View = () => {
                     },
                     {
                         label: 'Duración del periodo',
-                        data: aliveCountPerDate.map(a => moment(a.period[1]).diff(a.period[0], 'years')),
+                        data: processed.aliveCountPerDate.map(a => moment(a.period[1]).diff(a.period[0], 'years')),
                         backgroundColor: "rgba(250, 120, 120, 0.7)",
                         borderColor: 'rgba(250, 120, 120, 1)',
                         tension: 0.3,
