@@ -7,9 +7,10 @@ export const DB_LAST_UPDATE = 1689688230639; // 18-7-2023 10:50 hs
 //// DATE-TIME ////
 export const VIS_DATE_FORMAT = "YYYY-MM-DD";
 export const DAY_MS = 86400000;
+export const YEAR_MS = 31536000000;
 export const ZODIAC_SIGNS = ["Capricornio", "Acuario", "Piscis", "Aries", "Tauro", "Géminis", "Cáncer", "Leo", "Virgo", "Libra", "Escorpio", "Sagitario"];
-const MONTHS = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-const MONTHS_SHORT = ["Ene.", "Feb.", "Mar", "Abr.", "May", "Jun", "Jul.", "Ago", "Sept.", "Oct.", "Nov.", "Dic."];
+export const MONTHS = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+const MONTHS_SHORT = ["Ene.", "Feb.", "Mar", "Abr.", "May", "Jun.", "Jul.", "Ago.", "Sept.", "Oct.", "Nov.", "Dic."];
 const WEEK_DAYS = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
 const WEEK_DAYS_SHORT = ["Dom.", "Lun.", "Mar.", "Miér.", "Jue.", "Vier.", "Sáb."];
 const WEEK_DAYS_MIN = ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"];
@@ -37,6 +38,7 @@ export const MOMENT_LOCALE_CONFIG = {
 };
 //// TRIVIA QUIZ ////
 export const MAX_QUIZ_PLAYERS = 4;
+export const MAX_QUESTION_OPTIONS = 4;
 export const FEEDBACK_TIMEOUT = 3000;
 export const QUESTION_TIMEOUT = 20000;
 export const TIMER_UPDATE_PERIOD = 1000;

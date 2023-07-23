@@ -66,7 +66,7 @@ Personas (Entrada ```people```):
 }
 ```
 Mandatos (Entrada ```terms```):  
-*Como puede darse el hecho de que un mismo presidente gobierne en mandatos discontinuados, se emplea una entrada aparte y se la referencia con el CID*
+*Como puede darse el hecho de que un mismo presidente gobierne en mandatos discontinuados, se emplea una entrada aparte y se la referencia con el CID. El arreglo de mandatos no necesita estar ordenado cronológicamente.*
 ```jsonc
 {
   "cid": "", // string
@@ -89,4 +89,4 @@ Eventos (Entrada ```events```):
 ```
 
 ### N. del A.
-Durante los 12 años que asistí a las escuelas primaria y secundaria, las asignaturas relacionadas con las ciencias sociales fueron las que más detesté estudiar. Y no fue hasta luego de egresar de la universidad, cuando comencé a entender que efectivamente conocer al menos lo básico de la historia y la geografía de nuestro país nos permite anticipar el impacto de las deciciones del presente en el futuro que vamos creando como sociedad. "Todos los problemas son problemas de educación" dijo una vez el expresidente Domingo F. Sarmiento, así que consideren a esta aplicación como mi más humilde contribución en pos de lograr una Nación "menos problemática". 
+Durante los 12 años que asistí a las escuelas primaria y secundaria, las asignaturas relacionadas con las ciencias sociales fueron las que más detesté estudiar. Y no fue hasta luego de egresar de la universidad, cuando comencé a entender que efectivamente conocer al menos lo básico de la historia y la geografía de nuestro país nos permite anticipar el impacto de las decisiones del presente en el futuro que vamos creando como sociedad. "Todos los problemas son problemas de educación" dijo una vez el expresidente Domingo F. Sarmiento, así que consideren a esta aplicación como mi más humilde contribución en pos de lograr una Nación "menos problemática". 

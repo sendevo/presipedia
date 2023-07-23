@@ -3,32 +3,22 @@ import {
     QUESTION_TIMEOUT, 
     TIMER_UPDATE_PERIOD,
     MAX_QUIZ_PLAYERS
-} from "../model/constants";
+} from "./constants";
+import getRandomQuestion from "./question_generator";
 
-const generateQuestion = () => {
+const newQuestionToState = () => {
     return {
-        questionText: "¿Cuál era el primer nombre del expresidente de appellido Roca?",
-        options: [
-            {text: "Alberto", image:null},
-            {text: "Jorge", image:null},
-            {text: "Julio", image:null},
-            {text: "Arturo", image:null}
-        ],
-        rightAnswer: 2,
-        answerValue: 10,
-        feedbackExplanation: "El nombre del expresidente era Julio Argentino Roca"
+        ...getRandomQuestion(),
+        questionTicksLeft: QUESTION_TIMEOUT/TIMER_UPDATE_PERIOD,
+        feedbackTicksLeft: FEEDBACK_TIMEOUT/TIMER_UPDATE_PERIOD,
+        feedbackType: "HIDDEN", // HIDDEN, RIGHT, WRONG, TIMEOUT
+        feedbackTitle: ""
     };
 };
 
-const newQuestionToState = () => ({
-    ...generateQuestion(),
-    questionTicksLeft: QUESTION_TIMEOUT/TIMER_UPDATE_PERIOD,
-    feedbackTicksLeft: FEEDBACK_TIMEOUT/TIMER_UPDATE_PERIOD,
-    feedbackType: "HIDDEN", // HIDDEN, RIGHT, WRONG, TIMEOUT
-    feedbackTitle: ""
-});
-
 export const timerPeriod = TIMER_UPDATE_PERIOD;
+
+export const getQuestionProgress = ticks => ticks*100/QUESTION_TIMEOUT*TIMER_UPDATE_PERIOD;
 
 export const initialState = {
     players: [], // [{name: "Jugador 1", score: 0}]
@@ -78,7 +68,6 @@ export const reducer = (prevState, action) => {
                             ...prevState,
                             feedbackType: "TIMEOUT",
                             feedbackTitle: "¡Demasiado lento!",
-                            feedbackExplanation: "¡Intenta responder antes de que se acabe el tiempo!",
                             feedbackTicksLeft: FEEDBACK_TIMEOUT/TIMER_UPDATE_PERIOD
                         };
                     else{ // If not timeout, just update timer count
@@ -132,33 +121,3 @@ export const onAnswer = (dispatch, option) => {
         payload: {option}
     });
 };
-
-/*
-
-get a term from terms --> period | party
-- [ ] Quién goberno entre ... y entre ...  
-- [ ] Cuál era la tendencia política de ...
-
-get a random cid --> search cid in terms --> get terms total duration | get a term duration
-- [ ] Cuántos años en total gobernó ...  
-- [ ] Durante qué periodo gobernó ...  
-
-get person from people --> get birt_date | get location_city | picture
-- [ ] Donde nació ...  
-- [ ] Quien de los siguientes nació en ...  
-- [ ] Cuándo nacio ...
-- [ ] Quién de los siguientes nació en ...
-- [ ] A qué presidente corresponde el siguiente retrato:  
-- [ ] Cuál de los siguientes retratos corresponde a ....  
-
-get people with name.split(" ").length > 1
-- [ ] Cómo era el segundo nombre de ...  
-- [ ] Qué edad tiene (tendría hoy) ...  
-- [ ] A qué edad falleció ...
-
-stats based questions:
-- [ ] Cuántos expresidentes con vida había entre ... y ...
-- [ ] Cuántos expresidentes nacieron en el mes de ...    
-- [ ] Cuántos expresidentes nacieron en la provincia de ...
-*/
-

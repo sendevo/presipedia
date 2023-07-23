@@ -2,10 +2,10 @@ import * as Views from './views';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles'; 
 import { CssBaseline, GlobalStyles } from '@mui/material';
-import moment from 'moment';
 import Navigation from './components/Navigation';
-import { MOMENT_LOCALE_CONFIG } from './model/constants';
+import moment from 'moment';
 import theme, { globalStyles } from './themes';
+import { MOMENT_LOCALE_CONFIG } from './model/constants.js';
 
 moment.updateLocale('es', MOMENT_LOCALE_CONFIG);
 

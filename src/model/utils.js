@@ -29,6 +29,8 @@ export const randomColorsGenerator = (count, transparency=0.7) => {
     return colors;
 };
 
+export const getRandomElement = arr => arr[Math.floor(Math.random()*arr.length)];
+
 export const getZodiac = unixTime => {
 	var bound = [20,19,20,20,20,21,22,22,21,22,21,21];
 	const day = moment(unixTime).date();
@@ -36,3 +38,5 @@ export const getZodiac = unixTime => {
     const zIndex = day <= bound[month] ? month : (month+1) % 12;
 	return {index: zIndex, name: ZODIAC_SIGNS[zIndex]};
 };
+
+export const capitalize = str => str.charAt(0).toUpperCase()+str.slice(1);

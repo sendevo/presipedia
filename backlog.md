@@ -66,6 +66,11 @@
     - [ ] Compilar version build para android.  
     - [ ] Publicación en hosting.  
     - [ ] Publicación en Play Store.  
+  - [ ] Tests  
+    - [ ] APP: End to end.  
+    - [ ] GUI: Componentes.  
+    - [ ] GUI: Vistas.  
+    - [ ] Modelo: Unitarios para c/metodo.  
   - [ ] Opensourcing del repo.  
   
 

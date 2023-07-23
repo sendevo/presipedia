@@ -3,13 +3,15 @@ import MainView from "../../components/MainView";
 import PlayersDialog from "../../components/PlayersDialog";
 import QuestionBlock from "../../components/QuestionBlock";
 import OptionsBlock from "../../components/OptionsBlock";
+import ScoresBlock from "../../components/ScoresBox";
 import {
     timerPeriod,
     initialState,
     reducer,
     startQuiz,
     onTimerTick,
-    onAnswer
+    onAnswer,
+    getQuestionProgress
 } from "../../model/quiz";
 import FeedbackDialog from "../../components/FeedbackDialog";
 import background from "../../assets/backgrounds/background3.jpg";
@@ -38,8 +40,9 @@ const View = () => {
                 <QuestionBlock 
                     players={state.players}
                     playerIndex={state.currentPlayer}
-                    progress={state.questionTicksLeft}
-                    question={state.questionText} />
+                    progress={getQuestionProgress(state.questionTicksLeft)}
+                    question={state.questionText} 
+                    score={state.answerValue}/>
             }
 
             {state.running &&
@@ -47,6 +50,8 @@ const View = () => {
                     options={state.options} 
                     onAnswer={index => onAnswer(dispatch, index)}/>
             }
+
+            {state.running && <ScoresBlock players={state.players} />}
 
             <FeedbackDialog 
                 type={state.feedbackType}

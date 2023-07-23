@@ -23,6 +23,8 @@ const getContentBlock = person => {
     return container;
 };
 
+export const lastCID = database.terms.sort((a,b) => b.term_end < a.term_end).at(-1).cid;
+
 export const terms = database.terms
     .map((term, index) => ({
         id: index + 1,
