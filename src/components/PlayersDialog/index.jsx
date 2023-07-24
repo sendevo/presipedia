@@ -7,8 +7,7 @@ import {
     DialogContent,
     DialogActions,
     Grid,
-    DialogContentText,
-    Typography
+    DialogContentText
 } from "@mui/material";
 import { Input } from "../Inputs";
 import { FaTrash, FaUser } from "react-icons/fa";
@@ -70,28 +69,30 @@ const PlayersDialog = ({open, onPlayersReady}) => {
                 {players.length===4 && <DialogContentText sx={warningMessageStyle}>
                     El número máximo de jugadores admitidos es 4
                 </DialogContentText>}
-                <Grid container direction="column" sx={{marginTop: "10px", width:"100%"}}>
+                <Grid container direction="column" spacing={3} sx={{marginTop:"10px"}}>
                     {players.map((p, index) => (
-                        <Grid container direction="row" key={index} sx={{marginTop:"20px"}}>
-                            <Grid item sx={{paddingRight:"5px"}}>
-                                <FaUser size={20} />
-                            </Grid>
-                            <Grid item>
-                                <Input 
-                                    label={"Nombre de Jugador "+(index+1)}
-                                    name="name"
-                                    type="text"
-                                    value={p}
-                                    error={p===""}
-                                    onChange={v => handlePlayerNameChange(v.target.value, index)}/>
-                            </Grid>
-                            {players.length > 1 && 
-                                <Grid item sx={{paddingLeft:"5px"}}>
-                                    <Box onClick={() => handleRemovePlayer(index)}>
-                                        <FaTrash color="darkred"/>
-                                    </Box>
+                        <Grid item key={index}>
+                            <Grid container direction="row" spacing={1}>
+                                <Grid item sx={{paddingRight:"5px"}}>
+                                    <FaUser size={20} />
                                 </Grid>
-                            }
+                                <Grid item>
+                                    <Input 
+                                        label={"Nombre de Jugador "+(index+1)}
+                                        name="name"
+                                        type="text"
+                                        value={p}
+                                        error={p===""}
+                                        onChange={v => handlePlayerNameChange(v.target.value, index)}/>
+                                </Grid>
+                                {players.length > 1 && 
+                                    <Grid item sx={{paddingLeft:"5px"}}>
+                                        <Box onClick={() => handleRemovePlayer(index)}>
+                                            <FaTrash color="darkred"/>
+                                        </Box>
+                                    </Grid>
+                                }
+                            </Grid>
                         </Grid>
                     ))}
                 </Grid>

@@ -1,3 +1,5 @@
+import moment from "moment";
+
 //// BUILD ////
 export const APP_NAME = "Presipedia: Edición Argentina";
 export const VERSION_CODE = "1";
@@ -41,3 +43,5 @@ export const MAX_QUESTION_OPTIONS = 4;
 export const FEEDBACK_TIMEOUT = 3000;
 export const QUESTION_TIMEOUT = 20000;
 export const TIMER_UPDATE_PERIOD = 1000;
+
+moment.updateLocale('es', MOMENT_LOCALE_CONFIG);

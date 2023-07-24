@@ -6,18 +6,18 @@ import {
     MONTHS 
 } from "./constants";
 import { getRandomElement, capitalize } from "./utils";
-import { 
-    getBirthDate, 
-    getDeathDate,
-    getCity, 
-    getFullName,
-    isAlive,
-    isMale 
-} from "./queries";
 import database from "../assets/database.json";
 
 const ITERABLE_LEN = 50;
 const lastCID = database.terms.sort((a,b) => b.term_end < a.term_end).at(-1).cid;
+
+const getFullName = person => `${person.name} ${person.surname}`;
+const getCity = person => person.birth_location.features[0].properties.city;
+const getBirthDate = person => person.birth_date;
+const getDeathDate = person => person.death_date;
+const getAgeOfDeath = person => moment(person.death_date).diff(person.birth_date,'years',false);
+const isAlive = person => !Boolean(person.death_date);
+const isMale = person => person.gender === "M";
 
 const generateOptions = (iterable, rightIndex, rightValue) => {
     const optionsArray = new Array(MAX_QUESTION_OPTIONS);
@@ -43,6 +43,7 @@ const formatDate = d => {
 
 class QuestionBase {
     constructor() {
+        this._theme = "Indefinido";
         this._text = " ";
         this._options = new Array(MAX_QUESTION_OPTIONS).fill(" ");
         this._rightOptionIndex = Math.floor(Math.random()*MAX_QUESTION_OPTIONS);
@@ -64,6 +65,7 @@ class QuestionBase {
 class QType1 extends QuestionBase {
     constructor() {
         super();
+        this._theme = "Fechas y lugares de nacimiento";
         this._score = 10;
         const person = database.people[getRandomElement(Object.keys(database.people).filter(k => k!==lastCID))];
         this._name = getFullName(person);
@@ -128,7 +130,7 @@ class QT1Subtype5 extends QType1 {
         this._score = 30;
         this._text = `¿Hace cuántos años nació ${this._genderKW} expresidente ${this._name}?`;
         this._details = `${capitalize(this._genderKW)} expresidente ${this._name} nació hace ${this._age}`;
-        const iterable = Array.from({length: ITERABLE_LEN}, () => moment(this._birth + (2*Math.random()-1)*20*YEAR_MS).fromNow(true));
+        const iterable = Array.from({length: ITERABLE_LEN}, () => moment(this._birth + (40*Math.random()-20)*YEAR_MS).fromNow(true));
         this._options = generateOptions(iterable, this._rightOptionIndex, this._age);
     }
 };
@@ -136,6 +138,7 @@ class QT1Subtype5 extends QType1 {
 class QType2 extends QuestionBase {
     constructor() {
         super();
+        this._theme = "Segundos nombres";
         this._score = 10;
         const person = getRandomElement(Object.values(database.people).filter(p => p.name.split(" ").length > 1));
         const names = person.name.split(" ");
@@ -154,7 +157,9 @@ class QT2Subtype1 extends QType2 {
         const genderKW = this._male ? "del":"de la";
         this._text = `¿Cuál ${keyword} el segundo nombre ${genderKW} (ex)presidente ${this._firstName} ${this._surname}?`;
         this._details = `El nombre completo era ${this._firstName} ${this._secondName} ${this._surname}`;
-        const iterable = Object.values(database.people).filter(p => p.name.split(" ").length > 1).map(p => p.name.split(" ")[1]);
+        const iterable = Object.values(database.people)
+            .filter(p => p.name.split(" ").length > 1)
+            .map(p => p.name.split(" ")[1]);
         this._options = generateOptions(iterable, this._rightOptionIndex, this._secondName);
     }
 };
@@ -165,7 +170,14 @@ class QT2Subtype2 extends QType2 {
         const keyword = this._alive ? "es" : "era";
         this._text = `¿El segundo nombre de qué (ex)presidente ${keyword} ${this._secondName}?`;
         this._details = `El nombre completo era ${this._firstName} ${this._secondName} ${this._surname}`;
-        const iterable = Object.values(database.people).filter(p => p.name.split(" ").length > 1).map(p => p.name.split(" ")[0]+" "+p.surname);
+        const iterable = Object.values(database.people)
+            .filter(p => {
+                const names = p.name.split(" ");
+                if(names.length > 1)
+                    return names[1] !== this._secondName;
+                return false;
+            })
+            .map(p => p.name.split(" ")[0]+" "+p.surname);
         this._options = generateOptions(iterable, this._rightOptionIndex, this._firstName+" "+this._surname);
     }
 };
@@ -173,10 +185,11 @@ class QT2Subtype2 extends QType2 {
 class QType3 extends QuestionBase {
     constructor() {
         super();
+        this._theme = "Fechas de fallecimiento";
         this._score = 30;
         const person = getRandomElement(Object.values(database.people).filter(p => !isAlive(p)));
         this._name = getFullName(person);
-        this._age = moment(person.death_date).diff(person.birth_date,'years',false);
+        this._age = getAgeOfDeath(person);
         this._death = getDeathDate(person);
         this._male = isMale(person);
     }
@@ -188,8 +201,33 @@ class QT3Subtype1 extends QType3 {
         const genderKW = this._male ? "el":"la";
         this._text = `¿A qué edad falleció ${genderKW} expresidente ${this._name}?`;
         this._details = `El expresidente ${this._name} falleció a los ${this._age} años de edad`;
-        const iterable = Array.from({length: ITERABLE_LEN}, () => `A los ${this._age + Math.floor((2*Math.random()-1)*20)} años`);
+        const iterable = Array.from({length: ITERABLE_LEN}, () => `A los ${this._age + Math.floor(40*Math.random()-20)} años`);
         this._options = generateOptions(iterable, this._rightOptionIndex, `A los ${this._age} años`);
+    }
+};
+
+class QT3Subtype2 extends QType3 {
+    constructor() {
+        super();
+        const genderKW = this._male ? "el":"la";
+        this._text = `¿Cuál de los siguientes expresidentes falleció a los ${this._age} años?`;
+        this._details = `Quien falleció a los ${this._age} años de edad fue ${genderKW} expresidente ${this._name}`;
+        const iterable = Object.values(database.people)
+            .filter(p => getAgeOfDeath(p)!==this._age && !isAlive(p))
+            .map(p => getFullName(p));
+        this._options = generateOptions(iterable, this._rightOptionIndex, this._name);
+    }
+};
+
+class QT3Subtype3 extends QType3 {
+    constructor() {
+        super();
+        const genderKW = this._male ? "el":"la";
+        const year = moment(this._death).year();
+        this._text = `¿En qué año falleció ${genderKW} expresidente ${this._name}?`;
+        this._details = `${capitalize(genderKW)} expresidente ${this._name} falleció en el año ${year}`;
+        const iterable = Array.from({length: ITERABLE_LEN}, () => year + Math.floor(Math.random()*50-25));
+        this._options = generateOptions(iterable, this._rightOptionIndex, year);
     }
 };
 
@@ -201,7 +239,9 @@ const classes = [
     QT1Subtype5,
     QT2Subtype1,
     QT2Subtype2,
-    QT3Subtype1
+    QT3Subtype1,
+    QT3Subtype2,
+    QT3Subtype3
 ];
 
 const getRandomQuestion = () => {
@@ -213,10 +253,6 @@ const getRandomQuestion = () => {
 export default getRandomQuestion;
 
 /*
-get people with death_date !== null
-- [ ] Qué expresidente falleció a los  ....
-- [ ] Cuál de los siguientes expresidentes falleció a los ....
-
 get a term from terms --> get people[term.cid] --> period | party | duration
 - [ ] Quién goberno entre ... y entre ...  
 - [ ] Durante cuál de los siguientes periodos gobernó ...
@@ -231,5 +267,4 @@ stats based questions:
 get person from people --> get birth_date | get location_city | picture
 - [ ] A qué presidente corresponde el siguiente retrato:  
 - [ ] Cuál de los siguientes retratos corresponde a ....  
-
 */

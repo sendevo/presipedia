@@ -26,7 +26,7 @@ const QuestionBlock = ({number, players, playerIndex, progress, question, score}
                 }
                 <Typography sx={{fontWeight:"bold",marginBottom:"10px"}}>{question}</Typography>
             </Box>
-            <LinearProgress sx={progressStyle} variant="determinate" value={progress} />
+            <LinearProgress sx={progressStyle} color={progress < 20 ? "red" : "primary"} variant="determinate" value={progress} />
         </Box>
     );
 };
