@@ -15,6 +15,7 @@ const App = () => (
                 <Route path='/vis/timeline' element={<Views.Timeline/>}/>
                 <Route path='/vis/rankings' element={<Views.Rankings/>}/>
                 <Route path='/vis/stats' element={<Views.Stats/>}/>
+                <Route path='/vis/raw' element={<Views.Raw/>}/>   
                 
                 <Route path='/games' element={<Views.Games/>}/>
                 <Route path='/games/predictor' element={<Views.Predictor/>}/>
@@ -22,9 +23,8 @@ const App = () => (
                 
                 <Route index element={<Views.Home/>} />
                 
-                <Route path='/data' element={<Views.Data/>}/>
-                <Route path='/data/blog' element={<Views.Blog/>}/>
-                <Route path='/data/raw' element={<Views.Raw/>}/>                
+                <Route path='/blog' element={<Views.Blog/>}/>
+                <Route path='/blog/article' element={<Views.Article/>}/>
                 
                 <Route path='/about' element={<Views.About/>}/>
                 <Route path='/about/terms' element={<Views.Terms/>}/>

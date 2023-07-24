@@ -40,3 +40,5 @@ export const getZodiac = unixTime => {
 };
 
 export const capitalize = str => str.charAt(0).toUpperCase()+str.slice(1);
+
+export const readingTime = str => Math.round(str.split(" ").length/130);

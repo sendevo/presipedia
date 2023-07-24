@@ -1,7 +1,7 @@
 
 import About from './About';
+import Article from './Article';
 import Blog from './Blog';
-import Data from './Data';
 import Games from './Games';
 import Home from './Home';
 import Predictor from './Predictor';
@@ -16,8 +16,8 @@ import Visualizations from './Visualizations';
 
 export {
     About,
+    Article,
     Blog,
-    Data,
     Games,
     Home,
     Predictor,

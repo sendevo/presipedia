@@ -1,9 +1,9 @@
-import { Grid } from "@mui/material";
 import MainView from "../../components/MainView";
 import GridMenu from "../../components/GridMenu";
 import timelineIcon from "../../assets/icons/timeline.png";
 import statsIcon from "../../assets/icons/stats.png";
 import rankingsIcon from "../../assets/icons/ranking.png";
+import dbIcon from "../../assets/icons/database.png";
 import image from "../../assets/backgrounds/background2.jpg";
 
 const View = () => {
@@ -11,7 +11,7 @@ const View = () => {
     const content = [
         {
             path: "/vis/timeline",
-            title: "Cronologías",
+            title: "Cronología",
             text: "Líneas de tiempo",
             icon: timelineIcon
         },
@@ -26,14 +26,18 @@ const View = () => {
             title: "Clasificaciones",
             text: "¿Quiénes están primero?",
             icon: rankingsIcon
+        },
+        {
+            path: "/vis/raw",
+            title: "Bases de datos",
+            text: "Todo sale de aquí",
+            icon: dbIcon
         }
     ];
 
     return (
         <MainView title="Visualizaciones" background={image}>
-            <Grid container spacing={1} marginTop="25px">
-                <GridMenu items={content} subtitle={""}/>
-            </Grid>
+            <GridMenu items={content} subtitle={""}/>
         </MainView>
     );
 };

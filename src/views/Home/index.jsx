@@ -18,9 +18,9 @@ const View = () => {
             <br/>
             <Link to='vis/rankings'>Mandatarios</Link>
             <br/>
-            <Link to='data/blog'>Curiosidades</Link>
+            <Link to='blog'>Curiosidades</Link>
             <br/>
-            <Link to='data/raw'>Base de datos</Link>
+            <Link to='vis/raw'>Base de datos</Link>
             <br/>
             <Link to='about'>Acerca de Presipedia</Link>
         </MainView>

@@ -16,16 +16,12 @@ const iconStyle = {
     filter: "contrast(50%) drop-shadow(3px 5px 3px #888)"
 };
 
-const GridMenu = ({title, subtitle, items}) => {
+const GridMenu = ({items}) => {
     const navigate = useNavigate();
     return (
-        <>
-            <Grid item xs={12}>
-                {title && <Typography fontSize={18} fontWeight="bold">{title}</Typography>}
-                {subtitle && <Typography fontSize={14}>{subtitle}</Typography>}
-            </Grid>
+        <Grid container spacing={1}>
             {items.map((item, index) => (
-                <Grid key={index} item xs={6}>
+                <Grid item key={index} xs={6}>
                     <GenericCard sx={cardStyle} onClick={()=>navigate(item.path)}>
                         <Box 
                             display="flex" 
@@ -44,7 +40,7 @@ const GridMenu = ({title, subtitle, items}) => {
                     </GenericCard>
                 </Grid>
             ))}
-        </>
+        </Grid>
     );
 };
 

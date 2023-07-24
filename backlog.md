@@ -37,22 +37,22 @@
   - [ ] Listado de datos crudos:  
     - [ ] Tabla.  
     - [ ] Exportar a csv? ¿Link al repo? Generar en tpo de ejec.?  
-  - [ ] Preguntas y respuestas:  
-    - [ ] Generador de preguntas y respuestas.  
+  - [x] Preguntas y respuestas:  
+    - [x] Generador de preguntas y respuestas.  
     - [x] Reducer para controlar juego.  
     - [x] Diálogo para configurar jugadores.  
     - [x] Presentación de pregunta y opciones de respuesta.  
     - [x] Bloque de puntajes de jugadores.  
     - [x] Diálogo para mostrar resultado de respuesta.  
   - [ ] ¿Quién será el siguiente?  
-    - [ ] Formulario para ingresar género, fecha y lugar de nacimiento y tendencia politica.  
-    - [ ] Calcular probabilidad basado en datos actuales.  
+    - [ ] Formulario (secuencial?) para ingresar género, fecha y lugar de nacimiento y tendencia politica.  
+    - [ ] Cálculo probabilidad basado en datos actuales.  
     - [ ] Presentación del resultado.  
   - [ ] Menúes:  
     - [ ] Menú de inicio.  
-    - [ ] Menú de visualizaciones.  
-    - [ ] Menú de Juegos.  
-    - [ ] Menú de datos.  
+    - [x] Menú de visualizaciones.  
+    - [x] Menú de Juegos.  
+    - [x] Menú de datos.  
   - [ ] Branding y promoción:  
     - [ ] Logo  
     - [x] Nombre  

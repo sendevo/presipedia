@@ -1,4 +1,3 @@
-import { Grid } from "@mui/material";
 import MainView from "../../components/MainView";
 import GridMenu from "../../components/GridMenu";
 import predictorIcon from "../../assets/icons/predictor.png";
@@ -10,8 +9,8 @@ const View = () => {
     const content = [
         {
             path: "/games/predictor",
-            title: "El candidato",
-            text: "¿Quén será el siguiente?",
+            title: "Mi candidato",
+            text: "¿Podrá ser el siguiente?",
             icon: predictorIcon
         },
         {
@@ -24,9 +23,7 @@ const View = () => {
 
     return (
         <MainView title="Entretenimiento" background={image}>
-            <Grid container spacing={1} marginTop="25px">                
-                <GridMenu items={content} subtitle=""/>
-            </Grid>
+            <GridMenu items={content} subtitle=""/>
         </MainView>
     );
 };

@@ -8,7 +8,7 @@ import {
 import { 
     FaHome, 
     FaGamepad, 
-    FaDatabase, 
+    FaBookReader, 
     FaInfoCircle,
     FaChartBar 
 } from 'react-icons/fa';
@@ -27,25 +27,25 @@ const containerStyle = {
 
 const navigationStyle = {
     "& .Mui-selected, .Mui-selected > svg": {
-        color: "#2E9AFE", 
-        fontSize: "1.6rem"
+        fontSize: "1.5rem"
     },
     background: "transparent",
     width: "100%",
-    maxWidth: "500px"
+    maxWidth: "500px",
+    height: "45px"
 };
 
 const actionStyle = {
-    minWidth: "75px",
+    minWidth: "75px"
 };
 
-const buttonStyle = {
+const homeButtonStyle = {
     background: "rgb(240,240,240)",
     boxShadow: "0px -5px 4px 0px rgba(0, 0, 0, 0.4)",
     borderRadius: "50% 50% 30% 30%",
-    top:"-10px",
-    height: "70px",
-    maxWidth: "70px"
+    top:"-12px",
+    height: "65px",
+    maxWidth: "45px"
 };
 
 const Navigation = () => {
@@ -60,35 +60,35 @@ const Navigation = () => {
                 value={path}>
                 <BottomNavigationAction 
                     style={actionStyle}
-                    component={Link} 
+                    LinkComponent={Link}
                     to="/vis" 
                     value="vis" 
                     label={<Typography fontSize={12}>Infografias</Typography>} 
                     icon={<FaChartBar/>}/>
                 <BottomNavigationAction 
                     style={actionStyle}
-                    component={Link} 
+                    LinkComponent={Link}
                     to="/games" 
                     value="games" 
                     label={<Typography fontSize={12}>Entretenim.</Typography>} 
                     icon={<FaGamepad/>}/>
                 <BottomNavigationAction 
-                    style={buttonStyle}
-                    component={Link} 
+                    style={homeButtonStyle}
+                    LinkComponent={Link}
                     to="/" 
                     value="home" 
                     label={<Typography fontSize={12}>Inicio</Typography>} 
                     icon={<FaHome size={30}/>} />
                 <BottomNavigationAction 
                     style={actionStyle}
-                    component={Link} 
-                    to="/data" 
-                    value="data" 
-                    label={<Typography fontSize={12}>Datos</Typography>} 
-                    icon={<FaDatabase/>}/>
+                    LinkComponent={Link}
+                    to="/blog" 
+                    value="blog" 
+                    label={<Typography fontSize={12}>Blog</Typography>} 
+                    icon={<FaBookReader/>}/>
                 <BottomNavigationAction 
                     style={actionStyle}
-                    component={Link} 
+                    LinkComponent={Link}
                     to="/about" 
                     value="about" 
                     label={<Typography fontSize={12}>Info</Typography>} 

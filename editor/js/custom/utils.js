@@ -108,7 +108,7 @@ const updatePeopleTable = people => {
             <td>${index}</td>
             <td>${person.name + " " + person.surname}</td>
             <td style="text-align: center;">
-                <img class="profile-pic" src="img/${person.picture}" alt="${person.surname}"/>
+                <img class="profile-pic" src="pictures/${person.picture}" alt="${person.surname}"/>
             </td>
             <td>${getLocationLink(person.birth_location, location_city, true) + ", " + birth_date}</td>
             <td>${(person.death_date ? death_date+", a los "+death_age : "Tiene "+current_age)+" años"}</td>
