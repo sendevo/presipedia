@@ -15,7 +15,8 @@ const App = () => (
                 <Route path='/vis/timeline' element={<Views.Timeline/>}/>
                 <Route path='/vis/rankings' element={<Views.Rankings/>}/>
                 <Route path='/vis/stats' element={<Views.Stats/>}/>
-                <Route path='/vis/raw' element={<Views.Raw/>}/>   
+                <Route path='/vis/raw' element={<Views.Raw/>}/>
+                <Route path='/vis/person' element={<Views.Person/>}/>   
                 
                 <Route path='/games' element={<Views.Games/>}/>
                 <Route path='/games/predictor' element={<Views.Predictor/>}/>

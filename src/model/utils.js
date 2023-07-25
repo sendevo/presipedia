@@ -29,6 +29,8 @@ export const randomColorsGenerator = (count, transparency=0.7) => {
     return colors;
 };
 
+export const location2GoggleMap = (lat,lng) => `http://www.google.com/maps/place/${lat},${lng}`;
+
 export const getRandomElement = arr => arr[Math.floor(Math.random()*arr.length)];
 
 export const getZodiac = unixTime => {
