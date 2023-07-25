@@ -2,11 +2,11 @@ import moment from "moment";
 import { 
     MAX_QUESTION_OPTIONS, 
     DAY_MS, 
-    YEAR_MS,
-    MONTHS 
+    YEAR_MS
 } from "./constants";
-import { getRandomElement, capitalize } from "./utils";
+import { getRandomElement, capitalize, formatDate } from "./utils";
 import database from "../assets/database.json";
+//import processed from "../assets/processed.json";
 
 const ITERABLE_LEN = 50;
 const lastCID = database.terms.sort((a,b) => b.term_end < a.term_end).at(-1).cid;
@@ -18,6 +18,10 @@ const getDeathDate = person => person.death_date;
 const getAgeOfDeath = person => moment(person.death_date).diff(person.birth_date,'years',false);
 const isAlive = person => !Boolean(person.death_date);
 const isMale = person => person.gender === "M";
+const getTermDuration = term => {
+    const unitOfTime = term.term_end-term.term_begin < YEAR_MS ? {name:"months", text:"meses"} : {name:"years", text: "años"};
+    return moment(term.term_end).diff(term.term_end, unitOfTime.name, false) + " " + unitOfTime.text;
+};
 
 const generateOptions = (iterable, rightIndex, rightValue) => {
     const optionsArray = new Array(MAX_QUESTION_OPTIONS);
@@ -33,11 +37,6 @@ const generateOptions = (iterable, rightIndex, rightValue) => {
         }
     };
     return optionsArray;
-};
-
-const formatDate = d => {
-    const m = moment(d);
-    return `${m.date()} de ${MONTHS[m.month()]} de ${m.year()}`;
 };
 
 
@@ -231,6 +230,80 @@ class QT3Subtype3 extends QType3 {
     }
 };
 
+class QType4 extends QuestionBase {
+    constructor() {
+        super();
+        this._theme = "Mandatos";
+        this._score = 10;
+        const term = getRandomElement(database.terms);
+        this._term_begin = term.term_begin;
+        this._term_end = term.term_end;
+        this._term_duration_f = getTermDuration(term);
+        this._party = term.party;
+        const person = database.people[term.cid];
+        this._fullname = getFullName(person);
+        this._exkw = term.cid === lastCID ? "" : "ex";
+        this._genderKW = isMale(person) ? "el" : "la";
+        this._totalDuration = database.terms
+            .filter(t => t.cid === term.cid)
+            .reduce((acc, current) => acc + current.term_end - current.term_begin, 0);
+    }
+};
+
+class QT4Subtype1 extends QType4 {
+    constructor() {
+        super();
+        this._text = `¿Quién gobernó entre el ${formatDate(this._term_begin)} y el ${formatDate(this._term_end)}?`;
+        this._details = `${capitalize(this._genderKW)} ${this._exkw}presidente ${this._fullname} gobernó en el período ${moment(this._term_begin).format("DD/MM/YYYY")} - ${moment(this._term_end).format("DD/MM/YYYY")}`;
+        const iterable = Object.values(database.people).map(p => getFullName(p));
+        this._options = generateOptions(iterable, this._rightOptionIndex, this._fullname);
+    }
+};
+
+class QT4Subtype2 extends QType4 {
+    constructor() {
+        super();
+        this._text = `¿Durante qué período gobernó ${this._fullname}?`;
+        this._details = `${capitalize(this._genderKW)} ${this._exkw}presidente ${this._fullname} gobernó en el período ${moment(this._term_begin).format("DD/MM/YYYY")} - ${moment(this._term_end).format("DD/MM/YYYY")}`;
+        const iterable = Array.from({length: ITERABLE_LEN}, () => {
+            const tb = this._term_begin + (40*Math.random()-20)*YEAR_MS;
+            const te = tb + this._term_end - this._term_begin;
+            return `${moment(tb).format("DD/MM/YYYY")} - ${moment(te).format("DD/MM/YYYY")}`;
+        });
+        this._options = generateOptions(iterable, this._rightOptionIndex, `${moment(this._term_begin).format("DD/MM/YYYY")} - ${moment(this._term_end).format("DD/MM/YYYY")}`);
+    }
+};
+
+class QT4Subtype3 extends QType4 {
+    constructor() {
+        super();
+        this._text = `¿Cuál era la tendencia política del mandato de ${this._fullname}?`;
+        this._details = `La tendencia política del mandato de ${this._fullname} era ${this._party}`;
+        const iterable = database.terms.map(t => t.party);
+        this._options = generateOptions(iterable, this._rightOptionIndex, this._party);
+    }
+};
+
+class QT4Subtype4 extends QType4 {
+    constructor() {
+        super();
+        this._text = `¿A qué ${this._exkw}presidente se lo asocia con la tendencia ${this._party}?`;
+        this._details = `Al ${this._exkw}presidente ${this._fullname} se lo asocia con la tendencia ${this._party}`;
+        const iterable = database.terms.filter(t => t.party !== this._party).map(t => getFullName(database.people[t.cid]));
+        this._options = generateOptions(iterable, this._rightOptionIndex, this._fullname);
+    }
+};
+
+class QT4Subtype5 extends QType4 {
+    constructor() {
+        super();
+        this._text = `¿Cuántos años en total gobernó ${this._genderKW} ${this._exkw}presidente ${this._fullname}?`;
+        this._details = `${capitalize(this._genderKW)} ${this._exkw}presidente ${this._fullname} gobernó un total de ${Math.floor(this._totalDuration/YEAR_MS)} años`;
+        const iterable = Array.from({length: ITERABLE_LEN}, () => Math.floor(Math.random()*10 + 2)+ " años");
+        this._options = generateOptions(iterable, this._rightOptionIndex, Math.floor(this._totalDuration/YEAR_MS)+" años");
+    }
+};
+
 const classes = [
     QT1Subtype1,
     QT1Subtype2,
@@ -241,7 +314,12 @@ const classes = [
     QT2Subtype2,
     QT3Subtype1,
     QT3Subtype2,
-    QT3Subtype3
+    QT3Subtype3,
+    QT4Subtype1,
+    QT4Subtype2,
+    QT4Subtype3,
+    QT4Subtype4,
+    QT4Subtype5
 ];
 
 const getRandomQuestion = () => {
@@ -253,18 +331,12 @@ const getRandomQuestion = () => {
 export default getRandomQuestion;
 
 /*
-get a term from terms --> get people[term.cid] --> period | party | duration
-- [ ] Quién goberno entre ... y entre ...  
-- [ ] Durante cuál de los siguientes periodos gobernó ...
-- [ ] Cuál era la tendencia política de ...
-- [ ] Cuántos años en total gobernó ...  
-
 stats based questions:
 - [ ] Cuántos expresidentes con vida había entre ... y ...
 - [ ] Cuántos expresidentes nacieron en el mes de ...    
 - [ ] Cuántos expresidentes nacieron en la provincia de ...
 
-get person from people --> get birth_date | get location_city | picture
+get person from people --> picture
 - [ ] A qué presidente corresponde el siguiente retrato:  
 - [ ] Cuál de los siguientes retratos corresponde a ....  
 */

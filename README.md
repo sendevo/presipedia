@@ -56,8 +56,7 @@ Personas (Entrada ```people```):
   "name": "", // string
   "surname": "", // string
   "gender": "", // string {M, F}
-  "picture": "", // string
-  "bio": "", // string
+  "picture": "", // picture file name string
   "birth_date": 0, // unix timestamp
   "death_date": 0, // unix timestamp | null
   "cause_of_death": "", // string | null
@@ -85,6 +84,15 @@ Eventos (Entrada ```events```):
   "event_end": 0, // unix timestamp | null
   "location": {}, // geojson | null
   "sources": [] // Array of strings
+}
+```
+Artículos (En objeto separado)
+```jsonc
+{
+  "title": "", // string
+  "cover": "", // cover file name string
+  "content": "", // HTML formatted string
+  "sources": [], // array of urls strings
 }
 ```
 

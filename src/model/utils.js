@@ -1,5 +1,5 @@
 import moment from "moment";
-import { ZODIAC_SIGNS } from "../model/constants";
+import { ZODIAC_SIGNS, MONTHS } from "../model/constants";
 
 const hsv2rgb = (h,s,v) => {                              
     let f = (n,k = (n+h/60)%6) => v - v*s*Math.max( Math.min(k,4-k,1), 0);     
@@ -42,5 +42,10 @@ export const getZodiac = unixTime => {
 };
 
 export const capitalize = str => str.charAt(0).toUpperCase()+str.slice(1);
+
+export const formatDate = d => {
+    const m = moment(d);
+    return `${m.date()} de ${MONTHS[m.month()]} de ${m.year()}`;
+};
 
 export const readingTime = str => Math.round(str.split(" ").length/130);

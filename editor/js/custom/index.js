@@ -13,7 +13,7 @@ let database = {
 const data = localStorage.getItem("database");
 if(data){ 
     database = JSON.parse(data);
-    updatePeopleTable(database.people);
+    updatePeopleTable(database.people, database.updated);
     updateTermsTable(database.terms);
 }
 
@@ -35,7 +35,7 @@ fileInput.addEventListener('change', () => {
             database = parsedData;
             uploadButton.disabled = true;
             uploadButton.style.backgroundColor = "#eeeeee";
-            updatePeopleTable(database.people);
+            updatePeopleTable(database.people, database.updated);
             updateTermsTable(database.terms);
             localStorage.setItem("database", JSON.stringify(database));
         } catch (error) {
@@ -79,7 +79,7 @@ personForm.addEventListener('submit', event => {
         }
         personForm.reset();
         personEditingCID = "";
-        updatePeopleTable(database.people);
+        updatePeopleTable(database.people, database.updated);
         localStorage.setItem("database", JSON.stringify(database));
         console.log("Done", cid);
     })
@@ -90,7 +90,7 @@ const deletePerson = cid => {
     console.log("Deleting",cid);
     console.log(database.people[cid]);
     delete database.people[cid];
-    updatePeopleTable(database.people);
+    updatePeopleTable(database.people, database.updated);
     localStorage.setItem("database", JSON.stringify(database));
 };
 
@@ -207,6 +207,7 @@ exportButton.addEventListener('click', () => {
             console.log(result);
             console.log("Generating database.json file...");
             database.updated = Date.now();
+            database.terms.sort((a,b) => a.term_begin - b.term_begin);
             console.log(database);
             const json = JSON.stringify(database);
             const blob = new Blob([json], { type: 'application/json' });

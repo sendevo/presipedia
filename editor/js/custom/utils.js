@@ -90,7 +90,8 @@ const copyToClipboard = text => navigator.clipboard.writeText(text);
 
 ////////// PEOPLE //////////
 
-const updatePeopleTable = people => {
+const updatePeopleTable = (people,updated) => {
+    document.getElementById('db-last-update').innerHTML = moment(updated).format("LL")+"("+moment(updated).fromNow()+")";
     const tbody = document.getElementById('people-tbody');
     tbody.innerHTML = "";
     let index = 0;

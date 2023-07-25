@@ -1,5 +1,10 @@
 import { useSearchParams } from 'react-router-dom'
-import { Card, CardMedia, CardContent, Typography } from '@mui/material';
+import { 
+    Card, 
+    CardMedia, 
+    CardContent, 
+    Typography 
+} from '@mui/material';
 import moment from 'moment';
 import MainView from "../../components/MainView";
 import { APP_NAME } from '../../model/constants';
@@ -7,7 +12,7 @@ import { getZodiac, location2GoggleMap } from '../../model/utils';
 import database from "../../assets/database.json";
 import image from "../../assets/backgrounds/background2.jpg";
 
-
+ 
 const View = () => {
     const [searchParams] = useSearchParams();
     const cid = searchParams.get("cid");
