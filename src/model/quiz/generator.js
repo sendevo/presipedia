@@ -1,27 +1,23 @@
 import moment from "moment";
 import { 
-    MAX_QUESTION_OPTIONS, 
     DAY_MS, 
     YEAR_MS
-} from "./constants";
-import { getRandomElement, capitalize, formatDate } from "./utils";
-import database from "../assets/database.json";
-//import processed from "../assets/processed.json";
+} from "../constants";
+import { MAX_QUESTION_OPTIONS } from "./constants";
+import { getRandomElement, capitalize, formatDate } from "../utils";
+import {
+    getFullName,
+    getCity,
+    getBirthDate,
+    getDeathDate,
+    getAgeOfDeath,
+    isAlive,
+    isMale
+} from "../../model/data";
+import database from "../../assets/database.json";
 
 const ITERABLE_LEN = 50;
 const lastCID = database.terms.sort((a,b) => b.term_end < a.term_end).at(-1).cid;
-
-const getFullName = person => `${person.name} ${person.surname}`;
-const getCity = person => person.birth_location.features[0].properties.city;
-const getBirthDate = person => person.birth_date;
-const getDeathDate = person => person.death_date;
-const getAgeOfDeath = person => moment(person.death_date).diff(person.birth_date,'years',false);
-const isAlive = person => !Boolean(person.death_date);
-const isMale = person => person.gender === "M";
-const getTermDuration = term => {
-    const unitOfTime = term.term_end-term.term_begin < YEAR_MS ? {name:"months", text:"meses"} : {name:"years", text: "años"};
-    return moment(term.term_end).diff(term.term_end, unitOfTime.name, false) + " " + unitOfTime.text;
-};
 
 const generateOptions = (iterable, rightIndex, rightValue) => {
     const optionsArray = new Array(MAX_QUESTION_OPTIONS);
@@ -238,7 +234,6 @@ class QType4 extends QuestionBase {
         const term = getRandomElement(database.terms);
         this._term_begin = term.term_begin;
         this._term_end = term.term_end;
-        this._term_duration_f = getTermDuration(term);
         this._party = term.party;
         const person = database.people[term.cid];
         this._fullname = getFullName(person);

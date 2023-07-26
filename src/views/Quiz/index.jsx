@@ -5,14 +5,16 @@ import QuestionBlock from "../../components/QuestionBlock";
 import OptionsBlock from "../../components/OptionsBlock";
 import ScoresBlock from "../../components/ScoresBox";
 import {
-    timerPeriod,
     initialState,
     reducer,
-    startQuiz,
-    onTimerTick,
-    onAnswer,
+    init,
+    destroy,
     getQuestionProgress
-} from "../../model/quiz";
+} from "../../model/quiz/reducer";
+import {
+    onStartQuiz,
+    onAnswer
+} from "../../model/quiz/actions";
 import FeedbackDialog from "../../components/FeedbackDialog";
 import background from "../../assets/backgrounds/background3.jpg";
 
@@ -22,19 +24,19 @@ const View = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
 
     useEffect(() => {
-        const intervalID = setInterval(() => onTimerTick(dispatch), timerPeriod);
-        return () => clearInterval(intervalID);
+        const gameID = init(dispatch);
+        return () => destroy(gameID);
     },[]);
 
-    const handleStartQuiz = playerNames => {
-        startQuiz(dispatch, playerNames);
+    const handleinit = playerNames => {
+        onStartQuiz(dispatch, playerNames);
     };
 
     return(
         <MainView title="Preguntas y respuestas" background={background}>
             <PlayersDialog 
                 open={!state.running} 
-                onPlayersReady={handleStartQuiz} />
+                onPlayersReady={handleinit} />
 
             {state.running &&
                 <QuestionBlock 

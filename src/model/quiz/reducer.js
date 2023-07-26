@@ -1,24 +1,22 @@
+import getRandomQuestion from "./generator";
 import {
-    FEEDBACK_TIMEOUT, 
-    QUESTION_TIMEOUT, 
-    TIMER_UPDATE_PERIOD,
-    MAX_QUIZ_PLAYERS
+    MAX_QUIZ_PLAYERS,
+    QUESTION_TIMEOUT,
+    FEEDBACK_TIMEOUT,
+    TIMER_PERIOD
 } from "./constants";
-import getRandomQuestion from "./question_generator";
 
 const newQuestionToState = () => {
     return {
         ...getRandomQuestion(),
-        questionTicksLeft: QUESTION_TIMEOUT/TIMER_UPDATE_PERIOD,
-        feedbackTicksLeft: FEEDBACK_TIMEOUT/TIMER_UPDATE_PERIOD,
+        questionTicksLeft: QUESTION_TIMEOUT/TIMER_PERIOD,
+        feedbackTicksLeft: FEEDBACK_TIMEOUT/TIMER_PERIOD,
         feedbackType: "HIDDEN", // HIDDEN, RIGHT, WRONG, TIMEOUT
         feedbackTitle: ""
     };
 };
 
-export const timerPeriod = TIMER_UPDATE_PERIOD;
-
-export const getQuestionProgress = ticks => ticks*100/QUESTION_TIMEOUT*TIMER_UPDATE_PERIOD;
+export const getQuestionProgress = ticks => ticks*100/QUESTION_TIMEOUT*TIMER_PERIOD;
 
 export const initialState = {
     players: [], // [{name: "Jugador 1", score: 0}]
@@ -71,7 +69,7 @@ export const reducer = (prevState, action) => {
                             ...prevState,
                             feedbackType: "TIMEOUT",
                             feedbackTitle: "¡Demasiado lento!",
-                            feedbackTicksLeft: FEEDBACK_TIMEOUT/TIMER_UPDATE_PERIOD
+                            feedbackTicksLeft: FEEDBACK_TIMEOUT/TIMER_PERIOD
                         };
                     else{ // If not timeout, just update timer count
                         return {
@@ -90,8 +88,8 @@ export const reducer = (prevState, action) => {
             if(correct) prevScores[prevState.currentPlayer].score += prevState.answerValue;
             return {
                 ...prevState,
-                questionTicksLeft: QUESTION_TIMEOUT/TIMER_UPDATE_PERIOD,
-                feedbackTicksLeft: FEEDBACK_TIMEOUT/TIMER_UPDATE_PERIOD,
+                questionTicksLeft: QUESTION_TIMEOUT/TIMER_PERIOD,
+                feedbackTicksLeft: FEEDBACK_TIMEOUT/TIMER_PERIOD,
                 feedbackType: correct ? "RIGHT" : "WRONG",
                 feedbackTitle: correct ? "¡Respuesta correcta!" : "¡Respuesta incorrecta!",
                 players: [...prevScores]
@@ -103,24 +101,6 @@ export const reducer = (prevState, action) => {
     }
 };
 
-////// ACTIONS //////
+export const init = dispatch => setInterval(() => dispatch({type: "ON_TIMER_TICK"}), TIMER_PERIOD);
 
-export const startQuiz = (dispatch, playerNames) => {
-    dispatch({
-        type: "ON_QUIZ_START",
-        payload: {playerNames}
-    });
-};
-
-export const onTimerTick = (dispatch) => {
-    dispatch({
-        type: "ON_TIMER_TICK"
-    });
-};
-
-export const onAnswer = (dispatch, option) => {
-    dispatch({
-        type: "ON_ANSWER",
-        payload: {option}
-    });
-};
+export const destroy = gameID => clearInterval(gameID);

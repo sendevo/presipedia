@@ -4,7 +4,7 @@ import Article from './Article';
 import Blog from './Blog';
 import Games from './Games';
 import Home from './Home';
-import Person from './Person';
+import Profile from './Profile';
 import Predictor from './Predictor';
 import Quiz from './Quiz';
 import Rankings from './Rankings';
@@ -21,7 +21,7 @@ export {
     Blog,
     Games,
     Home,
-    Person,
+    Profile,
     Predictor,
     Quiz,
     Rankings,

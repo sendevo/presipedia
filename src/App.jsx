@@ -1,5 +1,10 @@
 import * as Views from './views';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { 
+    BrowserRouter, 
+    Routes, 
+    Route, 
+    Navigate 
+} from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles'; 
 import { CssBaseline, GlobalStyles } from '@mui/material';
 import Navigation from './components/Navigation';
@@ -16,7 +21,7 @@ const App = () => (
                 <Route path='/vis/rankings' element={<Views.Rankings/>}/>
                 <Route path='/vis/stats' element={<Views.Stats/>}/>
                 <Route path='/vis/raw' element={<Views.Raw/>}/>
-                <Route path='/vis/person' element={<Views.Person/>}/>   
+                <Route path='/vis/profile' element={<Views.Profile/>}/>   
                 
                 <Route path='/games' element={<Views.Games/>}/>
                 <Route path='/games/predictor' element={<Views.Predictor/>}/>
@@ -30,6 +35,8 @@ const App = () => (
                 <Route path='/about' element={<Views.About/>}/>
                 <Route path='/about/terms' element={<Views.Terms/>}/>
                 <Route path='/about/sources' element={<Views.Sources/>}/>
+
+                <Route path="*" element={<Navigate replace to="/" />} />
             </Routes>
             <Navigation/>
         </BrowserRouter>

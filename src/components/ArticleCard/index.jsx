@@ -34,7 +34,7 @@ const ArticleCard = ({title, cover, reading, link}) => {
                     {title}
                 </Typography>
                 <Typography  variant="body2" color="text.secondary">
-                    Tiempo de lectura: {reading} minutos
+                    Tiempo de lectura: {reading} minuto{reading > 1 ? "s":""}
                 </Typography>
             </CardContent>
             <CardActions sx={cardActionStyle}>
