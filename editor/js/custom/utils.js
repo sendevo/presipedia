@@ -2,16 +2,19 @@
 
 const DATE_FORMAT = "LL";
 const ZODIAC_SIGNS = ["Capricornio", "Acuario", "Piscis", "Aries", "Tauro", "Géminis", "Cáncer", "Leo", "Virgo", "Libra", "Escorpio", "Sagitario"];
+const MONTHS = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 const DAY_MS = 86400000;
 
 ////////// MISC //////////
+
+const arraySum = (arr, attr="") => arr.reduce((a, b) => a + (attr ? b[attr] : b), 0);
 
 const findAllIndexes = (objArr, attr, key) => objArr.reduce((indexes, element, current) => {
     if(element[attr] === key) indexes.push(current);
     return indexes;
 }, []);
 
-
+const capitalize = str => str.charAt(0).toUpperCase()+str.slice(1);
 
 ////////// TIME //////////
 

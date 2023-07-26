@@ -60,34 +60,40 @@ const analyzeDatabase = database => {
         }, [])
         .sort((a, b) => a.age - b.age);
 
-    const birthsPerMonth = Object.values(database.people)
-        .reduce((acc, current) => {
-            acc[moment(current.birth_date).month()]++;
-            return acc;
-        }, Array(12).fill(0));
 
-    const birthsPerZodiacSign = Object.values(database.people)
+    ////// Statistics //////
+
+    const birthsPerMonth = {
+        names: MONTHS,
+        count: Object.values(database.people)
+            .reduce((acc, current) => {
+                acc[moment(current.birth_date).month()]++;
+                return acc;
+            }, Array(12).fill(0))
+    };
+
+    const birthsPerZodiacSign = {
+        names: ZODIAC_SIGNS,
+        count: Object.values(database.people)
         .reduce((acc, current) => {
             acc[getZodiac(current.birth_date).index]++;
             return acc;
-        }, Array(12).fill(0));
-
-
-    ////// Statistics //////
+        }, Array(12).fill(0))
+    };
 
     const birthLocations = Object.values(database.people)
         .reduce((acc, current) => {
             const province = current.birth_location.features[0].properties.province;
-            const pIndex = acc.provinces.indexOf(province);
+            const pIndex = acc.names.indexOf(province);
             if (pIndex === -1) {
-                acc.provinces.push(province);
+                acc.names.push(province);
                 acc.count.push(1);
             } else {
                 acc.count[pIndex]++;
             }
             return acc;
         }, {
-            provinces: [],
+            names: [],
             count: []
         });
 
@@ -105,6 +111,40 @@ const analyzeDatabase = database => {
             names: [],
             count: []
         });
+
+    const occupations = Object.values(database.people)
+        .reduce((acc, current) => {
+            const occupations = current.occupation.split(" y ").map(oc => capitalize(oc));
+            occupations.forEach(oc => {
+                const pIndex = acc.names.indexOf(oc);
+                if (pIndex === -1) {
+                    acc.names.push(oc);
+                    acc.count.push(1);
+                } else {
+                    acc.count[pIndex]++;
+                }
+            });
+            return acc;
+        }, {
+            names: [],
+            count: []
+        });
+    
+    const genders = Object.values(database.people)
+    .reduce((acc, current) => {
+        const gender = current.gender;
+        const pIndex = acc.names.indexOf(gender);
+        if (pIndex === -1) {
+            acc.names.push(gender);
+            acc.count.push(1);
+        } else {
+            acc.count[pIndex]++;
+        }
+        return acc;
+    }, {
+        names: [],
+        count: []
+    });
 
     const aliveCountPerDate = (() => {
         const startDate = Object.keys(database.people)
@@ -182,6 +222,21 @@ const analyzeDatabase = database => {
         return aliveCount;
     })();
 
+
+    ////// Evaluator-predictor //////
+    const scaleArray = arr => {
+        const maxValueP = Math.max(...arr)/100;
+        return  arr.map(x => x/maxValueP);
+    };
+
+    birthsPerMonth.scaled = scaleArray(birthsPerMonth.count);
+    birthsPerZodiacSign.scaled = scaleArray(birthsPerZodiacSign.count);
+    birthLocations.scaled = scaleArray(birthLocations.count);
+    occupations.scaled = scaleArray(occupations.count);
+    genders.scaled = scaleArray(genders.count);
+    parties.scaled = scaleArray(parties.count);
+    
+
     return JSON.stringify({
         longerTerms,
         shorterTerms,
@@ -191,6 +246,8 @@ const analyzeDatabase = database => {
         birthsPerMonth,
         birthsPerZodiacSign,
         birthLocations,
+        occupations,
+        genders,
         parties,
         aliveCountPerDate,
         aliveExPresidentsPerDate

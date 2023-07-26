@@ -11,11 +11,11 @@
     - [ ] Formulario para editar blog.  
     - [x] Cálculo de CID para inserción de nuevos elementos.  
     - [x] Exportar base de datos a archivo json.  
-  - [ ] Data entry:  
+  - [x] Data entry:  
     - [x] Personas  
     - [x] Mandatos  
     - [x] Eventos  
-    - [ ] Articulos  
+    - [x] Articulos  
   - [x] Proyecto Vite+React.  
   - [x] Front-end React + MUI.  
   - [x] Navegación.  

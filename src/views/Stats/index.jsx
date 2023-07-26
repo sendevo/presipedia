@@ -11,12 +11,12 @@ const View = () => {
         <MainView title="Estadísticas" background={background}>
             <PieChart 
                 title="Nacidos por provincia" 
-                labels={processed.birthLocations.provinces}
+                labels={processed.birthLocations.names}
                 datasets={[
                     {
                         label: 'Presidentes nacidos',
                         data: processed.birthLocations.count, 
-                        backgroundColor: colorMapGenerator(processed.birthLocations.provinces.length, 220)
+                        backgroundColor: randomColorsGenerator(processed.birthLocations.names.length, 0.8)
                     }
                 ]} />
             <PieChart 
@@ -29,12 +29,22 @@ const View = () => {
                         backgroundColor: randomColorsGenerator(processed.parties.names.length, 0.8)
                     }
                 ]} />
+            <PieChart 
+                title="Ocupaciones" 
+                labels={processed.occupations.names}
+                datasets={[
+                    {
+                        label: 'Presidentes',
+                        data: processed.occupations.count,
+                        backgroundColor: randomColorsGenerator(processed.occupations.names.length, 0.8)
+                    }
+                ]} />
 
             <BarChart 
                 title="Nacidos por mes"
                 labels={moment.monthsShort()}
                 datasets={[{
-                    data: processed.birthsPerMonth,
+                    data: processed.birthsPerMonth.count,
                     label: "Nacidos",
                     backgroundColor: colorMapGenerator(12, 230),
                     borderColor: 'rgba(20, 20, 250, 0.5)',
@@ -49,7 +59,7 @@ const View = () => {
                 title="Nacidos por signo zodiacal"
                 labels={ZODIAC_SIGNS}
                 datasets={[{
-                    data: processed.birthsPerZodiacSign,
+                    data: processed.birthsPerZodiacSign.count,
                     label: "Nacidos",
                     backgroundColor: colorMapGenerator(12, 20),
                     borderColor: 'rgba(250, 20, 20, 0.5)',
