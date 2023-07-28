@@ -3,7 +3,7 @@ import { Container } from '@mui/material';
 import { FaArrowLeft } from 'react-icons/fa';
 import classes from './style.module.css';
 
-const MainView = ({title, background, onBackPrompt, children}) => {
+const MainView = ({title, background, children}) => {
     
     const navigate = useNavigate();        
     const onGoBack = () => navigate(-1);

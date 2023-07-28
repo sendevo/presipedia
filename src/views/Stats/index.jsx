@@ -19,6 +19,22 @@ const View = () => {
                         backgroundColor: randomColorsGenerator(processed.birthLocations.names.length, 0.8)
                     }
                 ]} />
+
+            <BarChart 
+                title="Edades de asunción"
+                labels={processed.assumptionAgeHistogram.names}
+                datasets={[{
+                    data: processed.assumptionAgeHistogram.count,
+                    label: "Cantidad de presidentes",
+                    backgroundColor: colorMapGenerator(12, 230),
+                    borderColor: 'rgba(20, 20, 250, 0.5)',
+                    borderWidth: 1
+                }]}
+                type="vertical"
+                suffix=""
+                xlabel="Rango de edad en años"
+                ylabel="Cantidad de presidentes"/>
+
             <PieChart 
                 title="Tendencia política de mandatos" 
                 labels={processed.parties.names}

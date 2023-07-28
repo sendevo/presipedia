@@ -62,6 +62,23 @@ const analyzeDatabase = database => {
 
 
     ////// Statistics //////
+    const assumptionAgeHistogram = youngestAssumption
+        .reduce((acc, current) => {
+            const binStart = Math.floor(current.age/10)*10;
+            const binEnd = binStart+10;
+            const name = `${binStart}-${binEnd}`;
+            const binIndex = acc.names.indexOf(name);
+            if(binIndex === -1){
+                acc.names.push(name);
+                acc.count.push(1);
+            }else{
+                acc.count[binIndex]++;
+            }
+            return acc;
+        }, {
+            names: [],
+            count: []
+        });
 
     const birthsPerMonth = {
         names: MONTHS,
@@ -235,7 +252,7 @@ const analyzeDatabase = database => {
     occupations.scaled = scaleArray(occupations.count);
     genders.scaled = scaleArray(genders.count);
     parties.scaled = scaleArray(parties.count);
-    
+    assumptionAgeHistogram.scaled = scaleArray(assumptionAgeHistogram.count);
 
     return JSON.stringify({
         longerTerms,
@@ -243,6 +260,7 @@ const analyzeDatabase = database => {
         oldest,
         youngest,
         youngestAssumption,
+        assumptionAgeHistogram,
         birthsPerMonth,
         birthsPerZodiacSign,
         birthLocations,
