@@ -6,11 +6,17 @@ import {
     StepLabel,
     StepContent,
     Button,
-    Typography,
     Grid
 } from "@mui/material";
-import { Input, DateInput } from "../Inputs";
-import { FaUser } from "react-icons/fa";
+import { 
+    Input, 
+    DateInput, 
+    Select,
+    SuggesterInput 
+} from "../Inputs";
+import { PROVINCES, OCCUPATIONS } from "../../model/constants";
+import { FaUser, FaCity, FaBriefcase, FaUsers } from "react-icons/fa";
+import processed from "../../assets/processed.json";
 
 const buttonStyle = {mt:1,mr:1};
 
@@ -104,22 +110,49 @@ const StepperForm = ({onSubmit}) => {
                             }
                             {active===2 && 
                                 <Box>
-
+                                    <Select 
+                                        icon={<FaCity />}
+                                        rIcon={true}
+                                        name="city"
+                                        id="city"
+                                        label="Provincia"
+                                        value=""
+                                        options={PROVINCES.map((op,i)=>({value:i, label:op}))}
+                                        onChange={console.log}/>
                                 </Box>
                             }
                             {active===3 && 
                                 <Box>
-
+                                    <SuggesterInput
+                                        icon={<FaBriefcase/>}
+                                        rIcon={true}
+                                        name="occupation"
+                                        id="occupation"
+                                        label="Ocupación"
+                                        value=""
+                                        options={processed.occupations.names.concat(OCCUPATIONS).map((op,i)=>({key:i, label:op}))}
+                                        onChange={console.log}/>
                                 </Box>
                             }
                             {active===4 && 
                                 <Box>
-                                    <DateInput onChange={console.log} />
+                                    <input type="date" onChange={e=>console.log(e.target.value)}/>
+                                    {
+                                    //<DateInput onChange={console.log} />
+                                    }
                                 </Box>
                             }
                             {active===5 && 
                                 <Box>
-
+                                    <SuggesterInput 
+                                        icon={<FaUsers />}
+                                        rIcon={true}
+                                        name="party"
+                                        id="party"
+                                        label="Tendencia"
+                                        value=""
+                                        options={processed.parties.names.map((op,i)=>({key:i, label:op}))}
+                                        onChange={console.log}/>
                                 </Box>
                             }
                             <Button 

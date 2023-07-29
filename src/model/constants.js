@@ -10,6 +10,7 @@ export const VIS_DATE_FORMAT = "YYYY-MM-DD";
 export const DAY_MS = 86400000;
 export const YEAR_MS = 31536000000;
 export const PROVINCES = ["Buenos Aires","Capital Federal","Catamarca","Chaco", "Chubut", "Córdoba", "Corrientes", "Entre Ríos", "Formosa", "Jujuy", "La Pampa", "La Rioja", "Mendoza", "Misiones", "Neuquén", "Río Negro", "Salta", "San Juan", "San Luis", "Santa Cruz", "Santa Fe", "Santiago del Estero", "Tierra del Fuego", "Tucumán"];
+export const OCCUPATIONS = ["Contador", "Agricultor", "Farmacéutico", "Secretario", "Vendedor", "Policía", "Enfermero", "Pintor", "Albañil", "Mecánico", "Chófer", "Piloto", "Artista", "Pescador", "Técnico", "Licenciado", "Plomero", "Soldador", "Herrero", "Diseñador", "Psicólogo", "Deportista", "Entrenador", "Arquitecto"];
 export const ZODIAC_SIGNS = ["Capricornio", "Acuario", "Piscis", "Aries", "Tauro", "Géminis", "Cáncer", "Leo", "Virgo", "Libra", "Escorpio", "Sagitario"];
 export const MONTHS = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 const MONTHS_SHORT = ["Ene.", "Feb.", "Mar", "Abr.", "May", "Jun.", "Jul.", "Ago.", "Sept.", "Oct.", "Nov.", "Dic."];
