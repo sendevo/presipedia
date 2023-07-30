@@ -3,7 +3,7 @@
 ### v1.0._ (alpha):  
   - [x] Creación del repositorio GitHub.  
   - [x] Definición del modelo de datos: mandatos, personas, eventos y blog.  
-  - [ ] Herramienta interna para edición de datos:  
+  - [ ] Herramienta interna para edición de base de datos:  
     - [x] Carga y listado de base de datos.  
     - [x] Formulario para editar persona.  
     - [x] Formulario para editar mandato.  
@@ -44,11 +44,11 @@
     - [x] Presentación de pregunta y opciones de respuesta.  
     - [x] Bloque de puntajes de jugadores.  
     - [x] Diálogo para mostrar resultado de respuesta.  
-  - [ ] Mi candidato  
+  - [x] Mi candidato  
     - [x] Formulario secuencial para ingresar datos.  
-    - [ ] Validación de formulario.  
+    - [x] Validación de formulario.  
     - [x] Cálculo probabilidad basado en datos actuales.  
-    - [ ] Presentación de resultados.  
+    - [x] Presentación de resultados.  
   - [ ] Menúes:  
     - [ ] Menú de inicio.  
     - [x] Menú de visualizaciones.  
