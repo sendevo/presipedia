@@ -14,7 +14,7 @@ const renderInput = (props, params) => {
     const iconDisplay = props.icon && iconLoaded || props.rIcon;
 
     return (
-        <Grid container spacing={2} alignItems="center" sx={{marginBottom:"0px", maxHeight: props.value.length === 0 ? "50px" : "none"}}>
+        <Grid container spacing={2} alignItems="center" sx={{marginBottom:"0px", maxHeight: props.value?.length ? "none" : "50px"}}>
             {props.icon &&
             <Grid 
                 item 

@@ -2,8 +2,8 @@ import { useEffect, useRef } from 'react';
 import { Chart } from 'chart.js/auto';
 
 const containerStyle = {
-    marginTop: "10px",
-    padding: "10px 5px 25px 5px",
+    marginTop: "5px",
+    padding: "5px",
     border: "1px solid rgb(180, 180, 180)",
     borderRadius: "5px",
     boxShadow: "0px 0px 5px 0px rgba(0, 0, 0, 0.2)",
@@ -17,9 +17,8 @@ const spanStyle = {
     lineHeight: "1.2em"
 };
 
-const RadarChart = ({title, clarification, labels, datasets, type, suffix, ylabel, xlabel}) => {
+const RadarChart = ({title, clarification, labels, datasets, suffix}) => {
     const canvasRef = useRef(null);
-    const containerHeight = type==="horizontal" ? datasets[0].data.length*50 : 500;
     const config = {
         type: 'radar',
         data: {labels,datasets},
@@ -57,7 +56,7 @@ const RadarChart = ({title, clarification, labels, datasets, type, suffix, ylabe
 
     return (
         <div style={containerStyle}>
-            <div style={{height: `${containerHeight}px`}}>
+            <div>
                 <canvas ref={canvasRef} />
             </div>
             {clarification && <span style={spanStyle}>{clarification}</span>}

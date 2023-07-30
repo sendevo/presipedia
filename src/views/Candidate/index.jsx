@@ -1,25 +1,34 @@
+import { useState } from "react";
 import MainView from "../../components/MainView";
 import SwipeableForm from "../../components/SwipeableForm";
-import { evalCandidate } from "../../model/candidate/actions";
+import CandidateResults from "../../components/CandidateResults";
+import Preloader from "../../components/Preloader";
+import { evalCandidate, formToCandidate } from "../../model/candidate/actions";
 import background from "../../assets/backgrounds/background.png";
 
 const View = () => {
 
+    const [state, setState] = useState(0);
+    const [results, setResults] = useState({});
+
     const handleFormSubmit = form => {
-        console.log(evalCandidate({
-            assumptionAgeHistogram: "30-40",
-            birthsPerMonth: "Enero",
-            birthsPerZodiacSign: "Sagitario",
-            birthLocations: "Buenos Aires",
-            occupations: "Abogado",
-            genders: "F",
-            parties: "Unitario"
-        }));
+        setState(1);
+        const candidate = formToCandidate(form);
+        const results = evalCandidate(candidate);
+        setResults(results);
+        setTimeout(()=>setState(2), 2000);
+    };
+
+    const handleGameReset = () => {
+        setState(0);
+        setResults({});
     };
 
     return(
         <MainView title="Mi candidato" background={background}>
-            <SwipeableForm onSubmit={handleFormSubmit}/>
+            {state===0 && <SwipeableForm onSubmit={handleFormSubmit}/>}
+            {state===1 && <Preloader />}
+            {state===2 && <CandidateResults results={results} onReset={handleGameReset}/>}
         </MainView>
     );
 };
