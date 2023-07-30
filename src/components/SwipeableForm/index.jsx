@@ -225,6 +225,7 @@ const SwipeableForm = ({onSubmit}) => {
                             value={form.birthdate} 
                             onChange={handleInputChange}/>
                     </GenericCard>
+                    <Typography fontWeight={"bold"}>Fecha seleccionada: {moment(form.birthdate).format("DD/MM/YYYY")}</Typography>
                     <Typography sx={tipStyle}>
                         <b>Tip:</b> Para avanzar más rápido sobre los años, podes pulsar/clickear sobre el año.
                     </Typography>

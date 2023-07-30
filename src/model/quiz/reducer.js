@@ -43,7 +43,7 @@ export const reducer = (prevState, action) => {
         case "ON_TIMER_TICK": {
             if(prevState.running){ // If game is running
                 if(prevState.feedbackType!=="HIDDEN"){ // If showing feedback, wait until timeout
-                    const feedbackTicksLeft = prevState.feedbackTicksLeft--;
+                    const feedbackTicksLeft = prevState.feedbackTicksLeft-1;
                     if(feedbackTicksLeft <= 0){ // Feedback timeout --> hide feedback, set next player and show next question
                         const prevPlayer = prevState.currentPlayer;
                         const totalPlayers = prevState.players.length;
@@ -63,7 +63,7 @@ export const reducer = (prevState, action) => {
                         }
                     }
                 }else{ // Showing question --> update progress
-                    const questionTicksLeft = prevState.questionTicksLeft--;
+                    const questionTicksLeft = prevState.questionTicksLeft-1;
                     if(questionTicksLeft <= 0) // Question timeout --> Show feedback
                         return {
                             ...prevState,
@@ -74,7 +74,7 @@ export const reducer = (prevState, action) => {
                     else{ // If not timeout, just update timer count
                         return {
                             ...prevState,
-                            questionTicksLeft 
+                            questionTicksLeft: questionTicksLeft 
                         };
                     }
                 }
@@ -101,6 +101,7 @@ export const reducer = (prevState, action) => {
     }
 };
 
-export const init = dispatch => setInterval(() => dispatch({type: "ON_TIMER_TICK"}), TIMER_PERIOD);
+export const init = dispatch => window.setInterval(() => dispatch({type: "ON_TIMER_TICK"}), TIMER_PERIOD);
 
-export const destroy = gameID => clearInterval(gameID);
+export const destroy = gameID => window.clearInterval(gameID);
+

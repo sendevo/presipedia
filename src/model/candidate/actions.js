@@ -46,7 +46,7 @@ export const evalCandidate = candidate => {
         }
     });
     result.name = candidate.name;
-    result.total = sum/6;
+    result.total = sum/Object.keys(adapter).length;
     return result;
 };
 
