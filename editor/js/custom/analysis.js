@@ -240,7 +240,7 @@ const analyzeDatabase = database => {
     })();
 
 
-    ////// Evaluator-predictor //////
+    ////// Evaluator-candidate //////
     const scaleArray = arr => {
         const maxValueP = Math.max(...arr)/100;
         return  arr.map(x => x/maxValueP);

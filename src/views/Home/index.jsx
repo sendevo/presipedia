@@ -8,7 +8,7 @@ const View = () => {
         <MainView background={background}>
             <Typography fontWeight={"bold"}>"Presipedia: Edición Argentina"</Typography>
             <br/>
-            <Link to='games/predictor'>¿Quién será el siguiente?</Link>
+            <Link to='games/candidate'>Mi candidato</Link>
             <br/>
             <Link to='games/quiz'>Preguntas y respuestas</Link>
             <br/>

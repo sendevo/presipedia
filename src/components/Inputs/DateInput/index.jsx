@@ -1,15 +1,19 @@
-import { useState } from 'react';
 import Calendar from 'react-calendar';
 import { Box } from '@mui/material';
+import moment from 'moment';
 import './calendar-style.css';
 
-const DateInput = ({onChange}) => { 
+const DateInput = ({name, value, onChange}) => {
 
-    const [date, setDate] = useState([new Date()]);
+    const date = moment(value).toDate();
 
-    const handleDateChange = d => {
-        setDate(d);
-        onChange(d);
+    const handleDateSelect = d => {
+        onChange({
+            target:{
+                name: name,
+                value: moment(d).unix()*1000
+            }
+        });
     };
 
     return (
@@ -19,7 +23,7 @@ const DateInput = ({onChange}) => {
                 locale='es-ES'
                 selectRange={false}
                 value={date}
-                onChange={handleDateChange}/>
+                onChange={handleDateSelect}/>
         </Box>
     );
 };

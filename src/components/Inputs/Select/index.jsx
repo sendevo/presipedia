@@ -28,9 +28,9 @@ const Select = props => {
     const iconDisplay = icon && iconLoaded || rIcon;
 
     return (
-        <Grid container spacing={2} alignItems="center" sx={{marginBottom:"0px", maxHeight: "60px"}}>
+        <Grid container spacing={2} alignItems="center">
             {icon &&
-            <Grid item xs={rIcon ? 1 : 2} display={iconDisplay ? 'grid':'none'}>
+            <Grid item xs={rIcon ? 1 : 2} display={iconDisplay ? 'block':'none'}>
                 {icon && !rIcon && 
                     <img 
                         onLoad={()=>setIconLoaded(true)} 
@@ -39,11 +39,7 @@ const Select = props => {
                         alt="icon" 
                         onClick={onIconClick}/>
                 }
-                {rIcon && 
-                    <Box sx={{textAlign:"center"}}>
-                        { icon }
-                    </Box>
-                }
+                {rIcon && <Box>{ icon }</Box>}
             </Grid>
             }
             <Grid item xs={rIcon ? 11 : (iconDisplay ? 10 : 12)} className={classes.InputContainer}>

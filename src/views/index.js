@@ -5,7 +5,7 @@ import Blog from './Blog';
 import Games from './Games';
 import Home from './Home';
 import Profile from './Profile';
-import Predictor from './Predictor';
+import Candidate from './Candidate';
 import Quiz from './Quiz';
 import Rankings from './Rankings';
 import Raw from './Raw';
@@ -22,7 +22,7 @@ export {
     Games,
     Home,
     Profile,
-    Predictor,
+    Candidate,
     Quiz,
     Rankings,
     Sources,

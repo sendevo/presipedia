@@ -42,27 +42,34 @@ const renderInput = (props, params) => {
                     variant="outlined"
                     className={classes.Input}
                     value={props.value?.label}
-                    onChange={props.onInputChange}
+                    onChange={props.onChange}
                     label={props.label}/>  
             </Grid>
         </Grid>
     );
 };
 
-const SuggesterInput = props => (
-    <Autocomplete
-        size="small"
-        multiple={props.multiple}
-        freeSolo={props.freeSolo}
-        noOptionsText="Sin resultados"
-        limitTags={1}
-        value={props.value}
-        onChange={props.onChange}
-        options={props.options} 
-        isOptionEqualToValue={(op, val) => (op.cid === val.cid)}
-        getOptionLabel={opt => opt.label || ""}
-        renderOption={renderOption}
-        renderInput={p => renderInput(props,p)}/>
-);
+const SuggesterInput = props => {
+
+    const handleInputChange = (_, nv) => {
+        props.onChange({target:{name: props.name, value: nv}});
+    };
+
+    return (
+        <Autocomplete
+            size="small"
+            multiple={props.multiple}
+            freeSolo={props.freeSolo}
+            noOptionsText="Sin resultados"
+            limitTags={1}
+            value={props.value}
+            onChange={handleInputChange}
+            options={props.options} 
+            isOptionEqualToValue={(op, val) => (op.cid === val.cid)}
+            getOptionLabel={opt => opt.label || ""}
+            renderOption={renderOption}
+            renderInput={p => renderInput(props,p)}/>
+    );
+};
 
 export default SuggesterInput;

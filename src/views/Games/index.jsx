@@ -1,6 +1,6 @@
 import MainView from "../../components/MainView";
 import GridMenu from "../../components/GridMenu";
-import predictorIcon from "../../assets/icons/predictor.png";
+import candidateIcon from "../../assets/icons/candidate.png";
 import quizIcon from "../../assets/icons/quiz.png";
 import image from "../../assets/backgrounds/background2.jpg";
 
@@ -8,10 +8,10 @@ const View = () => {
     
     const content = [
         {
-            path: "/games/predictor",
+            path: "/games/candidate",
             title: "Mi candidato",
             text: "¿Podrá ser el siguiente?",
-            icon: predictorIcon
+            icon: candidateIcon
         },
         {
             path: "/games/quiz",

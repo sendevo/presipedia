@@ -44,10 +44,11 @@
     - [x] Presentación de pregunta y opciones de respuesta.  
     - [x] Bloque de puntajes de jugadores.  
     - [x] Diálogo para mostrar resultado de respuesta.  
-  - [ ] ¿Quién será el siguiente?  
-    - [ ] Formulario (secuencial?) para ingresar género, fecha y lugar de nacimiento y tendencia politica.  
-    - [ ] Cálculo probabilidad basado en datos actuales.  
-    - [ ] Presentación del resultado.  
+  - [ ] Mi candidato  
+    - [x] Formulario secuencial para ingresar datos.  
+    - [ ] Validación de formulario.  
+    - [x] Cálculo probabilidad basado en datos actuales.  
+    - [ ] Presentación de resultados.  
   - [ ] Menúes:  
     - [ ] Menú de inicio.  
     - [x] Menú de visualizaciones.  

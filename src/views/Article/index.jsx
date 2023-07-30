@@ -1,5 +1,5 @@
 import { useSearchParams } from 'react-router-dom'
-import { Card, CardMedia, CardContent, Typography } from '@mui/material';
+import { Box, Card, CardMedia, CardContent, Typography } from '@mui/material';
 import MainView from "../../components/MainView";
 import { APP_NAME } from '../../model/constants';
 import blog from "../../assets/blog.json";
@@ -20,6 +20,12 @@ const View = () => {
                         title={article.title}/>
                     <CardContent>
                         <div dangerouslySetInnerHTML={{__html:article.content}}></div>
+                        <Box sx={{fontSize:"10px"}}>
+                            <Typography fontWeight={"bold"} fontSize={"14px"}>Bibliografía</Typography>
+                            {article.sources.map((s,i) => (
+                                <Typography key={i} fontSize={"11px"}>[{i+1}] {s}</Typography>
+                            ))}
+                        </Box>
                     </CardContent>
                 </Card>
                 :
