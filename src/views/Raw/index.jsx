@@ -40,7 +40,7 @@ const rows = database.terms.map((term, index)=>({
         </Typography>,
     term_end: 
         <Typography fontSize={12}>
-            {moment(term.term_end).format("DD/MMMM/YYYY")},
+            {moment(term.term_end).format("DD/MMMM/YYYY")}
         </Typography>,
     party: 
         <Typography fontSize={12}>
