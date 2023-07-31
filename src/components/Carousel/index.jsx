@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { 
     Box, 
     Typography,
@@ -13,26 +13,26 @@ import { FaChevronRight } from "react-icons/fa";
 const cardStyle = {
     background: "rgba(255,255,255,0.8)",
     boxShadow: "3px 3px 10px 0px rgba(0,0,0,0.7)",
-    pl:2,
-    pr:2
+    p:0
 };
 
 const Carousel = ({title, linkTo, slides}) => {
 
     const sliderRef = useRef();
-    const navigate = useNavigate();
     const transition = Math.floor(Math.random()*2000) + 3000;
     const speed = Math.floor(Math.random()*300) + 500;
 
     return (
         <Card sx={cardStyle}>
             <Box textAlign={"right"}>
-                <Typography fontSize={12} onClick={()=>navigate(linkTo)}> 
-                    Ir a {title} <FaChevronRight style={{paddingTop:"5px"}}/>
-                </Typography>
+                <Link to={linkTo}> 
+                    <Typography fontSize={12} sx={{cursor:"pointer"}}>
+                        Ir a {title} <FaChevronRight style={{paddingTop:"5px"}}/>
+                    </Typography>
+                </Link>
             </Box>
-            <CardContent>
-                <Box sx={{maxWidth:"75vw", marginTop:"0px"}}>
+            <CardContent sx={{p:0, maxWidth:"800px"}}>
+                <Box sx={{maxWidth:"95vw", marginTop:"0px"}}>
                     <Slider
                         ref={sliderRef}
                         slidesToShow={1}
@@ -42,7 +42,7 @@ const Carousel = ({title, linkTo, slides}) => {
                         autoplaySpeed={transition}
                         speed={speed}
                         centerMode={true}
-                        centerPadding="5px"
+                        centerPadding="0px"
                         slidesToScroll={1}>
                             {slides}
                     </Slider>

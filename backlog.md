@@ -49,13 +49,13 @@
     - [x] Validación de formulario.  
     - [x] Cálculo probabilidad basado en datos actuales.  
     - [x] Presentación de resultados.  
-  - [ ] Menúes:  
-    - [ ] Menú de inicio.  
+  - [x] Menúes:  
+    - [x] Menú de inicio.  
     - [x] Menú de visualizaciones.  
     - [x] Menú de Juegos.  
     - [x] Menú de datos.  
   - [ ] Branding y promoción:  
-    - [ ] Logo  
+    - [x] Logo  
     - [x] Nombre  
     - [x] Eslogans  
     - [ ] Capturas de pantalla  
