@@ -3,7 +3,7 @@ import { Box,Grid, Typography } from "@mui/material";
 import MainView from "../../components/MainView";
 import GridMenu from "../../components/GridMenu";
 import Carousel from "../../components/Carousel";
-import blogIcon from "../../assets/icons/idea.png";
+import aboutIcon from "../../assets/logo_512.png";
 import dbIcon from "../../assets/icons/database.png";
 import banner from '../../assets/banner.png';
 import background from "../../assets/backgrounds/background2.jpg";
@@ -28,16 +28,14 @@ const logoStyle = {
     filter: "contrast(60%) drop-shadow(3px 5px 2px #666)"
 };
 
-const imgStyle = {
+const bannerImgStyle = {
     objectFit:"cover", 
     objectPosition:"top",
-    height: "250px",
     width: "100%",
     animation: "move 7s infinite  alternate"
 };
 
-const keyframesStyles = 
-`
+const keyframesStyles = `
 @-webkit-keyframes move {
     0% { object-position:top; }
     100% { object-position:bottom; }
@@ -45,53 +43,49 @@ const keyframesStyles =
 @keyframes move {
     0% { object-position:top; }
     100% { object-position:bottom; }
-}
-`;
+}`;
+
+const ImgSlide = ({src, link, text, imageHeight="250px"}) => (
+    <Box>
+        <img src={src}  style={{...bannerImgStyle, height:imageHeight}} />
+        <Link to={link}>
+            <Typography textAlign={"center"}>
+                {text} <FaChevronRight style={{paddingTop:"5px"}}/>
+            </Typography>
+        </Link>
+    </Box>
+);
+
+const gamesSlides = [
+    <ImgSlide key={0} src="/carousel/candidate.png" link="/games/candidate" text="Mi candidato" />,
+    <ImgSlide key={1} src="/carousel/quiz.png" link="/games/quiz" text="Preguntas y respuestas" />
+];
+
+const visSlides = [
+    <ImgSlide key={0} src="/carousel/barchart.png" link="/vis/rankings" text="Clasificaciones" />,
+    <ImgSlide key={1} src="/carousel/linechart.png" link="/vis/stats" text="Estadísticas" />
+];
+
+const blogSlides = [
+    <ImgSlide key={0} src="/blog/banda.jpg" link="/blog/article?index=0" text="Banda Presidencial" imageHeight="150px"/>,
+    <ImgSlide key={1} src="/blog/baston.jpg" link="/blog/article?index=1" text="Bastón de Mando"  imageHeight="150px"/>,
+    <ImgSlide key={2} src="/blog/sillon.jpg" link="/blog/article?index=3" text="Sillón Presidencial"  imageHeight="150px"/>
+];
 
 const bottomMenuContent = [
-    {
-        path: "/blog",
-        title: "Curiosidades",
-        text: "Artículos interesantes",
-        icon: blogIcon
-    },
     {
         path: "/vis/raw",
         title: "Base de datos",
         text: "Todo sale de aquí",
         icon: dbIcon
+    },
+    {
+        path: "/about",
+        title: "Sobre Presipedia",
+        text: "Acerca del proyecto",
+        icon: aboutIcon
     }
 ];
-
-const gamesSlides = [
-    <Box>
-        <img src="/carousel/candidate.png" style={imgStyle} />
-        <Link to="/games/candidate">
-            <Typography textAlign={"center"}>Mi candidato <FaChevronRight style={{paddingTop:"5px"}}/></Typography>
-        </Link>
-    </Box>,
-    <Box>
-        <img src="/carousel/quiz.png"  style={imgStyle} />
-        <Link to="/games/quiz">
-            <Typography textAlign={"center"}>Preguntas y respuestas <FaChevronRight style={{paddingTop:"5px"}}/></Typography>
-        </Link>
-    </Box>
-].map((item,index) => <Box key={index}>{item}</Box>);
-
-const visSlides = [
-    <Box>
-        <img src="/carousel/barchart.png"  style={imgStyle} />
-        <Link to="/vis/rankings">
-            <Typography textAlign={"center"}>Clasificaciones <FaChevronRight style={{paddingTop:"5px"}}/></Typography>
-        </Link>
-    </Box>,
-    <Box>
-        <img src="/carousel/linechart.png"  style={imgStyle} />
-        <Link to="/vis/stats">
-            <Typography textAlign={"center"}>Estadísticas <FaChevronRight style={{paddingTop:"5px"}}/></Typography>
-        </Link>
-    </Box>
-].map((item,index) => <Box key={index}>{item}</Box>);
 
 const View = () => {
     return(
@@ -106,6 +100,12 @@ const View = () => {
                         title="entretenimiento"
                         linkTo="/games" 
                         slides={gamesSlides}/>
+                </Grid>
+                <Grid item>
+                    <Carousel 
+                        title="curiosidades"
+                        linkTo="/blog" 
+                        slides={blogSlides}/>
                 </Grid>
                 <Grid item>
                     <Carousel 
