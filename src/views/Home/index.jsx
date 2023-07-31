@@ -1,4 +1,4 @@
-import { Box,Grid } from "@mui/material";
+import { Box,Grid, Typography } from "@mui/material";
 import MainView from "../../components/MainView";
 import GridMenu from "../../components/GridMenu";
 import Carousel from "../../components/Carousel";
@@ -19,12 +19,12 @@ const logoContainerStyle = {
 };
 
 const logoStyle = {
-    width: "70%",
-    maxWidth: "500px",
-    maxHeight: "300px",
+    width: "80%",
+    maxWidth: "600px",
+    maxHeight: "400px",
     objectFit: "contain",
     filter: "contrast(60%) drop-shadow(3px 5px 2px #666)"
-}
+};
 
 const bottomMenuContent = [
     {
@@ -41,6 +41,24 @@ const bottomMenuContent = [
     }
 ];
 
+const gamesSlides = [
+    <Typography>hola</Typography>,
+    <Typography>mundo</Typography>,
+    <Typography>hola2</Typography>
+].map((item,index) => <Box key={index}>{item}</Box>);
+
+const timelineSlides = [
+    <Typography>hola</Typography>,
+    <Typography>mundo</Typography>,
+    <Typography>hola2</Typography>
+].map((item,index) => <Box key={index}>{item}</Box>);
+
+const visSlides = [
+    <Typography>hola</Typography>,
+    <Typography>mundo</Typography>,
+    <Typography>hola2</Typography>
+].map((item,index) => <Box key={index}>{item}</Box>);
+
 const View = () => {
     return(
         <MainView background={background}>
@@ -49,10 +67,25 @@ const View = () => {
             </Box>
             <Grid container spacing={2} direction="column">
                 <Grid item>
-                    <Carousel />
+                    <Carousel 
+                        title="entretenimiento"
+                        linkTo="/games" 
+                        slides={gamesSlides}/>
                 </Grid>
                 <Grid item>
-                    <GridMenu items={bottomMenuContent} subtitle={"hola"}/>
+                    <Carousel 
+                        title="cronología"
+                        linkTo="/vis/timeline" 
+                        slides={timelineSlides}/>
+                </Grid>
+                <Grid item>
+                    <Carousel 
+                        title="visualizaciones"
+                        linkTo="/vis" 
+                        slides={visSlides}/>
+                </Grid>
+                <Grid item>
+                    <GridMenu items={bottomMenuContent}/>
                 </Grid>
             </Grid>
         </MainView>
