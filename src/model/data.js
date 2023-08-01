@@ -22,4 +22,4 @@ export const getTermDuration = t => {
     }
 };
 export const getAgeOfAssumption = (person, term) => moment(term.term_begin).diff(person.birth_date, 'years');
-export const getLastCID = terms => terms.sort((a,b) => b.term_end < a.term_end).at(-1).cid;
+export const getLastCID = terms => terms.sort((a,b) => b.term_end < a.term_end)[terms.length-1].cid;

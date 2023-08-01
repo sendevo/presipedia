@@ -6,7 +6,6 @@ export default defineConfig({
   plugins: [react()],
   base: "",
   build: {
-    outDir: 'dist',
-    target: 'chrome58'
+    outDir: 'www',
   },
 })

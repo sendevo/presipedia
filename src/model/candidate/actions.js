@@ -41,7 +41,7 @@ export const evalCandidate = candidate => {
     Object.keys(adapter).forEach(attr => {
         if(processed[attr]){
             const index = processed[attr].names.indexOf(candidate[attr]);
-            result[attr] = index !== -1 ? processed[attr].scaled.at(index) : 0;
+            result[attr] = (index >= 0 && index < processed[attr].scaled.length) ? processed[attr].scaled[index] : 0;
             sum += result[attr];
         }
     });

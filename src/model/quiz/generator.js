@@ -12,12 +12,14 @@ import {
     getDeathDate,
     getAgeOfDeath,
     isAlive,
-    isMale
+    isMale,
+    getLastCID
 } from "../../model/data";
 import database from "../../assets/database.json";
 
 const ITERABLE_LEN = 50;
-const lastCID = database.terms.sort((a,b) => b.term_end < a.term_end).at(-1).cid;
+//const lastCID = database.terms.sort((a,b) => b.term_end < a.term_end).at(-1).cid;
+const lastCID = getLastCID(database.terms);
 
 const generateOptions = (iterable, rightIndex, rightValue) => {
     const optionsArray = new Array(MAX_QUESTION_OPTIONS);

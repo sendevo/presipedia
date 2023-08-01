@@ -8,7 +8,7 @@ import image from "../../assets/backgrounds/background2.jpg";
 const View = () => {
     const [searchParams] = useSearchParams();
     const articleIndex = searchParams.get("index");
-    const article = blog.at(articleIndex);
+    const article = (articleIndex >= 0 && articleIndex < blog.length) ? blog[articleIndex] : "";
     const available = Boolean(article);
     return (
         <MainView title={article?.title || "Artículo no encontrado!"} background={image}>
