@@ -2,9 +2,10 @@
 
 ### *Cronología presidencial argentina*
 
-Desde Bernardino Rivadavia hasta Alberto Ángel Fernández, la más completa guía sobre los mandatos presidenciales de la República Argentina. Cronología, datos históricos, interesantes visualizaciones y curiosidades sobre los últimos 51 presidentes que gobernaron este gran país.  
+Desde Bernardino Rivadavia hasta Alberto Ángel Fernández, la más completa guía sobre los mandatos presidenciales de la República Argentina. Cronología de mandatos y eventos relevantes, juegos de preguntas, datos históricos, visualizaciones, curiosidades y mucho más sobre cada uno de los más de 50 presidentes que gobernaron este gran país. ¿Cuál es tu favorito? ¿Con cuál te identificás? ¿Cuántas cosas en común tenés con cada expresidente? Y la pregunta de los 40 millones: ¿Podrás ser el siguiente? ¡Descubrilo con Presipedia!  
 
-*Basado en [una nota](https://www.lanueva.com/nota/2003-5-25-9-0-0-desde-rivadavia-todos-los-que-se-sentaron-en-el-sillon) del diario "La Nueva Provincia" del 25 de mayo de 2003.*
+*Basado en [esta nota](https://www.lanueva.com/nota/2003-5-25-9-0-0-desde-rivadavia-todos-los-que-se-sentaron-en-el-sillon) del diario "La Nueva Provincia" del 25 de mayo de 2003.*
+*Inspirado en [esta nota](https://www.infobae.com/politica/2019/10/27/curiosidades-estadisticas-y-datos-poco-conocidos-de-los-53-mandatarios-de-la-historia-argentina/) de "Infobae" del 27 de octubre de 2019.*  
 
 
 ## Stack
