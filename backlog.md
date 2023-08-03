@@ -29,13 +29,13 @@
     - [x] Duración de mandatos.  
     - [x] Edad de mandatarios.  
     - [x] Reducir y-labels  
-  - [ ] Visualización de estadísticas  
-    - [ ] Controles de visualización.  
+  - [x] Visualización de estadísticas  
+    - [x] Controles de visualización.  
     - [x] Lugares/Mandatos de nacimiento.  
     - [x] Meses/signos con mayores nacimientos (barra vertical).  
     - [x] Cantidad de presidentes/expresidentes con vida por periodo continuo.  
   - [ ] Listado de datos crudos:  
-    - [ ] Tabla.  
+    - [x] Tabla.  
     - [ ] Exportar a csv? ¿Link al repo? Generar en tpo de ejec.?  
   - [x] Preguntas y respuestas:  
     - [x] Generador de preguntas y respuestas.  
@@ -58,15 +58,15 @@
     - [x] Logo  
     - [x] Nombre  
     - [x] Eslogans  
-    - [ ] Capturas de pantalla  
+    - [x] Capturas de pantalla  
     - [ ] Video demo  
     - [ ] Publicaciones  
-  - [ ] Compilación  
-    - [ ] Generar bundle y probar en servidor local.  
-    - [ ] Compilar version dev para android.  
-    - [ ] Compilar version build para android.  
-    - [ ] Publicación en hosting.  
-    - [ ] Publicación en Play Store.  
+  - [x] Compilación  
+    - [x] Generar bundle y probar en servidor local.  
+    - [x] Compilar version dev para android.  
+    - [x] Compilar version build para android.  
+    - [x] Publicación en hosting.  
+    - [x] Publicación en Play Store.  
   - [ ] Tests  
     - [ ] APP: End to end.  
     - [ ] GUI: Componentes.  

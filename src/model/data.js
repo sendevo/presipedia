@@ -12,7 +12,7 @@ export const getTermDuration = t => {
     if(years === 0){
         const months = moment(t.term_end).diff(t.term_begin, "months", false);
         if(months === 0){
-            const days = moment(t.term_end).diff(t.term_begin, "months", false);
+            const days = moment(t.term_end).diff(t.term_begin, "days", false);
             return days+" día"+(days>1?"s":"");
         }else{
             return months+" mes"+(months>1?"es":"");
