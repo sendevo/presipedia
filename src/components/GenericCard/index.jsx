@@ -11,9 +11,9 @@ const contentStyle = {
     height: "100%"
 };
 
-const GenericCard = ({sx, onClick, children}) => (
+const GenericCard = ({sx, contentSx, onClick, children}) => (
     <Card sx={{...cardStyle, ...sx}} onClick={onClick}>
-        <CardContent sx={contentStyle}>
+        <CardContent sx={{...contentStyle, ...contentSx}}>
             {children}
         </CardContent>
     </Card>

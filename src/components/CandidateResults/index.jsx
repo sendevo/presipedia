@@ -6,7 +6,7 @@ import {
     Grid
 } from "@mui/material";
 import { RadarChart } from "../../charts";
-import { colorMapGenerator } from "../../model/utils";
+import { colorRangeGenerator } from "../../model/utils";
 import { getScaleKeyName, getScaleLongName } from "../../model/candidate/actions";
 
 const mainResultStyle = {
@@ -56,7 +56,7 @@ const CandidateResults = ({results, onReset}) => {
                 datasets={[{
                     data: datasets,
                     label: "Compatibilidad",
-                    backgroundColor: colorMapGenerator(12, 230),
+                    backgroundColor: colorRangeGenerator(12, 230),
                     borderColor: 'rgba(20, 20, 250, 0.5)',
                     borderWidth: 1
                 }]}/>

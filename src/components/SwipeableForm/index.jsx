@@ -203,7 +203,10 @@ const SwipeableForm = ({onSubmit}) => {
                         value={form.province}
                         options={PROVINCES.map((op,i)=>({value:i, label:op}))}
                         onChange={handleInputChange}/>
-                    <ArgMap selected={form.province} onSelect={console.log}/>
+                    <ArgMap 
+                        fillColor={"rgba(100,100,100,0.3)"}
+                        fillFc={index => form.province===index ? "#81DAF5":"rgba(100,100,100,0.3)"}
+                        onClick={idx => handleInputChange({target:{name:"province", value:idx}})}/>
                 </Box>
                 
                 <Box sx={slideStyle}>
@@ -221,7 +224,7 @@ const SwipeableForm = ({onSubmit}) => {
                 
                 <Box sx={slideStyle}>
                     <Typography sx={instructionsStyle}>Si recordás la fecha de nacimiento de {candidateName}, seleccionala en este calendario:</Typography>
-                    <GenericCard sx={{mb:2, mt:-2}}>
+                    <GenericCard sx={{mb:2, mt:-2}} contentSx={{p:0}}>
                         <DateInput 
                             name="birthdate"
                             value={form.birthdate} 

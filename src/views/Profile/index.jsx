@@ -21,7 +21,7 @@ import {
     getLastCID 
 } from '../../model/data';
 import database from "../../assets/database.json";
-import image from "../../assets/backgrounds/background2.jpg";
+import background from "../../assets/backgrounds/background5.jpg";
 
 const ulStyle = {marginTop: "0px"};
 
@@ -50,7 +50,7 @@ const View = () => {
         };
     }
     return (
-        <MainView title={data.fullname || "Persona no encontrada!"} background={image}>
+        <MainView title={data.fullname || "Persona no encontrada!"} background={background}>
             {available? 
                 <Card>
                     <CardMedia

@@ -4,7 +4,7 @@ import SwipeableForm from "../../components/SwipeableForm";
 import CandidateResults from "../../components/CandidateResults";
 import Preloader from "../../components/Preloader";
 import { evalCandidate, formToCandidate } from "../../model/candidate/actions";
-import background from "../../assets/backgrounds/background.png";
+import background from "../../assets/backgrounds/background1.jpg";
 
 const View = () => {
 

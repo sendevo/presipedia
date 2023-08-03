@@ -2,7 +2,7 @@ import MainView from "../../components/MainView";
 import GridMenu from "../../components/GridMenu";
 import candidateIcon from "../../assets/icons/candidate.png";
 import quizIcon from "../../assets/icons/quiz.png";
-import image from "../../assets/backgrounds/background2.jpg";
+import background from "../../assets/backgrounds/background8.jpg";
 
 const View = () => {
     
@@ -22,7 +22,7 @@ const View = () => {
     ];
 
     return (
-        <MainView title="Entretenimiento" background={image}>
+        <MainView title="Entretenimiento" background={background}>
             <GridMenu items={content} subtitle=""/>
         </MainView>
     );

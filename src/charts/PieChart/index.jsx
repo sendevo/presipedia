@@ -8,7 +8,7 @@ const cardStyle = {
     borderRadius: "5px",
     boxShadow: "0px 0px 5px 0px rgba(0, 0, 0, 0.2)",
     backgroundColor: "rgba(250, 250, 250, 0.6)"
-}
+};
 
 const containerStyle = {
     height: "50vh"

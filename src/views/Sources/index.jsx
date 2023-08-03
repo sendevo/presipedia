@@ -3,7 +3,7 @@ import moment from "moment";
 import MainView from "../../components/MainView";
 import TextBlock from "../../components/TextBlock";
 import { APP_NAME } from "../../model/constants";
-import background from "../../assets/backgrounds/background3.jpg";
+import background from "../../assets/backgrounds/background8.jpg";
 import database from "../../assets/database.json";
 import blog from "../../assets/blog.json";
 

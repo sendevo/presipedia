@@ -3,7 +3,7 @@ import { Box, Card, CardMedia, CardContent, Typography } from '@mui/material';
 import MainView from "../../components/MainView";
 import { APP_NAME } from '../../model/constants';
 import blog from "../../assets/blog.json";
-import image from "../../assets/backgrounds/background2.jpg";
+import background from "../../assets/backgrounds/background2.jpg";
 
 const View = () => {
     const [searchParams] = useSearchParams();
@@ -11,7 +11,7 @@ const View = () => {
     const article = (articleIndex >= 0 && articleIndex < blog.length) ? blog[articleIndex] : "";
     const available = Boolean(article);
     return (
-        <MainView title={article?.title || "Artículo no encontrado!"} background={image}>
+        <MainView title={article?.title || "Artículo no encontrado!"} background={background}>
             {available? 
                 <Card>
                     <CardMedia

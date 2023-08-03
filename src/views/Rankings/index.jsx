@@ -2,7 +2,7 @@ import { useState } from "react";
 import MainView from "../../components/MainView";
 import { Slider } from "../../components/Inputs";
 import BarChart from "../../charts/BarChart";
-import background from "../../assets/backgrounds/background4.jpg";
+import background from "../../assets/backgrounds/background6.jpg";
 import processed from "../../assets/processed.json";
 
 const toDurationYears = terms => terms.map(t => t.duration);

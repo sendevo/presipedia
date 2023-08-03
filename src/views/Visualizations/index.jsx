@@ -4,7 +4,7 @@ import timelineIcon from "../../assets/icons/timeline.png";
 import statsIcon from "../../assets/icons/stats.png";
 import rankingsIcon from "../../assets/icons/ranking.png";
 import dbIcon from "../../assets/icons/database.png";
-import image from "../../assets/backgrounds/background2.jpg";
+import background from "../../assets/backgrounds/background7.jpg";
 
 const View = () => {
     
@@ -36,7 +36,7 @@ const View = () => {
     ];
 
     return (
-        <MainView title="Visualizaciones" background={image}>
+        <MainView title="Visualizaciones" background={background}>
             <GridMenu items={content} subtitle={""}/>
         </MainView>
     );

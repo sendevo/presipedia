@@ -6,7 +6,7 @@ import Carousel from "../../components/Carousel";
 import aboutIcon from "../../assets/logo_512.png";
 import dbIcon from "../../assets/icons/database.png";
 import banner from '../../assets/banner.png';
-import background from "../../assets/backgrounds/background2.jpg";
+import background from "../../assets/backgrounds/background1.jpg";
 import { FaChevronRight } from "react-icons/fa";
 
 

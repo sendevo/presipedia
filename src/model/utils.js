@@ -6,7 +6,7 @@ const hsv2rgb = (h,s,v) => {
     return [f(5)*255,f(3)*255,f(1)*255];
 };  
 
-export const colorMapGenerator = (count, hue, satFrom=0.1, satTo=0.9, transparency=0.7) => {
+export const colorRangeGenerator = (count, hue, satFrom=0.1, satTo=0.9, transparency=0.7) => {
     const colors = [];
     const step = (satTo - satFrom)/count;
     for(let s = satFrom; s < satTo; s += step){
@@ -28,6 +28,15 @@ export const randomColorsGenerator = (count, transparency=0.7) => {
     }
     return colors;
 };
+
+export const colorMapGenerator = (values, hue, satFrom=0.1, satTo=0.9, transparency=0.7) => {
+    const maxValue = Math.max(...values);
+    return values.map(v => {
+        const s = v/maxValue*(satTo-satFrom)+satFrom;
+        const [r, g, b] = hsv2rgb(hue, s, 0.9);
+        return `rgba(${r}, ${g}, ${b}, ${transparency})`;
+    });
+}
 
 export const location2GoggleMap = (lat,lng) => `http://www.google.com/maps/place/${lat},${lng}`;
 
