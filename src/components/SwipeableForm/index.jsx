@@ -24,6 +24,7 @@ import {
     Select,
     SuggesterInput 
 } from "../Inputs";
+import ArgMap from "../ArgMap";
 import { PROVINCES, OCCUPATIONS, MONTHS } from "../../model/constants";
 import { getZodiac, capitalize } from "../../model/utils";
 import genderMale from "../../assets/icons/gender_male.png";
@@ -202,6 +203,7 @@ const SwipeableForm = ({onSubmit}) => {
                         value={form.province}
                         options={PROVINCES.map((op,i)=>({value:i, label:op}))}
                         onChange={handleInputChange}/>
+                    <ArgMap selected={form.province} onSelect={console.log}/>
                 </Box>
                 
                 <Box sx={slideStyle}>
