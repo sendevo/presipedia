@@ -24,11 +24,15 @@ const View = () => {
         setResults({});
     };
 
+    const handleShare = data => {
+        console.log(data);
+    };
+
     return(
         <MainView title="Mi candidato" background={background}>
             {state===0 && <SwipeableForm onSubmit={handleFormSubmit}/>}
             {state===1 && <Preloader />}
-            {state===2 && <CandidateResults results={results} onReset={handleGameReset}/>}
+            {state===2 && <CandidateResults results={results} onReset={handleGameReset} onShare={handleShare}/>}
         </MainView>
     );
 };

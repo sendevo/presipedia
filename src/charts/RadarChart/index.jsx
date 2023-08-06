@@ -17,7 +17,7 @@ const spanStyle = {
     lineHeight: "1.2em"
 };
 
-const RadarChart = ({title, clarification, labels, datasets, suffix}) => {
+const RadarChart = ({title, clarification, labels, datasets, suffix, onReady}) => {
     const canvasRef = useRef(null);
     const config = {
         type: 'radar',
@@ -44,6 +44,12 @@ const RadarChart = ({title, clarification, labels, datasets, suffix}) => {
                             return tooltipItem.dataset.label+": "+value+suffix;
                         }
                     }
+                }
+            },
+            animation: {
+                onComplete: () => {                      
+                    const dataURL = canvasRef.current?.toDataURL();
+                    onReady(dataURL);
                 }
             }
         }

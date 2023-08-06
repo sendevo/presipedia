@@ -8,6 +8,7 @@ import {
 import { RadarChart } from "../../charts";
 import { colorRangeGenerator } from "../../model/utils";
 import { getScaleKeyName, getScaleLongName } from "../../model/candidate/actions";
+import { useState } from "react";
 
 const mainResultStyle = {
     fontSize: "18px",
@@ -15,13 +16,23 @@ const mainResultStyle = {
     margin: "5px 0px"
 };
 
-const CandidateResults = ({results, onReset}) => {
+let imageData = "";
+
+const CandidateResults = ({results, onReset, onShare}) => {
 
     const labels = Object.keys(results).filter(k => k !== "total" && k !== "name");
     const labelNames = labels.map(k => getScaleKeyName(k));
     const datasets = labels.map(l => results[l]);
     const strengths = labels.filter(l => results[l] > 50).map(k => ({name:getScaleLongName(k), value: results[k]}));
     const weakness = labels.filter(l => results[l] < 50).map(k => ({name:getScaleLongName(k), value: results[k]}));
+
+    const handleShare = () => {
+        const data = {
+            ...results,
+            image: imageData
+        };
+        onShare(data);
+    };
 
     return (
         <Box>
@@ -59,12 +70,18 @@ const CandidateResults = ({results, onReset}) => {
                     backgroundColor: colorRangeGenerator(12, 230),
                     borderColor: 'rgba(20, 20, 250, 0.5)',
                     borderWidth: 1
-                }]}/>
-            <Stack sx={{m:3}}>
+                }]}
+                onReady={data => {imageData = data}}/>
+            <Stack sx={{m:3, p:2}}>
                 <Button 
                     variant="contained"
-                    size="small"
                     onClick={onReset}>¡Evaluar otro candidato!</Button>
+                <Button 
+                    sx={{mt:2}}
+                    variant="contained"
+                    size="small"
+                    color="secondary"
+                    onClick={handleShare}>Compartir resultados</Button>
             </Stack>
         </Box>
     )

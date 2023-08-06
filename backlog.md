@@ -34,9 +34,9 @@
     - [x] Lugares/Mandatos de nacimiento.  
     - [x] Meses/signos con mayores nacimientos (barra vertical).  
     - [x] Cantidad de presidentes/expresidentes con vida por periodo continuo.  
-  - [ ] Listado de datos crudos:  
+  - [x] Listado de datos crudos:  
     - [x] Tabla.  
-    - [ ] Exportar a csv? ¿Link al repo? Generar en tpo de ejec.?  
+    - [z] Perfiles de ex-presidentes.  
   - [x] Preguntas y respuestas:  
     - [x] Generador de preguntas y respuestas.  
     - [x] Reducer para controlar juego.  
@@ -67,14 +67,13 @@
     - [x] Compilar version build para android.  
     - [x] Publicación en hosting.  
     - [x] Publicación en Play Store.  
-  - [ ] Tests  
-    - [ ] APP: End to end.  
-    - [ ] GUI: Componentes.  
-    - [ ] GUI: Vistas.  
-    - [ ] Modelo: Unitarios para c/metodo.  
   - [ ] Opensourcing del repo.  
   
 
 ### v1.1._ (beta) (requisitos pendientes):  
   - [ ] Optimizar tareas de mantenimiento y actualización.  
-  - [ ] Implementar backend para actualización dinámica de la base de datos.  
+  - [ ] Tests  
+    - [ ] APP: End to end.  
+    - [ ] GUI: Componentes.  
+    - [ ] GUI: Vistas.  
+    - [ ] Modelo: Unitarios para c/metodo.  

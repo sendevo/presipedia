@@ -1,10 +1,15 @@
-import { Link, useLocation } from 'react-router-dom';
+import { useState, useEffect, forwardRef } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Capacitor } from '@capacitor/core';
+import { App } from '@capacitor/app';
 import { 
     BottomNavigation, 
     BottomNavigationAction, 
     Paper, 
-    Typography
+    Typography,
+    Snackbar
 } from "@mui/material";
+import MuiAlert from "@mui/material/Alert";
 import { 
     FaHome, 
     FaGamepad, 
@@ -12,6 +17,7 @@ import {
     FaInfoCircle,
     FaChartBar 
 } from 'react-icons/fa';
+
 
 const containerStyle = {
     position: "fixed",
@@ -48,10 +54,44 @@ const homeButtonStyle = {
     maxWidth: "45px"
 };
 
+const Toast = forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
+let exitWatchDog = 0;
+
 const Navigation = () => {
 
+    const [toastOpen, setToastOpen] = useState(true);
     const location = useLocation();
     const path = location.pathname.split('/')[1] || 'home';
+    const navigate = useNavigate();
+
+    const handleCloseToast = (e, reason) => {
+        if (reason === 'clickaway')
+            return;
+        setToastOpen(false);
+    };
+
+    useEffect(() => {        
+        if(Capacitor.isNativePlatform()){
+            App.removeAllListeners()
+            .then(() => {
+                App.addListener('backButton', () => {                                        
+                    if(location.pathname === '/'){
+                        if(Date.now() - exitWatchDog > 3000){
+                            setToastOpen(true);                            
+                            exitWatchDog = Date.now();
+                        }else{
+                            App.exitApp();
+                        }            
+                    }else{
+                        navigate(-1);
+                    }
+                });
+            });
+        }
+    }, [location]);    
     
     return (
         <Paper style={containerStyle} elevation={3}>
@@ -94,6 +134,12 @@ const Navigation = () => {
                     label={<Typography fontSize={12}>Info</Typography>} 
                     icon={<FaInfoCircle/>}/>
             </BottomNavigation>
+            
+            <Snackbar open={toastOpen} autoHideDuration={1500} onClose={handleCloseToast}>
+                <Toast severity='info' sx={{ width: '100%' }} onClose={handleCloseToast}>
+                    Presione nuevamente para salir
+                </Toast>
+            </Snackbar>
         </Paper>
     );
 };
