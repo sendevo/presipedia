@@ -62,7 +62,7 @@ let exitWatchDog = 0;
 
 const Navigation = () => {
 
-    const [toastOpen, setToastOpen] = useState(true);
+    const [toastOpen, setToastOpen] = useState(false);
     const location = useLocation();
     const path = location.pathname.split('/')[1] || 'home';
     const navigate = useNavigate();

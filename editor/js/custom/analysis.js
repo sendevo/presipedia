@@ -60,6 +60,8 @@ const analyzeDatabase = database => {
         }, [])
         .sort((a, b) => a.age - b.age);
 
+    const oldestAssumption = [...youngestAssumption].reverse();
+
 
     ////// Statistics //////
     const assumptionAgeHistogram = youngestAssumption
@@ -260,6 +262,7 @@ const analyzeDatabase = database => {
         oldest,
         youngest,
         youngestAssumption,
+        oldestAssumption,
         assumptionAgeHistogram,
         birthsPerMonth,
         birthsPerZodiacSign,

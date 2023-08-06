@@ -1,6 +1,7 @@
 import { useState } from "react";
 import MainView from "../../components/MainView";
 import { Slider } from "../../components/Inputs";
+import RSlider from "react-slick";
 import BarChart from "../../charts/BarChart";
 import background from "../../assets/backgrounds/background6.jpg";
 import processed from "../../assets/processed.json";
@@ -30,6 +31,7 @@ const View = () => {
     const oldestSliced = processed.oldest.slice(0, sliderValue);
     const youngestSliced = processed.youngest.slice(0, sliderValue);
     const youngestAssumpSliced = processed.youngestAssumption.slice(0, sliderValue);
+    const oldestAssumpSliced = processed.oldestAssumption.slice(0, sliderValue);
 
     return(
         <MainView title="Clasificaciones" background={background}>
@@ -44,52 +46,98 @@ const View = () => {
                 onChange={handleSliderChange}
                 suffix="primeros"/>
 
-            <BarChart 
-                title="Los mandatos más extensos" 
-                labels={longerTermsSliced.map(t => t.president)} 
-                datasets={terms2ChartDS(longerTermsSliced, "Duración", toDurationYears)}
-                type="horizontal"
-                suffix=" años"
-                xlabel="Años de mandato"
-                ylabel="Presidente"/>
-                
-            <BarChart 
-                title="Los mandatos más breves" 
-                labels={shorterTermsSliced.map(t => t.president)} 
-                datasets={terms2ChartDS(shorterTermsSliced, "Duración", toDurationMonths, 'rgba(200, 20, 50, 0.6)', 'rgba(200, 20, 50, 1)')}
-                type="horizontal"
-                suffix=" meses"
-                xlabel="Meses de mandato"
-                ylabel="Presidente"/>
+            <RSlider
+                style={{marginTop:"0px", marginBottom:"30px"}}
+                autoplay={true}
+                autoplaySpeed={5000}
+                speed={1000}
+                dots={true}
+                infinite={true}
+                arrows={false}
+                centerPadding="10px"
+                slidesToShow={1}
+                slidesToScroll={1}>
+                <BarChart 
+                    title="Los mandatos más extensos" 
+                    labels={longerTermsSliced.map(t => t.president)} 
+                    datasets={terms2ChartDS(longerTermsSliced, "Duración", toDurationYears)}
+                    type="horizontal"
+                    suffix=" años"
+                    xlabel="Años de mandato"
+                    ylabel="Presidente"/>
+                    
+                <BarChart 
+                    title="Los mandatos más breves" 
+                    labels={shorterTermsSliced.map(t => t.president)} 
+                    datasets={terms2ChartDS(shorterTermsSliced, "Duración", toDurationMonths, 'rgba(200, 20, 50, 0.6)', 'rgba(200, 20, 50, 1)')}
+                    type="horizontal"
+                    suffix=" meses"
+                    xlabel="Meses de mandato"
+                    ylabel="Presidente"/>
+            </RSlider>
 
-            <BarChart 
-                title="Los que más años vivieron *" 
-                clarification="* Hasta la fecha de actualización de los datos."
-                labels={oldestSliced.map(t => t.president)} 
-                datasets={terms2ChartDS(oldestSliced, "Edad", toAges, 'rgba(20, 200, 50, 0.6)', 'rgba(20, 200, 50, 1)')}
-                type="horizontal"
-                suffix=" años"
-                xlabel="Años de edad"
-                ylabel="Presidente"/>
+            <RSlider
+                style={{marginTop:"0px", marginBottom:"30px"}}
+                autoplay={true}
+                autoplaySpeed={5000}
+                speed={1000}
+                dots={true}
+                infinite={true}
+                arrows={false}
+                centerPadding="10px"
+                slidesToShow={1}
+                slidesToScroll={1}>
+                <BarChart 
+                    title="Los que más años vivieron *" 
+                    clarification="* Hasta la fecha de actualización de los datos."
+                    labels={oldestSliced.map(t => t.president)} 
+                    datasets={terms2ChartDS(oldestSliced, "Edad", toAges, 'rgba(20, 200, 50, 0.6)', 'rgba(20, 200, 50, 1)')}
+                    type="horizontal"
+                    suffix=" años"
+                    xlabel="Años de edad"
+                    ylabel="Presidente"/>
 
-            <BarChart 
-                title="Los que menos años vivieron **" 
-                clarification="** Hasta la fecha de actualización de los datos."
-                labels={youngestSliced.map(t => t.president)} 
-                datasets={terms2ChartDS(youngestSliced, "Edad", toAges, 'rgba(20, 60, 190, 0.6)', 'rgba(20, 60, 190, 1)')}
-                type="horizontal"
-                suffix=" años"
-                xlabel="Años de edad"
-                ylabel="Presidente"/>
+                <BarChart 
+                    title="Los que menos años vivieron **" 
+                    clarification="** Hasta la fecha de actualización de los datos."
+                    labels={youngestSliced.map(t => t.president)} 
+                    datasets={terms2ChartDS(youngestSliced, "Edad", toAges, 'rgba(20, 60, 190, 0.6)', 'rgba(20, 60, 190, 1)')}
+                    type="horizontal"
+                    suffix=" años"
+                    xlabel="Años de edad"
+                    ylabel="Presidente"/>
+            </RSlider>
 
-            <BarChart 
-                title="Los más jóvenes en asumir" 
-                labels={youngestAssumpSliced.map(t => t.president)} 
-                datasets={terms2ChartDS(youngestAssumpSliced, "Edad", toAges, 'rgba(200, 60, 19, 0.6)', 'rgba(200, 60, 19, 1)')}
-                type="horizontal"
-                suffix=" años"
-                xlabel="Edad al asumir"
-                ylabel="Presidente"/>
+
+            <RSlider
+                style={{marginTop:"0px", marginBottom:"30px"}}
+                autoplay={true}
+                autoplaySpeed={5000}
+                speed={1000}
+                dots={true}
+                infinite={true}
+                arrows={false}
+                centerPadding="10px"
+                slidesToShow={1}
+                slidesToScroll={1}>
+                <BarChart 
+                    title="Los más jóvenes en asumir" 
+                    labels={youngestAssumpSliced.map(t => t.president)} 
+                    datasets={terms2ChartDS(youngestAssumpSliced, "Edad", toAges, 'rgba(200, 60, 19, 0.6)', 'rgba(200, 60, 19, 1)')}
+                    type="horizontal"
+                    suffix=" años"
+                    xlabel="Edad al asumir"
+                    ylabel="Presidente"/>
+
+                <BarChart 
+                    title="Los más viejos en asumir" 
+                    labels={oldestAssumpSliced.map(t => t.president)} 
+                    datasets={terms2ChartDS(oldestAssumpSliced, "Edad", toAges, 'rgba(130, 130, 190, 0.6)', 'rgba(130, 130, 190, 1)')}
+                    type="horizontal"
+                    suffix=" años"
+                    xlabel="Edad al asumir"
+                    ylabel="Presidente"/>
+            </RSlider>
         </MainView>
     );
 };

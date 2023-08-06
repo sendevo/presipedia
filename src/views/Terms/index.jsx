@@ -8,7 +8,7 @@ const APP_NAME = "Presipedia: Edición Argentina";
 
 const View = () => (
     <MainView title="Términos y condiciones" background={background}>
-        <Box marginTop={"10px"}>                     
+        <Box marginTop={"10px"} textAlign={"justify"}>                     
             <TextBlock title={"Aceptación de los términos"}>
                 Al acceder a <b>{APP_NAME}</b> a través de cualquiera de sus versiones móvil u online, usted acepta los términos y condiciones del servicio aquí detallados.
                 El material multimedial, el texto y la información contenida en esta aplicación en cualquiera de sus versiones, es producto del trabajo realizado por <i>Sendevo Software</i>, salvo que se indique lo contrario (véase <Link to='/about/sources'>Fuentes de información</Link>).

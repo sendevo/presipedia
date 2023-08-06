@@ -5,7 +5,8 @@ const textBlockStyle = {
     border: "1px solid lightgray",
     borderRadius: "5px",
     padding: "10px",
-    marginTop: "5px"
+    marginTop: "5px",
+    textOverflow:"ellipsis"
 };
 
 const titleStyle = {

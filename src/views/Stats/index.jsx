@@ -16,29 +16,6 @@ const View = () => {
 
     return(
         <MainView title="Estadísticas" background={background}>
-            <Slider
-                style={{marginTop:"0px", marginBottom:"30px"}}
-                autoplay={true}
-                autoplaySpeed={5000}
-                speed={1000}
-                dots={true}
-                infinite={true}
-                arrows={false}
-                centerPadding="10px"
-                slidesToShow={1}
-                slidesToScroll={1}>
-                <MapChart title="Nacidos por provincia" data={processed.birthLocations}/>
-                <PieChart 
-                    title="Nacidos por provincia" 
-                    labels={processed.birthLocations.names}
-                    datasets={[
-                        {
-                            label: 'Presidentes nacidos',
-                            data: processed.birthLocations.count, 
-                            backgroundColor: randomColorsGenerator(processed.birthLocations.names.length, 0.8)
-                        }
-                    ]} />
-            </Slider>
 
             <BarChart 
                 title="Edades de asunción"
@@ -107,6 +84,31 @@ const View = () => {
                         backgroundColor: randomColorsGenerator(processed.parties.names.length, 0.8)
                     }
                 ]} />
+
+            <Slider
+                style={{marginTop:"0px", marginBottom:"30px"}}
+                autoplay={true}
+                autoplaySpeed={5000}
+                speed={1000}
+                dots={true}
+                infinite={true}
+                arrows={false}
+                centerPadding="10px"
+                slidesToShow={1}
+                slidesToScroll={1}>
+                <MapChart title="Nacidos por provincia" data={processed.birthLocations}/>
+                <PieChart 
+                    title="Nacidos por provincia" 
+                    labels={processed.birthLocations.names}
+                    datasets={[
+                        {
+                            label: 'Presidentes nacidos',
+                            data: processed.birthLocations.count, 
+                            backgroundColor: randomColorsGenerator(processed.birthLocations.names.length, 0.8)
+                        }
+                    ]} />
+            </Slider>
+
             <PieChart 
                 title="Ocupaciones" 
                 labels={processed.occupations.names}
