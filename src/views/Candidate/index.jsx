@@ -1,10 +1,12 @@
 import { useState } from "react";
 import moment from "moment";
+import { FileOpener } from '@capacitor-community/file-opener';
 import MainView from "../../components/MainView";
 import SwipeableForm from "../../components/SwipeableForm";
 import CandidateResults from "../../components/CandidateResults";
 import Preloader from "../../components/Preloader";
 import { evalCandidate, formToCandidate } from "../../model/candidate/actions";
+import { writeFile } from "../../model/storage";
 import exportPDF from "../../model/pdf";
 import background from "../../assets/backgrounds/background1.jpg";
 
