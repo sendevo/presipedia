@@ -1,8 +1,12 @@
+
 import * as pdfFonts from "pdfmake/build/vfs_fonts.js";
-import pdfMake from 'pdfmake';
+import pdfMake from "pdfmake";
 import { getScaleLongName } from "../candidate/actions";
 import styles from './pdfstyle.json';
 import defaultLogo from '../../assets/b64_logo.json';
+
+//pdfMake.vfs = pdfFonts.pdfMake.vfs;
+pdfMake.vfs = pdfFonts && pdfFonts.pdfMake ? pdfFonts.pdfMake.vfs : globalThis.pdfMake.vfs;
 
 const getContent = results => {    
 
@@ -28,7 +32,7 @@ const getContent = results => {
                 },
                 {
                     width: "50%",
-                    text: strengths.length>0 ? "" : "Las debilidades:",
+                    text: strengths.length>0 ? "Las debilidades:" : "",
                     style: "boldText"
                 }
             ]
@@ -53,9 +57,6 @@ const getContent = results => {
         }
     ];
 };
-
-
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 
 const exportPDF = (results, config) => {

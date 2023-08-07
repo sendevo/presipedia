@@ -17,6 +17,7 @@
     "@capacitor/core": "^5.2.2",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@fontsource/roboto": "^5.0.8",
     "@mui/material": "^5.14.0",
     "chart.js": "^4.3.0",
     "moment": "^2.29.4",
