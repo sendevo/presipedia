@@ -1,6 +1,8 @@
 import moment from "moment";
 import { ZODIAC_SIGNS, MONTHS } from "../model/constants";
 
+export const round2 = num => Math.round(num*100)/100;
+
 const hsv2rgb = (h,s,v) => {                              
     let f = (n,k = (n+h/60)%6) => v - v*s*Math.max( Math.min(k,4-k,1), 0);     
     return [f(5)*255,f(3)*255,f(1)*255];

@@ -131,6 +131,22 @@ const analyzeDatabase = database => {
             count: []
         });
 
+    const partiesDuration = database.terms
+        .reduce((acc, current) => {
+            const duration = moment(current.term_end).diff(current.term_begin,'years', true);
+            const pIndex = acc.names.indexOf(current.party);
+            if (pIndex === -1) {
+                acc.names.push(current.party);
+                acc.count.push(duration);
+            } else {
+                acc.count[pIndex] += duration;
+            }
+            return acc;
+        }, {
+            names: [],
+            count: []
+        });
+
     const occupations = Object.values(database.people)
         .reduce((acc, current) => {
             const occupations = current.occupation.split(" y ").map(oc => capitalize(oc));
@@ -270,6 +286,7 @@ const analyzeDatabase = database => {
         occupations,
         genders,
         parties,
+        partiesDuration,
         aliveCountPerDate,
         aliveExPresidentsPerDate
     });

@@ -74,16 +74,39 @@ const View = () => {
                     ylabel="Nacidos"/>
             </Slider>
 
-            <PieChart 
-                title="Tendencia política de mandatos" 
-                labels={processed.parties.names}
-                datasets={[
-                    {
-                        label: 'Mandatos',
-                        data: processed.parties.count,
-                        backgroundColor: randomColorsGenerator(processed.parties.names.length, 0.8)
-                    }
-                ]} />
+            <Slider
+                style={{marginTop:"0px", marginBottom:"30px"}}
+                autoplay={true}
+                autoplaySpeed={5000}
+                speed={1000}
+                dots={true}
+                infinite={true}
+                arrows={false}
+                centerPadding="10px"
+                slidesToShow={1}
+                slidesToScroll={1}>
+                <PieChart 
+                    title="Tendencias políticas" 
+                    labels={processed.partiesDuration.names}
+                    datasets={[
+                        {
+                            label: 'Años',
+                            data: processed.partiesDuration.count.map(p => Math.round(p)),
+                            backgroundColor: randomColorsGenerator(processed.partiesDuration.names.length, 0.8)
+                        }
+                    ]} />
+                <PieChart 
+                    title="Tendencias políticas" 
+                    labels={processed.parties.names}
+                    datasets={[
+                        {
+                            label: 'Mandatos',
+                            data: processed.parties.count,
+                            backgroundColor: randomColorsGenerator(processed.parties.names.length, 0.8)
+                        }
+                    ]} />
+
+            </Slider>
 
             <Slider
                 style={{marginTop:"0px", marginBottom:"30px"}}
@@ -111,6 +134,7 @@ const View = () => {
 
             <PieChart 
                 title="Ocupaciones" 
+                clarification="Algunos mandatarios tienen más de una ocupación."
                 labels={processed.occupations.names}
                 datasets={[
                     {

@@ -1,4 +1,6 @@
+import { round2 } from "../utils";
 import processed from "../../assets/processed.json";
+
 
 const adapter = {
     assumptionAgeHistogram: "Edad",
@@ -41,7 +43,7 @@ export const evalCandidate = candidate => {
     Object.keys(adapter).forEach(attr => {
         if(processed[attr]){
             const index = processed[attr].names.indexOf(candidate[attr]);
-            result[attr] = (index >= 0 && index < processed[attr].scaled.length) ? processed[attr].scaled[index] : 0;
+            result[attr] = (index >= 0 && index < processed[attr].scaled.length) ? round2(processed[attr].scaled[index]) : 0;
             sum += result[attr];
         }
     });

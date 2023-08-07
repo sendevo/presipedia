@@ -2,7 +2,6 @@
     "header": {
         "fontSize": 18,
         "bold": true,
-        "alignment": "center",
         "margin": [0, 0, 0, 15] 
     },
     "subheader": {

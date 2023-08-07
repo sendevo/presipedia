@@ -1,11 +1,56 @@
 import * as pdfFonts from "pdfmake/build/vfs_fonts.js";
 import pdfMake from 'pdfmake';
+import { getScaleLongName } from "../candidate/actions";
 import styles from './pdfstyle.json';
 import defaultLogo from '../../assets/b64_logo.json';
 
-const getContent = data => {
+const getContent = results => {    
+
+    const labels = Object.keys(results).filter(k => k !== "total" && k !== "name" && k !== "image");
+    const strengths = labels.filter(l => results[l] > 50).map(k => ({text:`${getScaleLongName(k)}: ${results[k].toFixed(2)}%`, style:"text"}));
+    const weaknesses = labels.filter(l => results[l] <= 50).map(k => ({text:`${getScaleLongName(k)}: ${results[k].toFixed(2)}%`, style:"text"}));
+
     return [
-        // TODO
+        {
+            text: `Resultados para: ${results.name}`,
+            style: "subheader"
+        },
+        {
+            text: `Puntaje obtenido: ${results.total.toFixed(2)}%`,
+            style: "header"
+        },
+        {
+            columns: [
+                {
+                    width: "50%",
+                    text: strengths.length>0 ? "Los fuertes:" : "Las debilidades:",
+                    style: "boldText"
+                },
+                {
+                    width: "50%",
+                    text: strengths.length>0 ? "" : "Las debilidades:",
+                    style: "boldText"
+                }
+            ]
+        },
+        {
+            columns: [
+                {
+                    width: "50%",
+                    ul: strengths.length>0 ? strengths : weaknesses
+                },
+                {
+                    width: "50%",
+                    ul: strengths.length>0 ? weaknesses : []
+                }
+            ]
+        },
+        {
+            image: results.image,
+            width: 500,
+            margin: [10,10,10,10],
+            alignment: "center"
+        }
     ];
 };
 

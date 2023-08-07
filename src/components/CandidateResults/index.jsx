@@ -8,7 +8,7 @@ import {
 import { RadarChart } from "../../charts";
 import { colorRangeGenerator } from "../../model/utils";
 import { getScaleKeyName, getScaleLongName } from "../../model/candidate/actions";
-import { useState } from "react";
+
 
 const mainResultStyle = {
     fontSize: "18px",
@@ -24,7 +24,7 @@ const CandidateResults = ({results, onReset, onShare}) => {
     const labelNames = labels.map(k => getScaleKeyName(k));
     const datasets = labels.map(l => results[l]);
     const strengths = labels.filter(l => results[l] > 50).map(k => ({name:getScaleLongName(k), value: results[k]}));
-    const weakness = labels.filter(l => results[l] < 50).map(k => ({name:getScaleLongName(k), value: results[k]}));
+    const weakness = labels.filter(l => results[l] <= 50).map(k => ({name:getScaleLongName(k), value: results[k]}));
 
     const handleShare = () => {
         const data = {
