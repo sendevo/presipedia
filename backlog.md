@@ -67,7 +67,7 @@
     - [x] Compilar version build para android.  
     - [x] Publicación en hosting.  
     - [x] Publicación en Play Store.  
-  - [ ] Opensourcing del repo.  
+  - [x] Opensourcing del repo.  
   
 
 ### v1.1._ (beta) (requisitos pendientes):  

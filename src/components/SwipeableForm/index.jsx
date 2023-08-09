@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import { Link } from "react-router-dom";
 import moment from "moment";
 import {
     Box,
@@ -137,7 +138,7 @@ const SwipeableForm = ({onSubmit}) => {
                 <Box sx={slideStyle}>
                     <style>{keyframesStyles}</style>
                     <Typography>
-                        ¿Te ves a vos o a tu mejor amigo/a como candidato/a a presidente de nuestro país? ¿Te gustaría saber cuántos parecidos tienen con quienes ya pasaron por el <a href="/blog/article?index=3"><i>Sillón de Rivadavia</i></a>?
+                        ¿Te ves a vos o a tu mejor amigo/a como candidato/a a presidente de nuestro país? ¿Te gustaría saber cuántos parecidos tienen con quienes ya pasaron por el <Link to="/blog/article?index=3"><i>Sillón de Rivadavia</i></Link>?
                     </Typography>
                     <Typography sx={{mt:1}}>
                         En este juego, te proponemos evaluar las similitudes de tu candidato/a con todos los expresidentes de Argentina, por lo que te iremos pidiendo algunos datos para que podamos conocerlo/a mejor.
