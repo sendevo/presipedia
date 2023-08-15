@@ -26,7 +26,7 @@ import {
     SuggesterInput 
 } from "../Inputs";
 import ArgMap from "../ArgMap";
-import { PROVINCES, OCCUPATIONS, MONTHS } from "../../model/constants";
+import { PROVINCES, OCCUPATIONS, MONTHS, PARTIES } from "../../model/constants";
 import { getZodiac, capitalize } from "../../model/utils";
 import genderMale from "../../assets/icons/gender_male.png";
 import genderFemale from "../../assets/icons/gender_female.png";
@@ -246,7 +246,7 @@ const SwipeableForm = ({onSubmit}) => {
                         id="party"
                         label="Tendencia política"
                         value={form.party}
-                        options={processed.parties.names.map((op,i)=>({key:i, label:op}))}
+                        options={processed.parties.names.concat(PARTIES).map((op,i)=>({key:i, label:op}))}
                         onChange={handleInputChange}/>
                 </Box>
 

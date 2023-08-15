@@ -25,7 +25,7 @@ const MapChart = ({title, data}) => {
             contentSx={{paddingBottom:"0px!important"}}>
             <Typography color={"#666"} fontSize={"18px"}>{title}</Typography>
             <ArgMap height="48vh" fillFc={index => colorMap[index]} onClick={index=>setSelectedProv(index)}/>
-            {selectedProv > -1 && selectedProv < PROVINCES.length && <Typography fontSize={10} sx={{paddingLeft:"10px"}}>Ex-presidentes de {PROVINCES[selectedProv]}: {provinceCounter[selectedProv]}</Typography>}
+            {selectedProv > -1 && selectedProv < PROVINCES.length && <Typography fontSize={10} sx={{paddingLeft:"10px"}}>Expresidentes de {PROVINCES[selectedProv]}: {provinceCounter[selectedProv]}</Typography>}
         </GenericCard>
     );
 };

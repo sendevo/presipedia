@@ -2,6 +2,7 @@ import moment from "moment";
 
 export const getFullName = person => `${person.name} ${person.surname}`;
 export const getCity = person => person.birth_location.features[0].properties.city;
+export const getProvince = person => person.birth_location.features[0].properties.province;
 export const getBirthDate = person => person.birth_date;
 export const getDeathDate = person => person.death_date;
 export const getAgeOfDeath = person => moment(person.death_date).diff(person.birth_date,'years',false);

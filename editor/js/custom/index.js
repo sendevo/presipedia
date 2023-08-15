@@ -221,6 +221,7 @@ exportButton.addEventListener('click', () => {
         .catch(console.error);
 });
 
+/*
 const analyzeButton = document.getElementById("analyze-button");
 analyzeButton.addEventListener('click', () => {
     console.log("Analyzing data...");
@@ -234,3 +235,4 @@ analyzeButton.addEventListener('click', () => {
     link.click();
     URL.revokeObjectURL(downloadUrl);
 });
+*/

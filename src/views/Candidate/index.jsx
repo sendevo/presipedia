@@ -60,7 +60,7 @@ const View = () => {
     };
 
     return(
-        <MainView title="Mi candidato" background={background}>
+        <MainView title="Presidentómetro" background={background}>
             {state===0 && <SwipeableForm onSubmit={handleFormSubmit}/>}
             {state===1 && <Preloader />}
             {state===2 && 

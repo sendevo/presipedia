@@ -22,9 +22,9 @@ const CandidateResults = ({results, onReset, onShare}) => {
 
     const labels = Object.keys(results).filter(k => k !== "total" && k !== "name");
     const labelNames = labels.map(k => getScaleKeyName(k));
-    const datasets = labels.map(l => results[l]);
-    const strengths = labels.filter(l => results[l] > 50).map(k => ({name:getScaleLongName(k), value: results[k]}));
-    const weakness = labels.filter(l => results[l] <= 50).map(k => ({name:getScaleLongName(k), value: results[k]}));
+    const datasets = labels.map(l => results[l].score);
+    const strengths = labels.filter(l => results[l].score > 50).map(k => ({name:getScaleLongName(k), value: `${results[k].score.toFixed()} (${results[k].freq.toFixed(2)}%)`}));
+    const weakness = labels.filter(l => results[l].score <= 50).map(k => ({name:getScaleLongName(k), value: `${results[k].score.toFixed()} (${results[k].freq.toFixed(2)}%)`}));
 
     const handleShare = () => {
         const data = {
@@ -39,22 +39,22 @@ const CandidateResults = ({results, onReset, onShare}) => {
             <Box>
                 <Typography>Resultados para <b>{results.name}</b></Typography>
                 <Typography sx={mainResultStyle}>Puntaje obtenido: {results.total?.toFixed(2)}%</Typography>
-                <Grid container direction="row" spacing={1} sx={{fontSize:12}}>
+                <Grid container direction="row" spacing={1} sx={{fontSize:11}}>
                     {strengths.length > 0 && 
                         <Grid item xs={6}>
-                            <Typography fontSize={14}>Los fuertes:</Typography>
+                            <Typography fontSize={12}>Los fuertes:</Typography>
                             <ul style={{margin:"0px", paddingLeft: "15px"}}>
                                 {strengths.map((item, index) => (
-                                    <li key={index}>{item.name}: {item.value.toFixed(2)}%</li>
+                                    <li style={{paddingLeft: "0px"}} key={index}>{item.name}: {item.value}</li>
                                 ))}
                             </ul>
                         </Grid>}
                     {weakness.length > 0 && 
                         <Grid item xs={6}>
-                            <Typography fontSize={14}>Las debilidades:</Typography>
+                            <Typography fontSize={12}>Las debilidades:</Typography>
                             <ul style={{margin:"0px", paddingLeft: "15px"}}>
                                 {weakness.map((item, index) => (
-                                    <li key={index}>{item.name}: {item.value.toFixed(2)}%</li>
+                                    <li style={{paddingLeft: "0px"}} key={index}>{item.name}: {item.value}</li>
                                 ))}
                             </ul>
                         </Grid>}
@@ -62,8 +62,8 @@ const CandidateResults = ({results, onReset, onShare}) => {
             </Box>
             <RadarChart 
                 title="Compatibilidad por escala"
-                labels={labelNames}
-                suffix="%"
+                labels={labelNames}              
+                suffix=" pts."  
                 datasets={[{
                     data: datasets,
                     label: "Compatibilidad",

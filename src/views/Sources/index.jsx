@@ -17,7 +17,7 @@ const View = () => {
         <MainView title="Fuentes de información" background={background}>
             <Box textAlign={"justify"}>
                 <TextBlock title="Línea de tiempo">
-                    <b>{APP_NAME}</b> está inspirada en una nota publicada por el ex-diario <a href="https://www.lanueva.com/nota/2003-5-25-9-0-0-desde-rivadavia-todos-los-que-se-sentaron-en-el-sillon" rel="noopener" target="_blank">La Nueva Provincia</a> del 25 de mayo de 2003.
+                    <b>{APP_NAME}</b> está inspirada en una nota publicada por el exdiario <a href="https://www.lanueva.com/nota/2003-5-25-9-0-0-desde-rivadavia-todos-los-que-se-sentaron-en-el-sillon" rel="noopener" target="_blank">La Nueva Provincia</a> del 25 de mayo de 2003.
                     A partir de esta fuente se conformó la primera versión de la base de datos con fechas de nacimiento y defunción de los máximos mandatarios que tuvo la Argentina, como así también los periodos de cada mandato hasta la fecha de redacción de dicho artículo.
                     La visualización de la cronología y otros datos interesantes está inspirada en los gráficos interactivos de <a href="https://www.infobae.com/politica/2019/10/27/curiosidades-estadisticas-y-datos-poco-conocidos-de-los-53-mandatarios-de-la-historia-argentina/" rel="noopener" target="_blank">este artículo de Infobae</a>.
                     Para completar el resto de la información que produjo la historia argentina durante los 20 años siguientes, así como también para revisar la validez de los datos presentados, se utilizó principalmente al sitio web <a href="https://es.wikipedia.org" rel="noopener" target="_blank">Wikipedia</a> como fuente de información.

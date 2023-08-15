@@ -1,7 +1,7 @@
 import MainView from "../../components/MainView";
 import GridMenu from "../../components/GridMenu";
-import candidateIcon from "../../assets/icons/candidate.png";
-import quizIcon from "../../assets/icons/quiz.png";
+import candidateIcon from "../../assets/icons/candidate_gauge.png";
+import quizIcon from "../../assets/icons/test.png";
 import background from "../../assets/backgrounds/background8.jpg";
 
 const View = () => {
@@ -9,8 +9,8 @@ const View = () => {
     const content = [
         {
             path: "/games/candidate",
-            title: "Mi candidato",
-            text: "¿Podrá ser el siguiente?",
+            title: "Presidentómetro",
+            text: "¿Podrás ser el siguiente?",
             icon: candidateIcon
         },
         {

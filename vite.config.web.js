@@ -4,8 +4,8 @@ import react from '@vitejs/plugin-react-swc'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: "/presipedia/app/",
+  base: "https://sendevosoftware.com.ar/presipedia/app/",
   build: {
-    outDir: 'www',
+    outDir: 'dist-web',
   },
 })

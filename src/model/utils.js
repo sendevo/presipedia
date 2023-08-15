@@ -1,5 +1,7 @@
 import moment from "moment";
-import { ZODIAC_SIGNS, MONTHS } from "../model/constants";
+import { ZODIAC_SIGNS, MONTHS } from "../model/constants.js";
+
+export const arraySum = (arr, attr="") => arr.reduce((a, b) => a + (attr ? b[attr] : b), 0);
 
 export const round2 = num => Math.round(num*100)/100;
 

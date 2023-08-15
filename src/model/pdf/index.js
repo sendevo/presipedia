@@ -11,8 +11,8 @@ pdfMake.vfs = pdfFonts && pdfFonts.pdfMake ? pdfFonts.pdfMake.vfs : globalThis.p
 const getContent = results => {    
 
     const labels = Object.keys(results).filter(k => k !== "total" && k !== "name" && k !== "image");
-    const strengths = labels.filter(l => results[l] > 50).map(k => ({text:`${getScaleLongName(k)}: ${results[k].toFixed(2)}%`, style:"text"}));
-    const weaknesses = labels.filter(l => results[l] <= 50).map(k => ({text:`${getScaleLongName(k)}: ${results[k].toFixed(2)}%`, style:"text"}));
+    const strengths = labels.filter(l => results[l].score > 50).map(k => ({text:`${getScaleLongName(k)}: ${results[k].score.toFixed(2)} (${results[k].freq.toFixed(2)}%)`, style:"text"}));
+    const weaknesses = labels.filter(l => results[l].score <= 50).map(k => ({text:`${getScaleLongName(k)}: ${results[k].score.toFixed(2)} (${results[k].freq.toFixed(2)}%)`, style:"text"}));
 
     return [
         {

@@ -16,7 +16,7 @@ const adapterLong = {
     assumptionAgeHistogram: "Edad de asunción",
     birthsPerMonth: "Mes de nacimiento",
     birthsPerZodiacSign: "Signo zodiacal",
-    birthLocations: "Provincia de nacimiento",
+    birthLocations: "Prov. de nacimiento",
     occupations: "Ocupación",
     genders: "Género",
     parties: "Tendencia política"
@@ -43,8 +43,10 @@ export const evalCandidate = candidate => {
     Object.keys(adapter).forEach(attr => {
         if(processed[attr]){
             const index = processed[attr].names.indexOf(candidate[attr]);
-            result[attr] = (index >= 0 && index < processed[attr].scaled.length) ? round2(processed[attr].scaled[index]) : 0;
-            sum += result[attr];
+            const score = (index >= 0 && index < processed[attr].scaled?.length) ? round2(processed[attr].scaled[index]) : 0;
+            const freq = (index >= 0 && index < processed[attr].freq?.length) ? round2(processed[attr].freq[index]) : 0;
+            sum += score;
+            result[attr] = {score, freq};            
         }
     });
     result.name = candidate.name;

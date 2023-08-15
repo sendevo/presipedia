@@ -57,7 +57,7 @@ const ImgSlide = ({src, link, text, imageHeight="250px"}) => (
 );
 
 const gamesSlides = [
-    <ImgSlide key={0} src="/carousel/candidate.png" link="/games/candidate" text="Mi candidato" />,
+    <ImgSlide key={0} src="/carousel/candidate.png" link="/games/candidate" text="Presidentómetro" />,
     <ImgSlide key={1} src="/carousel/quiz.png" link="/games/quiz" text="Preguntas y respuestas" />
 ];
 
