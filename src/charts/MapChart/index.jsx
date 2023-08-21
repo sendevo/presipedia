@@ -2,15 +2,15 @@ import { useState } from "react";
 import { Typography } from "@mui/material";
 import GenericCard from "../../components/GenericCard"
 import ArgMap from "../../components/ArgMap";
-import { colorMapGenerator } from "../../model/utils";
+import { colorMapGenerator, round2 } from "../../model/utils";
 import { PROVINCES } from "../../model/constants";
 
-const MapChart = ({title, data}) => {
+const MapChart = ({title, dataset, labels}) => {
     const [selectedProv, setSelectedProv] = useState(-1);
         
     const provinceCounter = new Array(PROVINCES.length).fill(0);
-    data.names.forEach((p, index) => {
-        provinceCounter[PROVINCES.indexOf(p)] = data.count[index];
+    labels.forEach((p, index) => {
+        provinceCounter[PROVINCES.indexOf(p)] = dataset.data[index];
     });
     const colorMap = colorMapGenerator(provinceCounter, 230, 0, 1, 1);
 
@@ -25,7 +25,7 @@ const MapChart = ({title, data}) => {
             contentSx={{paddingBottom:"0px!important"}}>
             <Typography color={"#666"} fontSize={"18px"}>{title}</Typography>
             <ArgMap height="48vh" fillFc={index => colorMap[index]} onClick={index=>setSelectedProv(index)}/>
-            {selectedProv > -1 && selectedProv < PROVINCES.length && <Typography fontSize={10} sx={{paddingLeft:"10px"}}>Expresidentes de {PROVINCES[selectedProv]}: {provinceCounter[selectedProv]}</Typography>}
+            {selectedProv > -1 && selectedProv < PROVINCES.length && <Typography fontSize={10} sx={{paddingLeft:"10px"}}>{dataset.label} de {PROVINCES[selectedProv]}: {round2(provinceCounter[selectedProv])}</Typography>}
         </GenericCard>
     );
 };

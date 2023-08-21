@@ -42,7 +42,7 @@ const Select = props => {
                 {rIcon && <Box>{ icon }</Box>}
             </Grid>
             }
-            <Grid item xs={rIcon ? 11 : (iconDisplay ? 10 : 12)} className={classes.InputContainer}>
+            <Grid item xs={rIcon ? 11 : (iconDisplay ? 10 : 12)} className={classes.Container}>
                 <FormControl fullWidth size="small">
                     <InputLabel id={id}>{label}</InputLabel>
                     <MuiSelect

@@ -2,7 +2,7 @@ import fs from "fs";
 import moment from "moment";
 import { MONTHS, ZODIAC_SIGNS, DAY_MS } from "../model/constants.js";
 import { arraySum, getZodiac, capitalize } from "../model/utils.js";
-import { getProvince } from "../model/data.js";
+import { getAgeOfAssumption, getProvince } from "../model/data.js";
 import database from "./database.json" assert { type: 'json' };
 
 
@@ -63,7 +63,7 @@ const youngestAssumption = database.terms
     .map(term => {
         const person = database.people[term.cid];
         const president = getPersonName(term.cid);
-        const age = moment(term.term_begin).diff(person.birth_date, 'years');
+        const age = getAgeOfAssumption(person, term);
         return {
             president,
             age
@@ -99,6 +99,18 @@ const assumptionAgeHistogram = youngestAssumption
     });
 assumptionAgeHistogram.scaled = scaleArray(assumptionAgeHistogram.count);
 assumptionAgeHistogram.freq = getProportions(assumptionAgeHistogram.count);
+assumptionAgeHistogram.years = database.terms 
+    .reduce((acc, current) => {
+        const person = database.people[current.cid];
+        const age = getAgeOfAssumption(person, current);
+        const binStart = Math.floor(age/10)*10;
+        const binEnd = binStart+10;
+        const name = `${binStart}-${binEnd}`;
+        const binIndex = assumptionAgeHistogram.names.indexOf(name);
+        const duration = moment(current.term_end).diff(current.term_begin, 'years', true);            
+        acc[binIndex] += duration;
+        return acc;
+    }, Array(assumptionAgeHistogram.names.length).fill(0));
 
 
 const birthsPerMonth = {
@@ -230,16 +242,16 @@ const parties = database.terms
         if (pIndex === -1) {
             acc.names.push(current.party);
             acc.count.push(1);
-            acc.durations.push(duration);
+            acc.years.push(duration);
         } else {
             acc.count[pIndex]++;
-            acc.durations[pIndex]+=duration;
+            acc.years[pIndex]+=duration;
         }
         return acc;
     }, {
         names: [],
         count: [],
-        durations: []
+        years: []
     });
 parties.scaled = scaleArray(parties.count);
 parties.freq = getProportions(parties.count);

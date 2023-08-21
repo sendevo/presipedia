@@ -36,7 +36,7 @@ const Input = props => {
                 {rIcon && <Box>{ icon }</Box>}
             </Grid>
             }
-            <Grid item xs={rIcon ? 11 : (iconDisplay ? 10 : 12)} className={classes.InputContainer}>
+            <Grid item xs={rIcon ? 11 : (iconDisplay ? 10 : 12)} className={classes.Container}>
                 <TextField
                     variant="outlined"
                     size="small" 

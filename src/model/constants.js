@@ -2,9 +2,9 @@ import moment from "moment";
 
 //// BUILD ////
 export const APP_NAME = "Presipedia: Edición Argentina";
-export const VERSION_CODE = "2";
-export const VERSION_VALUE = "1.0.1 (alpha)";
-export const BUILD_DATE = 1691452195438; // 7-8-2023 20:50 hs
+export const VERSION_CODE = "3";
+export const VERSION_VALUE = "1.0.2 (alpha)";
+export const BUILD_DATE = 1692656103640; // 21-8-2023 19:15 hs
 //// DATE-TIME ////
 export const VIS_DATE_FORMAT = "YYYY-MM-DD";
 export const DAY_MS = 86400000;

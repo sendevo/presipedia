@@ -9,7 +9,7 @@ const View = () => {
     const content = [
         {
             path: "/games/candidate",
-            title: "Presidentómetro",
+            title: "Presidenciómetro",
             text: "¿Podrás ser el siguiente?",
             icon: candidateIcon
         },

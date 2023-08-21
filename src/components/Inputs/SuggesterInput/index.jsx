@@ -35,7 +35,7 @@ const renderInput = (props, params) => {
                 }
             </Grid>
             }
-            <Grid item xs={props.rIcon ? 11 : (iconDisplay ? 10 : 12)} className={classes.InputContainer}>
+            <Grid item xs={props.rIcon ? 11 : (iconDisplay ? 10 : 12)} className={classes.Container}>
                 <TextField
                     {...params}         
                     sx={{zIndex: 0}}                    

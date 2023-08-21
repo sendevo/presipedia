@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Grid, Slider as MuiSlider } from '@mui/material';
+import { Box, Grid, Slider as MuiSlider } from '@mui/material';
 import classes from '../style.module.css';
 
 const getMarks = (min, max, length) => Array.from({length}, (_, i) => (min + (max-min)/(length-1)*i))
@@ -21,7 +21,7 @@ const Slider = props => {
             }
             <Grid item xs={props.icon && iconLoaded ? 10 : 12}>
                 <span className={classes.Title}>{props.name}</span>
-                <div className={classes.SliderContainer}>
+                <Box className={classes.InputContainer}>
                     <MuiSlider
                         size={props.size || "medium"}
                         className={classes.Slider}
@@ -29,7 +29,7 @@ const Slider = props => {
                         marks={props.withmarks && getMarks(props.min, props.max, props.ticks)}
                         valueLabelFormat={v=>`${v} ${props.suffix}`}
                         {...props} />
-                </div>
+                </Box>
             </Grid>
         </Grid>
     );

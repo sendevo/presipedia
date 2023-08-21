@@ -21,7 +21,7 @@
   - [x] Navegación.  
     - [x] React Router Dom.  
     - [x] Barra de navegación inferior.  
-  - [ ] Visualizaciones de línea de tiempo con Vis.js  
+  - [ ] Visualizaciones de línea de tiempo    
     - [x] Linea de tiempo de mandatos y eventos.  
     - [x] Linea de tiempo de nacimientos y fallecimientos.  
     - [ ] Buscar alternativas de visualizacion.  
