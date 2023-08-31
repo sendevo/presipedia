@@ -5,7 +5,7 @@ import MainView from "../../components/MainView";
 import SwipeableForm from "../../components/SwipeableForm";
 import CandidateResults from "../../components/CandidateResults";
 import Preloader from "../../components/Preloader";
-import { evalCandidate, formToCandidate } from "../../model/candidate/actions";
+import { evalCandidate } from "../../model/candidate/actions";
 import { writeFile } from "../../model/storage";
 import exportPDF from "../../model/pdf";
 import background from "../../assets/backgrounds/background1.jpg";
@@ -16,15 +16,30 @@ const pdfConfig = {
     watermark: true
 };
 
+const formToCandidate = form => {
+    const binStart = Math.floor(form.age/10)*10;
+    const binEnd = binStart+10;
+    return {
+        name: form.name,
+        assumptionAgeHistogram: `${binStart}-${binEnd}`,
+        birthsPerMonth: form.month,
+        birthsPerZodiacSign: form.zodiac,
+        birthLocations: form.province,
+        occupations: form.occupation,
+        genders: form.gender,
+        parties: form.party
+    };
+};
+
 const View = () => {
 
-    const [state, setState] = useState(0);
+    const [state, setState] = useState(0); // 0: start, 1: loading, 2: results
     const [results, setResults] = useState({});
 
     const handleFormSubmit = form => {
-        setState(1);
         const candidate = formToCandidate(form);
         const results = evalCandidate(candidate);
+        setState(1);
         setResults(results);
         setTimeout(()=>setState(2), 2000);
     };

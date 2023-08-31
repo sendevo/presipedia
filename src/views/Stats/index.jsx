@@ -21,7 +21,7 @@ const View = () => {
         setDisplayYears(e.target.checked);
     };
 
-    const dataAttr = displayYears ? "years" : "count";
+    const dataAttr = displayYears ? "years" : "terms";
 
     return (
         <MainView title="Estadísticas" background={background}>
@@ -37,7 +37,7 @@ const View = () => {
                 title="Edades de asunción"
                 labels={processed.assumptionAgeHistogram.names}
                 datasets={[{
-                    data: processed.assumptionAgeHistogram[dataAttr],
+                    data: processed.assumptionAgeHistogram[dataAttr].count,
                     label: displayYears ? "Años de gobierno":"Expresidentes",
                     backgroundColor: colorRangeGenerator(12, 230),
                     borderColor: 'rgba(20, 20, 250, 0.5)',
@@ -63,7 +63,7 @@ const View = () => {
                     title={displayYears ? "Años de mandato por mes":"Nacidos por mes"}
                     labels={moment.monthsShort()}
                     datasets={[{
-                        data: processed.birthsPerMonth[dataAttr],
+                        data: processed.birthsPerMonth[dataAttr].count,
                         label: displayYears ? "Años" : "Nacidos",
                         backgroundColor: colorRangeGenerator(12, 230),
                         borderColor: 'rgba(20, 20, 250, 0.5)',
@@ -78,7 +78,7 @@ const View = () => {
                     title={displayYears ? "Años de mandato por signo":"Nacidos por signo zodiacal"}
                     labels={ZODIAC_SIGNS}
                     datasets={[{
-                        data: processed.birthsPerZodiacSign[dataAttr],
+                        data: processed.birthsPerZodiacSign[dataAttr].count,
                         label: displayYears ? "Años" : "Nacidos",
                         backgroundColor: colorRangeGenerator(12, 20),
                         borderColor: 'rgba(250, 20, 20, 0.5)',
@@ -96,7 +96,7 @@ const View = () => {
                 datasets={[
                     {
                         label: displayYears ? "Años" : "Mandatos",
-                        data: processed.parties[dataAttr],
+                        data: processed.parties[dataAttr].count,
                         backgroundColor: randomColorsGenerator(processed.parties.names.length, 0.8)
                     }
                 ]} />
@@ -117,7 +117,7 @@ const View = () => {
                     labels={processed.birthLocations.names}
                     dataset={{
                         label: displayYears ? "Años" : "Expresidentes",
-                        data: processed.birthLocations[dataAttr]
+                        data: processed.birthLocations[dataAttr].count
                     }}
                 />
                 <PieChart 
@@ -126,7 +126,7 @@ const View = () => {
                     datasets={[
                         {
                             label: displayYears ? "Años" : "Expresidentes",
-                            data: processed.birthLocations[dataAttr], 
+                            data: processed.birthLocations[dataAttr].count, 
                             backgroundColor: randomColorsGenerator(processed.birthLocations.names.length, 0.8)
                         }
                     ]} />
@@ -139,7 +139,7 @@ const View = () => {
                 datasets={[
                     {
                         label: displayYears ? "Años" : "Expresidentes",
-                        data: processed.occupations[dataAttr],
+                        data: processed.occupations[dataAttr].count,
                         backgroundColor: randomColorsGenerator(processed.occupations.names.length, 0.8)
                     }
                 ]} />

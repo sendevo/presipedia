@@ -7,7 +7,7 @@ import SuggesterInput from "./SuggesterInput";
 import Switch from "./Switch";
 
 export { 
-    DateInput,
+    DateInput,    
     Input,
     Radio,
     Select,

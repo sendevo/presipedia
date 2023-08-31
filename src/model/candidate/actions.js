@@ -2,7 +2,7 @@ import { round2 } from "../utils";
 import processed from "../../assets/processed.json";
 
 
-const adapter = {
+const scales = {
     assumptionAgeHistogram: "Edad",
     birthsPerMonth: "Mes",
     birthsPerZodiacSign: "Signo",
@@ -12,7 +12,7 @@ const adapter = {
     parties: "Tendencia"
 };
 
-const adapterLong = {
+const scalesLong = {
     assumptionAgeHistogram: "Edad de asunción",
     birthsPerMonth: "Mes de nacimiento",
     birthsPerZodiacSign: "Signo zodiacal",
@@ -22,42 +22,29 @@ const adapterLong = {
     parties: "Tendencia política"
 };
 
-export const formToCandidate = form => {
-    const binStart = Math.floor(form.age/10)*10;
-    const binEnd = binStart+10;
-    return {
-        name: form.name,
-        assumptionAgeHistogram: `${binStart}-${binEnd}`,
-        birthsPerMonth: form.month,
-        birthsPerZodiacSign: form.zodiac,
-        birthLocations: form.province,
-        occupations: form.occupation,
-        genders: form.gender,
-        parties: form.party
-    };
-};
+const scalesCount = Object.keys(scales).length;
 
-export const evalCandidate = candidate => {
+export const evalCandidate = candidate => {    
     const result = {};
     let sum = 0;
-    Object.keys(adapter).forEach(attr => {
+    Object.keys(scales).forEach(attr => {
         if(processed[attr]){
             const index = processed[attr].names.indexOf(candidate[attr]);
-            const score = (index >= 0 && index < processed[attr].scaled?.length) ? round2(processed[attr].scaled[index]) : 0;
-            const freq = (index >= 0 && index < processed[attr].freq?.length) ? round2(processed[attr].freq[index]) : 0;
+            const score = (index >= 0 && index < processed[attr].terms.scaled?.length) ? round2(processed[attr].terms.scaled[index]) : 0;
+            const freq = (index >= 0 && index < processed[attr].terms.frequency?.length) ? round2(processed[attr].terms.frequency[index]) : 0;
             sum += score;
             result[attr] = {score, freq};            
         }
     });
     result.name = candidate.name;
-    result.total = sum/Object.keys(adapter).length;
+    result.total = sum/scalesCount;
     return result;
 };
 
 export const getScaleKeyName = key => {
-    return adapter[key];
+    return scales[key];
 };
 
 export const getScaleLongName = key => {
-    return adapterLong[key];
+    return scalesLong[key];
 };

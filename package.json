@@ -1,12 +1,12 @@
 {
   "name": "presipedia",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.3",
   "type": "module",
   "scripts": {
     "process-db": "node src/assets/analyzer.mjs && mv processed.json src/assets/",
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && npx cap sync",
     "build-web": "vite build --config vite.config.web.js",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"

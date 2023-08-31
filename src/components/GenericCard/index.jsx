@@ -7,7 +7,7 @@ const cardStyle = {
 };
 
 const contentStyle = {
-    padding: "10px",
+    p: 1,
     height: "100%"
 };
 

@@ -19,20 +19,19 @@ import {
     FaArrowAltCircleRight 
 } from "react-icons/fa";
 import { 
-    DateInput,
+    DateInput,    
     Input, 
     Radio, 
     Select,
     SuggesterInput 
 } from "../Inputs";
 import ArgMap from "../ArgMap";
-import { PROVINCES, OCCUPATIONS, MONTHS, PARTIES } from "../../model/constants";
+import { PROVINCES, OCCUPATIONS, MONTHS, PARTIES, YEAR_MS } from "../../model/constants";
 import { getZodiac, capitalize } from "../../model/utils";
 import genderMale from "../../assets/icons/gender_male.png";
 import genderFemale from "../../assets/icons/gender_female.png";
 import genderUnk from "../../assets/icons/gender_unk.png";
 import processed from "../../assets/processed.json";
-import GenericCard from "../GenericCard";
 
 
 const buttonStyle = {
@@ -48,7 +47,7 @@ const instructionsStyle = {
 };
 
 const tipStyle = {
-    mt: "5px",
+    mt: 2,
     fontStyle:"italic",
     color: "#444",
     fontSize:"14px",
@@ -88,7 +87,14 @@ const SwipeableForm = ({onSubmit}) => {
 
     const sliderRef = useRef();
 
-    const [form, setForm] = useState({
+    const [{
+        name,
+        gender,
+        province,
+        birthdate,
+        occupation,
+        party
+    }, setForm] = useState({
         name: "",
         gender: undefined,
         province: "",
@@ -97,30 +103,28 @@ const SwipeableForm = ({onSubmit}) => {
         party: ""
     });
 
-    const candidateName = form.name || "tu candidato/a";
-    const candidateAge = moment().diff(form.birthdate, 'years', false);
+    const candidateName = name || "tu candidato/a";
+    const candidateAge = moment().diff(birthdate, 'years', false);
     
 
     const handleInputChange = e => {
         const {name, value} = e.target;
-        setForm(prevForm => {
-            const form = {...prevForm};
-            form[name] = value;
-            return form;
-        });
+        setForm(prevForm => ({
+            ...prevForm,
+            [name]: value
+        }));
     };
 
     const handleSubmit = () => {
         onSubmit({
             name: candidateName,
             age: candidateAge,
-            gender: form.gender,
-            //month: candidateAge > 0 ? moment(form.birthdate).format("MMMM") : "",
-            month: candidateAge > 0 ? MONTHS[moment(form.birthdate).month()] : "",
-            zodiac: candidateAge > 0 ? getZodiac(form.birthdate).name : "",
-            province: PROVINCES[form.province],
-            occupation: form.occupation?.label,
-            party: form.party?.label
+            gender: gender,            
+            month: candidateAge > 0 ? MONTHS[moment(birthdate).month()] : "",
+            zodiac: candidateAge > 0 ? getZodiac(birthdate).name : "",
+            province: PROVINCES[province],
+            occupation: occupation?.label,
+            party: party?.label
         });
     };
 
@@ -161,7 +165,7 @@ const SwipeableForm = ({onSubmit}) => {
                     <Input 
                         icon={<FaUser/>}
                         rIcon={true}
-                        value={form.name}
+                        value={name}
                         name="name"
                         label="Nombre"
                         type="text"
@@ -172,7 +176,7 @@ const SwipeableForm = ({onSubmit}) => {
                     <Typography sx={instructionsStyle}>¿Con qué género se identifica mejor {candidateName}?</Typography>
                     <Radio 
                         name="gender"
-                        value={form.gender}
+                        value={gender}
                         options={[
                             {
                                 name: "Hombre",
@@ -201,12 +205,12 @@ const SwipeableForm = ({onSubmit}) => {
                         name="province"
                         id="city"
                         label="Provincia"
-                        value={form.province}
+                        value={province}
                         options={PROVINCES.map((op,i)=>({value:i, label:op}))}
                         onChange={handleInputChange}/>
                     <ArgMap 
                         fillColor={"rgba(100,100,100,0.3)"}
-                        fillFc={index => form.province===index ? "#81DAF5":"rgba(100,100,100,0.3)"}
+                        fillFc={index => province===index ? "#81DAF5":"rgba(100,100,100,0.3)"}
                         onClick={idx => handleInputChange({target:{name:"province", value:idx}})}/>
                 </Box>
                 
@@ -218,23 +222,18 @@ const SwipeableForm = ({onSubmit}) => {
                         name="occupation"
                         id="occupation"
                         label="Ocupación"
-                        value={form.occupation}
+                        value={occupation}
                         options={processed.occupations.names.concat(OCCUPATIONS).map((op,i)=>({key:i, label:op}))}
                         onChange={handleInputChange}/>
                 </Box>
                 
                 <Box sx={slideStyle}>
-                    <Typography sx={instructionsStyle}>Si recordás la fecha de nacimiento de {candidateName}, seleccionala en este calendario:</Typography>
-                    <GenericCard sx={{mb:2, mt:-2}} contentSx={{p:0}}>
-                        <DateInput 
-                            name="birthdate"
-                            value={form.birthdate} 
-                            onChange={handleInputChange}/>
-                    </GenericCard>
-                    <Typography fontWeight={"bold"}>Fecha seleccionada: {moment(form.birthdate).format("DD/MM/YYYY")}</Typography>
-                    <Typography sx={tipStyle}>
-                        <b>Tip:</b> Para avanzar más rápido sobre los años, podes pulsar/clickear sobre la fecha central.
-                    </Typography>
+                    <Typography sx={instructionsStyle}>Si recordás la fecha de nacimiento de {candidateName}, podés seleccionarla aquí:</Typography>
+                    <DateInput                             
+                        name="birthdate"
+                        value={birthdate} 
+                        onChange={handleInputChange}/>
+                    <Typography sx={tipStyle}><b>Edad de {candidateName}:</b> {candidateAge} años</Typography>
                 </Box>
             
                 <Box sx={slideStyle}>
@@ -245,7 +244,7 @@ const SwipeableForm = ({onSubmit}) => {
                         name="party"
                         id="party"
                         label="Tendencia política"
-                        value={form.party}
+                        value={party}
                         options={processed.parties.names.concat(PARTIES).map((op,i)=>({key:i, label:op}))}
                         onChange={handleInputChange}/>
                 </Box>
@@ -256,13 +255,13 @@ const SwipeableForm = ({onSubmit}) => {
                     </Typography>
                     <ul>
                         <li><b>Nombre:</b> {capitalize(candidateName)}</li>
-                        {form.gender && <li><b>Género:</b> {form.gender==="M" ? "Masculino":"Femenino"}</li>}
-                        {candidateAge > 0 && <li><b>Mes de nacimiento:</b> {MONTHS[moment(form.birthdate).month()]}</li>}
+                        {gender && <li><b>Género:</b> {gender==="M" ? "Masculino":"Femenino"}</li>}
+                        {candidateAge > 0 && <li><b>Mes de nacimiento:</b> {MONTHS[moment(birthdate).month()]}</li>}
                         {candidateAge > 0 && <li><b>Edad:</b> {candidateAge} años</li>}
-                        {form.occupation?.label && <li><b>Ocupación:</b> {form.occupation?.label}</li>}
-                        {candidateAge > 0 && <li><b>Signo zodiacal:</b> {getZodiac(form.birthdate).name}</li>}
-                        {form.province !== "" && <li><b>Provincia de origen:</b> {PROVINCES[form.province]}</li>}
-                        {form.party?.label && <li><b>Tendencia política:</b> {form.party?.label}</li>}
+                        {occupation?.label && <li><b>Ocupación:</b> {occupation?.label}</li>}
+                        {candidateAge > 0 && <li><b>Signo zodiacal:</b> {getZodiac(birthdate).name}</li>}
+                        {province !== "" && <li><b>Provincia de origen:</b> {PROVINCES[province]}</li>}
+                        {party?.label && <li><b>Tendencia política:</b> {party?.label}</li>}
                     </ul>
 
                     <Stack sx={{m:3}}>

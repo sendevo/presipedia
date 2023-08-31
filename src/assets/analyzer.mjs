@@ -88,68 +88,84 @@ const assumptionAgeHistogram = youngestAssumption
         const binIndex = acc.names.indexOf(name);
         if(binIndex === -1){
             acc.names.push(name);
-            acc.count.push(1);
+            acc.terms.count.push(1);
         }else{
-            acc.count[binIndex]++;
+            acc.terms.count[binIndex]++;
         }
         return acc;
     }, {
         names: [],
-        count: []
+        terms: {
+            count: []
+        }
     });
-assumptionAgeHistogram.scaled = scaleArray(assumptionAgeHistogram.count);
-assumptionAgeHistogram.freq = getProportions(assumptionAgeHistogram.count);
-assumptionAgeHistogram.years = database.terms 
-    .reduce((acc, current) => {
-        const person = database.people[current.cid];
-        const age = getAgeOfAssumption(person, current);
-        const binStart = Math.floor(age/10)*10;
-        const binEnd = binStart+10;
-        const name = `${binStart}-${binEnd}`;
-        const binIndex = assumptionAgeHistogram.names.indexOf(name);
-        const duration = moment(current.term_end).diff(current.term_begin, 'years', true);            
-        acc[binIndex] += duration;
-        return acc;
-    }, Array(assumptionAgeHistogram.names.length).fill(0));
+assumptionAgeHistogram.terms.scaled = scaleArray(assumptionAgeHistogram.terms.count);
+assumptionAgeHistogram.terms.frequency = getProportions(assumptionAgeHistogram.terms.count);
+
+assumptionAgeHistogram.years = {
+    count: database.terms .reduce((acc, current) => {
+            const person = database.people[current.cid];
+            const age = getAgeOfAssumption(person, current);
+            const binStart = Math.floor(age/10)*10;
+            const binEnd = binStart+10;
+            const name = `${binStart}-${binEnd}`;
+            const binIndex = assumptionAgeHistogram.names.indexOf(name);
+            const duration = moment(current.term_end).diff(current.term_begin, 'years', true);            
+            acc[binIndex] += duration;
+            return acc;
+        }, Array(assumptionAgeHistogram.names.length).fill(0))
+};
+assumptionAgeHistogram.years.scaled = scaleArray(assumptionAgeHistogram.years.count);
+assumptionAgeHistogram.years.frequency = getProportions(assumptionAgeHistogram.years.count);
 
 
 const birthsPerMonth = {
     names: MONTHS,
-    count: Object.values(database.people)
-        .reduce((acc, current) => {
-            acc[moment(current.birth_date).month()]++;
-            return acc;
-        }, Array(12).fill(0)),
-    years: database.terms
-        .reduce((acc, current) => {
-            const person = database.people[current.cid];
-            const month = moment(person.birth_date).month();
-            const duration = moment(current.term_end).diff(current.term_begin, 'years', true);
-            acc[month] += duration;
-            return acc;
-        }, Array(12).fill(0))
+    terms: {
+        count: Object.values(database.people).reduce((acc, current) => {
+                acc[moment(current.birth_date).month()]++;
+                return acc;
+            }, Array(12).fill(0))
+    },
+    years: {
+        count: database.terms.reduce((acc, current) => {
+                const person = database.people[current.cid];
+                const month = moment(person.birth_date).month();
+                const duration = moment(current.term_end).diff(current.term_begin, 'years', true);
+                acc[month] += duration;
+                return acc;
+            }, Array(12).fill(0))
+    }
 };
-birthsPerMonth.scaled = scaleArray(birthsPerMonth.count);
-birthsPerMonth.freq = getProportions(birthsPerMonth.count);
+birthsPerMonth.terms.scaled = scaleArray(birthsPerMonth.terms.count);
+birthsPerMonth.terms.frequency = getProportions(birthsPerMonth.terms.count);
+birthsPerMonth.years.scaled = scaleArray(birthsPerMonth.years.count);
+birthsPerMonth.years.frequency = getProportions(birthsPerMonth.years.count);
+
 
 const birthsPerZodiacSign = {
     names: ZODIAC_SIGNS,
-    count: Object.values(database.people)
-        .reduce((acc, current) => {
-            acc[getZodiac(current.birth_date).index]++;
-            return acc;
-        }, Array(12).fill(0)),
-    years: database.terms 
-        .reduce((acc, current) => {
-            const person = database.people[current.cid];
-            const signIndex = getZodiac(person.birth_date).index;
-            const duration = moment(current.term_end).diff(current.term_begin, 'years', true);
-            acc[signIndex] += duration;
-            return acc;
-        }, Array(12).fill(0))
+    terms: {
+        count: Object.values(database.people).reduce((acc, current) => {
+                acc[getZodiac(current.birth_date).index]++;
+                return acc;
+            }, Array(12).fill(0))
+    },
+    years: {
+        count: database.terms .reduce((acc, current) => {
+                const person = database.people[current.cid];
+                const signIndex = getZodiac(person.birth_date).index;
+                const duration = moment(current.term_end).diff(current.term_begin, 'years', true);
+                acc[signIndex] += duration;
+                return acc;
+            }, Array(12).fill(0))
+    }
 };
-birthsPerZodiacSign.scaled = scaleArray(birthsPerZodiacSign.count);
-birthsPerZodiacSign.freq = getProportions(birthsPerZodiacSign.count);
+birthsPerZodiacSign.terms.scaled = scaleArray(birthsPerZodiacSign.terms.count);
+birthsPerZodiacSign.terms.frequency = getProportions(birthsPerZodiacSign.terms.count);
+birthsPerZodiacSign.years.scaled = scaleArray(birthsPerZodiacSign.years.count);
+birthsPerZodiacSign.years.frequency = getProportions(birthsPerZodiacSign.years.count);
+
 
 const birthLocations = Object.values(database.people)
     .reduce((acc, current) => {
@@ -157,26 +173,33 @@ const birthLocations = Object.values(database.people)
         const pIndex = acc.names.indexOf(province);
         if (pIndex === -1) {
             acc.names.push(province);
-            acc.count.push(1);
+            acc.terms.count.push(1);
         } else {
-            acc.count[pIndex]++;
+            acc.terms.count[pIndex]++;
         }
         return acc;
     }, {
         names: [],
-        count: []
+        terms: {
+            count: []
+        }
     });
-birthLocations.scaled = scaleArray(birthLocations.count);
-birthLocations.freq = getProportions(birthLocations.count);
-birthLocations.years = database.terms
-    .reduce((acc, current) => {
-        const person = database.people[current.cid];
-        const province = getProvince(person);
-        const pIndex = birthLocations.names.indexOf(province);
-        const duration = moment(current.term_end).diff(current.term_begin, 'years', true);            
-        acc[pIndex] += duration;
-        return acc;
-    }, Array(birthLocations.names.length).fill(0));
+birthLocations.terms.scaled = scaleArray(birthLocations.terms.count);
+birthLocations.terms.frequency = getProportions(birthLocations.terms.count);
+
+birthLocations.years = {
+    count: database.terms.reduce((acc, current) => {
+            const person = database.people[current.cid];
+            const province = getProvince(person);
+            const pIndex = birthLocations.names.indexOf(province);
+            const duration = moment(current.term_end).diff(current.term_begin, 'years', true);            
+            acc[pIndex] += duration;
+            return acc;
+        }, Array(birthLocations.names.length).fill(0))
+};
+birthLocations.years.scaled = scaleArray(birthLocations.years.count);
+birthLocations.years.frequency = getProportions(birthLocations.years.count);
+
 
 const occupations = Object.values(database.people)
     .reduce((acc, current) => {
@@ -185,29 +208,36 @@ const occupations = Object.values(database.people)
             const pIndex = acc.names.indexOf(oc);
             if (pIndex === -1) {
                 acc.names.push(oc);
-                acc.count.push(1);
+                acc.terms.count.push(1);
             } else {
-                acc.count[pIndex]++;
+                acc.terms.count[pIndex]++;
             }
         });
         return acc;
     }, {
         names: [],
-        count: []
+        terms: {
+            count: []
+        }
     });
-occupations.scaled = scaleArray(occupations.count);
-occupations.freq = getProportions(occupations.count);
-occupations.years = database.terms
-    .reduce((acc, current) => {
-        const person = database.people[current.cid];        
-        const occs = person.occupation.split(" y ").map(oc => capitalize(oc));
-        const duration = moment(current.term_end).diff(current.term_begin, 'years', true);
-        occs.forEach(oc => {
-            const pIndex = occupations.names.indexOf(oc);
-            acc[pIndex] += duration;
-        });
-        return acc;
-    }, Array(occupations.names.length).fill(0));
+occupations.terms.scaled = scaleArray(occupations.terms.count);
+occupations.terms.frequency = getProportions(occupations.terms.count);
+
+occupations.years = {
+    count: database.terms.reduce((acc, current) => {
+            const person = database.people[current.cid];        
+            const occs = person.occupation.split(" y ").map(oc => capitalize(oc));
+            const duration = moment(current.term_end).diff(current.term_begin, 'years', true);
+            occs.forEach(oc => {
+                const pIndex = occupations.names.indexOf(oc);
+                acc[pIndex] += duration;
+            });
+            return acc;
+        }, Array(occupations.names.length).fill(0))
+};
+occupations.years.scaled = scaleArray(occupations.years.count);
+occupations.years.frequency = getProportions(occupations.years.count);
+
 
 const genders = Object.values(database.people)
     .reduce((acc, current) => {
@@ -215,25 +245,32 @@ const genders = Object.values(database.people)
         const pIndex = acc.names.indexOf(gender);
         if (pIndex === -1) {
             acc.names.push(gender);
-            acc.count.push(1);
+            acc.terms.count.push(1);
         } else {
-            acc.count[pIndex]++;
+            acc.terms.count[pIndex]++;
         }
         return acc;
     }, {
         names: [],
-        count: []
+        terms: {
+            count: []
+        }
     });
-genders.scaled = scaleArray(genders.count);
-genders.freq = getProportions(genders.count);
-genders.years = database.terms
-    .reduce((acc, current) => {
-        const person = database.people[current.cid];        
-        const pIndex = genders.names.indexOf(person.gender);
-        const duration = moment(current.term_end).diff(current.term_begin, 'years', true);            
-        acc[pIndex] += duration;
-        return acc;
-    }, Array(genders.names.length).fill(0));
+genders.terms.scaled = scaleArray(genders.terms.count);
+genders.terms.frequency = getProportions(genders.terms.count);
+
+genders.years = {
+    count: database.terms.reduce((acc, current) => {
+            const person = database.people[current.cid];        
+            const pIndex = genders.names.indexOf(person.gender);
+            const duration = moment(current.term_end).diff(current.term_begin, 'years', true);            
+            acc[pIndex] += duration;
+            return acc;
+        }, Array(genders.names.length).fill(0))
+};
+genders.years.scaled = scaleArray(genders.years.count);
+genders.years.frequency = getProportions(genders.years.count);
+
 
 const parties = database.terms
     .reduce((acc, current) => {
@@ -241,20 +278,23 @@ const parties = database.terms
         const pIndex = acc.names.indexOf(current.party);
         if (pIndex === -1) {
             acc.names.push(current.party);
-            acc.count.push(1);
-            acc.years.push(duration);
+            acc.terms.count.push(1);
+            acc.years.count.push(duration);
         } else {
-            acc.count[pIndex]++;
-            acc.years[pIndex]+=duration;
+            acc.terms.count[pIndex]++;
+            acc.years.count[pIndex] += duration;
         }
         return acc;
     }, {
         names: [],
-        count: [],
-        years: []
+        terms: {count:[]},
+        years: {count:[]}
     });
-parties.scaled = scaleArray(parties.count);
-parties.freq = getProportions(parties.count);
+parties.terms.scaled = scaleArray(parties.terms.count);
+parties.terms.frequency = getProportions(parties.terms.count);
+parties.years.scaled = scaleArray(parties.years.count);
+parties.years.frequency = getProportions(parties.years.count);
+
 
 const aliveCountPerDate = (() => {
     const startDate = Object.keys(database.people)
