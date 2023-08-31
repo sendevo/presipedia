@@ -12,7 +12,7 @@ import Raw from './Raw';
 import Sources from './Sources'; 
 import Stats from './Stats'; 
 import Terms from './Terms';
-import Timeline from './Timeline'; 
+import Timeline from './Timeline2'; 
 import Visualizations from './Visualizations';
 
 export {

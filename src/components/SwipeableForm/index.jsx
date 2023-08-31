@@ -26,7 +26,7 @@ import {
     SuggesterInput 
 } from "../Inputs";
 import ArgMap from "../ArgMap";
-import { PROVINCES, OCCUPATIONS, MONTHS, PARTIES, YEAR_MS } from "../../model/constants";
+import { PROVINCES, OCCUPATIONS, MONTHS, PARTIES } from "../../model/constants";
 import { getZodiac, capitalize } from "../../model/utils";
 import genderMale from "../../assets/icons/gender_male.png";
 import genderFemale from "../../assets/icons/gender_female.png";
