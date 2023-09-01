@@ -5,7 +5,7 @@ import database from "../../assets/database.json";
 
 const getContentBlock = person => {
     const name = `${person.name} ${person.surname}`;
-    const image = person.picture;
+    const image = `/pictures/${person.picture}`;
     return {name, image};
 };
 

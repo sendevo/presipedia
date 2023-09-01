@@ -1,11 +1,12 @@
 import { useEffect, useRef } from "react";
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import VerticalTimeline from "../../model/timeline";
 
 const containerStyle = {
     marginTop: "10px",
     padding: "0px 10px 10px 10px",
-    border: "1px solid lightgray",
+    border: "1px solid lightgray",    
+    backgroundColor: "rgba(255,255,255,0.6)",
     borderRadius: "5px"
 };
 
@@ -14,16 +15,18 @@ const Timeline = ({title, clarification, items}) => {
     const containerRef = useRef();
 
     useEffect(()=>{
-        const tl = new VerticalTimeline(containerRef.current, items);
-        return () => tl.destroy();
-    }, []);
+        if(items && items.length > 0){
+            const tl = new VerticalTimeline(containerRef.current, items);
+            return () => tl.destroy();
+        }
+    }, [items]);
 
     return (
-        <div style={containerStyle}>
+        <Box style={containerStyle}>
             <Typography fontSize={"large"}>{title}</Typography>
-            <div ref={containerRef}></div>
+            <Box ref={containerRef}></Box>
             {clarification && <Typography fontSize={"small"}>{clarification}</Typography>}
-        </div>
+        </Box>
     );
 };
 
