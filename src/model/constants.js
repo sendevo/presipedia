@@ -8,7 +8,7 @@ export const BUILD_DATE = 1692656103640; // 21-8-2023 19:15 hs
 //// DATE-TIME ////
 export const VIS_DATE_FORMAT = "YYYY-MM-DD";
 export const DAY_MS = 86400000;
-export const YEAR_MS = 31536000000;
+export const YEAR_MS = 31556952000; 
 export const PROVINCES = ["Buenos Aires", "Capital Federal", "Catamarca", "Chaco", "Chubut", "Córdoba", "Corrientes", "Entre Ríos", "Formosa", "Jujuy", "La Pampa", "La Rioja", "Mendoza", "Misiones", "Neuquén", "Río Negro", "Salta", "San Juan", "San Luis", "Santa Cruz", "Santa Fe", "Santiago del Estero", "Tierra del Fuego", "Tucumán"];
 export const OCCUPATIONS = ["Contador", "Agricultor", "Estudiante", "Farmacéutico", "Bombero", "Secretario", "Vendedor", "Veterinario", "Policía", "Enfermero", "Economista", "Pintor", "Albañil", "Mecánico", "Chófer", "Piloto", "Artista", "Cocinero", "Martillero público", "Escribano", "Pescador", "Técnico", "Obrero", "Licenciado", "Plomero", "Soldador", "Herrero", "Diseñador", "Psicólogo", "Deportista", "Mozo", "Entrenador", "Arquitecto", "Carpintero"];
 export const PARTIES = ["Socialista", "Libertario", "Comunista"];
