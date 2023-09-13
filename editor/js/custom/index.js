@@ -131,8 +131,8 @@ termForm.addEventListener('submit', event => {
     if(database.people.hasOwnProperty(cid)){
         const termData = {
             cid: cid,
-            term_begin: toUnixTimestamp(termForm.elements.term_begin.value),
-            term_end: toUnixTimestamp(termForm.elements.term_end.value),
+            begin: toUnixTimestamp(termForm.elements.begin.value),
+            end: toUnixTimestamp(termForm.elements.end.value),
             party: termForm.elements.party.value
         };
         console.log("Adding new entry to terms db...");
@@ -162,8 +162,8 @@ const editTerm = index => {
     console.log("Loading term data to form", index);
     const term = database.terms[index];
     termForm.elements.cid.value = term.cid;
-    termForm.elements.term_begin.value = unixToDate(term.term_begin);
-    termForm.elements.term_end.value = unixToDate(term.term_end);
+    termForm.elements.begin.value = unixToDate(term.begin);
+    termForm.elements.end.value = unixToDate(term.end);
     termForm.elements.party.value = term.party;
     termEditingIndex = index;
 };
@@ -207,7 +207,7 @@ exportButton.addEventListener('click', () => {
             console.log(result);
             console.log("Generating database.json file...");
             database.updated = Date.now();
-            database.terms.sort((a,b) => a.term_begin - b.term_begin);
+            database.terms.sort((a,b) => a.begin - b.begin);
             console.log(database);
             const json = JSON.stringify(database);
             const blob = new Blob([json], { type: 'application/json' });

@@ -1,28 +1,32 @@
 import { useEffect, useRef } from "react";
-import { Typography } from "@mui/material";
-import { Timeline as VisTimeline } from "vis-timeline";
+import { Box, Typography } from "@mui/material";
+import VerticalTimeline from "../../model/timeline";
 
 const containerStyle = {
     marginTop: "10px",
     padding: "0px 10px 10px 10px",
-    border: "1px solid lightgray",
+    border: "1px solid lightgray",    
+    backgroundColor: "rgba(255,255,255,0.6)",
     borderRadius: "5px"
 };
 
-const Timeline = ({title, clarification, items}) => {
+
+const Timeline = ({title, clarification, items, scale}) => {
     const containerRef = useRef();
-    
+
     useEffect(()=>{
-        const tl = new VisTimeline(containerRef.current, items, {locale: 'es', maxHeight: '600px'});
-        return () => tl.destroy();
-    }, []);
+        if(items && items.length > 0){
+            const tl = new VerticalTimeline(containerRef.current, items, scale);
+            return () => tl.destroy();
+        }
+    }, [items, scale]);
 
     return (
-        <div style={containerStyle}>
+        <Box style={containerStyle}>
             <Typography fontSize={"large"}>{title}</Typography>
-            <div ref={containerRef}></div>
+            <Box ref={containerRef}></Box>
             {clarification && <Typography fontSize={"small"}>{clarification}</Typography>}
-        </div>
+        </Box>
     );
 };
 

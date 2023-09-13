@@ -42,7 +42,12 @@ export const colorMapGenerator = (values, hue, satFrom=0.1, satTo=0.9, transpare
     });
 }
 
-export const location2GoggleMap = (lat,lng) => `http://www.google.com/maps/place/${lat},${lng}`;
+const latLng2GoogleMap = (lat,lng) => `http://www.google.com/maps/place/${lat},${lng}`;
+
+export const location2GoogleMap = location => {
+    const [lng, lat] = location.features[0].geometry.coordinates;
+    return latLng2GoogleMap(lat, lng);
+};
 
 export const getRandomElement = arr => arr[Math.floor(Math.random()*arr.length)];
 
@@ -55,6 +60,8 @@ export const getZodiac = unixTime => {
 };
 
 export const capitalize = str => str.charAt(0).toUpperCase()+str.slice(1);
+
+export const cropString = (str,len) => str.slice(0,len)+(str.length > len?"...":"");
 
 export const formatDate = d => {
     const m = moment(d);

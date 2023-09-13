@@ -56,11 +56,11 @@ const geojson2LngLat = geojson => ([
     geojson.features[0].properties.province
 ]);
 
-const location2GoggleMap = (lat,lng) => `http://www.google.com/maps/place/${lat},${lng}`;
+const latLng2GoogleMap = (lat,lng) => `http://www.google.com/maps/place/${lat},${lng}`;
 
 const getLocationLink = (geojson, text, linkFormat) => {
     const [lng, lat] = geojson.features[0].geometry.coordinates;
-    const link = location2GoggleMap(lat, lng);
+    const link = latLng2GoogleMap(lat, lng);
     return linkFormat ? `<a href=${link} rel="noopener" target="_blank">${text}</a>` : link;
 };
 
@@ -143,8 +143,8 @@ const updateTermsTable = terms => {
             row.innerHTML = `
                 <td>${index+1}</td>
                 <td>${person.name + " " + person.surname}</td>
-                <td>${moment(term.term_begin).format(DATE_FORMAT)}</td>
-                <td>${term.term_end ? moment(term.term_end).format(DATE_FORMAT) : 'Actualmente en el cargo'}</td>
+                <td>${moment(term.begin).format(DATE_FORMAT)}</td>
+                <td>${term.end ? moment(term.end).format(DATE_FORMAT) : 'Actualmente en el cargo'}</td>
                 <td>${term.party}</td>
                 <td>
                     <button onClick="editTerm('${index}')" title="Editar"><i class="fa fa-edit"></i></button>

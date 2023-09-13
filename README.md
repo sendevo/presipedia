@@ -58,8 +58,8 @@ Personas (Entrada ```people```):
 {
   "name": "", // string
   "surname": "", // string
-  "gender": "", // string {M, F}
-  "picture": "", // picture file name string
+  "gender": "", // string {M, F, null}
+  "picture": "", // picture file name string (public folder)
   "birth_date": 0, // unix timestamp
   "death_date": 0, // unix timestamp | null
   "cause_of_death": "", // string | null
@@ -73,8 +73,8 @@ Mandatos (Entrada ```terms```):
 {
   "cid": "", // string
   "party": "", // string
-  "term_begin": 0, // unix timestamp
-  "term_end": 0 // unix timestamp | null
+  "begin": 0, // unix timestamp
+  "end": 0 // unix timestamp | null
 }
 ```
 Eventos (Entrada ```events```):  
@@ -83,8 +83,9 @@ Eventos (Entrada ```events```):
   "type": "", // string: {PERIOD, DATE}
   "title": "", // string
   "description": "", // string
-  "event_begin": 0,  // unix timestamp
-  "event_end": 0, // unix timestamp | null
+  "image": "", // image file name string (public folder)
+  "begin": 0,  // unix timestamp
+  "end": 0, // unix timestamp | null
   "location": {}, // geojson | null
   "sources": [] // Array of strings
 }

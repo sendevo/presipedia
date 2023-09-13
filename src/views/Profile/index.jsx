@@ -11,7 +11,7 @@ import MainView from "../../components/MainView";
 import { APP_NAME } from '../../model/constants';
 import { 
     getZodiac, 
-    location2GoggleMap, 
+    location2GoogleMap, 
     formatDate 
 } from '../../model/utils';
 import { 
@@ -33,6 +33,7 @@ const View = () => {
     const data = {};
     if(available){
         data.fullname =`${person.name} ${person.surname}`;
+        data.picture = person.picture;
         data.birthdate = formatDate(person.birth_date);
         data.zodiac = getZodiac(person.birth_date);
         data.occupation = person.occupation;
@@ -40,9 +41,8 @@ const View = () => {
         data.deathage = person.death_date ? moment(person.death_date).diff(person.birth_date, "years", false) : false;
         data.cause_of_death = data.deathdate ? person.cause_of_death : false;
         data.city = person.birth_location.features[0].properties.city;
-        data.province = person.birth_location.features[0].properties.province;
-        const [lng, lat] = person.birth_location.features[0].geometry.coordinates;
-        data.locationURL = location2GoggleMap(lat,lng);
+        data.province = person.birth_location.features[0].properties.province;        
+        data.locationURL = location2GoogleMap(person.birth_location);
         data.kw = {
             ex: getLastCID(database.terms) === cid ? "" : "ex",
             gender: isMale(person) ? "El" : "La",
@@ -55,7 +55,7 @@ const View = () => {
                 <Card>
                     <CardMedia
                         sx={{height:"200px"}}
-                        image={`/pictures/${person.picture}`}
+                        image={`/pictures/${data.picture}`}
                         title={data.fullname}/>
                     <CardContent>
                         <Box>
@@ -67,7 +67,7 @@ const View = () => {
                             <ul style={ulStyle}>
                             {database.terms.filter(t => t.cid === cid).map((t, index) => (
                                 <li key={index}>
-                                    <Typography>Del {formatDate(t.term_begin)} al {formatDate(t.term_end)} (durante {getTermDuration(t)}). Asumió a los {getAgeOfAssumption(person,t)} años de edad y la tendencia política de su mandato {data.kw.was} "{t.party}".</Typography>
+                                    <Typography>Del {formatDate(t.begin)} al {formatDate(t.end)} (durante {getTermDuration(t)}). Asumió a los {getAgeOfAssumption(person,t)} años de edad y la tendencia política de su mandato {data.kw.was} "{t.party}".</Typography>
                                 </li>
                             ))}
                             </ul>

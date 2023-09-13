@@ -26,7 +26,7 @@ const getPersonName = (cid, suffix = "") => {
 
 const longerTerms = database.terms
     .map((term, index) => {
-        const duration = moment(term.term_end).diff(term.term_begin, 'years', true);
+        const duration = moment(term.end).diff(term.begin, 'years', true);
         const president = getPersonName(term.cid);
         return {
             index,
@@ -110,7 +110,7 @@ assumptionAgeHistogram.years = {
             const binEnd = binStart+10;
             const name = `${binStart}-${binEnd}`;
             const binIndex = assumptionAgeHistogram.names.indexOf(name);
-            const duration = moment(current.term_end).diff(current.term_begin, 'years', true);            
+            const duration = moment(current.end).diff(current.begin, 'years', true);            
             acc[binIndex] += duration;
             return acc;
         }, Array(assumptionAgeHistogram.names.length).fill(0))
@@ -131,7 +131,7 @@ const birthsPerMonth = {
         count: database.terms.reduce((acc, current) => {
                 const person = database.people[current.cid];
                 const month = moment(person.birth_date).month();
-                const duration = moment(current.term_end).diff(current.term_begin, 'years', true);
+                const duration = moment(current.end).diff(current.begin, 'years', true);
                 acc[month] += duration;
                 return acc;
             }, Array(12).fill(0))
@@ -155,7 +155,7 @@ const birthsPerZodiacSign = {
         count: database.terms .reduce((acc, current) => {
                 const person = database.people[current.cid];
                 const signIndex = getZodiac(person.birth_date).index;
-                const duration = moment(current.term_end).diff(current.term_begin, 'years', true);
+                const duration = moment(current.end).diff(current.begin, 'years', true);
                 acc[signIndex] += duration;
                 return acc;
             }, Array(12).fill(0))
@@ -192,7 +192,7 @@ birthLocations.years = {
             const person = database.people[current.cid];
             const province = getProvince(person);
             const pIndex = birthLocations.names.indexOf(province);
-            const duration = moment(current.term_end).diff(current.term_begin, 'years', true);            
+            const duration = moment(current.end).diff(current.begin, 'years', true);            
             acc[pIndex] += duration;
             return acc;
         }, Array(birthLocations.names.length).fill(0))
@@ -227,7 +227,7 @@ occupations.years = {
     count: database.terms.reduce((acc, current) => {
             const person = database.people[current.cid];        
             const occs = person.occupation.split(" y ").map(oc => capitalize(oc));
-            const duration = moment(current.term_end).diff(current.term_begin, 'years', true);
+            const duration = moment(current.end).diff(current.begin, 'years', true);
             occs.forEach(oc => {
                 const pIndex = occupations.names.indexOf(oc);
                 acc[pIndex] += duration;
@@ -263,7 +263,7 @@ genders.years = {
     count: database.terms.reduce((acc, current) => {
             const person = database.people[current.cid];        
             const pIndex = genders.names.indexOf(person.gender);
-            const duration = moment(current.term_end).diff(current.term_begin, 'years', true);            
+            const duration = moment(current.end).diff(current.begin, 'years', true);            
             acc[pIndex] += duration;
             return acc;
         }, Array(genders.names.length).fill(0))
@@ -274,7 +274,7 @@ genders.years.frequency = getProportions(genders.years.count);
 
 const parties = database.terms
     .reduce((acc, current) => {
-        const duration = moment(current.term_end).diff(current.term_begin,'years', true);
+        const duration = moment(current.end).diff(current.begin,'years', true);
         const pIndex = acc.names.indexOf(current.party);
         if (pIndex === -1) {
             acc.names.push(current.party);
@@ -336,10 +336,10 @@ const aliveCountPerDate = (() => {
 
 const aliveExPresidentsPerDate = (() => {
     const startDate = database.terms
-        .reduce((acc, current) => current.term_begin < acc ? current.term_begin : acc, Number.POSITIVE_INFINITY);
+        .reduce((acc, current) => current.begin < acc ? current.begin : acc, Number.POSITIVE_INFINITY);
 
     const dateToAliveCountIndex = dateMS => Math.floor((dateMS - startDate) / DAY_MS);
-    const getAssumptionDate = cid => database.terms.find(t => t.cid === cid).term_begin;
+    const getAssumptionDate = cid => database.terms.find(t => t.cid === cid).begin;
 
     const totalPeriodDays = dateToAliveCountIndex(Date.now());
     const aliveCounts = Array(totalPeriodDays).fill(0);

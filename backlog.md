@@ -21,10 +21,10 @@
   - [x] Navegación.  
     - [x] React Router Dom.  
     - [x] Barra de navegación inferior.  
-  - [ ] Visualizaciones de línea de tiempo    
+  - [x] Visualizaciones de línea de tiempo    
     - [x] Linea de tiempo de mandatos y eventos.  
     - [x] Linea de tiempo de nacimientos y fallecimientos.  
-    - [ ] Buscar alternativas de visualizacion.  
+    - [x] Buscar alternativas de visualizacion.  
   - [x] Visualizaciones de rankings o clasificaciones  
     - [x] Duración de mandatos.  
     - [x] Edad de mandatarios.  

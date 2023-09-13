@@ -18,7 +18,7 @@ import {
 import database from "../../assets/database.json";
 
 const ITERABLE_LEN = 50;
-//const lastCID = database.terms.sort((a,b) => b.term_end < a.term_end).at(-1).cid;
+//const lastCID = database.terms.sort((a,b) => b.end < a.end).at(-1).cid;
 const lastCID = getLastCID(database.terms);
 
 const generateOptions = (iterable, rightIndex, rightValue) => {
@@ -234,8 +234,8 @@ class QType4 extends QuestionBase {
         this._theme = "Mandatos";
         this._score = 10;
         const term = getRandomElement(database.terms);
-        this._term_begin = term.term_begin;
-        this._term_end = term.term_end;
+        this._term_begin = term.begin;
+        this._term_end = term.end;
         this._party = term.party;
         const person = database.people[term.cid];
         this._fullname = getFullName(person);
@@ -243,7 +243,7 @@ class QType4 extends QuestionBase {
         this._genderKW = isMale(person) ? "el" : "la";
         this._totalDuration = database.terms
             .filter(t => t.cid === term.cid)
-            .reduce((acc, current) => acc + current.term_end - current.term_begin, 0);
+            .reduce((acc, current) => acc + current.end - current.begin, 0);
     }
 };
 
