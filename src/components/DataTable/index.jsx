@@ -1,44 +1,63 @@
-import * as React from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import { Typography } from '@mui/material';
+import {
+    Table, 
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Paper,
+    Typography
+} from "@mui/material";
 
-const DataTable = ({headers, rows}) => {
-    return (
-        <TableContainer>
-            <Table sx={{ minWidth: 650 }} size="small">
-                <TableHead>
+const DataTable = ({title, headers, rows}) => (
+    <TableContainer component={Paper} sx={{ backgroundColor: 'rgba(255, 255, 255, 0.7)' }}>
+        <Table size="small">
+            <TableHead>
+                {title && 
                     <TableRow>
-                        {headers.map((col, index) => (
-                            <TableCell key={index}>
-                                <Typography fontWeight={"bold"} fontSize={12}>
+                        <TableCell 
+                            colSpan={headers.length} 
+                            align="left">
+                            <Typography 
+                                lineHeight="1em" 
+                                fontWeight="bold">
+                                {title}
+                            </Typography>
+                        </TableCell>
+                    </TableRow>
+                }
+                <TableRow>
+                    {headers.map((col, index) => (
+                        <TableCell 
+                            key={index}
+                            align="left">  
+                            <Typography 
+                                lineHeight="1em" 
+                                fontWeight="bold" 
+                                fontSize={12}>
                                     {col.text}
-                                </Typography>
+                            </Typography>
+                        </TableCell>
+                    ))}
+                </TableRow>
+            </TableHead>
+            <TableBody>
+                {rows.map((row, index) => (
+                    <TableRow key={index} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                        {headers.map((col, index2)=>(
+                            <TableCell 
+                                key={index*headers.length+index2}
+                                width="auto"
+                                align="left"
+                                sx={{whiteSpace: 'nowrap'}}>
+                                    {row[col.key]()}
                             </TableCell>
                         ))}
                     </TableRow>
-                </TableHead>
-                <TableBody>
-                    {rows.map((row, index) => (
-                        <TableRow key={index} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                            {headers.map((col, index2)=>(
-                                <TableCell 
-                                    key={index*headers.length+index2} 
-                                    component="th" 
-                                    scope="row">
-                                        {row[col.key]}
-                                </TableCell>
-                            ))}
-                        </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
-    );
-};
+                ))}
+            </TableBody>
+        </Table>
+    </TableContainer>
+);
 
 export default DataTable;

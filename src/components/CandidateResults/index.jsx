@@ -3,18 +3,44 @@ import {
     Box, 
     Stack,
     Typography,
-    Grid
+    Paper
 } from "@mui/material";
+import DataTable from "../../components/DataTable";
 import { RadarChart } from "../../charts";
-import { colorRangeGenerator } from "../../model/utils";
+import { colorRangeGenerator, round2 } from "../../model/utils";
 import { getScaleKeyName, getScaleLongName } from "../../model/candidate/actions";
 
+const paperStyle = {
+    p: 1, 
+    mt:1, 
+    backgroundColor: 'rgba(255, 255, 255, 0.7)' 
+};
 
 const mainResultStyle = {
     fontSize: "18px",
-    fontWeight: "bold",
-    margin: "5px 0px"
+    fontWeight: "bold"
 };
+
+const tableHeaders = [
+    {
+        text: "Escala",
+        key: "name"
+    },
+    {
+        text: "Puntaje",
+        key: "score"
+    },
+    {
+        text: "Frecuencia",
+        key: "freq"
+    }
+];
+
+const getScaleRow = (results, scale) => ({
+    name: () => <Typography fontSize={12} lineHeight="1em">{getScaleLongName(scale)}</Typography>,
+    score: () => <Typography fontSize={12} lineHeight="1em">{results[scale].score} pts.</Typography>,
+    freq: () => <Typography fontSize={12} lineHeight="1em">{round2(results[scale].freq)} %</Typography>
+});
 
 let imageData = "";
 
@@ -23,8 +49,8 @@ const CandidateResults = ({results, onReset, onShare}) => {
     const labels = Object.keys(results).filter(k => k !== "total" && k !== "name");
     const labelNames = labels.map(k => getScaleKeyName(k));
     const datasets = labels.map(l => results[l].score);
-    const strengths = labels.filter(l => results[l].score > 50).map(k => ({name:getScaleLongName(k), value: `${results[k].score.toFixed()} (${results[k].freq.toFixed(2)}%)`}));
-    const weakness = labels.filter(l => results[l].score <= 50).map(k => ({name:getScaleLongName(k), value: `${results[k].score.toFixed()} (${results[k].freq.toFixed(2)}%)`}));
+    const strengths = labels.filter(l => results[l].score > 50).map(k => getScaleRow(results, k));
+    const weaknesses = labels.filter(l => results[l].score <= 50).map(k => getScaleRow(results, k));
 
     const handleShare = () => {
         const data = {
@@ -36,30 +62,10 @@ const CandidateResults = ({results, onReset, onShare}) => {
 
     return (
         <Box>
-            <Box>
-                <Typography>Resultados para <b>{results.name}</b></Typography>
+            <Typography lineHeight="1em">Resultados para: <b>{results.name}</b></Typography>
+            <Paper sx={paperStyle}>
                 <Typography sx={mainResultStyle}>Puntaje obtenido: {results.total?.toFixed(2)}%</Typography>
-                <Grid container direction="row" spacing={1} sx={{fontSize:11}}>
-                    {strengths.length > 0 && 
-                        <Grid item xs={6}>
-                            <Typography fontSize={12}>Los fuertes:</Typography>
-                            <ul style={{margin:"0px", paddingLeft: "15px"}}>
-                                {strengths.map((item, index) => (
-                                    <li style={{paddingLeft: "0px"}} key={index}>{item.name}: {item.value}</li>
-                                ))}
-                            </ul>
-                        </Grid>}
-                    {weakness.length > 0 && 
-                        <Grid item xs={6}>
-                            <Typography fontSize={12}>Las debilidades:</Typography>
-                            <ul style={{margin:"0px", paddingLeft: "15px"}}>
-                                {weakness.map((item, index) => (
-                                    <li style={{paddingLeft: "0px"}} key={index}>{item.name}: {item.value}</li>
-                                ))}
-                            </ul>
-                        </Grid>}
-                </Grid>
-            </Box>
+            </Paper>
             <RadarChart 
                 title="Compatibilidad por escala"
                 labels={labelNames}              
@@ -72,6 +78,18 @@ const CandidateResults = ({results, onReset, onShare}) => {
                     borderWidth: 1
                 }]}
                 onReady={data => {imageData = data}}/>
+            <Box sx={{mt:1}}>
+                {strengths.length > 0 && 
+                    <Box>
+                        <DataTable title="Los fuertes:" headers={tableHeaders} rows={strengths} />
+                    </Box>
+                }
+                {weaknesses.length > 0 && 
+                    <Box sx={{mt:1}}>
+                        <DataTable title="Las debilidades:" headers={tableHeaders} rows={weaknesses} />
+                    </Box>
+                }
+            </Box>
             <Stack sx={{m:3, p:2}}>
                 <Button 
                     variant="contained"

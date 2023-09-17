@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, forwardRef } from "react";
+import { Snackbar } from "@mui/material";
+import MuiAlert from "@mui/material/Alert";
 import moment from "moment";
 import { FileOpener } from '@capacitor-community/file-opener';
 import MainView from "../../components/MainView";
@@ -31,10 +33,31 @@ const formToCandidate = form => {
     };
 };
 
+const Toast = forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
 const View = () => {
 
+    const [toastOpen, setToastOpen] = useState(false);
     const [state, setState] = useState(0); // 0: start, 1: loading, 2: results
     const [results, setResults] = useState({});
+
+    /// Test data
+    /*
+    const [state, setState] = useState(2); // 0: start, 1: loading, 2: results
+    const [results, setResults] = useState({
+        name: "Candidato de prueba",
+        total: 65,
+        assumptionAgeHistogram: {score: 95, freq: 35},
+        birthsPerMonth:  {score: 15, freq: 23},
+        birthsPerZodiacSign:  {score: 90, freq: 10},
+        birthLocations:  {score: 4, freq: 34},
+        occupations:  {score: 92, freq: 14.532},
+        genders:  {score: 93, freq: 23.2},
+        parties:  {score: 0, freq: 15.43}
+    });
+    */
 
     const handleFormSubmit = form => {
         const candidate = formToCandidate(form);
@@ -47,6 +70,12 @@ const View = () => {
     const handleGameReset = () => {
         setState(0);
         setResults({});
+    };
+
+    const handleCloseToast = (e, reason) => {
+        if (reason === 'clickaway')
+            return;
+        setToastOpen(false);
     };
 
     const handleShare = data => {
@@ -62,16 +91,21 @@ const View = () => {
                                     filePath: uri,
                                     contentType: 'application/pdf'
                                 });
-                            }).catch(console.error);
+                            })
+                            .catch(console.error);
                         });
                     }else{
                         pdfFile.download(fileName);                        
                     }
                 }else{
+                    setToastOpen(true);
                     console.error("Error when retrieving PDF file.");
                 }
             })
-            .catch(console.error);
+            .catch(err => {
+                setToastOpen(true);
+                console.error(err);
+            });
     };
 
     return(
@@ -84,6 +118,11 @@ const View = () => {
                     onReset={handleGameReset} 
                     onShare={handleShare}/>
             }
+            <Snackbar open={toastOpen} autoHideDuration={1500} onClose={handleCloseToast}>
+                <Toast severity="error" sx={{ width: '100%' }} onClose={handleCloseToast}>
+                    Error al exportar resultados
+                </Toast>
+            </Snackbar>
         </MainView>
     );
 };

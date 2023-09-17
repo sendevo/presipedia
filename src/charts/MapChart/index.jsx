@@ -23,7 +23,7 @@ const MapChart = ({title, dataset, labels}) => {
                 backgroundColor: "rgba(250, 250, 250, 0.6)"
             }}
             contentSx={{paddingBottom:"0px!important"}}>
-            <Typography color={"#666"} fontSize={"18px"}>{title}</Typography>
+            <Typography fontSize={"18px"} fontWeight={"bold"}>{title}</Typography>
             <ArgMap height="48vh" fillFc={index => colorMap[index]} onClick={index=>setSelectedProv(index)}/>
             {selectedProv > -1 && selectedProv < PROVINCES.length && <Typography fontSize={10} sx={{paddingLeft:"10px"}}>{dataset.label} de {PROVINCES[selectedProv]}: {round2(provinceCounter[selectedProv])}</Typography>}
         </GenericCard>

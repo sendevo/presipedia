@@ -34,7 +34,8 @@ const PieChart = ({title, clarification, labels, datasets}) => {
                 title: {
                     align: "start",
                     display: true,
-                    font: {size: 18, weight: "normal"},
+                    font: {size: 18, weight: "bold"},
+                    color: "#000",
                     text: title
                 }
             }
