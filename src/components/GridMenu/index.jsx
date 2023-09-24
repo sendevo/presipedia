@@ -34,8 +34,8 @@ const GridMenu = ({items}) => {
                                 : 
                                 <img src={item.icon} height={"70px"} style={iconStyle}></img>
                             }
-                            <Typography sx={{marginTop: "10px"}}><b>{item.title}</b></Typography>
-                            <Typography lineHeight={"1.2em"} fontSize={"0.7em"}>{item.text}</Typography>
+                            <Typography lineHeight="1em" sx={{mt: 1}}><b>{item.title}</b></Typography>
+                            <Typography lineHeight="1.2em" fontSize="0.7em" sx={{mt:1}}>{item.text}</Typography>
                         </Box>
                     </GenericCard>
                 </Grid>
