@@ -2,7 +2,20 @@ import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
 
 // Storage target
 const DATA_DIR = Directory.Data;
-const DOC_DIR = Directory.Documents; // Check permissions
+const DOC_DIR = Directory.Documents;
+
+// localStorage keys (implement migrations if updating the following keys)
+export const CANDIDATE_RESULTS_KEY = "candidate-results";
+export const QUIZ_PROGRESS_KEY = "quiz-progress";
+
+// Migrations
+export const migrateLocalStorageData = (oldKey, newKey) => {
+    const oldData = localStorage.getItem(oldKey);
+    if(oldData){
+        localStorage.setItem(newKey, oldData);
+        localStorage.removeItem(oldKey);
+    }
+};
 
 export const readFile = filename => {
     return Filesystem.readFile({

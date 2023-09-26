@@ -12,8 +12,14 @@ const theme = createTheme({
         mode: "light",
         primary: {main: "#3477FF"},
         secondary: {main: "#71AEF8"},
+        tertiary: {main: "#FFFFFF"},
         red: {main: "#FF0000"},
-        text: {primary: "#000000", secondary: "#555555"}
+        text: {
+            primary: "#000000", 
+            secondary: "#555555",
+            tertiary: "#3477FF",
+            red: "#FFFFFF"
+        }
     }
 });
 

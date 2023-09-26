@@ -50,7 +50,7 @@ const View = () => {
         };
     }
     return (
-        <MainView title={data.fullname || "Persona no encontrada!"} background={background}>
+        <MainView title={data?.fullname || "Persona no encontrada!"} background={background}>
             {available? 
                 <Card>
                     <CardMedia

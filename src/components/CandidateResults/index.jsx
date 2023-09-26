@@ -1,3 +1,5 @@
+import { useState, forwardRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { 
     Button, 
     Box, 
@@ -5,10 +7,16 @@ import {
     Typography,
     Paper
 } from "@mui/material";
+import { Snackbar } from "@mui/material";
+import MuiAlert from "@mui/material/Alert";
+import moment from "moment";
+import { FileOpener } from '@capacitor-community/file-opener';
 import DataTable from "../../components/DataTable";
 import { RadarChart } from "../../charts";
 import { colorRangeGenerator, round2 } from "../../model/utils";
-import { getScaleKeyName, getScaleLongName } from "../../model/candidate/actions";
+import { writeFile } from "../../model/storage";
+import exportPDF from "../../model/pdf";
+import { getScaleKeyName, getScaleLongName, saveResults } from "../../model/candidate/actions";
 
 const paperStyle = {
     p: 1, 
@@ -36,29 +44,117 @@ const tableHeaders = [
     }
 ];
 
+const pdfConfig = {
+    password: null,
+    passwordValue: "",
+    watermark: true
+};
+
 const getScaleRow = (results, scale) => ({
     name: () => <Typography fontSize={12} lineHeight="1em">{getScaleLongName(scale)}</Typography>,
     score: () => <Typography fontSize={12} lineHeight="1em">{results[scale].score} pts.</Typography>,
     freq: () => <Typography fontSize={12} lineHeight="1em">{round2(results[scale].freq)} %</Typography>
 });
 
+const Toast = forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
 let imageData = "";
 
-const CandidateResults = ({results, onReset, onShare}) => {
+const CandidateResults = ({ results, onReset }) => {
 
-    const labels = Object.keys(results).filter(k => k !== "total" && k !== "name");
+    const navigate = useNavigate();
+
+    const [toastState, setToastState] = useState({
+        open: false,
+        severity: "info",
+        message: ""
+    });
+
+    const handleCloseToast = (_, reason) => {
+        if (reason === 'clickaway') return;
+        setToastState(prevState => ({
+            ...prevState,
+            open: false
+        }));
+    };
+
+    const handleShare = () => {
+        exportPDF({...results, image:imageData}, pdfConfig)
+            .then(pdfFile => {
+                if(pdfFile){
+                    const fileName = "Presipedia_"+moment().format("DDMMYYYYHHmm")+".pdf";
+                    if(Capacitor.isNativePlatform()){
+                        pdfFile.getBase64(base64pdf => {                                
+                            writeFile(base64pdf, fileName, "documents", "binary")
+                            .then(({uri}) => {
+                                FileOpener.open({
+                                    filePath: uri,
+                                    contentType: 'application/pdf'
+                                });
+                            })
+                            .catch(err => {
+                                setToastState({
+                                    open: true,
+                                    severity: "error",
+                                    message: "Error al generar exportable"
+                                });
+                                console.error(err);
+                            });
+                        });
+                    }else{
+                        pdfFile.download(fileName);
+                        setToastState({
+                            open: true,
+                            severity: "success",
+                            message: "Exportable generado correctamente"
+                        });
+                    }
+                }else{
+                    setToastState({
+                        open: true,
+                        severity: "error",
+                        message: "Error al generar exportable"
+                    });
+                    console.error("Error when retrieving PDF file.");
+                }
+            })
+            .catch(err => {
+                setToastState({
+                    open: true,
+                    severity: "error",
+                    message: "Error al generar exportable"
+                });
+                console.error(err);
+            });
+    };
+
+    const handleSave = () => {
+        saveResults(results)
+        .then(() => {
+            setToastState({
+                open: true,
+                severity: "success",
+                message: "Resultados guardados correctamente"
+            });
+            setTimeout(() => navigate("/games"), 1500);
+        })
+        .catch(err => {
+            console.error(err);
+            setToastState({
+                open: true,
+                severity: "error",
+                message: "Error al guardar resultados"
+            });
+        });
+    };
+
+    const labels = Object.keys(results).filter(k => k !== "total" && k !== "name" && k !== "image" && k !== "timestamp");
     const labelNames = labels.map(k => getScaleKeyName(k));
     const datasets = labels.map(l => results[l].score);
     const strengths = labels.filter(l => results[l].score > 50).map(k => getScaleRow(results, k));
     const weaknesses = labels.filter(l => results[l].score <= 50).map(k => getScaleRow(results, k));
-
-    const handleShare = () => {
-        const data = {
-            ...results,
-            image: imageData
-        };
-        onShare(data);
-    };
 
     return (
         <Box>
@@ -100,7 +196,19 @@ const CandidateResults = ({results, onReset, onShare}) => {
                     size="small"
                     color="secondary"
                     onClick={handleShare}>Compartir resultados</Button>
+                <Button 
+                    sx={{mt:2}}
+                    variant="contained"
+                    size="small"
+                    color="tertiary"
+                    onClick={handleSave}>Guardar resultados</Button>
             </Stack>
+
+            <Snackbar open={toastState.open} autoHideDuration={1500} onClose={handleCloseToast}>
+                <Toast severity={toastState.severity} sx={{ width: '100%' }} onClose={handleCloseToast}>
+                    {toastState.message}
+                </Toast>
+            </Snackbar>
         </Box>
     )
 };

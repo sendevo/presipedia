@@ -59,6 +59,28 @@ export const getZodiac = unixTime => {
 	return {index: zIndex, name: ZODIAC_SIGNS[zIndex]};
 };
 
+export const hash = message => {
+    return new Promise((resolve, reject) => {
+        const msgBuffer = new TextEncoder().encode(message);
+        window.crypto.subtle.digest('SHA-256', msgBuffer)
+        .then(hashBuffer => {
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hexString = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            const str = hexString
+                .replace(/\r|\n/g, "")
+                .replace(/([\da-fA-F]{2}) ?/g, "0x$1 ")
+                .replace(/ +$/, "")
+                .split(" ");
+            const b64 = btoa(String.fromCharCode.apply(null, str));
+            resolve(b64);
+        })
+        .catch(error => {
+            console.error(error);
+            reject(error);
+        });
+    });
+};
+
 export const capitalize = str => str.charAt(0).toUpperCase()+str.slice(1);
 
 export const cropString = (str,len) => str.slice(0,len)+(str.length > len?"...":"");

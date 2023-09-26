@@ -1,4 +1,6 @@
 import { round2 } from "../utils";
+import { CANDIDATE_RESULTS_KEY } from "../storage";
+import { hash } from "../utils";
 import processed from "../../assets/processed.json";
 
 
@@ -16,7 +18,7 @@ const scalesLong = {
     assumptionAgeHistogram: "Edad de asunción",
     birthsPerMonth: "Mes de nacimiento",
     birthsPerZodiacSign: "Signo zodiacal",
-    birthLocations: "Prov. de nacimiento",
+    birthLocations: "Pcia. de nacimiento",
     occupations: "Ocupación",
     genders: "Género",
     parties: "Tendencia política"
@@ -38,8 +40,40 @@ export const evalCandidate = candidate => {
     });
     result.name = candidate.name;
     result.total = sum/scalesCount;
+    result.timestamp = Date.now();
     return result;
 };
+
+export const saveResults = results => {
+    return new Promise((resolve, reject) => {
+        hash(JSON.stringify(results))
+        .then(cid => {
+            const data = localStorage.getItem(CANDIDATE_RESULTS_KEY);
+            const storedResults = data ? JSON.parse(data) : {};
+            storedResults[cid] = results;
+            localStorage.setItem(CANDIDATE_RESULTS_KEY, JSON.stringify(storedResults));
+            resolve();
+        })
+        .catch(reject);
+    });
+};
+
+export const loadResults = cid => {
+    return new Promise((resolve, reject) => {
+        const data = localStorage.getItem(CANDIDATE_RESULTS_KEY);
+        if(data){
+            const allResults = JSON.parse(data);
+            const res = allResults[cid];
+            if(res){
+                resolve(res);
+            }else{
+                reject(`Error when loading result cid: ${cid}`);
+            }
+        }else{
+            reject("Error while retrieving all saved results");
+        }
+    });
+}
 
 export const getScaleKeyName = key => {
     return scales[key];

@@ -33,7 +33,7 @@ const RadarChart = ({title, clarification, labels, datasets, suffix, onReady}) =
                     align: "start",
                     display: true,
                     font: {
-                        size: 18, 
+                        size: 16, 
                         weight: "bold"
                     },
                     color: "#000",
