@@ -11,3 +11,10 @@ export const onAnswer = (dispatch, option) => {
         payload: {option}
     });
 };
+
+export const onLoad = (dispatch, cid) => {
+    dispatch({
+        type: "ON_LOAD_QUIZ",
+        payload: {cid}
+    });
+};

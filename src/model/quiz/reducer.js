@@ -1,4 +1,6 @@
+import { hash } from "../utils";
 import getRandomQuestion from "./generator";
+import { QUIZ_PROGRESS_KEY } from "../storage";
 import {
     MAX_QUIZ_PLAYERS,
     QUESTION_TIMEOUT,
@@ -6,28 +8,39 @@ import {
     TIMER_PERIOD
 } from "./constants";
 
-const newQuestionToState = () => {
-    return {
-        ...getRandomQuestion(),
-        questionTicksLeft: QUESTION_TIMEOUT/TIMER_PERIOD,
-        feedbackTicksLeft: FEEDBACK_TIMEOUT/TIMER_PERIOD,
-        feedbackType: "HIDDEN", // HIDDEN, RIGHT, WRONG, TIMEOUT
-        feedbackTitle: ""
-    };
-};
+const initialQuestionTicks = QUESTION_TIMEOUT/TIMER_PERIOD;
+const initialFeedbackTicks = FEEDBACK_TIMEOUT/TIMER_PERIOD;
 
-export const getQuestionProgress = ticks => ticks*100/QUESTION_TIMEOUT*TIMER_PERIOD;
+export const getQuestionProgress = ticks => ticks*100/initialQuestionTicks;
 
 export const initialState = {
     players: [], // [{name: "Jugador 1", score: 0}]
     currentPlayer: 0,
     running: false,
     questionCounter: 0,
-    ...newQuestionToState()
+    ...getRandomQuestion(),
+    questionTicksLeft: initialQuestionTicks,
+    feedbackTicksLeft: initialFeedbackTicks,
+    feedbackType: "HIDDEN", // HIDDEN, RIGHT, WRONG, TIMEOUT
+    feedbackTitle: ""
 };
 
 export const reducer = (prevState, action) => {
     switch(action.type){
+        case "ON_LOAD_QUIZ":
+            const data = localStorage.getItem(QUIZ_PROGRESS_KEY);
+            if(data){
+                const allProgress = JSON.parse(data);
+                const nextState = allProgress[action.payload.cid];
+                if(nextState){
+                    return {...nextState};
+                }else{
+                    console.error(`Error when loading result cid: ${cid}`);
+                }
+            }else{
+                console.error("Error while retrieving all saved results");
+            }
+            return {...prevState};
         case "ON_QUIZ_START": // Set player list and start game
             const players = action.payload.playerNames.map(name => ({name, score:0}));
             if(players.length > MAX_QUIZ_PLAYERS){
@@ -49,10 +62,14 @@ export const reducer = (prevState, action) => {
                         const totalPlayers = prevState.players.length;
                         const currentPlayer = (prevPlayer+1) % totalPlayers;
                         const questionCounter = prevState.questionCounter+1;
+                        const question = getRandomQuestion();
                         return {
                             ...prevState,
-                            ...newQuestionToState(),
+                            ...question,
+                            questionTicksLeft: initialQuestionTicks,
+                            feedbackTicksLeft: initialFeedbackTicks,
                             feedbackType: "HIDDEN",
+                            feedbackTitle: "",
                             questionCounter,
                             currentPlayer
                         };
@@ -63,18 +80,17 @@ export const reducer = (prevState, action) => {
                         }
                     }
                 }else{ // Showing question --> update progress
-                    const questionTicksLeft = prevState.questionTicksLeft-1;
-                    if(questionTicksLeft <= 0) // Question timeout --> Show feedback
+                    if(prevState.questionTicksLeft-1 <= 0) // Question timeout --> Show feedback
                         return {
                             ...prevState,
                             feedbackType: "TIMEOUT",
                             feedbackTitle: "¡Demasiado lento!",
-                            feedbackTicksLeft: FEEDBACK_TIMEOUT/TIMER_PERIOD
+                            feedbackTicksLeft: initialFeedbackTicks
                         };
                     else{ // If not timeout, just update timer count
                         return {
                             ...prevState,
-                            questionTicksLeft: questionTicksLeft 
+                            questionTicksLeft: prevState.questionTicksLeft-1
                         };
                     }
                 }
@@ -88,8 +104,8 @@ export const reducer = (prevState, action) => {
             if(correct) prevScores[prevState.currentPlayer].score += prevState.answerValue;
             return {
                 ...prevState,
-                questionTicksLeft: QUESTION_TIMEOUT/TIMER_PERIOD,
-                feedbackTicksLeft: FEEDBACK_TIMEOUT/TIMER_PERIOD,
+                questionTicksLeft: initialQuestionTicks,
+                feedbackTicksLeft: initialFeedbackTicks,
                 feedbackType: correct ? "RIGHT" : "WRONG",
                 feedbackTitle: correct ? "¡Respuesta correcta!" : "¡Respuesta incorrecta!",
                 players: [...prevScores]
@@ -105,3 +121,16 @@ export const init = dispatch => window.setInterval(() => dispatch({type: "ON_TIM
 
 export const destroy = gameID => window.clearInterval(gameID);
 
+export const saveProgress = state => {
+    return new Promise((resolve, reject) => {
+        hash(JSON.stringify(state))
+        .then(cid => {
+            const data = localStorage.getItem(QUIZ_PROGRESS_KEY);
+            const storedProgress = data ? JSON.parse(data) : {};
+            storedProgress[cid] = state;
+            localStorage.setItem(QUIZ_PROGRESS_KEY, JSON.stringify(storedProgress));
+            resolve();
+        })
+        .catch(reject);
+    });
+}

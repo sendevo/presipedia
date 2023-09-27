@@ -56,7 +56,7 @@ const View = () => {
         nextStoredGames.push(...getStoredItems(
             QUIZ_PROGRESS_KEY,
             cid => `/games/quiz?cid=${encodeURIComponent(cid)}`,
-            (data, cid) => data[cid]?.players?.join(",") || "Sin nombres"
+            (data, cid) => data[cid]?.players?.map(p => p.name).join(",") || "Sin nombres"
         ));
 
         setStoredGames(nextStoredGames);
@@ -82,7 +82,7 @@ const View = () => {
                 {
                     storedGames.map((g, index) => (
                         <Box key={index} display={"flex"} flexDirection={"row"}>
-                            <Typography fontSize={12}>{g?.title || "Sin titulo"} - {moment(g.timestamp).format("D/M/YYYY - HH/mm")}</Typography>
+                            <Typography fontSize={12}>{g?.title || "Sin titulo"} - {moment(g.timestamp).format("D/M/YYYY - HH:mm")}</Typography>
                             <Link to={g.link}>Abrir</Link>
                             <Button size="small" variant="contained" onClick={() => handleRemoveGame(g.type, g.cid)}>Eliminar</Button>
                         </Box>

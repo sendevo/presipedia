@@ -1,4 +1,5 @@
 import { useEffect, useReducer } from "react";
+import { useSearchParams } from 'react-router-dom';
 import MainView from "../../components/MainView";
 import PlayersDialog from "../../components/PlayersDialog";
 import QuestionBlock from "../../components/QuestionBlock";
@@ -9,23 +10,34 @@ import {
     reducer,
     init,
     destroy,
+    saveProgress,
     getQuestionProgress
 } from "../../model/quiz/reducer";
 import {
     onStartQuiz,
-    onAnswer
+    onAnswer,
+    onLoad
 } from "../../model/quiz/actions";
 import FeedbackDialog from "../../components/FeedbackDialog";
 import background from "../../assets/backgrounds/background3.jpg";
 
-
+let progressCache = {};
 
 const View = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
+    const [searchParams] = useSearchParams();
+
+    progressCache = state;
 
     useEffect(() => {
+        const progressCID = searchParams.get("cid");
+        if(progressCID) onLoad(dispatch, decodeURIComponent(progressCID));
         const gameID = init(dispatch);
-        return () => destroy(gameID);
+        return () => {
+            console.log("Saving progress");
+            saveProgress(progressCache);
+            destroy(gameID);
+        };
     },[]);
 
     const handleinit = playerNames => {

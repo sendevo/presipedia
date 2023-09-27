@@ -31,12 +31,9 @@ const View = () => {
     useEffect(() => {
         const resultCID = searchParams.get("cid");
         if(resultCID){
-            loadResults(decodeURIComponent(resultCID))
-            .then(res => {
-                setResults(res);
-                setState(2);
-            })
-            .catch(console.error);
+            const res = loadResults(decodeURIComponent(resultCID))
+            setResults(res);
+            setState(2);
         }
     }, []);
 

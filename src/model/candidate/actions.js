@@ -59,20 +59,18 @@ export const saveResults = results => {
 };
 
 export const loadResults = cid => {
-    return new Promise((resolve, reject) => {
-        const data = localStorage.getItem(CANDIDATE_RESULTS_KEY);
-        if(data){
-            const allResults = JSON.parse(data);
-            const res = allResults[cid];
-            if(res){
-                resolve(res);
-            }else{
-                reject(`Error when loading result cid: ${cid}`);
-            }
+    const data = localStorage.getItem(CANDIDATE_RESULTS_KEY);
+    if(data){
+        const allResults = JSON.parse(data);
+        const res = allResults[cid];
+        if(res){
+            return res;
         }else{
-            reject("Error while retrieving all saved results");
+            console.error(`Error when loading result cid: ${cid}`);
         }
-    });
+    }else{
+        console.error("Error while retrieving all saved results");
+    }
 }
 
 export const getScaleKeyName = key => {
