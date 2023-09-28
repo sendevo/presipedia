@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Box, Button, Typography } from "@mui/material";
 import moment from "moment";
@@ -12,62 +12,50 @@ import background from "../../assets/backgrounds/background8.jpg";
 
 const content = [
     {
+        key: CANDIDATE_RESULTS_KEY,
         path: "/games/candidate",
         title: "Presidenciómetro",
         text: "¿Podrás ser el siguiente?",
-        icon: candidateIcon
+        icon: candidateIcon,
+        titleFormatter: (data, cid) => data[cid].name
     },
     {
+        key: QUIZ_PROGRESS_KEY,
         path: "/games/quiz",
         title: "Preguntas y respuestas",
         text: "Pon a prueba tus conocimientos",
-        icon: quizIcon
+        icon: quizIcon,
+        titleFormatter: (data, cid) => data[cid]?.players?.map(p => p.name).join(",") || "Sin nombres"
     }
 ];
 
-const getStoredItems = (key, linkFormatter, titleFormatter) => {
+const getStoredItems = ({key, path, titleFormatter}) => {
     const data = localStorage.getItem(key);
     if(data){
         const items = JSON.parse(data);
         return Object.keys(items).map(cid => ({
             cid,
-            type: key,
-            link: linkFormatter(cid),
+            key,
+            link: `${path}?cid=${encodeURIComponent(cid)}`,
             title: titleFormatter(items, cid),
             timestamp: items[cid].timestamp
         }));
     }
     return [];
-}
+};
 
 const View = () => {
     
-    const [storedGames, setStoredGames] = useState([]);
+    const [storedGames, setStoredGames] = useState(
+        content.reduce((acc, current) => ([...acc, ...getStoredItems(current)]), [])
+    );
 
-    useEffect(() => {
-        const nextStoredGames = [];
-
-        nextStoredGames.push(...getStoredItems(
-            CANDIDATE_RESULTS_KEY, 
-            cid => `/games/candidate?cid=${encodeURIComponent(cid)}`,
-            (data, cid) => data[cid].name
-        ));
-
-        nextStoredGames.push(...getStoredItems(
-            QUIZ_PROGRESS_KEY,
-            cid => `/games/quiz?cid=${encodeURIComponent(cid)}`,
-            (data, cid) => data[cid]?.players?.map(p => p.name).join(",") || "Sin nombres"
-        ));
-
-        setStoredGames(nextStoredGames);
-    }, []);
-
-    const handleRemoveGame = (type, cid) => {
-        const oldData = localStorage.getItem(type);
+    const handleRemoveGame = (key, cid) => {
+        const oldData = localStorage.getItem(key);
         if(oldData){
             const items = JSON.parse(oldData);
             delete items[cid];
-            localStorage.setItem(type, JSON.stringify(items));
+            localStorage.setItem(key, JSON.stringify(items));
             setStoredGames(prevGames => prevGames.filter(g => g.cid !== cid));
         }else{
             console.error("Error: no data in localStorage");
@@ -84,7 +72,7 @@ const View = () => {
                         <Box key={index} display={"flex"} flexDirection={"row"}>
                             <Typography fontSize={12}>{g?.title || "Sin titulo"} - {moment(g.timestamp).format("D/M/YYYY - HH:mm")}</Typography>
                             <Link to={g.link}>Abrir</Link>
-                            <Button size="small" variant="contained" onClick={() => handleRemoveGame(g.type, g.cid)}>Eliminar</Button>
+                            <Button size="small" variant="contained" onClick={() => handleRemoveGame(g.key, g.cid)}>Eliminar</Button>
                         </Box>
                     ))
                 }

@@ -17,6 +17,7 @@ export const initialState = {
     players: [], // [{name: "Jugador 1", score: 0}]
     currentPlayer: 0,
     running: false,
+    timestamp: null,
     questionCounter: 0,
     ...getRandomQuestion(),
     questionTicksLeft: initialQuestionTicks,
@@ -49,6 +50,7 @@ export const reducer = (prevState, action) => {
             }else{
                 return {
                     ...prevState,
+                    timestamp: Date.now(),
                     players,
                     running: true
                 };
@@ -99,16 +101,20 @@ export const reducer = (prevState, action) => {
             }
         }
         case "ON_ANSWER":{
-            const correct = prevState.rightAnswer === action.payload.option;
             const prevScores = [...prevState.players];
+            const correct = prevState.rightAnswer === action.payload.option;
             if(correct) prevScores[prevState.currentPlayer].score += prevState.answerValue;
-            return {
+            const tempState = {
                 ...prevState,
                 questionTicksLeft: initialQuestionTicks,
                 feedbackTicksLeft: initialFeedbackTicks,
+                players: [...prevScores]
+            };
+            saveProgress(tempState).then(console.log).catch(console.error);
+            return {
+                ...tempState,
                 feedbackType: correct ? "RIGHT" : "WRONG",
                 feedbackTitle: correct ? "¡Respuesta correcta!" : "¡Respuesta incorrecta!",
-                players: [...prevScores]
             };
         }
         default:
@@ -123,13 +129,13 @@ export const destroy = gameID => window.clearInterval(gameID);
 
 export const saveProgress = state => {
     return new Promise((resolve, reject) => {
-        hash(JSON.stringify(state))
+        hash(JSON.stringify(state.timestamp))
         .then(cid => {
             const data = localStorage.getItem(QUIZ_PROGRESS_KEY);
             const storedProgress = data ? JSON.parse(data) : {};
             storedProgress[cid] = state;
             localStorage.setItem(QUIZ_PROGRESS_KEY, JSON.stringify(storedProgress));
-            resolve();
+            resolve("Game progress saved.");
         })
         .catch(reject);
     });

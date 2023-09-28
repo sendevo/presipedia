@@ -10,7 +10,6 @@ import {
     reducer,
     init,
     destroy,
-    saveProgress,
     getQuestionProgress
 } from "../../model/quiz/reducer";
 import {
@@ -21,23 +20,15 @@ import {
 import FeedbackDialog from "../../components/FeedbackDialog";
 import background from "../../assets/backgrounds/background3.jpg";
 
-let progressCache = {};
-
 const View = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
     const [searchParams] = useSearchParams();
-
-    progressCache = state;
 
     useEffect(() => {
         const progressCID = searchParams.get("cid");
         if(progressCID) onLoad(dispatch, decodeURIComponent(progressCID));
         const gameID = init(dispatch);
-        return () => {
-            console.log("Saving progress");
-            saveProgress(progressCache);
-            destroy(gameID);
-        };
+        return () => destroy(gameID);
     },[]);
 
     const handleinit = playerNames => {
