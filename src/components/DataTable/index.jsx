@@ -48,8 +48,7 @@ const DataTable = ({title, headers, rows}) => (
                             <TableCell 
                                 key={index*headers.length+index2}
                                 width="auto"
-                                align="left"
-                                sx={{whiteSpace: 'nowrap'}}>
+                                align="left">
                                     {row[col.key]()}
                             </TableCell>
                         ))}

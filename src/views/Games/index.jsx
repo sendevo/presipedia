@@ -1,10 +1,13 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { Box, Button, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { Grid, Box, Button, Typography } from "@mui/material";
 import moment from "moment";
+import { FaTrash, FaExternalLinkSquareAlt } from "react-icons/fa";
 import MainView from "../../components/MainView";
 import GridMenu from "../../components/GridMenu";
+import DataTable from "../../components/DataTable";
 import { CANDIDATE_RESULTS_KEY, QUIZ_PROGRESS_KEY } from "../../model/storage";
+import { cropString } from "../../model/utils";
 import candidateIcon from "../../assets/icons/candidate_gauge.png";
 import quizIcon from "../../assets/icons/test.png";
 import background from "../../assets/backgrounds/background8.jpg";
@@ -25,7 +28,7 @@ const content = [
         title: "Preguntas y respuestas",
         text: "Pon a prueba tus conocimientos",
         icon: quizIcon,
-        titleFormatter: (data, cid) => data[cid]?.players?.map(p => p.name).join(",") || "Sin nombres"
+        titleFormatter: (data, cid) => cropString(data[cid]?.players?.map(p => p.name).join(", ") || "Sin nombres", 20)
     }
 ];
 
@@ -44,11 +47,28 @@ const getStoredItems = ({key, path, titleFormatter}) => {
     return [];
 };
 
+const gameHeaders = [
+    {text: "Jugador/es", key: "title"},
+    {text: "Juego", key: "game"},
+    {text: "Guardado", key: "timestamp"},
+    {text: "Acciones", key: "actions"}
+];
+
+const iconStyle = {
+    display: "block", 
+    marginLeft: "auto", 
+    marginRight:"auto",
+    filter: "contrast(50%) drop-shadow(2px 2px 3px #888)"
+};
+
+
 const View = () => {
     
     const [storedGames, setStoredGames] = useState(
         content.reduce((acc, current) => ([...acc, ...getStoredItems(current)]), [])
     );
+
+    const navigate = useNavigate();
 
     const handleRemoveGame = (key, cid) => {
         const oldData = localStorage.getItem(key);
@@ -65,18 +85,34 @@ const View = () => {
     return (
         <MainView title="Entretenimiento" background={background}>
             <GridMenu items={content} subtitle=""/>
-            <Box sx={{mt:2}}>
-                {storedGames.length > 0 && <Typography>Guardado</Typography>}
-                {
-                    storedGames.map((g, index) => (
-                        <Box key={index} display={"flex"} flexDirection={"row"}>
-                            <Typography fontSize={12}>{g?.title || "Sin titulo"} - {moment(g.timestamp).format("D/M/YYYY - HH:mm")}</Typography>
-                            <Link to={g.link}>Abrir</Link>
-                            <Button size="small" variant="contained" onClick={() => handleRemoveGame(g.key, g.cid)}>Eliminar</Button>
-                        </Box>
-                    ))
-                }
-            </Box>
+            {storedGames.length > 0 && 
+                <Box sx={{mt:3}}>
+                    <Typography fontWeight={"bold"}>Progreso y resultados guardados:</Typography>
+                    <DataTable headers={gameHeaders} rows={storedGames.map(g => (
+                        {
+                            title: () => <Typography fontSize={12}>{g?.title || "Sin titulo"}</Typography>,
+                            game: () => <img src={content.find(c => c.key === g.key).icon} height={"25px"} style={iconStyle}></img>,
+                            timestamp: () => <Typography fontSize={10}>{moment(g.timestamp).format("D/M/YYYY HH:mm")}</Typography>,
+                            actions: () => <Grid container spacing={0}>  
+                                <Grid item xs={6}>
+                                    <Box display="flex" justifyContent="flex-end">
+                                        <Button size="small" onClick={() => navigate(g.link)} sx={{m:0, p:0}} title="Abrir">
+                                            <FaExternalLinkSquareAlt/>
+                                        </Button>
+                                    </Box>
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <Box display="flex" justifyContent="flex-end">
+                                        <Button size="small" onClick={() => handleRemoveGame(g.key, g.cid)} sx={{m:0, p:0}} title="Eliminar">
+                                            <FaTrash color="red"/>
+                                        </Button>
+                                    </Box>
+                                </Grid>
+                            </Grid>
+                        }
+                    ))}/>
+                </Box>
+            }
         </MainView>
     );
 };

@@ -3,7 +3,6 @@ import { Typography } from "@mui/material";
 import moment from "moment";
 import MainView from "../../components/MainView";
 import DataTable from "../../components/DataTable";
-import GenericCard from "../../components/GenericCard";
 import { getFullName, getTermDuration, getLocationName } from "../../model/data";
 import { cropString, location2GoogleMap } from "../../model/utils";
 import database from "../../assets/database.json";
