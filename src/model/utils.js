@@ -1,5 +1,10 @@
 import moment from "moment";
-import { ZODIAC_SIGNS, MONTHS } from "../model/constants.js";
+import { 
+    DEBUG_MODE, 
+    AVAILABLE_DEBUG_MODES,
+    ZODIAC_SIGNS, 
+    MONTHS 
+} from "../model/constants.js";
 
 export const arraySum = (arr, attr="") => arr.reduce((a, b) => a + (attr ? b[attr] : b), 0);
 
@@ -75,7 +80,7 @@ export const hash = message => {
             resolve(b64);
         })
         .catch(error => {
-            console.error(error);
+            debug(error, "error");
             reject(error);
         });
     });
@@ -91,3 +96,9 @@ export const formatDate = d => {
 };
 
 export const readingTime = str => Math.round(str.split(" ").length/130);
+
+export const debug = (message, type="log") => {
+    if(DEBUG_MODE)
+        if(AVAILABLE_DEBUG_MODES.includes(type)) 
+            console[type](message);
+};

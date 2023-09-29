@@ -38,7 +38,7 @@ Para contribuir al proyecto *Presipedia*, puede hacer un fork y enviar un pull r
 
 #### Quiero contribuir, pero no soy desarrollador...
 
-Si Ud. no posee conocimientos de desarrollo de software o de sistemas de control de versiones pero quiere sugerir cambios a este proyecto, puede ponerse en contacto a través de alguno de los siguientes correos electrónicos: [holasendevo@gmail.com](mailto:holasendevo@gmail.com) o [matias.micheletto@uns.edu.ar](mailto:matias.micheletto@uns.edu.ar). ¡Todo comentario, sugerencia o colaboración será bienvenida!
+Si Ud. no posee conocimientos de desarrollo de software o de sistemas de control de versiones pero quiere sugerir cambios a este proyecto, puede ponerse en contacto a través del siguiente correo electrónico: [holasendevo@gmail.com](mailto:holasendevo@gmail.com). ¡Todo comentario, sugerencia o colaboración será bienvenida!
 
 
 ## Formato de datos  

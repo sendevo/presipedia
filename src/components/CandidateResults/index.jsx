@@ -13,7 +13,7 @@ import moment from "moment";
 import { FileOpener } from '@capacitor-community/file-opener';
 import DataTable from "../../components/DataTable";
 import { RadarChart } from "../../charts";
-import { colorRangeGenerator, round2 } from "../../model/utils";
+import { colorRangeGenerator, round2, debug } from "../../model/utils";
 import { writeFile } from "../../model/storage";
 import exportPDF from "../../model/pdf";
 import { getScaleKeyName, getScaleLongName, saveResults } from "../../model/candidate/actions";
@@ -100,7 +100,7 @@ const CandidateResults = ({ results, onReset }) => {
                                     severity: "error",
                                     message: "Error al generar exportable"
                                 });
-                                console.error(err);
+                                debug(err, "error");
                             });
                         });
                     }else{
@@ -117,7 +117,7 @@ const CandidateResults = ({ results, onReset }) => {
                         severity: "error",
                         message: "Error al generar exportable"
                     });
-                    console.error("Error when retrieving PDF file.");
+                    debug("Error when retrieving PDF file.", "error");
                 }
             })
             .catch(err => {
@@ -126,7 +126,7 @@ const CandidateResults = ({ results, onReset }) => {
                     severity: "error",
                     message: "Error al generar exportable"
                 });
-                console.error(err);
+                debug(err, "error");
             });
     };
 
@@ -141,7 +141,7 @@ const CandidateResults = ({ results, onReset }) => {
             setTimeout(() => navigate("/games"), 1500);
         })
         .catch(err => {
-            console.error(err);
+            debug(err, "error");
             setToastState({
                 open: true,
                 severity: "error",

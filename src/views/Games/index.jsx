@@ -7,7 +7,7 @@ import MainView from "../../components/MainView";
 import GridMenu from "../../components/GridMenu";
 import DataTable from "../../components/DataTable";
 import { CANDIDATE_RESULTS_KEY, QUIZ_PROGRESS_KEY } from "../../model/storage";
-import { cropString } from "../../model/utils";
+import { cropString, debug } from "../../model/utils";
 import candidateIcon from "../../assets/icons/candidate_gauge.png";
 import quizIcon from "../../assets/icons/test.png";
 import background from "../../assets/backgrounds/background8.jpg";
@@ -64,11 +64,12 @@ const iconStyle = {
 
 const View = () => {
     
+    const navigate = useNavigate();
+
     const [storedGames, setStoredGames] = useState(
         content.reduce((acc, current) => ([...acc, ...getStoredItems(current)]), [])
     );
-
-    const navigate = useNavigate();
+    debug(storedGames, "table");
 
     const handleRemoveGame = (key, cid) => {
         const oldData = localStorage.getItem(key);
@@ -78,7 +79,7 @@ const View = () => {
             localStorage.setItem(key, JSON.stringify(items));
             setStoredGames(prevGames => prevGames.filter(g => g.cid !== cid));
         }else{
-            console.error("Error: no data in localStorage");
+            debug("Error: no data in localStorage", "error");
         }
     };
 
@@ -95,14 +96,14 @@ const View = () => {
                             timestamp: () => <Typography fontSize={10}>{moment(g.timestamp).format("D/M/YYYY HH:mm")}</Typography>,
                             actions: () => <Grid container spacing={0}>  
                                 <Grid item xs={6}>
-                                    <Box display="flex" justifyContent="flex-end">
+                                    <Box display="flex" justifyContent="center">
                                         <Button size="small" onClick={() => navigate(g.link)} sx={{m:0, p:0}} title="Abrir">
                                             <FaExternalLinkSquareAlt/>
                                         </Button>
                                     </Box>
                                 </Grid>
                                 <Grid item xs={6}>
-                                    <Box display="flex" justifyContent="flex-end">
+                                    <Box display="flex" justifyContent="center">
                                         <Button size="small" onClick={() => handleRemoveGame(g.key, g.cid)} sx={{m:0, p:0}} title="Eliminar">
                                             <FaTrash color="red"/>
                                         </Button>

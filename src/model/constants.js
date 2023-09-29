@@ -1,6 +1,8 @@
 import moment from "moment";
 
 //// BUILD ////
+export const DEBUG_MODE = true;
+export const AVAILABLE_DEBUG_MODES = ["log", "error", "info", "warn", "table"];
 export const APP_NAME = "Presipedia: Edición Argentina";
 export const VERSION_CODE = "4";
 export const VERSION_VALUE = "1.0.3 (alpha)";
@@ -9,6 +11,7 @@ export const BUILD_DATE = 1692656103640; // 21-8-2023 19:15 hs
 export const VIS_DATE_FORMAT = "YYYY-MM-DD";
 export const DAY_MS = 86400000;
 export const YEAR_MS = 31556952000; 
+export const MONTH_MS = YEAR_MS/12;
 export const PROVINCES = ["Buenos Aires", "Capital Federal", "Catamarca", "Chaco", "Chubut", "Córdoba", "Corrientes", "Entre Ríos", "Formosa", "Jujuy", "La Pampa", "La Rioja", "Mendoza", "Misiones", "Neuquén", "Río Negro", "Salta", "San Juan", "San Luis", "Santa Cruz", "Santa Fe", "Santiago del Estero", "Tierra del Fuego", "Tucumán"];
 export const OCCUPATIONS = ["Contador", "Agricultor", "Estudiante", "Farmacéutico", "Bombero", "Secretario", "Vendedor", "Veterinario", "Policía", "Enfermero", "Economista", "Pintor", "Albañil", "Mecánico", "Chófer", "Piloto", "Artista", "Cocinero", "Martillero público", "Escribano", "Pescador", "Técnico", "Obrero", "Licenciado", "Plomero", "Soldador", "Herrero", "Diseñador", "Psicólogo", "Deportista", "Mozo", "Entrenador", "Arquitecto", "Carpintero"];
 export const PARTIES = ["Socialista", "Libertario", "Comunista"];
@@ -41,4 +44,5 @@ export const MOMENT_LOCALE_CONFIG = {
     }
 };
 
+if(DEBUG_MODE) console.log(`Available debug functions: ${AVAILABLE_DEBUG_MODES.join(", ")}`);
 moment.updateLocale('es', MOMENT_LOCALE_CONFIG);

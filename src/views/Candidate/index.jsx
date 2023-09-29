@@ -5,7 +5,9 @@ import SwipeableForm from "../../components/SwipeableForm";
 import CandidateResults from "../../components/CandidateResults";
 import Preloader from "../../components/Preloader";
 import { evalCandidate, loadResults } from "../../model/candidate/actions";
+import { debug } from "../../model/utils";
 import background from "../../assets/backgrounds/background1.jpg";
+
 
 const formToCandidate = form => {
     const binStart = Math.floor(form.age/10)*10;
@@ -26,6 +28,7 @@ const View = () => {
 
     const [state, setState] = useState(0); // 0: start, 1: loading, 2: results
     const [results, setResults] = useState({});
+    debug(results, "table");
 
     const [searchParams] = useSearchParams();
     useEffect(() => {

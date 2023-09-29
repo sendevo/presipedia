@@ -1,6 +1,6 @@
 import { round2 } from "../utils";
 import { CANDIDATE_RESULTS_KEY } from "../storage";
-import { hash } from "../utils";
+import { hash, debug } from "../utils";
 import processed from "../../assets/processed.json";
 
 
@@ -66,10 +66,10 @@ export const loadResults = cid => {
         if(res){
             return res;
         }else{
-            console.error(`Error when loading result cid: ${cid}`);
+            debug(`Error when loading result cid: ${cid}`, "error");
         }
     }else{
-        console.error("Error while retrieving all saved results");
+        debug("Error while retrieving all saved results", "error");
     }
 }
 

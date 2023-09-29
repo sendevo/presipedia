@@ -1,6 +1,7 @@
 import { hash } from "../utils";
 import getRandomQuestion from "./generator";
 import { QUIZ_PROGRESS_KEY } from "../storage";
+import { debug } from "../utils";
 import {
     MAX_QUIZ_PLAYERS,
     QUESTION_TIMEOUT,
@@ -36,16 +37,16 @@ export const reducer = (prevState, action) => {
                 if(nextState){
                     return {...nextState};
                 }else{
-                    console.error(`Error when loading result cid: ${cid}`);
+                    debug(`Error when loading result cid: ${cid}`, "error");
                 }
             }else{
-                console.error("Error while retrieving all saved results");
+                debug("Error while retrieving all saved results", "error");
             }
             return {...prevState};
         case "ON_QUIZ_START": // Set player list and start game
             const players = action.payload.playerNames.map(name => ({name, score:0}));
             if(players.length > MAX_QUIZ_PLAYERS){
-                console.error('Error: cannot add more than', MAX_QUIZ_PLAYERS, 'players');
+                debug(`Error: cannot add more than ${MAX_QUIZ_PLAYERS} players`, "error");
                 return {...prevState};
             }else{
                 return {
@@ -110,7 +111,9 @@ export const reducer = (prevState, action) => {
                 feedbackTicksLeft: initialFeedbackTicks,
                 players: [...prevScores]
             };
-            saveProgress(tempState).then(console.log).catch(console.error);
+            saveProgress(tempState)
+            .then(debug)
+            .catch(err => debug(err, "error"));
             return {
                 ...tempState,
                 feedbackType: correct ? "RIGHT" : "WRONG",
@@ -118,7 +121,7 @@ export const reducer = (prevState, action) => {
             };
         }
         default:
-            console.warn(`Unhandled action type: ${action.type}`);
+            debug(`Unhandled action type: ${action.type}`, "warn");
             return prevState;
     }
 };

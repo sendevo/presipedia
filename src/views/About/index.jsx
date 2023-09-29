@@ -33,9 +33,9 @@ const View = () => (
             </TextBlock>
             <TextBlock title="Contribuciones al proyecto">
                 Cualquier comentario, sugerencia o cambio que desee incluir en el proyecto será bienvenido. Este proyecto sigue los términos de licencia de la <a href="https://www.gnu.org/licenses/gpl-3.0.html" rel="noopener" target="_blank">GNU General Public License (v3)</a>, por lo que deberá tener en cuenta que estará liberando su trabajo según los términos de esta misma licencia.
-                Para contribuir al desarrollo del proyecto <b>{APP_NAME}</b>, debe hacer un <i>fork</i> y enviar un <i>pull request</i> en el sitio del <a href="https://github.com/sendevo/presipedia" rel="noopener" target="_blank">repositorio público</a>.  
+                Para contribuir al desarrollo del proyecto <b>{APP_NAME}</b>, debe hacer un <i>fork</i> y enviar un <i>pull request</i> en el sitio del <a href="https://github.com/sendevo/presipedia" rel="noopener" target="_blank">repositorio público</a>, o bien enviar sus comentarios y sugerencias a través de los medios de contacto que allí figuran.  
                 <br/>
-                Consulte la lista de <a href="https://github.com/sendevo/presipedia/graphs/contributors" rel="noopener" target="_blank">principales contribuidores <FaExternalLinkAlt style={{marginLeft:"5px", marginBottom:"-2px"}} /></a>
+                Consulte la lista de <a href="https://github.com/sendevo/presipedia/graphs/contributors" rel="noopener" target="_blank">principales contribuidores</a> o  de <a href="https://github.com/sendevo/presipedia/blob/main/contributors.md" rel="noopener" target="_blank">colaboradores externos</a>.
             </TextBlock>            
             <TextBlock title="Costos de uso">
                 <b>{APP_NAME}</b> es una aplicación gratuita, libre de publicidades y no solicitará a sus usuarios realizar pagos bajo ningún concepto y tampoco es requisito autenticarse ni brindar datos personales de ningún tipo.

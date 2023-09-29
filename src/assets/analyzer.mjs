@@ -1,7 +1,7 @@
 import fs from "fs";
 import moment from "moment";
 import { MONTHS, ZODIAC_SIGNS, DAY_MS } from "../model/constants.js";
-import { arraySum, getZodiac, capitalize } from "../model/utils.js";
+import { arraySum, getZodiac, capitalize, debug } from "../model/utils.js";
 import { getAgeOfAssumption, getProvince } from "../model/data.js";
 import database from "./database.json" assert { type: 'json' };
 
@@ -393,7 +393,7 @@ const processed = {
 const jsonData = JSON.stringify(processed);
 fs.writeFile('processed.json', jsonData, 'utf8', err => {
     if(err)
-        console.error('Error writing to file:', err);
+        debug(`Error writing to file: ${err}`, "error");
     else
-        console.log('Data saved to processed.json');
+        debug('Data saved to processed.json');
 });

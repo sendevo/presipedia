@@ -1,8 +1,9 @@
 import moment from "moment";
-import { YEAR_MS } from "./constants";
-import { cropString } from "./utils";
+import { YEAR_MS, MONTH_MS } from "./constants";
+import { cropString, debug } from "./utils";
 
 const xmlns = "http://www.w3.org/2000/svg";
+const displayMonthsWithScale = 150;
 
 let watchDog;
 const handleScroll = ev => {
@@ -18,10 +19,11 @@ export default class VerticalTimeline {
         this._items = items;
         this._scale = scale;        
         this._init();
+        debug(this._items, "table");
     }
 
     _init() {
-        //const tic = Date.now(); // Measure rendering time
+        const tic = Date.now(); // Measure rendering time
 
         const beginDate = Math.min(...this._items.map(it => it.begin));
         const endDate = Math.max(...this._items.map(it => (it.end===null ? it.begin : it.end)));        
@@ -33,7 +35,7 @@ export default class VerticalTimeline {
         const tickLabelWidth = 25;
         const timelineWidth = 10;
         const timelineHeight = (timespanMs+YEAR_MS)/ms2px;
-        const boxSpace = 10;
+        const boxSpace = 20;
         const boxWidth = 300;        
         const boxHeight = 50;
         const maxTitleChars = 30;
@@ -53,22 +55,43 @@ export default class VerticalTimeline {
         timeline.setAttribute("y2", timelineHeight + paddingBottom);
         timeline.setAttribute("stroke", "#000");
         svg.appendChild(timeline);
-        for (let t = 0; t <= timespanMs+YEAR_MS; t += YEAR_MS) {
-            const tick = document.createElementNS(xmlns, "line");
-            tick.setAttribute("x1", tickLabelWidth);
-            tick.setAttribute("y1", t / ms2px + paddingTop);
-            tick.setAttribute("x2", timelineWidth+tickLabelWidth);
-            tick.setAttribute("y2", t / ms2px + paddingTop);
-            tick.setAttribute("stroke", "#000");
-            svg.appendChild(tick);
 
-            const tickLabel = document.createElementNS(xmlns, "text");
-            tickLabel.setAttribute("x", 0);
-            tickLabel.setAttribute("y", t / ms2px + paddingTop);
-            tickLabel.setAttribute("alignment-baseline", "middle");
-            tickLabel.setAttribute("font-size", "10px");
-            tickLabel.textContent = moment(beginDate+t).year();
-            svg.appendChild(tickLabel);
+        for (let t = 0; t <= timespanMs+YEAR_MS; t += YEAR_MS) {
+            const yearTick = document.createElementNS(xmlns, "line");
+            yearTick.setAttribute("x1", tickLabelWidth);
+            yearTick.setAttribute("y1", (t-YEAR_MS) / ms2px + paddingTop);
+            yearTick.setAttribute("x2", timelineWidth+tickLabelWidth);
+            yearTick.setAttribute("y2", (t-YEAR_MS) / ms2px + paddingTop);
+            yearTick.setAttribute("stroke", "#000");
+            svg.appendChild(yearTick);
+
+            const yearTickLabel = document.createElementNS(xmlns, "text");
+            yearTickLabel.setAttribute("x", 0);
+            yearTickLabel.setAttribute("y", (t-MONTH_MS) / ms2px + paddingTop);
+            yearTickLabel.setAttribute("alignment-baseline", "middle");
+            yearTickLabel.setAttribute("font-size", "10px");
+            yearTickLabel.textContent = moment(beginDate+t).year();
+            svg.appendChild(yearTickLabel);
+
+            if(this._scale >= displayMonthsWithScale){
+                for(let m = t; m < t+YEAR_MS; m += MONTH_MS){
+                    const monthTick = document.createElementNS(xmlns, "line");
+                    monthTick.setAttribute("x1", tickLabelWidth);
+                    monthTick.setAttribute("y1", m / ms2px + paddingTop);
+                    monthTick.setAttribute("x2", timelineWidth+tickLabelWidth);
+                    monthTick.setAttribute("y2", m / ms2px + paddingTop);
+                    monthTick.setAttribute("stroke", "#000");
+                    svg.appendChild(monthTick);
+
+                    const monthTickLabel = document.createElementNS(xmlns, "text");
+                    monthTickLabel.setAttribute("x", tickLabelWidth+timelineWidth);
+                    monthTickLabel.setAttribute("y", m / ms2px + paddingTop);
+                    monthTickLabel.setAttribute("alignment-baseline", "middle");
+                    monthTickLabel.setAttribute("font-size", "10px");
+                    monthTickLabel.textContent = moment(beginDate+m).format("MMM");
+                    svg.appendChild(monthTickLabel);
+                }
+            }
         }
 
         const xBox = tickLabelWidth+timelineWidth+boxSpace;
@@ -146,12 +169,12 @@ export default class VerticalTimeline {
         const scrollValue = localStorage.getItem("timeline-scroll-position");
         if(scrollValue) this._container.scrollTop = Number(scrollValue);
 
-        //console.log("Render finished in", Date.now() - tic, "ms");
+        debug(`Render finished in ${Date.now() - tic} ms`);
     }
 
     destroy() {
         this._container.innerHTML = "";
         this._container.removeEventListener("scroll", handleScroll);
-        //console.log("Timeline destroyed");
+        debug("Timeline destroyed");
     }
 };
