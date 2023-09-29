@@ -13,20 +13,29 @@ const handleScroll = ev => {
     }, 500);
 };
 
+
 export default class VerticalTimeline {
     constructor(container, items, scale = 40) {
         this._container = container;
         this._items = items;
         this._scale = scale;        
+
+        const tic = Date.now();
         this._init();
-        debug(this._items, "table");
+        debug(`Render finished in ${Date.now() - tic} ms`);
+
+        //debug(this._items, "table");
+        //debug(this._scale);
     }
 
     _init() {
-        const tic = Date.now(); // Measure rendering time
-
-        const beginDate = Math.min(...this._items.map(it => it.begin));
-        const endDate = Math.max(...this._items.map(it => (it.end===null ? it.begin : it.end)));        
+        let beginDate = Infinity;
+        let endDate = -Infinity;
+        for (const item of this._items) {
+            const itemEnd = item.end === null ? item.begin : item.end;
+            if (item.begin < beginDate) beginDate = item.begin;
+            if (itemEnd > endDate) endDate = itemEnd;
+        }
         const timespanMs = endDate-beginDate;
         const ms2px = YEAR_MS/this._scale;
 
@@ -94,29 +103,52 @@ export default class VerticalTimeline {
             }
         }
 
+        const yBoxes = this._items.map(it => { // Computationally intensive --> TODO: move to service worker or webassembly module
+            //return (it.begin - beginDate) / ms2px + paddingTop;
+            return ((it.begin + (it.end ? it.end : it.begin))/ms2px - boxHeight)/2 + paddingTop - beginDate/ms2px;
+        });
+        
         const xBox = tickLabelWidth+timelineWidth+boxSpace;
-        this._items.forEach(item => {            
-            const contentMargin = xBox + (item.image ? boxHeight : 10) + 10;
-            const yStart = (item.begin - beginDate) / ms2px + paddingTop;
-            const yEnd = ((item.end === null ? item.begin : item.end) - beginDate) / ms2px + paddingTop;
-            const yBox = (yStart+yEnd)/2 - boxHeight/2;
-
+        this._items.forEach((item, index) => {            
+            
             const box = document.createElementNS(xmlns, "rect");
             box.setAttribute("x", xBox);
-            box.setAttribute("y", yBox);
+            box.setAttribute("y", yBoxes[index]);
             box.setAttribute("width", boxWidth);
             box.setAttribute("height", boxHeight);
             box.setAttribute("stroke", item.borderColor || "#A9E2F3")
             box.setAttribute("fill", item.backgroundColor || "#A9E2F3AA");
             svg.appendChild(box);
 
+            const polygon = document.createElementNS(xmlns, 'polygon');
+            const vertices = [
+                [timelineWidth / 2 + tickLabelWidth, (item.begin - beginDate) / ms2px + paddingTop],
+                [xBox, yBoxes[index]],
+                [xBox, yBoxes[index]+boxHeight],
+                [timelineWidth / 2 + tickLabelWidth, ((item.end === null ? item.begin : item.end) - beginDate) / ms2px + paddingTop]
+            ];
+            polygon.setAttribute("points", vertices.reduce((acc, current) => acc + ` ${current[0]},${current[1]}`, ""));
+            polygon.setAttribute("stroke", item.borderColor || "#A9E2F3");
+            polygon.setAttribute("fill", item.backgroundColor || "#A9E2F3AA");
+            svg.appendChild(polygon);
+
+            if(item.image){
+                const image = document.createElementNS(xmlns, "image");
+                image.setAttribute("x", xBox);
+                image.setAttribute("y", yBoxes[index]);
+                image.setAttribute("height", boxHeight);
+                image.setAttribute("href", item.image);
+                svg.appendChild(image);
+            }
+
+            const contentMargin = xBox + 10 + (item.image ? boxHeight : 10);
+
             const titleLabel = document.createElementNS(xmlns, "text");
             titleLabel.setAttribute("x", contentMargin);
-            titleLabel.setAttribute("y", yBox + boxHeight/4);            
+            titleLabel.setAttribute("y", yBoxes[index] + boxHeight/4);            
             titleLabel.setAttribute("alignment-baseline", "middle");
             titleLabel.setAttribute("font-size", "14px");
             titleLabel.textContent = cropString(item.title, maxTitleChars);
-
             if(item.link){
                 const link = document.createElementNS(xmlns, "a");
                 link.setAttribute("href", item.link);            
@@ -128,7 +160,7 @@ export default class VerticalTimeline {
 
             const periodLabel = document.createElementNS(xmlns, "text");
             periodLabel.setAttribute("x", contentMargin);
-            periodLabel.setAttribute("y", yBox + boxHeight/4 + 15);
+            periodLabel.setAttribute("y", yBoxes[index] + boxHeight/4 + 15);
             periodLabel.setAttribute("alignment-baseline", "middle");
             periodLabel.setAttribute("font-size", "9px");
             periodLabel.textContent = (item.end ? "Del " : "")+moment(item.begin).format("D/M/YYYY")+(item.end ? (" hasta el "+moment(item.end).format("D/M/YYYY")):"");
@@ -136,40 +168,17 @@ export default class VerticalTimeline {
 
             const descriptionLabel = document.createElementNS(xmlns, "text");
             descriptionLabel.setAttribute("x", contentMargin);
-            descriptionLabel.setAttribute("y", yBox + boxHeight/4 + 28);
+            descriptionLabel.setAttribute("y", yBoxes[index] + boxHeight/4 + 28);
             descriptionLabel.setAttribute("alignment-baseline", "middle");
             descriptionLabel.setAttribute("font-size", "11px");
             descriptionLabel.textContent = cropString(item.description, maxDescriptionChars);
             svg.appendChild(descriptionLabel);
-
-            if(item.image){
-                const image = document.createElementNS(xmlns, "image");
-                image.setAttribute("x", xBox);
-                image.setAttribute("y", yBox);
-                image.setAttribute("height", boxHeight);
-                image.setAttribute("href", item.image);
-                svg.appendChild(image);
-            }
-
-            const polygon = document.createElementNS(xmlns, 'polygon');
-            const vertices = [
-                [timelineWidth / 2 + tickLabelWidth, yStart],
-                [xBox, yBox],
-                [xBox, yBox+boxHeight],
-                [timelineWidth / 2 + tickLabelWidth, yEnd]
-            ];
-            polygon.setAttribute("points", vertices.reduce((acc, current) => acc + ` ${current[0]},${current[1]}`, ""));
-            polygon.setAttribute("stroke", item.borderColor || "#A9E2F3");
-            polygon.setAttribute("fill", item.backgroundColor || "#A9E2F3AA");
-            svg.appendChild(polygon);
         });
 
         this._container.appendChild(svg);
         this._container.addEventListener("scroll", handleScroll);
         const scrollValue = localStorage.getItem("timeline-scroll-position");
         if(scrollValue) this._container.scrollTop = Number(scrollValue);
-
-        debug(`Render finished in ${Date.now() - tic} ms`);
     }
 
     destroy() {
