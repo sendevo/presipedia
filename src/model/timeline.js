@@ -31,9 +31,9 @@ export default class VerticalTimeline {
     _init() {
         let beginDate = Infinity;
         let endDate = -Infinity;
-        for (const item of this._items) {
-            const itemEnd = item.end === null ? item.begin : item.end;
-            if (item.begin < beginDate) beginDate = item.begin;
+        for (let index = 0; index < this._items.length; index++) {
+            const itemEnd = this._items[index].end === null ? this._items[index].begin : this._items[index].end;
+            if (this._items[index].begin < beginDate) beginDate = this._items[index].begin;
             if (itemEnd > endDate) endDate = itemEnd;
         }
         const timespanMs = endDate-beginDate;
@@ -68,9 +68,9 @@ export default class VerticalTimeline {
         for (let t = 0; t <= timespanMs+YEAR_MS; t += YEAR_MS) {
             const yearTick = document.createElementNS(xmlns, "line");
             yearTick.setAttribute("x1", tickLabelWidth);
-            yearTick.setAttribute("y1", (t-YEAR_MS) / ms2px + paddingTop);
+            yearTick.setAttribute("y1", (t-YEAR_MS-MONTH_MS) / ms2px + paddingTop);
             yearTick.setAttribute("x2", timelineWidth+tickLabelWidth);
-            yearTick.setAttribute("y2", (t-YEAR_MS) / ms2px + paddingTop);
+            yearTick.setAttribute("y2", (t-YEAR_MS-MONTH_MS) / ms2px + paddingTop);
             yearTick.setAttribute("stroke", "#000");
             svg.appendChild(yearTick);
 
@@ -109,8 +109,9 @@ export default class VerticalTimeline {
         });
         
         const xBox = tickLabelWidth+timelineWidth+boxSpace;
-        this._items.forEach((item, index) => {            
-            
+        for(let index = 0; index < this._items.length; index++) {            
+            const item = this._items[index];
+
             const box = document.createElementNS(xmlns, "rect");
             box.setAttribute("x", xBox);
             box.setAttribute("y", yBoxes[index]);
@@ -173,7 +174,7 @@ export default class VerticalTimeline {
             descriptionLabel.setAttribute("font-size", "11px");
             descriptionLabel.textContent = cropString(item.description, maxDescriptionChars);
             svg.appendChild(descriptionLabel);
-        });
+        };
 
         this._container.appendChild(svg);
         this._container.addEventListener("scroll", handleScroll);

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Grid, Box, Button, Typography } from "@mui/material";
+import { Grid, Box, Button, Typography, Fab } from "@mui/material";
 import moment from "moment";
 import { FaTrash, FaExternalLinkSquareAlt } from "react-icons/fa";
 import MainView from "../../components/MainView";
@@ -61,6 +61,11 @@ const iconStyle = {
     filter: "contrast(50%) drop-shadow(2px 2px 3px #888)"
 };
 
+const actionButtonStyle = {
+    m:0, 
+    p:0, 
+    transform: "scale(0.75)"
+};
 
 const View = () => {
     
@@ -89,24 +94,36 @@ const View = () => {
             {storedGames.length > 0 && 
                 <Box sx={{mt:3}}>
                     <Typography fontWeight={"bold"}>Progreso y resultados guardados:</Typography>
-                    <DataTable headers={gameHeaders} rows={storedGames.map(g => (
+                    <DataTable 
+                        cellSx={{pt:0, pb:0}}
+                        headers={gameHeaders} 
+                        rows={storedGames.map(g => (
                         {
                             title: () => <Typography fontSize={12}>{g?.title || "Sin titulo"}</Typography>,
                             game: () => <img src={content.find(c => c.key === g.key).icon} height={"25px"} style={iconStyle}></img>,
                             timestamp: () => <Typography fontSize={10}>{moment(g.timestamp).format("D/M/YYYY HH:mm")}</Typography>,
                             actions: () => <Grid container spacing={0}>  
                                 <Grid item xs={6}>
-                                    <Box display="flex" justifyContent="center">
-                                        <Button size="small" onClick={() => navigate(g.link)} sx={{m:0, p:0}} title="Abrir">
-                                            <FaExternalLinkSquareAlt/>
-                                        </Button>
+                                    <Box display="flex" justifyContent="flex-end">
+                                        <Fab 
+                                            sx={actionButtonStyle} 
+                                            size="small" 
+                                            variant="contained" 
+                                            color="primary" 
+                                            title="Abrir"
+                                            onClick={() => navigate(g.link)} >
+                                            <FaExternalLinkSquareAlt color="white"/>
+                                        </Fab>
                                     </Box>
                                 </Grid>
                                 <Grid item xs={6}>
                                     <Box display="flex" justifyContent="center">
-                                        <Button size="small" onClick={() => handleRemoveGame(g.key, g.cid)} sx={{m:0, p:0}} title="Eliminar">
-                                            <FaTrash color="red"/>
-                                        </Button>
+                                        <Fab 
+                                            sx={{...actionButtonStyle, backgroundColor: "#FF0000"}}
+                                            title="Eliminar"
+                                            size="small" onClick={() => handleRemoveGame(g.key, g.cid)} >
+                                            <FaTrash color="white"/>
+                                        </Fab>
                                     </Box>
                                 </Grid>
                             </Grid>

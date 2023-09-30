@@ -9,7 +9,7 @@ import {
     Typography
 } from "@mui/material";
 
-const DataTable = ({title, headers, rows}) => (
+const DataTable = ({title, headers, rows, cellSx}) => (
     <TableContainer component={Paper} sx={{ backgroundColor: 'rgba(255, 255, 255, 0.7)' }}>
         <Table size="small">
             <TableHead>
@@ -46,6 +46,7 @@ const DataTable = ({title, headers, rows}) => (
                     <TableRow key={index} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                         {headers.map((col, index2)=>(
                             <TableCell 
+                                sx={cellSx}
                                 key={index*headers.length+index2}
                                 width="auto"
                                 align="left">
