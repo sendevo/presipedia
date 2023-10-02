@@ -42,7 +42,7 @@ const View = () => {
                 items={[...terms, ...events]}
                 //items={terms}
                 //items={events}
-                scale={scale*2+10} />
+                scale={scale*2+20} />
         </MainView>
     );
 };

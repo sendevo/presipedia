@@ -36,7 +36,7 @@
     - [x] Cantidad de presidentes/expresidentes con vida por periodo continuo.  
   - [x] Listado de datos crudos:  
     - [x] Tabla.  
-    - [z] Perfiles de expresidentes.  
+    - [x] Perfiles de expresidentes.  
   - [x] Preguntas y respuestas:  
     - [x] Generador de preguntas y respuestas.  
     - [x] Reducer para controlar juego.  
@@ -44,7 +44,7 @@
     - [x] Presentación de pregunta y opciones de respuesta.  
     - [x] Bloque de puntajes de jugadores.  
     - [x] Diálogo para mostrar resultado de respuesta.  
-  - [x] Presidentómetro  
+  - [x] Presidenciómetro  
     - [x] Formulario secuencial para ingresar datos.  
     - [x] Validación de formulario.  
     - [x] Cálculo probabilidad basado en datos actuales.  

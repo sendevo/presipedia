@@ -4,6 +4,15 @@ import { cropString, debug } from "./utils";
 
 const xmlns = "http://www.w3.org/2000/svg";
 const displayMonthsWithScale = 150;
+const maxDeoverlapIterations = 500;
+const paddingTop = 25;
+const tickLabelWidth = 25;
+const timelineWidth = 10;
+const boxSpace = 20;
+const boxWidth = 300;        
+const boxHeight = 50;
+const maxTitleChars = 30;
+const maxDescriptionChars = 45;
 
 let watchDog;
 const handleScroll = ev => {
@@ -12,7 +21,6 @@ const handleScroll = ev => {
         localStorage.setItem("timeline-scroll-position", ev.target.scrollTop.toString());
     }, 500);
 };
-
 
 export default class VerticalTimeline {
     constructor(container, items, scale = 40) {
@@ -23,54 +31,59 @@ export default class VerticalTimeline {
         const tic = Date.now();
         this._init();
         debug(`Render finished in ${Date.now() - tic} ms`);
-
-        //debug(this._items, "table");
-        //debug(this._scale);
     }
 
     _init() {
-        let beginDate = Infinity;
-        let endDate = -Infinity;
-        for (let index = 0; index < this._items.length; index++) {
-            const itemEnd = this._items[index].end === null ? this._items[index].begin : this._items[index].end;
-            if (this._items[index].begin < beginDate) beginDate = this._items[index].begin;
-            if (itemEnd > endDate) endDate = itemEnd;
-        }
-        const timespanMs = endDate-beginDate;
+        this._items.sort((a,b) => a.begin-b.begin);
+        const beginDate = this._items[0].begin;
+        const endDate = this._items.at(-1).end;
+        const timespanMs = endDate - beginDate;
         const ms2px = YEAR_MS/this._scale;
 
-        const paddingTop = 10;
-        const paddingBottom = 10;
-        const tickLabelWidth = 25;
-        const timelineWidth = 10;
-        const timelineHeight = (timespanMs+YEAR_MS)/ms2px;
-        const boxSpace = 20;
-        const boxWidth = 300;        
-        const boxHeight = 50;
-        const maxTitleChars = 30;
-        const maxDescriptionChars = 45;
+        // Compute vertical positions of every event box
+        const yBoxes = [];
+        for(let index = 0; index < this._items.length; index++)
+            yBoxes[index] = ((this._items[index].begin + (this._items[index].end ? this._items[index].end : this._items[index].begin))/ms2px - boxHeight)/2 + paddingTop - beginDate/ms2px;
+
+        // Detect overlapping between boxes and sepparate them
+        let stepSize = 5;
+        for(let iteration = 0; iteration < maxDeoverlapIterations; iteration++){
+            let overlapping = 0;
+            for(let index = 0; index < this._items.length; index++){
+                if(yBoxes[index+1] - yBoxes[index] - 2 < boxHeight){                    
+                    if(yBoxes[index] > stepSize)
+                        yBoxes[index] -= stepSize;
+                    yBoxes[index+1] += stepSize;
+                    overlapping++;
+                }
+            }
+            if(overlapping === 0) break;
+        }
 
         this._container.style.height = "60vh";
         this._container.style.overflowY = "auto";        
 
+        const timelineHeight = Math.max(timespanMs/ms2px, yBoxes.at(-1)+boxHeight/2)+paddingTop;
+
         const svg = document.createElementNS(xmlns, "svg");
         svg.setAttribute("width", "100%");
-        svg.setAttribute("height", timelineHeight + paddingTop + paddingBottom);
+        svg.setAttribute("height", timelineHeight);
 
+        // Draw vertical timeline with ticks and labels (years and months)
         const timeline = document.createElementNS(xmlns, "line");
         timeline.setAttribute("x1", timelineWidth / 2 + tickLabelWidth);
         timeline.setAttribute("y1", 0);
         timeline.setAttribute("x2", timelineWidth / 2 + tickLabelWidth);
-        timeline.setAttribute("y2", timelineHeight + paddingBottom);
+        timeline.setAttribute("y2", timelineHeight);
         timeline.setAttribute("stroke", "#000");
         svg.appendChild(timeline);
 
         for (let t = 0; t <= timespanMs+YEAR_MS; t += YEAR_MS) {
             const yearTick = document.createElementNS(xmlns, "line");
             yearTick.setAttribute("x1", tickLabelWidth);
-            yearTick.setAttribute("y1", (t-YEAR_MS-MONTH_MS) / ms2px + paddingTop);
+            yearTick.setAttribute("y1", (t-MONTH_MS) / ms2px + paddingTop);
             yearTick.setAttribute("x2", timelineWidth+tickLabelWidth);
-            yearTick.setAttribute("y2", (t-YEAR_MS-MONTH_MS) / ms2px + paddingTop);
+            yearTick.setAttribute("y2", (t-MONTH_MS) / ms2px + paddingTop);
             yearTick.setAttribute("stroke", "#000");
             svg.appendChild(yearTick);
 
@@ -82,7 +95,7 @@ export default class VerticalTimeline {
             yearTickLabel.textContent = moment(beginDate+t).year();
             svg.appendChild(yearTickLabel);
 
-            if(this._scale >= displayMonthsWithScale){
+            if(this._scale >= displayMonthsWithScale){ // Months only if scale is large
                 for(let m = t; m < t+YEAR_MS; m += MONTH_MS){
                     const monthTick = document.createElementNS(xmlns, "line");
                     monthTick.setAttribute("x1", tickLabelWidth);
@@ -103,11 +116,7 @@ export default class VerticalTimeline {
             }
         }
 
-        const yBoxes = this._items.map(it => { // Computationally intensive --> TODO: move to service worker or webassembly module
-            //return (it.begin - beginDate) / ms2px + paddingTop;
-            return ((it.begin + (it.end ? it.end : it.begin))/ms2px - boxHeight)/2 + paddingTop - beginDate/ms2px;
-        });
-        
+        // Draw everything
         const xBox = tickLabelWidth+timelineWidth+boxSpace;
         for(let index = 0; index < this._items.length; index++) {            
             const item = this._items[index];
