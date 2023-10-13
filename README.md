@@ -18,7 +18,6 @@ Desde Bernardino Rivadavia hasta Alberto Ángel Fernández, la más completa gu�
 | Componentes GUI | [ReactJS](https://es.react.dev/) |
 | Hojas de estilos | [MUI](https://mui.com/) |
 | Componentes nativos | [CapacitorJS](https://capacitorjs.com/) |
-| Línea de tiempo | [VisJS](https://visjs.github.io/vis-timeline/examples/timeline/) |
 | Formateo de fechas | [MomentJS](https://momentjs.com/) |
 | Calendario | [React-Calendar](https://www.npmjs.com/package/react-calendar) |
 | Visualización de datos | [Charts.js](https://www.chartjs.org/) |
