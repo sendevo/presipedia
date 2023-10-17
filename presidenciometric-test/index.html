@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>Presidenciometría 2023</title>
+    <meta name="description" content="Prueba presidenciometría elecciones presidenciales 2023">
+    <meta name="author" content="Dr. Ing. Matias Micheletto">
+</head>
+
+<body>
+    <div id="container" style="height:500px"><canvas id="chart"></canvas></div>
+
+    <script type="text/javascript" src="js/vendor/chart.min.js"></script>
+    <script type="text/javascript" src="js/vendor/moment-with-locales.js"></script>
+    <script type="text/javascript" src="js/custom/processed.js"></script>
+    <script type="text/javascript">
+        const ZODIAC_SIGNS = ["Capricornio", "Acuario", "Piscis", "Aries", "Tauro", "Géminis", "Cáncer", "Leo", "Virgo","Libra", "Escorpio", "Sagitario"];
+        const MONTHS = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre","Octubre", "Noviembre", "Diciembre"];
+        const YEAR_MS = 31556952000;
+
+        const round2 = num => Math.round(num * 100) / 100;
+        const toUnixTimestamp = date => moment(date, "YYYY-MM-DD").unix() * 1000;
+        const getZodiac = birthDate => {
+            const unixTime = toUnixTimestamp(birthDate);
+            var bound = [20, 19, 20, 20, 20, 21, 22, 22, 21, 22, 21, 21];
+            const day = moment(unixTime).date();
+            const month = moment(unixTime).month();
+            const zIndex = day <= bound[month] ? month : (month + 1) % 12;
+            return {
+                index: zIndex,
+                name: ZODIAC_SIGNS[zIndex]
+            };
+        };
+        const getAgeBin = birthDate => {
+            const age = (Date.now() - toUnixTimestamp(birthDate)) / YEAR_MS;
+            const binStart = Math.floor(age / 10) * 10;
+            const binEnd = binStart + 10;
+            return `${binStart}-${binEnd}`;
+        };
+        const evalCandidate = candidate => {
+            const pre = [
+                "assumptionAgeHistogram",
+                "birthsPerMonth",
+                "birthsPerZodiacSign",
+                "birthLocations",
+                "occupations",
+                "genders",
+                "parties"
+            ].reduce((res, attr) => {
+                const index = processed[attr].names.indexOf(candidate[attr]);
+                return {
+                    ...res,
+                    sum: res.sum + round2(processed[attr].terms.scaled.at(index))
+                }
+            }, {
+                name: candidate.name,
+                sum: 0
+            });
+            return {
+                ...pre,
+                total: pre.sum / 7
+            };
+        };
+
+        const candidates = [{
+                name: "Javier Milei (LLA)",
+                birthDate: "1970-10-22",
+                birthLocations: "Capital Federal",
+                occupations: "Economista",
+                genders: "M",
+                parties: "Liberal"
+            },
+            {
+                name: "Sergio Massa (UP)",
+                birthDate: "1972-04-28",
+                birthLocations: "Buenos Aires",
+                occupations: "Abogado",
+                genders: "M",
+                parties: "Justicialista"
+            },
+            {
+                name: "Patricia Bullrich",
+                birthDate: "1956-06-19",
+                birthLocations: "Capital Federal",
+                occupations: "Empleado público",
+                genders: "F",
+                parties: "Propuesta Republicana"
+            },
+            {
+                name: "Juan Schiaretti (HNP)",
+                birthDate: "1949-06-19",
+                birthLocations: "Córdoba",
+                occupations: "Contador público",
+                genders: "M",
+                parties: "Justicialista"
+            },
+            {
+                name: "Myriam Bregman (FIT)",
+                birthDate: "1972-02-25",
+                birthLocations: "Buenos Aires",
+                occupations: "Abogado",
+                genders: "F",
+                parties: "Socialista"
+            }
+        ];
+
+        const data = candidates
+            .map(c => ({
+                ...c,
+                assumptionAgeHistogram: getAgeBin(c.birthDate),
+                birthsPerMonth: MONTHS[moment(c.birthDate).month()],
+                birthsPerZodiacSign: getZodiac(c.birthDate).name,
+            }))
+            .map(c => evalCandidate(c).total);
+        const labels = candidates.map(c => c.name);
+        const config = {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data,
+                    labels
+                }]
+            },
+            options: {
+                indexAxis: "y",
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        title: {
+                            display: "Presidente",
+                            text: "Presidentes"
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: " pts.",
+                            text: "Puntaje <Presipedia/>"
+                        }
+                    },
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    title: {
+                        align: "start",
+                        display: true,
+                        font: {
+                            size: 18,
+                            weight: "bold"
+                        },
+                        color: "#000",
+                        text: "Predicción <Presipedia/>"
+                    },
+                    tooltip: {
+                        enabled: true,
+                        mode: 'point',
+                        callbacks: {
+                            label: tooltipItem => `${tooltipItem.label}: ${tooltipItem.raw.toFixed(2)} pts.`
+                        }
+                    }
+                }
+            }
+        };
+        const chart = new Chart("chart", config);
+    </script>
+</body>
+
+</html>
