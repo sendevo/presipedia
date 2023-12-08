@@ -23,9 +23,10 @@ const handleScroll = ev => {
 };
 
 export default class VerticalTimeline {
-    constructor(container, items, scale = 40) {
+    constructor(container, items, navigate, scale = 40) {
         this._container = container;
         this._items = items;
+        this._navigate = navigate;
         this._scale = scale;        
 
         const tic = Date.now();
@@ -121,6 +122,9 @@ export default class VerticalTimeline {
         for(let index = 0; index < this._items.length; index++) {            
             const item = this._items[index];
 
+            const boxGroup = document.createElementNS(xmlns, "g");
+            if(item.link) boxGroup.onclick = () => this._navigate(item.link);
+
             const box = document.createElementNS(xmlns, "rect");
             box.setAttribute("x", xBox);
             box.setAttribute("y", yBoxes[index]);
@@ -128,7 +132,7 @@ export default class VerticalTimeline {
             box.setAttribute("height", boxHeight);
             box.setAttribute("stroke", item.borderColor || "#A9E2F3")
             box.setAttribute("fill", item.backgroundColor || "#A9E2F3AA");
-            svg.appendChild(box);
+            boxGroup.appendChild(box);
 
             const polygon = document.createElementNS(xmlns, 'polygon');
             const vertices = [
@@ -140,7 +144,7 @@ export default class VerticalTimeline {
             polygon.setAttribute("points", vertices.reduce((acc, current) => acc + ` ${current[0]},${current[1]}`, ""));
             polygon.setAttribute("stroke", item.borderColor || "#A9E2F3");
             polygon.setAttribute("fill", item.backgroundColor || "#A9E2F3AA");
-            svg.appendChild(polygon);
+            boxGroup.appendChild(polygon);
 
             if(item.image){
                 const image = document.createElementNS(xmlns, "image");
@@ -148,7 +152,7 @@ export default class VerticalTimeline {
                 image.setAttribute("y", yBoxes[index]);
                 image.setAttribute("height", boxHeight);
                 image.setAttribute("href", item.image);
-                svg.appendChild(image);
+                boxGroup.appendChild(image);
             }
 
             const contentMargin = xBox + 10 + (item.image ? boxHeight : 10);
@@ -159,14 +163,8 @@ export default class VerticalTimeline {
             titleLabel.setAttribute("alignment-baseline", "middle");
             titleLabel.setAttribute("font-size", "14px");
             titleLabel.textContent = cropString(item.title, maxTitleChars);
-            if(item.link){
-                const link = document.createElementNS(xmlns, "a");
-                link.setAttribute("href", item.link);            
-                link.appendChild(titleLabel);
-                svg.appendChild(link);
-            }else{
-                svg.appendChild(titleLabel);
-            }
+            boxGroup.appendChild(titleLabel);
+            
 
             const periodLabel = document.createElementNS(xmlns, "text");
             periodLabel.setAttribute("x", contentMargin);
@@ -174,7 +172,7 @@ export default class VerticalTimeline {
             periodLabel.setAttribute("alignment-baseline", "middle");
             periodLabel.setAttribute("font-size", "9px");
             periodLabel.textContent = (item.end ? "Del " : "")+moment(item.begin).format("D/M/YYYY")+(item.end ? (" hasta el "+moment(item.end).format("D/M/YYYY")):"");
-            svg.appendChild(periodLabel);
+            boxGroup.appendChild(periodLabel);
 
             const descriptionLabel = document.createElementNS(xmlns, "text");
             descriptionLabel.setAttribute("x", contentMargin);
@@ -182,7 +180,9 @@ export default class VerticalTimeline {
             descriptionLabel.setAttribute("alignment-baseline", "middle");
             descriptionLabel.setAttribute("font-size", "11px");
             descriptionLabel.textContent = cropString(item.description, maxDescriptionChars);
-            svg.appendChild(descriptionLabel);
+            boxGroup.appendChild(descriptionLabel);
+
+            svg.appendChild(boxGroup);
         };
 
         this._container.appendChild(svg);

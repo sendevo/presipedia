@@ -4,11 +4,10 @@ import moment from "moment";
 export const DEBUG_MODE = false;
 export const AVAILABLE_DEBUG_MODES = ["log", "error", "info", "warn", "table"];
 export const APP_NAME = "Presipedia: Edición Argentina";
-export const VERSION_CODE = "4";
-export const VERSION_VALUE = "1.0.3 (alpha)";
-export const BUILD_DATE = 1696212507443; // 1-10-2023 23:08 hs
+export const VERSION_CODE = "5";
+export const VERSION_VALUE = "1.0.4 (alpha)";
+export const BUILD_DATE = 1696264323611; // 2-10-2023 13:32 hs
 //// DATE-TIME ////
-export const VIS_DATE_FORMAT = "YYYY-MM-DD";
 export const DAY_MS = 86400000;
 export const YEAR_MS = 31556952000; 
 export const MONTH_MS = YEAR_MS/12;

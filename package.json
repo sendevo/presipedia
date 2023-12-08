@@ -1,7 +1,7 @@
 {
   "name": "presipedia",
   "private": true,
-  "version": "1.0.3",
+  "version": "1.0.4",
   "type": "module",
   "scripts": {
     "process-db": "node src/assets/analyzer.mjs && mv processed.json src/assets/",
@@ -31,8 +31,7 @@
     "react-icons": "^4.10.1",
     "react-router-dom": "^6.14.1",
     "react-slick": "^0.29.0",
-    "slick-carousel": "^1.8.1",
-    "vis-timeline": "^7.7.2"
+    "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.14",

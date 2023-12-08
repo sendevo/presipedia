@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
 import VerticalTimeline from "../../model/timeline";
 
@@ -13,10 +14,11 @@ const containerStyle = {
 
 const Timeline = ({title, clarification, items, scale}) => {
     const containerRef = useRef();
+    const navigate = useNavigate();
 
     useEffect(()=>{
         if(items && items.length > 0){
-            const tl = new VerticalTimeline(containerRef.current, items, scale);
+            const tl = new VerticalTimeline(containerRef.current, items, navigate, scale);
             return () => tl.destroy();
         }
     }, [items, scale]);
