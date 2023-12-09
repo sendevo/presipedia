@@ -54,13 +54,13 @@
     - [x] Menú de visualizaciones.  
     - [x] Menú de Juegos.  
     - [x] Menú de datos.  
-  - [ ] Branding y promoción:  
+  - [x] Branding y promoción:  
     - [x] Logo  
     - [x] Nombre  
     - [x] Eslogans  
     - [x] Capturas de pantalla  
-    - [ ] Video demo  
-    - [ ] Publicaciones  
+    - [x] Video demo  
+    - [x] Publicaciones  
   - [x] Compilación  
     - [x] Generar bundle y probar en servidor local.  
     - [x] Compilar version dev para android.  
@@ -70,7 +70,7 @@
   - [x] Opensourcing del repo.  
   
 
-### v1.1._ (beta) (requisitos pendientes):  
+### v1.1._ (beta):  
   - [ ] Optimizar tareas de mantenimiento y actualización.  
   - [ ] Tests  
     - [ ] APP: End to end.  

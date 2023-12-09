@@ -29,7 +29,7 @@ const View = () => (
                 </ul>
             </TextBlock>
             <TextBlock title="Versión">
-                <b>{APP_NAME}</b> se encuentra actualmente en su versión <b>alpha</b>, lo que significa que este producto está transitando su fase inicial de desarrollo luego de su publicación. Por ello, el software puede resultar inestable, contener errores o sufrir muchos cambios en plazos cortos.
+                <b>{APP_NAME}</b> se encuentra actualmente en su versión <b>beta</b>, lo que significa que este producto está transitando fases iniciales de desarrollo luego de su publicación. Por ello, el software puede resultar inestable o contener errores.
             </TextBlock>
             <TextBlock title="Contribuciones al proyecto">
                 Cualquier comentario, sugerencia o cambio que desee incluir en el proyecto será bienvenido. Este proyecto sigue los términos de licencia de la <a href="https://www.gnu.org/licenses/gpl-3.0.html" rel="noopener" target="_blank">GNU General Public License (v3)</a>, por lo que deberá tener en cuenta que estará liberando su trabajo según los términos de esta misma licencia.
