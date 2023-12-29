@@ -90,7 +90,7 @@ const View = () => {
 
     return (
         <MainView title="Entretenimiento" background={background}>
-            <GridMenu items={content} subtitle=""/>
+            <GridMenu items={content}/>
             {storedGames.length > 0 && 
                 <Box sx={{mt:3}}>
                     <Typography fontWeight={"bold"}>Progreso y resultados guardados:</Typography>

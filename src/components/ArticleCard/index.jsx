@@ -22,7 +22,7 @@ const cardActionStyle = {
     padding:"0px"
 };
 
-const ArticleCard = ({title, cover, reading, link}) => {
+const ArticleCard = ({title, cover, reading, section, index}) => {
     return (
         <Card sx={cardStyle}>
             <CardMedia
@@ -40,7 +40,7 @@ const ArticleCard = ({title, cover, reading, link}) => {
             <CardActions sx={cardActionStyle}>
                 <Button 
                     LinkComponent={Link} 
-                    to={`article?index=${link}`}>Leer
+                    to={`/blog/article?section=${section}&index=${index}`}>Leer
                 </Button>
             </CardActions>
         </Card>

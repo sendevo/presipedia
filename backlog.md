@@ -1,6 +1,6 @@
 # Backlog 
 
-### v1.0._ (alpha):  
+### v1.0._ (beta):  
   - [x] Creación del repositorio GitHub.  
   - [x] Definición del modelo de datos: mandatos, personas, eventos y blog.  
   - [ ] Herramienta interna para edición de base de datos:  
@@ -67,10 +67,34 @@
     - [x] Compilar version build para android.  
     - [x] Publicación en hosting.  
     - [x] Publicación en Play Store.  
-  - [x] Opensourcing del repo.  
+  - [x] Opensourcing del proyecto.  
   
 
-### v1.1._ (beta):  
+### v1.1._ (rc):  
+  - [x] Publicación de [landing page](https://sendevosoftware.com.ar/presipedia).  
+  - [x] Clasificar artículos de blog en distintas secciones:  
+    - [x] Símbolos:  
+      - [x] Bastón de mando.  
+      - [x] Banda presidencial.  
+      - [x] Marcha de ituzaingó.  
+      - [x] El sillón de rivadavia.  
+    - [ ] Residencias y transportes:
+      - [x] Casa rosada.  
+      - [ ] Quinta de olivos [link](https://es.wikipedia.org/wiki/Quinta_presidencial_de_Olivos).  
+      - [ ] Agrupación Aérea Presidencial [link](https://es.wikipedia.org/wiki/Agrupaci%C3%B3n_A%C3%A9rea_Presidencial).  
+    - [ ] Atentados a presidentes y expresidentes: [link](https://buenosaireshistoria.org/juntas/los-atentados-presidenciales/).  
+      - [ ] Domingo F. Sarmiento.  
+      - [ ] Julio A. Roca.  
+      - [ ] Manuel Quintana.  
+      - [ ] José Figueroa Alcorta.  
+      - [ ] Victorino de la Plaza.  
+      - [ ] Hipólito Yrigoyen.  
+      - [ ] Cristina Fernández.  
+    - [ ] Curiosidades.    
+      - [ ] El Hombre Gris de Solari Parravicini [link](https://www.rionegro.com.ar/redes/que-dice-la-profecia-del-hombre-gris-de-solari-parravicini-que-vinculan-a-las-elecciones-2023-3084280/).  
+      - [x] El segundo nombre de Ramon Castillo.  
+      - [x] El mandato de Rawson.  
+      - [ ] Signos zodiacales.  
   - [ ] Optimizar tareas de mantenimiento y actualización.  
   - [ ] Tests  
     - [ ] APP: End to end.  

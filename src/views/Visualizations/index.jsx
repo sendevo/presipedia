@@ -35,7 +35,7 @@ const content = [
 
 const View = () => (
     <MainView title="Visualizaciones" background={background}>
-        <GridMenu items={content} subtitle={""}/>
+        <GridMenu items={content}/>
     </MainView>
 );
 

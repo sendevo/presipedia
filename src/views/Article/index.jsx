@@ -7,9 +7,11 @@ import background from "../../assets/backgrounds/background2.jpg";
 
 const View = () => {
     const [searchParams] = useSearchParams();
+    const sectionIndex = searchParams.get("section");
     const articleIndex = searchParams.get("index");
-    const article = (articleIndex >= 0 && articleIndex < blog.length) ? blog[articleIndex] : "";
+    const article = (articleIndex >= 0 && articleIndex < blog[sectionIndex].articles.length) ? blog[sectionIndex].articles[articleIndex] : "";
     const available = Boolean(article);
+
     return (
         <MainView title={article?.title || "Artículo no encontrado!"} background={background}>
             {available? 

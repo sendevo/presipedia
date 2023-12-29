@@ -2,6 +2,7 @@
 import About from './About';
 import Article from './Article';
 import Blog from './Blog';
+import BlogSection from './BlogSection';
 import Event from './Event';
 import Games from './Games';
 import Home from './Home';
@@ -20,6 +21,7 @@ export {
     About,
     Article,
     Blog,
+    BlogSection,
     Event,
     Games,
     Home,
