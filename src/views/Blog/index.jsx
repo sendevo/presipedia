@@ -11,7 +11,7 @@ const content = blog.map((section,index) => ({
 
 const View = () => {
     return(
-        <MainView title="Artículos para leer" background={background}>
+        <MainView title="Blog" background={background}>
             <GridMenu items={content}/>
         </MainView>
     );

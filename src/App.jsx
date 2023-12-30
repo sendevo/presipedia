@@ -31,7 +31,7 @@ const App = () => (
                 <Route index element={<Views.Home/>} />
                 
                 <Route path='/blog' element={<Views.Blog/>}/>
-                <Route path='/blog/section' element={<Views.BlogSection/>}/>
+                <Route path='/blog/section' element={<Views.Section/>}/>
                 <Route path='/blog/article' element={<Views.Article/>}/>
                 
                 <Route path='/about' element={<Views.About/>}/>

@@ -39,7 +39,7 @@ Si Ud. no posee conocimientos de desarrollo de software o de sistemas de control
 
 
 ## Edición de los datos  
-Actualmente Presipedia es puramente *client-side*, por lo que su contenido es estático. Todos los datos se incluyen en el archivo [database.json](src/assets/database.json). Para editar este archivo se recomienda utilizar el [editor](editor/) provisto en este mismo repositorio. 
+Actualmente Presipedia es puramente *client-side*, por lo que su contenido es estático. Todos los datos se incluyen en el archivo [database.json](src/assets/database.json). Para editar este archivo se recomienda utilizar el [editor](editor/database) provisto en este mismo repositorio. 
 
 En caso de editar el archivo manualmente, debe respetar el siguiente formato:
 
@@ -51,7 +51,7 @@ En caso de editar el archivo manualmente, debe respetar el siguiente formato:
 }
 ```
 #### Personas (Entrada ```people```):  
-*Para cada entrada se calcula un identificador de contenido (CID) mediante una función de hash y se emplea como clave del objeto ```people```. El uso del hash para validación del contenido no se aplica actualmente, por lo que esta entrada se puede editar sin modificar el nombre de cada clave.*
+Para cada entrada se calcula un identificador de contenido (CID) mediante una función de hash y se emplea como clave del objeto ```people```. El uso del hash para validación del contenido no se aplica actualmente, por lo que esta entrada se puede editar sin modificar el nombre de cada clave. Para encontrar el CID de un mandatario, puede utilizar el mismo [editor](editor/database/), pulsando sobre el botón de copiar CID.  
 ```jsonc
 {
   "name": "", // string
@@ -65,8 +65,10 @@ En caso de editar el archivo manualmente, debe respetar el siguiente formato:
   "occupation": "" // string
 }
 ```
+Cuando se actualizan los datos de un mandatario y se exporta una nueva base de datos desde el [editor](editor/database/), el CID del presidente se actualizará en función del nuevo contenido. Las referencias a este mandatario en la lista de mandatos se actualizarán automáticamente, sin embargo, existen otras referencias que pueden estar *hardcodeadas*, como por ejemplo en la sección de artículos. Revise los enlaces luego de actualizar los datos de alguno de los presidentes.
+
 #### Mandatos (Entrada ```terms```):  
-*Como puede darse el hecho de que un mismo presidente gobierne en mandatos discontinuados, se emplea una entrada aparte y se la referencia con el CID. El arreglo de mandatos no necesita estar ordenado cronológicamente.*
+Como puede darse el hecho de que un mismo presidente gobierne en mandatos discontinuados, se emplea una entrada aparte y se la referencia con el CID. El arreglo de mandatos no necesita estar ordenado cronológicamente.
 ```jsonc
 {
   "cid": "", // string
@@ -97,7 +99,7 @@ npm run process-db
 ```
 
 #### Artículos
-El contenido de los artículos se encuentra en otro [archivo](src/assets/blog.json) separado. Puede valerse de la carpeta [blog](editor/blog/) para visualizar cada artículo. Luego, utilice el siguiente formato para cada entrada:  
+El contenido de los artículos se encuentra en un [archivo](src/assets/blog.json) separado de la base de datos de presidentes. Puede valerse de la carpeta [blog](editor/blog/) para visualizar cada artículo. Luego, utilice el siguiente formato para cada entrada:  
 
 ```jsonc
 {
@@ -108,8 +110,18 @@ El contenido de los artículos se encuentra en otro [archivo](src/assets/blog.js
 }
 ```
 
+Los artículos se encuentran agrupados en categorías o secciones, las cuales respetan el siguiente formato:
+
+```jsonc
+{
+  "title": "", // string
+  "icon": "", // path to icon file in 'public' folder
+  "articles": [], // array of article objects
+}
+```
+
 #### Imágenes
-Las imágenes con las fotografías de perfil de cada presidente y de los eventos deben alojarse en la carpeta [pictures](public/pictures/). Para los artículos se emplea la carpeta [blog](public/blog/). Para visualizar estas imágenes con el editor, se emplean enlaces simbólicos. Por ejemplo, para crear los correspondientes a las fotografías de presidentes, utilice el siguiente comando:  
+Las imágenes con las fotografías de perfil de cada presidente y de los eventos deben alojarse en la carpeta [pictures](public/pictures/). Para los artículos se emplea la carpeta [blog](public/blog/). Para visualizar estas imágenes con el editor de contenido, se emplean enlaces simbólicos. Por ejemplo, para crear los correspondientes a las fotografías de presidentes, utilice el siguiente comando:  
 
 ```bash
 cd editor/pictures

@@ -67,9 +67,9 @@ const visSlides = [
 ];
 
 const blogSlides = [
-    <ImgSlide key={0} src="/blog/banda.jpg" link="/blog/article?index=0" text="Banda Presidencial" imageHeight="150px"/>,
-    <ImgSlide key={1} src="/blog/baston.jpg" link="/blog/article?index=1" text="Bastón de Mando"  imageHeight="150px"/>,
-    <ImgSlide key={2} src="/blog/sillon.jpg" link="/blog/article?index=3" text="Sillón Presidencial"  imageHeight="150px"/>
+    <ImgSlide key={0} src="/blog/backgrounds/banda.jpg" link="/blog/article?section=0&index=0" text="Banda Presidencial" imageHeight="150px"/>,
+    <ImgSlide key={1} src="/blog/backgrounds/baston.jpg" link="/blog/article?section=0&index=1" text="Bastón de Mando"  imageHeight="150px"/>,
+    <ImgSlide key={2} src="/blog/backgrounds/sillon.jpg" link="/blog/article?section=0&index=3" text="Sillón Presidencial"  imageHeight="150px"/>
 ];
 
 const bottomMenuContent = [
