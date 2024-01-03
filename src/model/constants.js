@@ -4,16 +4,16 @@ import moment from "moment";
 export const DEBUG_MODE = false;
 export const AVAILABLE_DEBUG_MODES = ["log", "error", "info", "warn", "table"];
 export const APP_NAME = "Presipedia: Edición Argentina";
-export const VERSION_CODE = "6";
-export const VERSION_VALUE = "1.0.5 (beta)";
-export const BUILD_DATE = 1696264323611; // 2-10-2023 13:32 hs
+export const VERSION_CODE = "7";
+export const VERSION_VALUE = "1.0.6 (beta)";
+export const BUILD_DATE = 1704240956672; // 2-1-2024 21:16 hs
 //// DATE-TIME ////
 export const DAY_MS = 86400000;
 export const YEAR_MS = 31556952000; 
 export const MONTH_MS = YEAR_MS/12;
 export const PROVINCES = ["Buenos Aires", "Capital Federal", "Catamarca", "Chaco", "Chubut", "Córdoba", "Corrientes", "Entre Ríos", "Formosa", "Jujuy", "La Pampa", "La Rioja", "Mendoza", "Misiones", "Neuquén", "Río Negro", "Salta", "San Juan", "San Luis", "Santa Cruz", "Santa Fe", "Santiago del Estero", "Tierra del Fuego", "Tucumán"];
 export const OCCUPATIONS = ["Contador", "Agricultor", "Estudiante", "Farmacéutico", "Bombero", "Secretario", "Vendedor", "Veterinario", "Policía", "Enfermero", "Economista", "Pintor", "Albañil", "Mecánico", "Chófer", "Piloto", "Artista", "Cocinero", "Martillero público", "Escribano", "Pescador", "Técnico", "Obrero", "Licenciado", "Plomero", "Soldador", "Herrero", "Diseñador", "Psicólogo", "Deportista", "Mozo", "Entrenador", "Arquitecto", "Carpintero"];
-export const PARTIES = ["Socialista", "Libertario", "Comunista"];
+export const PARTIES = ["Socialista", "Comunista"];
 export const ZODIAC_SIGNS = ["Capricornio", "Acuario", "Piscis", "Aries", "Tauro", "Géminis", "Cáncer", "Leo", "Virgo", "Libra", "Escorpio", "Sagitario"];
 export const MONTHS = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 const MONTHS_SHORT = ["Ene.", "Feb.", "Mar", "Abr.", "May", "Jun.", "Jul.", "Ago.", "Sept.", "Oct.", "Nov.", "Dic."];

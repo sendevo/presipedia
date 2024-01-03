@@ -1,6 +1,6 @@
 # Backlog 
 
-### v1.0._ (beta):  
+### v0.0._ (alpha):  
   - [x] Creación del repositorio GitHub.  
   - [x] Definición del modelo de datos: mandatos, personas, eventos y blog.  
   - [ ] Herramienta interna para edición de base de datos:  
@@ -8,10 +8,10 @@
     - [x] Formulario para editar persona.  
     - [x] Formulario para editar mandato.  
     - [ ] Formulario para editar eventos.  
-    - [ ] Formulario para editar blog.  
+    - [ ] Formulario para editar artículos.  
     - [x] Cálculo de CID para inserción de nuevos elementos.  
     - [x] Exportar base de datos a archivo json.  
-  - [x] Data entry:  
+  - [x] Data entry manual:  
     - [x] Personas  
     - [x] Mandatos  
     - [x] Eventos  
@@ -78,26 +78,41 @@
       - [x] Banda presidencial.  
       - [x] Marcha de ituzaingó.  
       - [x] El sillón de rivadavia.  
-    - [ ] Residencias y transportes:
+    - [x] Residencias y transportes:
       - [x] Casa rosada.  
-      - [ ] Quinta de olivos [link](https://es.wikipedia.org/wiki/Quinta_presidencial_de_Olivos).  
-      - [ ] Agrupación Aérea Presidencial [link](https://es.wikipedia.org/wiki/Agrupaci%C3%B3n_A%C3%A9rea_Presidencial).  
-    - [ ] Atentados a presidentes y expresidentes: [link](https://buenosaireshistoria.org/juntas/los-atentados-presidenciales/).  
-      - [ ] Domingo F. Sarmiento.  
-      - [ ] Julio A. Roca.  
-      - [ ] Manuel Quintana.  
-      - [ ] José Figueroa Alcorta.  
-      - [ ] Victorino de la Plaza.  
-      - [ ] Hipólito Yrigoyen.  
-      - [ ] Cristina Fernández.  
-    - [ ] Curiosidades.    
-      - [ ] El Hombre Gris de Solari Parravicini [link](https://www.rionegro.com.ar/redes/que-dice-la-profecia-del-hombre-gris-de-solari-parravicini-que-vinculan-a-las-elecciones-2023-3084280/).  
+      - [x] Quinta de olivos [link](https://es.wikipedia.org/wiki/Quinta_presidencial_de_Olivos).  
+      - [x] Agrupación Aérea Presidencial [link](https://es.wikipedia.org/wiki/Agrupaci%C3%B3n_A%C3%A9rea_Presidencial).  
+      - [x] Automóviles presidenciales.  
+    - [x] Atentados a presidentes y expresidentes: [link](https://buenosaireshistoria.org/juntas/los-atentados-presidenciales/).  
+      - [x] Domingo F. Sarmiento.  
+      - [x] Julio A. Roca.  
+      - [x] Manuel Quintana.  
+      - [x] José Figueroa Alcorta.  
+      - [x] Victorino de la Plaza.  
+      - [x] Hipólito Yrigoyen.  
+      - [x] Raul Alfonsin.  
+      - [x] Cristina Fernández.  
+    - [x] Curiosidades.    
+      - [x] El Hombre Gris de Solari Parravicini.  
       - [x] El segundo nombre de Ramon Castillo.  
       - [x] El mandato de Rawson.  
-      - [ ] Signos zodiacales.  
+      - [x] Parentesco entre presidentes.  
+      - [x] Signos zodiacales.  
+  - [ ] Eventos históricos:  
+    - [ ] Ley 8.871 (Ley Saenz Peña).  
+    - [ ] Ley 13.010 (Ley Evita y sufragio femenino).  
+    - [ ] Golpe de Estado de 1955.  
+
+
+
+### v2.x.x (commercial release)
+  - [ ] Versión PWA:  
+    - [ ] Backend.  
+    - [ ] Métricas de uso.  
+    - [ ] Publicidades.  
   - [ ] Optimizar tareas de mantenimiento y actualización.  
   - [ ] Tests  
-    - [ ] APP: End to end.  
-    - [ ] GUI: Componentes.  
-    - [ ] GUI: Vistas.  
-    - [ ] Modelo: Unitarios para c/metodo.  
+    - [ ] Componentes.  
+    - [ ] Vistas.  
+    - [ ] Unitarios.  
+    - [ ] End to end.  
