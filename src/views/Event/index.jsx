@@ -4,12 +4,13 @@ import {
     Card, 
     CardMedia, 
     CardContent, 
-    Typography 
+    Typography,
+    Link 
 } from '@mui/material';
 import moment from 'moment';
 import MainView from "../../components/MainView";
 import { APP_NAME } from '../../model/constants';
-import { location2GoogleMap } from '../../model/utils';
+import { location2GoogleMap, isValidUrl } from '../../model/utils';
 import { getLocationName } from '../../model/data';
 import database from "../../assets/database.json";
 import background from "../../assets/backgrounds/background5.jpg";
@@ -42,21 +43,42 @@ const View = () => {
                         <Box>
                             <Typography 
                                 variant="h5" 
+                                sx={{mb:2}}
                                 lineHeight={"1em"}>
                                     {data.title}
                             </Typography>
                             <Typography 
                                 fontSize={14} 
+                                sx={{mb:2}}
                                 fontStyle={"italic"}>
                                     Fecha: {data.time}
                             </Typography>
-                            <Typography>{data.description}</Typography>
-                            {data.locationURL && <Typography>Este evento ocurrió en <a href={data.locationURL} rel="noopener" target="_blank">{data.locationName}</a></Typography>}
+                            <Typography sx={{mb:2}}>
+                                {data.description}
+                            </Typography>
+                            {data.locationURL && 
+                                <Typography sx={{mb:2}}>
+                                    Este evento ocurrió en <a href={data.locationURL} rel="noopener" target="_blank">{data.locationName}</a>
+                                </Typography>}
                         </Box>
                         <Box>
-                            <Typography fontWeight={"bold"} fontSize={"14px"}>Fuente(s)</Typography>
+                            {data.sources.length > 0 &&
+                                <Typography fontWeight={"bold"} fontSize={"14px"}>Fuente(s)</Typography>
+                            }
                             {data.sources.map((s,i) => (
-                                <Typography key={i} fontSize={"11px"}>[{i+1}] {s}</Typography>
+                                <Typography key={i} fontSize={"11px"} sx={{mb:1}}>
+                                    [{i + 1}]
+                                    {isValidUrl(s) ? (
+                                        <Link
+                                            href={s}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            underline="hover">
+                                            {s}
+                                        </Link>
+                                        ) : (s)
+                                    }
+                                </Typography>
                             ))}
                         </Box>
                     </CardContent>

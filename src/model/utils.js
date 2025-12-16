@@ -102,3 +102,12 @@ export const debug = (message, type="log") => {
         if(AVAILABLE_DEBUG_MODES.includes(type)) 
             console[type](message);
 };
+
+export const isValidUrl = value => {
+    try {
+        new URL(value);
+    return true;
+    } catch {
+        return false;
+    }
+};
