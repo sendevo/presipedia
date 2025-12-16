@@ -4,9 +4,9 @@ import moment from "moment";
 export const DEBUG_MODE = false;
 export const AVAILABLE_DEBUG_MODES = ["log", "error", "info", "warn", "table"];
 export const APP_NAME = "Presipedia: Edición Argentina";
-export const VERSION_CODE = "7";
-export const VERSION_VALUE = "1.0.6 (beta)";
-export const BUILD_DATE = 1704240956672; // 2-1-2024 21:16 hs
+export const VERSION_CODE = "9";
+export const VERSION_VALUE = "1.0.8 (beta)";
+export const BUILD_DATE = 1765922032566; // 16-12-2025 18:54 hs
 //// DATE-TIME ////
 export const DAY_MS = 86400000;
 export const YEAR_MS = 31556952000; 
